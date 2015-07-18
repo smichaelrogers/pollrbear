@@ -13,9 +13,11 @@
 class Poll < ActiveRecord::Base
   validates :user, :title, presence: true
 
-  belongs_to :creator
+  belongs_to :user
+  has_many :comments
   has_many :questions
-
-  has_many :follows, inverse_of: :follower
-  has_many :comments, inverse_of: :commenter
+  has_many :invited_users,
+    class_name: "Invite",
+    foreign_key: :poll_id,
+    primary_key: :id
 end

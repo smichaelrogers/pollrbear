@@ -12,7 +12,7 @@
 class Question < ActiveRecord::Base
   validates  :content, presence: true
 
-  has_one :chart, dependent: :destroy
+  has_many :charts, dependent: :destroy
   has_many :answers, dependent: :destroy
   belongs_to :poll
 end

@@ -3,8 +3,9 @@ window.PollrBear = {
   Collections: {},
   Views: {},
   Routers: {},
+  Mixins: {},
   initialize: function() {
-
+    new PollrBear.Routers.Router;
     Backbone.history.start();
   }
 };

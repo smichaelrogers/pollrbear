@@ -15,12 +15,25 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :email, uniqueness: true
 
-
   has_many :responses
-  has_many :polls, inverse_of: :creator
-  has_many :comments, inverse_of: :commenter
-  has_many :follows, inverse_of: :poll
-  has_many :followers, inverse_of: :follower
+  has_many :polls
+  has_many :comments
+  has_many :sent_invitations,
+    class_name: "Invite",
+    foreign_key: :user_id,
+    primary_key: :id
+  has_many :recieved_invitations,
+    class_name: "Invite",
+    foreign_key: :invitee_id,
+    primary_key: :id
+  belongs_to :follower,
+    class_name: "User",
+    foreign_key: :user_id,
+    primary_key: :id
+  has_many :follows,
+    class_name: "User",
+    foreign_key: :follower_id,
+    primary_key: :id
 
   attr_reader :password
   after_initialize :ensure_token

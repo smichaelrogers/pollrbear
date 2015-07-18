@@ -13,9 +13,7 @@
 
 class Follow < ActiveRecord::Base
   validates :user, presence: true
-  validates user_id: { scope: [:followable_id, :followable_type]}
+  validates :user, uniqueness: { scope: :follower }
 
-  belongs_to :user, inverse_of: :follow
-  belongs_to :follower, inverse_of: :poll
-  belongs_to :followable, polymorphic: true
+  belongs_to :user, inverse_of: :follower
 end

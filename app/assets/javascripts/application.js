@@ -11,12 +11,15 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
+//= require jquery-ui
 //= require jquery_ujs
-//= require turbolinks
 //= require underscore
+//= require serialize_json
 //= require backbone
 //= require pollr_bear
 //= require_tree ../templates
+//= require_tree ./utils
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views

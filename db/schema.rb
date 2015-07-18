@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718062027) do
+ActiveRecord::Schema.define(version: 20150718170942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,16 +49,27 @@ ActiveRecord::Schema.define(version: 20150718062027) do
   add_index "comments", ["poll_id"], name: "index_comments_on_poll_id", using: :btree
 
   create_table "follows", force: :cascade do |t|
-    t.integer  "user_id",                     null: false
-    t.integer  "value",           default: 0, null: false
-    t.integer  "followable_id",               null: false
-    t.string   "followable_type",             null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "user_id",     null: false
+    t.integer  "follower_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "follows", ["followable_id", "followable_type"], name: "index_follows_on_followable_id_and_followable_type", using: :btree
-  add_index "follows", ["user_id", "followable_id", "followable_type"], name: "index_follows_on_user_id_and_followable_id_and_followable_type", unique: true, using: :btree
+  add_index "follows", ["follower_id"], name: "index_follows_on_follower_id", using: :btree
+  add_index "follows", ["user_id", "follower_id"], name: "index_follows_on_user_id_and_follower_id", unique: true, using: :btree
+  add_index "follows", ["user_id"], name: "index_follows_on_user_id", using: :btree
+
+  create_table "invites", force: :cascade do |t|
+    t.integer  "poll_id",    null: false
+    t.integer  "user_id",    null: false
+    t.integer  "invitee_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invites", ["invitee_id"], name: "index_invites_on_invitee_id", using: :btree
+  add_index "invites", ["poll_id"], name: "index_invites_on_poll_id", using: :btree
+  add_index "invites", ["user_id"], name: "index_invites_on_user_id", using: :btree
 
   create_table "polls", force: :cascade do |t|
     t.integer  "user_id",                null: false
