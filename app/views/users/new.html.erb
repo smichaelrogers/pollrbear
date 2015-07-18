@@ -1,0 +1,46 @@
+<div id="splash" class="clearfix">&nbsp;
+
+  <div id="login" class="splash-panel panel panel-default centered">
+    <div class="panel-body">
+      <form class="form-horizontal" action="/users" method="post">
+        <div class="form-group">
+          <div class="col-xs-2">
+          </div>
+          <div class="col-xs-10">
+            <h1>poll app</h1>
+            <h4>Sign up</h4>
+          </div>
+        </div>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <div class="form-group">
+          <label for="inputEmail" class="col-xs-2 control-label">Email</label>
+          <div class="col-xs-10">
+            <input class="form-control" name="user[email]" type="text" id="inputEmail" placeholder="email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="col-xs-2 control-label">Password</label>
+          <div class="col-xs-10">
+            <input class="form-control" id="inputPassword" name="user[password]" type="password" placeholder="password">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-10 col-xs-offset-2">
+            <button type="reset" class="btn btn-default">Reset</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="col-xs-6 col-xs-offset-6">
+        <a href="<%= new_session_url %>">member sign in</a>
+      </div>
+      <div>
+        <div class="col-xs-12 well">
+          guests use login email:
+          <strong>asdf@asdf.asdf</strong> password:
+          <strong>asdfasdf</strong>
+        </div>
+      </div>
+    </div>
+  </div>

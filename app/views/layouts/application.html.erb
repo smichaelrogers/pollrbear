@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PollrBear</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if signed_in? %>
+    <%= render partial: "layouts/header" %>
+  <% else %>
+    <%= render partial: "layouts/guest" %>
+  <% end %>
+  <div class="container-fluid">
+    <%= yield %>
+  </div>
+  <footer>
+    <%= render partial: "layouts/footer" %>
+  </footer>
+</body>
+</html>

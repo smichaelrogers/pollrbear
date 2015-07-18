@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: charts
+#
+#  id          :integer          not null, primary key
+#  question_id :integer          not null
+#  format      :integer          default(1)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question_id: 1
+  format: 1
+
+two:
+  question_id: 1
+  format: 1
