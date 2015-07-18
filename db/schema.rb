@@ -11,18 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718062823) do
+ActiveRecord::Schema.define(version: 20150718062027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id", null: false
+    t.integer  "chart_id",    null: false
     t.string   "text",        null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "answers", ["chart_id"], name: "index_answers_on_chart_id", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "charts", force: :cascade do |t|
@@ -35,20 +37,20 @@ ActiveRecord::Schema.define(version: 20150718062823) do
   add_index "charts", ["question_id"], name: "index_charts_on_question_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "poll_id",    null: false
+    t.integer  "commenter_id", null: false
+    t.integer  "poll_id",      null: false
     t.integer  "parent_id"
-    t.text     "text",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "text",         null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
+  add_index "comments", ["commenter_id"], name: "index_comments_on_commenter_id", using: :btree
   add_index "comments", ["poll_id"], name: "index_comments_on_poll_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "follows", force: :cascade do |t|
     t.integer  "user_id",                     null: false
-    t.integer  "value",           default: 0
+    t.integer  "value",           default: 0, null: false
     t.integer  "followable_id",               null: false
     t.string   "followable_type",             null: false
     t.datetime "created_at",                  null: false
@@ -59,11 +61,12 @@ ActiveRecord::Schema.define(version: 20150718062823) do
   add_index "follows", ["user_id", "followable_id", "followable_type"], name: "index_follows_on_user_id_and_followable_id_and_followable_type", unique: true, using: :btree
 
   create_table "polls", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.string   "title",      null: false
+    t.integer  "user_id",                null: false
+    t.string   "title",                  null: false
     t.string   "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "privacy",    default: 1, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "polls", ["user_id"], name: "index_polls_on_user_id", using: :btree
@@ -86,17 +89,6 @@ ActiveRecord::Schema.define(version: 20150718062823) do
 
   add_index "responses", ["answer_id"], name: "index_responses_on_answer_id", using: :btree
   add_index "responses", ["user_id"], name: "index_responses_on_user_id", using: :btree
-
-  create_table "trends", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "answer_id",  null: false
-    t.string   "value",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "trends", ["answer_id"], name: "index_trends_on_answer_id", using: :btree
-  add_index "trends", ["user_id"], name: "index_trends_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false

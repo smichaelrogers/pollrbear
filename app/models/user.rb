@@ -15,11 +15,12 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :email, uniqueness: true
 
-  has_many :polls, inverse_of: :creator
-  has_many :responses
 
+  has_many :responses
+  has_many :polls, inverse_of: :creator
   has_many :comments, inverse_of: :commenter
-  has_many :follows, inverse_of: :follower
+  has_many :follows, inverse_of: :poll
+  has_many :followers, inverse_of: :follower
 
   attr_reader :password
   after_initialize :ensure_token

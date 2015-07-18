@@ -13,9 +13,9 @@
 class Poll < ActiveRecord::Base
   validates :user, :title, presence: true
 
-  belongs_to :user
+  belongs_to :creator
   has_many :questions
 
-  has_many :follows, as: :followable, class_name: "Follow"
-  has_many :comments, inverse_of: :poll
+  has_many :follows, inverse_of: :follower
+  has_many :comments, inverse_of: :commenter
 end

@@ -12,6 +12,5 @@
 class Response < ActiveRecord::Base
   validates :user, :answer, presence: true
 
-  belongs_to :answer
-  belongs_to :user
+  belongs_to :answer, invers_of: :user
 end

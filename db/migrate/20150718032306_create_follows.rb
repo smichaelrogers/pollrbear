@@ -1,7 +1,7 @@
 class CreateFollows < ActiveRecord::Migration
   def change
     create_table :follows do |t|
-      t.integer :follower_id, null: false
+      t.integer :user_id, null: false
       t.integer :value, default: 0, null: false
       t.integer :followable_id, null: false
       t.string :followable_type, null: false
