@@ -1,25 +1,35 @@
 PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
+
+  //====================================================================
+
   template: JST['polls/index'],
   className: 'idx',
   tagName: 'section',
   events: {
     'click .show-poll': 'showPoll',
+
+    'click .toggle-footer-up': 'toggleFooterUp',
+    'click .toggle-footer-down': 'toggleFooterDown',
+    'click .toggle-footer-left': 'toggleFooterLeft',
+    'click .toggle-footer-right': 'toggleFooterRight',
+
     'click .show-new-poll-form': 'showNewPollForm',
-    'click .submit-new-poll-form': 'submitNewPollForm',
     'click .show-edit-poll-form': 'showEditPollForm',
+    'click .submit-new-poll-form': 'submitNewPollForm',
     'click .submit-edit-poll-form': 'submitEditPollForm',
     'click .show-delete-poll-confirmation': 'showDeleteFormConfirmation',
     'click .submit-delete-poll-confirmation': 'submitDeletePollConfirmation',
     'click .show-poll-info': 'showPollInfo',
     'click .show-poll-report': 'showPollReport',
-    'click .show-comment-form': 'showCommentForm',
+    'click .show-comments': 'showComments',
     'click .submit-comment-form': 'submitCommentForm',
     'click .show-user-profile': 'showUserProfile',
     'click .view-collapse': 'collapse',
-    'click .toggle-footer-up': 'toggleFooterUp',
-    'click .toggle-footer-down': 'toggleFooterDown',
+
     'keydown input': 'maybeCreate'
   },
+
+  //====================================================================
 
   initialize: function() {
     this.listenTo(this.collection, 'sync', this.render);
@@ -33,7 +43,7 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     return this;
   },
 
-
+  //====================================================================
 
   showPoll: function(event) {
     event.preventDefault();
@@ -47,8 +57,59 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     this._swapView(view);
   },
 
+  //====================================================================
+
+
+  toggleFooterBaseline: function() {
+    this.$('#footer').removeClass('footer-mid, footer-full').addClass('footer-baseline');
+  },
+  toggleFooterMid: function() {
+    this.$('#footer').removeClass('footer-baseline, footer-full').addClass('footer-mid');
+  },
+  toggleFooterFull: function() {
+    this.$('#footer').removeClass('footer-baseline, footer-mid').addClass('footer-baseline');
+  },
+  toggleFooterRight: function(event) {
+    this.$('#footer-left').removeClass('footer-left-show').addClass('footer-left-hide');
+    this.$('#footer-right').removeClass('footer-right-hide').addClass('footer-right-show');
+  },
+  toggleFooterLeft: function(event) {
+    this.$('#footer-left').removeClass('footer-left-hide').addClass('footer-left-show');
+    this.$('#footer-right').removeClass('footer-right-show').addClass('footer-right-hide');
+  },
+  toggleFooterUp: function(event) {
+    if (this.$('#footer').hasClass('footer-baseline')) {
+      this.toggleFooterMid();
+    } else if (this.$('#footer').hasClass('footer-mid')) {
+      this.toggleFooterFull();
+    }
+  },
+  toggleFooterDown: function(event) {
+    if (this.$('#footer').hasClass('footer-full')) {
+      this.toggleFooterMid();
+    } else if (this.$('#footer').hasClass('footer-mid')) {
+      this.toggleFooterBaseline();
+    }
+  },
+
+
+  //====================================================================
+
+
   showNewPollForm: function(event) {
-    this.$('#footer').attr('class', 'footer-mid');
+    this.$('#poll-title, #poll-description, #poll-id').val('');
+    this.toggleFooterRight();
+    this.toggleFooterFull();
+  },
+
+  showEditPollForm: function(event) {
+    var pollId = $(event.currentTarget).attr('data-id');
+    var poll = this.collection.getOrFetch(pollId);
+    this.$('#poll-title').val(poll.escape('title'));
+    this.$('#poll-description').val(poll.escape('description'));
+    this.$('#poll-id').val(poll.id + '');
+    this.toggleFooterRight();
+    this.toggleFooterFull();
   },
 
   submitNewPollForm: function(event) {
@@ -56,35 +117,43 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     var formData = this.$('#poll-form').serializeJSON();
     this.collection.create(formData, {
       success: function() {
-        this.$('#form-poll').toggleClass('collapsed');
-        this.$('input, textarea').val('');
-        this.$()
+        this.$('#poll-title, #poll-description, #poll-id').val('');
+        this.toggleFooterLeft();
+        this.toggleFooterMid();
+      },
+      error: function() {
+        this.$('#errors-footer').text('Invalid blah blah');
       }
     });
   },
-
-  showEditPollForm: function(event) {
-    var pollId = $(event.currentTarget).attr('data-id');
-    var poll = this.collection.getOrFetch(pollId);
-    this.$('input#poll-title').val(poll.escape('title'));
-    this.$('textarea#poll-description').val(poll.escape('description'));
-    this.$('input#poll-id').val(poll.id);
-    this.$('#form-poll').toggleClass('collapsed');
-  },
-
   submitEditPollForm: function(event) {
     event.preventDefault();
-    var formData = this.$('#form-poll').serializeJSON();
-    this.collection.set(formData, {
+    var formData = this.$('#poll-form').serializeJSON();
+    this.collection.save(formData, {
       success: function() {
-        console.log('Successfully updated Poll');
-        Backbone.history.navigate('', {
-          trigger: true
-        });
-        this.$('input, textarea').text('');
+        this.$('#poll-title, #poll-description, #poll-id').val('');
+        this.toggleFooterLeft();
+        this.toggleFooterMid();
+      },
+      error: function() {
+        this.$('#errors-footer').text('Invalid blah blah');
       }
     });
   },
+
+  showDeletePollConfirmation: function(event) {
+    $(event.currentTarget).find('.delete-poll-confirmation').toggleClass('collapsed');
+  },
+
+  submitDeletePollConfirmation: function(event) {
+    var $target = $(event.currentTarget);
+    var pollId = $target.attr('data-id');
+    $(event.currentTarget).find('tr.')/////////////////////////////FINISHED HERE
+  }
+
+
+  //====================================================================
+
 
   showPollInfo: function(event) {
     event.preventDefault();
@@ -98,7 +167,8 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     var pollId = $(event.currentTarget).attr('data-id');
     var poll = this.collection.getOrFetch(pollId);
     var view = new PollrBear.Views.PollReport({
-      model: poll
+      model: poll,
+      display: 1
     });
     this._swapView(view);
   },
@@ -107,20 +177,10 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     event.preventDefault();
     var polls = this.collection;
     var view = new PollrBear.Views.PollReport({
-      collection: polls
+      collection: polls,
+      display: 2
     });
     this._swapView(view);
-  },
-
-  showCommentForm: function(event) {
-    event.preventDefault();
-    var $target = $(event.currentTarget).find('.poll-comments');
-    var pollId = $(event.currentTarget).attr('data-id');
-    var poll = this.collection.getOrFetch(pollId);
-    var view = new PollrBear.Views.PollComment({
-      model: poll
-    });
-    $target.html(view.render().$el);
   },
 
   showUserProfile: function(event) {
@@ -136,16 +196,13 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     this._swapView(view);
   },
 
+  //====================================================================
+
   _swapView: function(view) {
     this._currentView && this._currentView.remove();
     this._currentView = view;
-    this.$el.html(view.$el);
+    this.$('#container').html(view.$el);
     view.render();
-  },
-
-  collapse: function(event) {
-    event.stopPropgation();
-    var $(event.currentTarget).toggleClass('collapsed');
   },
 
   maybeCreate: function(event) {
