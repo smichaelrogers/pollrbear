@@ -4,11 +4,10 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
 
   buttonGroups: {
     'moderator': '
-    <button class=\"btn btn-default show-edit-question-form\" data-id=\"<%= poll.id %>\">Edit</button>
-    <button class=\"btn btn-default show-delete-confirmation\" data-id=\"<%= poll.id %>\">Delete</button>
-    <button class=\"btn btn-default show-invite-form\" data-id=\"<%= poll.id %>\">Invite</button>
-    <button class=\"btn btn-default show-poll-report\" data-id=\"<%= poll.id %>\">Report</button>',
-    'visitor': '<button class=\"btn btn-default show-question\" data-id=\"<%= question.id %>\">Answer</button>'
+    <button class=\"btn btn-default show-edit-question-form\" data-id=\"<%= question.id %>\">Edit</button>
+    <button class=\"btn btn-default show-delete-confirmation\" data-id=\"<%= question.id %>\">Delete</button>',
+    'visitor': '
+    <button class=\"btn btn-default show-question-form\" data-id=\"<%= question.id %>\">Answer</button>'
   },
 
   events: {
@@ -17,8 +16,8 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
     'click .show-question-info': 'showQuestionInfo',
     'click .hide-question-info': 'hideQuestionInfo',
     'click .show-question-form': 'showQuestionForm',
-    'click .show-edit-question-form': 'showEditQuestionForm',
     'click .hide-question-form': 'hideQuestionForm',
+    'click .show-edit-question-form': 'showEditQuestionForm',
     'click .toggle-question-form': 'toggleQuestionForm',
     'click .submit-question-form': 'submitQuestionForm'
   },
@@ -32,27 +31,47 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
     this.listenTo(this.collection, 'add', this.render);
   },
   render: function() {
+    var access = this.delegateAccess();
     var content = this.template({
-      poll: this.model
+      poll: this.model,
+      questions: this.collection,
+      moderator: access
     });
     this.$el.html(content);
     return this;
   },
+
+  delegateAccess: function() {
+    var status = false;
+    var userId = this.model.get('user_id');
+    $.ajax({
+      url: '/session',
+      type: 'get',
+      success: function(data) {
+         if ( data['current_user_id'] === userId ){
+           status = true;
+         }
+      }
+    });
+    return status;
+  },
+
   //====================================================================
+
   showQuestion: function(event) {
     event.preventDefault();
     var $target = $(event.currentTarget).find('.question-content');
-    $(event.target).addClass('collapsed');
+    $(event.target).removeClass('collapsed');
     var questionId = $(event.currentTarget).attr('data-id');
     var question = this.collection.getOrFetch(questionId);
     var view = new PollrBear.Views.QuestionsIndex({
-      model: question
+      model: question // in a td-colspan 4
     });
     $target.html(view.render().$el);
   },
   hideQuestion: function(event) {
     event.preventDefault();
-    this.$('.show-question').removeClass('collapsed');
+    this.$('.show-question').addClass('collapsed');
     var $target = $(event.currentTarget).find('.question-content');
     $target.remove();
   },
