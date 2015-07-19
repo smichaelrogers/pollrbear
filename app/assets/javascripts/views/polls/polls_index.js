@@ -3,15 +3,21 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
   className: 'idx',
   tagName: 'section',
   events: {
-    'click .show-poll': 'showPollIdx',
+    'click .show-poll': 'showPoll',
     'click .show-new-poll-form': 'showNewPollForm',
     'click .submit-new-poll-form': 'submitNewPollForm',
     'click .show-edit-poll-form': 'showEditPollForm',
     'click .submit-edit-poll-form': 'submitEditPollForm',
+    'click .show-delete-poll-confirmation': 'showDeleteFormConfirmation',
+    'click .submit-delete-poll-confirmation': 'submitDeletePollConfirmation',
     'click .show-poll-info': 'showPollInfo',
     'click .show-poll-report': 'showPollReport',
+    'click .show-comment-form': 'showCommentForm',
+    'click .submit-comment-form': 'submitCommentForm',
     'click .show-user-profile': 'showUserProfile',
     'click .view-collapse': 'collapse',
+    'click .toggle-footer-up': 'toggleFooterUp',
+    'click .toggle-footer-down': 'toggleFooterDown',
     'keydown input': 'maybeCreate'
   },
 
@@ -27,7 +33,8 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     return this;
   },
 
-  // delegate PRIVATE or PUBLIC or INIVTED
+
+
   showPoll: function(event) {
     event.preventDefault();
     var pollId = $(event.currentTarget).attr('data-id');
@@ -37,24 +44,21 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
       model: poll,
       collection: polls
     });
-    var div = "div[data-id='" + pollId + "']";
-    this.addSubview(div, view);
+    this._swapView(view);
   },
 
   showNewPollForm: function(event) {
-    this.$('.form-poll').toggleClass('collapsed');
+    this.$('#footer').attr('class', 'footer-mid');
   },
 
-  // formData: user_id, title, text, privacy(1,2,3)
   submitNewPollForm: function(event) {
     event.preventDefault();
-    var formData = this.$('.poll-form').serializeJSON();
+    var formData = this.$('#poll-form').serializeJSON();
     this.collection.create(formData, {
       success: function() {
-        console.log('Successfully created new Poll');
-        Backbone.history.navigate('', {
-          trigger: true
-        });
+        this.$('#form-poll').toggleClass('collapsed');
+        this.$('input, textarea').val('');
+        this.$()
       }
     });
   },
@@ -62,37 +66,33 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
   showEditPollForm: function(event) {
     var pollId = $(event.currentTarget).attr('data-id');
     var poll = this.collection.getOrFetch(pollId);
-    this.$('.form-poll input.poll-title').text(poll.escape('title'));
-    this.$('.form-poll textarea').text(poll.escape('description'));
-    this.$('.form-poll input.poll-id').text(poll.id);
-    this.$('.form-poll').toggleClass('collapsed');
+    this.$('input#poll-title').val(poll.escape('title'));
+    this.$('textarea#poll-description').val(poll.escape('description'));
+    this.$('input#poll-id').val(poll.id);
+    this.$('#form-poll').toggleClass('collapsed');
   },
 
-  // formData: user_id, title, text, privacy(1,2,3)
   submitEditPollForm: function(event) {
     event.preventDefault();
-    var formData = this.$('.poll-form').serializeJSON();
+    var formData = this.$('#form-poll').serializeJSON();
     this.collection.set(formData, {
       success: function() {
         console.log('Successfully updated Poll');
         Backbone.history.navigate('', {
           trigger: true
         });
-        this.$('.form-poll input, .form-poll textarea').text('');
+        this.$('input, textarea').text('');
       }
     });
   },
 
-  // display private/public/invited/friends participating
   showPollInfo: function(event) {
     event.preventDefault();
     var pollId = $(event.currentTarget).attr('data-id');
-    var poll = this.collection.getOrFetch(pollId);
-    this.$("div[data-id='" + pollId + "']").toggleClass('collapsed');
+    var $target = $(event.currentTarget).find('.show-poll-info');
+    $target.toggleClass('collapsed');
   },
 
-  // clear content
-  // delegate PRIVATE or PUBLIC/INVITED
   showPollReport: function(event) {
     event.preventDefault();
     var pollId = $(event.currentTarget).attr('data-id');
@@ -100,35 +100,48 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     var view = new PollrBear.Views.PollReport({
       model: poll
     });
-    this.$el.html(view);
+    this._swapView(view);
   },
 
-  // clear content
   showReportIndex: function(event) {
     event.preventDefault();
     var polls = this.collection;
     var view = new PollrBear.Views.PollReport({
       collection: polls
     });
-    this.$el.html(view);
+    this._swapView(view);
   },
 
-  // will be same action for current user or others,
-  // depends on privacy, and who user is, to edit etc
-  // same as polls
+  showCommentForm: function(event) {
+    event.preventDefault();
+    var $target = $(event.currentTarget).find('.poll-comments');
+    var pollId = $(event.currentTarget).attr('data-id');
+    var poll = this.collection.getOrFetch(pollId);
+    var view = new PollrBear.Views.PollComment({
+      model: poll
+    });
+    $target.html(view.render().$el);
+  },
+
   showUserProfile: function(event) {
     event.preventDefault();
     var userId = $(event.currentTarget).attr("data-id");
     var user = new PollrBear.Models.User({
       id: userId
     });
+    user.fetch();
     var view = new PollrBear.Views.UserProfile({
       user: user
     });
-    this.$el.html(view);
+    this._swapView(view);
   },
 
-
+  _swapView: function(view) {
+    this._currentView && this._currentView.remove();
+    this._currentView = view;
+    this.$el.html(view.$el);
+    view.render();
+  },
 
   collapse: function(event) {
     event.stopPropgation();
