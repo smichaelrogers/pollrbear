@@ -6,14 +6,13 @@
   <div class="table-responsive">
     <table class="table">
       <thead>
-        <th>Poll</th>
-        <th>Moderator</th>
+        <th>Question</th>
         <th></th>
         <th></th>
       </thead>
-      <% polls.forEach(function (poll) { %>
+      <% questions.forEach(function (question) { %>
         <tr>
-          <td><%= poll.id %> <%= poll.escape('title') %></td>
+          <td><%= question.id %> <%= question.escape('text') %></td>
           <td><%= poll.escape('created_at') %></td>
           <td><button class="btn btn-default show-poll" data-id="<%= poll.id %>"></td>
           <td>

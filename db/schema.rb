@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   create_table "comments", force: :cascade do |t|
     t.integer  "commenter_id", null: false
     t.integer  "poll_id",      null: false
-    t.integer  "parent_id"
     t.text     "text",         null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false

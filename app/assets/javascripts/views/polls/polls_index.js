@@ -1,8 +1,11 @@
 PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   template: JST['polls/index'],
-
   events: {
     'click .show-poll': 'showPoll'
+  },
+  buttonGroups: {
+    'moderator': '<button class=\"btn btn-default show-edit-poll-form\" data-id=\"<%= poll.id %>\">Edit</button><button class=\"btn btn-default show-delete-confirmation\" data-id=\"<%= poll.id %>\">Delete</button><button class=\"btn btn-default show-invite-form\" data-id=\"<%= poll.id %>\">Invite</button><button class=\"btn btn-default show-poll-report\" data-id=\"<%= poll.id %>\">Report</button>',
+    'visitor': '<button class=\"btn btn-default show-poll\" data-id=\"<%= poll.id %>\">Participate</button>'
   },
   //====================================================================
   initialize: function() {
@@ -13,6 +16,7 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
       polls: this.collection
     });
     this.$el.html(content);
+    this.delegateAccess();
     return this;
   },
   //====================================================================
@@ -24,5 +28,26 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
       model: poll
     });
     this._swapView(view);
+  },
+
+  delegateAccess: function(event) {
+    var $buttonGroups = this.$('.btn-access');
+    var currentId, poll, pollId;
+    $.ajax({
+      url: '/session',
+      type: 'get',
+      success: function(data) {
+         currentId = data['current_user_id'];
+      }
+    });
+    $buttonGroups.each(function(index) {
+      var pollId = $(this).attr('data-id');
+      var poll = this.collection.getOrFetch(pollId);
+      if (poll.user_id === currentId) {
+        $(this).append(buttonGroups['moderator']);
+      } else {
+        $(this).append(buttonGroups['visitor']);
+      };
+    });
   }
 });

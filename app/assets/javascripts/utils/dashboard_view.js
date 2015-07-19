@@ -10,8 +10,9 @@ Backbone.DashboardView = Backbone.View.extend({
     'click .show-edit-poll-form': 'showEditPollForm',
     'click .submit-poll-form': 'submitPollForm',
     'click .show-delete-confirmation': 'showDeleteConfirmation',
-    'click .submit-delete-confirmation': 'submitDeleteConfirmation',
+    'click .submit-delete': 'submitDelete',
     'click .show-poll-info': 'showPollInfo',
+    'click .show-poll-info': 'hidePollInfo',
     'click .show-poll-report': 'showPollReport',
     'click .show-comments': 'showComments',
     'click .submit-comment': 'submitCommentForm',
@@ -88,6 +89,7 @@ Backbone.DashboardView = Backbone.View.extend({
   },
 
   submitDelete: function(event) {
+    event.preventDefault();
     var $target = $(event.currentTarget);
     var objId = $target.attr('data-id');
     var obj = this.collection.getOrFetch(objId);
@@ -103,8 +105,13 @@ Backbone.DashboardView = Backbone.View.extend({
 
   showPollInfo: function(event) {
     event.preventDefault();
-    var $target = $(event.currentTarget).find('.show-poll-info');
-    $target.toggleClass('collapsed');
+    var $target = $(event.currentTarget).find('.poll-info-content');
+    $target.removeClass('collapsed');
+  },
+
+  hidePollInfo: function(event) {
+    event.preventDefault();
+    this.$('.poll-info-content').addClass('collapsed');
   },
 
   showPollReport: function(event) {
