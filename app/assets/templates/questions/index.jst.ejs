@@ -1,0 +1,9 @@
+<div id="chart-form">chart</div>
+answers
+<ul class="list-group">
+  <% answers.forEach(function(answer) { %>
+    <li class="list-group-item">
+      <%= answer.escape('text') %>
+    </li>
+  <% }); %>
+</ul>

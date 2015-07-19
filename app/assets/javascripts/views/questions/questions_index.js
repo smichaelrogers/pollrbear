@@ -12,7 +12,7 @@ PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
   //====================================================================
 
   initialize: function() {
-    this.collection = this.model.answers();
+    this.charts = this.collection.charts;
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.collection, 'add', this.render);
   },
@@ -42,7 +42,6 @@ PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
     var answerId = $(event.currentTarget).attr('data-id');
     var answer = this.collection.getOrFetch(answerId);
     answer.destroy();
-    this.render();
   },
   selectChart: function(event) {
     event.preventDefault();
@@ -59,6 +58,5 @@ PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
   deleteChart: function(event) {
     event.preventDefault();
     this.model.noChart();
-    this.render();
   }
 });

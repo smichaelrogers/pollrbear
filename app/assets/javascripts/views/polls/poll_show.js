@@ -40,7 +40,6 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
     this.$el.html(content);
     return this;
   },
-
   delegateAccess: function() {
     var status = false;
     var userId = this.model.get('user_id');
