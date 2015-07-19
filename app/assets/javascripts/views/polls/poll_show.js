@@ -9,9 +9,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     'click .show-question-info': 'showQuestionInfo',
     'click .show-new-question-form': 'showQuestionForm',
     'click .show-edit-question-form': 'showEditQuestionForm',
-    'click .show-delete-question-confirmation': 'showDeleteQuestionConfirmation',
-    'click .submit-delete-question-confirmation': 'submitDeleteQuestionConfirmation',
-    'click .view-collapse': 'collapse',
+    
     'keydown input': 'maybeCreate'
   },
 
