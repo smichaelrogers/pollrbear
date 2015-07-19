@@ -130,6 +130,22 @@ Backbone.DashboardView = Backbone.View.extend({
     this._swapView(view);
   },
 
+  submitComment: function(event) {
+    event.preventDefault();
+    var formData = this.$('#comment-input');
+    var pollId = this.$('#current-poll');
+    var poll = PollrBear.Collections.polls.getOrFetch(pollId);
+    poll.create(formData,{
+      success: function() {
+        this.$('#comment-input').val('');
+        this.toggleFooterMid();
+      },
+      error: function() {
+        this.$('#errors-footer').text('Invalid comment');
+      }
+    });
+  },
+
   showUserProfile: function(event) {
     event.preventDefault();
     var userId = $(event.currentTarget).attr("data-id");

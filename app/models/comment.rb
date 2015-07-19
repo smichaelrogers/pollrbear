@@ -14,17 +14,6 @@
 class Comment < ActiveRecord::Base
   validates :user, :poll, :text, presence: true
 
-  belongs_to :user, inverse_of: :comments
-
-  belongs_to :parent_comment,
-    class_name: "Comment",
-    foreign_key: :parent_id,
-    primary_key: :id
-
-  has_many :child_comments,
-    class_name: "Comment",
-    foreign_key: :parent_id,
-    primary_key: :id
-
-
+  belongs_to :user
+  belongs_to :poll
 end

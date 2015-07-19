@@ -5,7 +5,6 @@ PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
   events: {
     'click .add-answer': 'addAnswer',
     'click .delete-answer': 'deleteAnswer',
-    'click .show-chart-form': 'showChartForm',
     'click .select-chart': 'selectChart',
     'click .delete-chart': 'deleteChart'
   },

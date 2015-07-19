@@ -13,6 +13,7 @@ class Answer < ActiveRecord::Base
   validates :question, :text, presence: true
 
   has_many :responses, dependent: :destroy
+  has_many :users, through: :responses, source: :user
   belongs_to :question
   belongs_to :chart
 end
