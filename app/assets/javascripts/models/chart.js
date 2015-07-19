@@ -11,6 +11,6 @@ PollrBear.Models.Chart = Backbone.Model.extend({
       this.answers().set(response.answers, { parse: true })
       delete response.answers;
     }
-    return answers;
+    return response;
   }
 });

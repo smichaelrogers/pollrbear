@@ -11,6 +11,6 @@ PollrBear.Models.Answer = Backbone.Model.extend({
       this.responses().set(response.responses, { parse: true })
       delete response.responses;
     }
-    return responses;
+    return response;
   }
 });

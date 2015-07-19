@@ -15,16 +15,16 @@ PollrBear.Models.Question = Backbone.Model.extend({
   noChart: function () {
     this._charts = null;
     return null;
-  }
+  },
   parse: function(response) {
     if(response.answers) {
-      this.answers().set(response.answers, { parse: true })
+      this.answers().set(response.answers, { parse: true });
       delete response.answers;
     }
     if(response.charts) {
-      this.charts().set(response.charts, { parse: true })
+      this.charts().set(response.charts, { parse: true });
       delete response.charts;
     }
-    return charts;
+    return response;
   }
 });

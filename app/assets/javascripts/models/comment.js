@@ -11,6 +11,6 @@ PollrBear.Models.Comment = Backbone.Model.extend({
       this.comments().set(response.comments, { parse: true })
       delete response.comments;
     }
-    return comments;
+    return response;
   }
 });

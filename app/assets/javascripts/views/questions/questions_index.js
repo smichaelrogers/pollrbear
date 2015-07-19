@@ -28,7 +28,6 @@ PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
   addAnswer: function(event) {
     event.preventDefault();
     var formData = $(event.currentTarget).find('#answer-form').serializeJSON();
-    var answer = new PollrBear.Models.Answer(formData);
     this.collection.create(formData, {
       success: function() {
         this.$('#success-header').text('success');

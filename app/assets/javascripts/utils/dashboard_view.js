@@ -91,9 +91,8 @@ Backbone.DashboardView = Backbone.View.extend({
     var $target = $(event.currentTarget);
     var objId = $target.attr('data-id');
     var obj = this.collection.getOrFetch(objId);
-    var $tr = this.$el.find('tr[data-id='
-      " + objId + "
-      ']');
+    var value = "tr[data-id=\'" + objId + "']";
+    var $tr = this.$el.find(value);
     obj.destroy();
     $tr.remove();
   },
@@ -104,7 +103,6 @@ Backbone.DashboardView = Backbone.View.extend({
 
   showPollInfo: function(event) {
     event.preventDefault();
-    var pollId = $(event.currentTarget).attr('data-id');
     var $target = $(event.currentTarget).find('.show-poll-info');
     $target.toggleClass('collapsed');
   },

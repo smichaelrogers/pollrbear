@@ -1,7 +1,7 @@
 PollrBear.Views.PollReport = Backbone.DashboardView.extend({
   template: JST['polls/report'],
 
-  initialize: function() {
+  initialize: function(options) {
     if(options.display === 1) {
       this.collection = this.model.questions();
     }

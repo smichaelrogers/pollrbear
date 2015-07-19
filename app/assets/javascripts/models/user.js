@@ -19,13 +19,13 @@ PollrBear.Models.User = Backbone.Model.extend({
     if (response.polls) {
       this.polls().set(response.polls, {
         parse: true
-      })
+      });
       delete response.polls;
     }
     if (response.responses) {
       this.responses().set(response.responses, {
         parse: true
-      })
+      });
       delete response.responses;
     }
     return response;
@@ -42,7 +42,7 @@ PollrBear.Models.CurrentUser = Backbone.Models.User.extend({
     var sendId = this.userId;
     $.ajax({
       url: this.url,
-      type: "GET",
+      type: 'get',
       data: sendId,
       success: function(data) {
         if (data['current_user_id'] === sendId) {
@@ -55,10 +55,10 @@ PollrBear.Models.CurrentUser = Backbone.Models.User.extend({
   checkUserState: function(event) {
     var currentId = this.currentUserId();
     if (this.userId !== currentId) {
-      alert('not current user');
+      console.log('not current user');
     } else {
       console.log('logged in');
-    };
+    }
   }
 
 
