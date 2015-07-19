@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :show, :create, :destroy]
 
   namespace :api, default: { format: :json } do
-
-    # get 'responses/poll/:id' => 'responses#poll_responses'
-    resources :polls
-    resources :questions
-    resources :graphs, only: [:create, :update, :destroy]
-    resources :answers
-    resources :responses, only: [:create, :update, :destroy]
+    resources :polls, only: [:index, :create, :show, :update, :destroy]
+    resources :questions, only: [:index, :create, :show, :update, :destroy]
+    resources :charts, only: [:create, :show, :update, :destroy]
+    resources :answers, only:  [:index, :create, :show, :update, :destroy]
+    resources :responses, only:  [:index, :create, :show, :update, :destroy]
+    resources :comments, only: [:create, :destroy]
+    resources :follows, only: [:create, :destroy]
+    resources :invites, only: [:create, :destroy]
+    resources :users, only: [:create, :show, :update]
   end
 end
