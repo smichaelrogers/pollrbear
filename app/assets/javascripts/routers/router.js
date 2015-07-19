@@ -3,9 +3,7 @@ PollrBear.Routers.Router = Backbone.Router.extend({
     this.$rootEl = $("#content");
     this.collection = PollrBear.Collections.polls;
   },
-  routes: {
-    '': 'index',
-  },
+  routes: { '': 'index' },
   index: function() {
     this.collection.fetch();
     var view = new PollrBear.Views.PollsIndex({
