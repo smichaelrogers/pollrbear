@@ -1,7 +1,6 @@
-PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
+PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   template: JST['polls/index'],
-  className: 'idx',
-  tagName: 'section',
+
   events: {
     'click .show-poll': 'showPoll'
   },

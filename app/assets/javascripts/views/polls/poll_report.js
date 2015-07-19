@@ -1,6 +1,6 @@
-PollrBear.Views.PollReport = Backbone.CompositeView.extend({
+PollrBear.Views.PollReport = Backbone.DashboardView.extend({
   template: JST['polls/report'],
-  className: 'content-report',
+
   initialize: function() {
     this.listenTo(this.collection, 'sync', this.render);
   },
