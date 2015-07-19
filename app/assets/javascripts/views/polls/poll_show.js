@@ -1,6 +1,11 @@
 PollrBear.Views.PollShow = Backbone.CompositeView.extend({
   template: JST['polls/show'],
   className: 'content-poll',
+  events: {
+    'click .'
+    'click .view-collapse': 'collapse',
+    'keydown input': 'maybeCreate'
+  },
   initialize: function() {
     this.collection = this.model.questions();
     this.listenTo(this.model, 'sync', this.render);
@@ -13,7 +18,8 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     this.$el.html(content);
     return this;
   },
-  showQuestions: function() {
+  // render will display all uncollapsed questions
+  showQuestion: function(event) {
 
   }
 });

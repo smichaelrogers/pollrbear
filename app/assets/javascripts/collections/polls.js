@@ -1,7 +1,9 @@
 PollrBear.Collections.Polls = Backbone.Collection.extend({
   model: PollrBear.Models.Poll,
   url: '/api/polls',
-  initialize: function() {},
+  initialize: function(models, options) {
+    this.user = options.user
+  },
   getOrFetch: function (id) {
     var poll = this.get(id);
     if (!poll) {
