@@ -7,7 +7,9 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
     'click .show-question-info': 'showQuestionInfo',
     'click .show-new-question-form': 'showQuestionForm',
     'click .show-edit-question-form': 'showEditQuestionForm',
-    'click .submit-question-form': 'submitQuestionForm'
+    'click .submit-question-form': 'submitQuestionForm',
+    'click .show-invite-form': 'showInviteForm',
+    'click .send-invite': 'sendInvite'
   },
 
   //====================================================================

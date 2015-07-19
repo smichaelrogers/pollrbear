@@ -14,4 +14,5 @@ class Chart < ActiveRecord::Base
 
   belongs_to :question
   has_many :answers
+  has_many :responses, through: :answers, source: :responses
 end

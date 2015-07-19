@@ -14,5 +14,6 @@ class Question < ActiveRecord::Base
 
   has_many :charts, dependent: :destroy
   has_many :answers, dependent: :destroy
+  has_many :responses, through: :answers, source: :responses
   belongs_to :poll
 end
