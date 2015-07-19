@@ -20,10 +20,8 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
     event.preventDefault();
     var pollId = $(event.currentTarget).attr('data-id');
     var poll = this.collection.getOrFetch(pollId);
-    var polls = this.collection;
     var view = new PollrBear.Views.PollShow({
-      model: poll,
-      collection: polls
+      model: poll
     });
     this._swapView(view);
   }

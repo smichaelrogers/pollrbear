@@ -4,18 +4,20 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
 
   events: {
     'click .show-question': 'showQuestion',
+    'click .hide-question': 'hideQuestion',
     'click .show-question-info': 'showQuestionInfo',
-    'click .show-new-question-form': 'showQuestionForm',
-    'click .show-edit-question-form': 'showEditQuestionForm',
-    'click .submit-question-form': 'submitQuestionForm',
-    'click .show-invite-form': 'showInviteForm',
-    'click .send-invite': 'sendInvite'
+    'click .hide-question-info': 'hideQuestionInfo',
+    'click .show-question-form': 'showQuestionForm',
+    'click .hide-question-form': 'hideQuestionForm',
+    'click .toggle-question-form': 'toggleQuestionForm',
+    'click .submit-question-form': 'submitQuestionForm'
   },
 
   //====================================================================
 
   initialize: function() {
     this.collection = this.model.questions();
+
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.collection, 'add', this.render);
   },
@@ -29,32 +31,46 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
   //====================================================================
   showQuestion: function(event) {
     event.preventDefault();
+    var $target = $(event.currentTarget).find('.question-content');
+    $(event.target).addClass('collapsed');
     var questionId = $(event.currentTarget).attr('data-id');
     var question = this.collection.getOrFetch(questionId);
-    var view = new PollrBear.Views.QuestionShow({
-      model: question,
-      collection: questions
+    var view = new PollrBear.Views.QuestionsIndex({
+      model: question
     });
-    $(event.currentTarget).find('.question-content').html(view.render().$el);
+    $target.html(view.render().$el);
   },
   hideQuestion: function(event) {
     event.preventDefault();
-    var $target = $(event.currentTarget).find('question-content');
+    this.$('.show-question').removeClass('collapsed');
+    var $target = $(event.currentTarget).find('.question-content');
     $target.remove();
   },
   showQuestionInfo: function(event) {
     event.preventDefault();
     $(event.currentTarget).find('.question-info').toggleClass('collapsed');
   },
-  showNewQuestionForm: function(event) {
+  hideQuestionInfo: function(event) {
+    event.preventDefault();
+    $(event.currentTarget).find('.question-info').toggleClass('collapsed');
+  },
+  showQuestionForm: function(event) {
+    event.preventDefault();
+    this.$('#question-form').removeClass('collapsed');
+  },
+  hideQuestionForm: function(event) {
+    event.preventDefault();
+    this.$('#question-form').addClass('collapsed');
+  },
+  toggleQuestionForm: function(event) {
     event.preventDefault();
     this.$('#question-form').toggleClass('collapsed');
   },
   showEditQuestionForm: function(event) {
     event.preventDefault();
-    var questionContent = this.$(event.currentTarget).find('.question-text');
+    var questionContent = $(event.currentTarget).find('.question-text');
     this.$('#question-form-text').text(questionContent);
-    this.$('#question-form').toggleClass('collapsed');
+    this.$('#question-form').removeClass('collapsed');
   },
   submitQuestionForm: function(event) {
     event.preventDefault();
@@ -68,10 +84,8 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
         this.$('#queston-form').toggleClass('collapsed');
       },
       error: function() {
-
+        this.$('#errors-header').text('invalid kajsod header');
       }
     });
   }
-
-
 });
