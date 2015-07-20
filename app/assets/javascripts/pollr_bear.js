@@ -12,7 +12,3 @@ window.PollrBear = {
     Backbone.history.start();
   }
 };
-
-$(document).ready(function(){
-  PollrBear.initialize();
-});

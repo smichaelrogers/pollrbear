@@ -6,8 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
-
 p1 = Poll.create!(user_id: 1, title: "p1 title", text: "p1 text")
 p2 = Poll.create!(user_id: 1, title: "p2 title", text: "p2 text")
 p3 = Poll.create!(user_id: 1, title: "p3 title", text: "p3 text")

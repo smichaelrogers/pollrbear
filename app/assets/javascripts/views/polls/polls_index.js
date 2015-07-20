@@ -3,11 +3,7 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   events: {
     'click .show-poll': 'showPoll'
   },
-  buttonGroups: {
-    'moderator': "<button class=\"btn btn-default show-edit-poll-form\" data-id=\"<%= poll.id %>\">Edit</button><button class=\"btn btn-default show-delete-confirmation\" data-id=\"<%= poll.id %>\">Delete</button><button class=\"btn btn-default show-invite-form\" data-id=\"<%= poll.id %>\">Invite</button><button class=\"btn btn-default show-poll-report\" data-id=\"<%= poll.id %>\">Report</button>",
-    'visitor': "<button class=\"btn btn-default show-poll\" data-id=\"<%= poll.id %>\">Participate</button>"
-  },
-  //====================================================================
+
   initialize: function() {
     this.collection = this.model.polls();
     this.listenTo(this.collection, 'sync', this.render);

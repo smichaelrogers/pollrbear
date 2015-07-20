@@ -1,12 +1,9 @@
 <h2>index</h2>
-
 <ul>
   <% users.each(function(user){ %>
   <li>
     <a href="#" data-id="<%= user.id %>"><%= user.escape("first_name") %></a>
-    <% user.polls.forEach(function(poll) { %>
-      <a href="#" data-id="<%= poll.id %>"><%= poll.escape("title") %></a>
-    <% }); %>
   </li>
   <% }); %>
 </ul>
+<section id="idx"></section>

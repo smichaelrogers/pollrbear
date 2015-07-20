@@ -26,7 +26,7 @@ PollrBear.Views.SignIn = Backbone.View.extend({
       email: formData.email,
       password: formData.password,
       error: function(){
-        alert("Wrong username/password combination. Please try again.");
+        alert("invalid email/password");
       }
     });
   },
