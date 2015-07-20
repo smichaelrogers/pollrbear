@@ -14,21 +14,6 @@ PollrBear.Models.User = Backbone.Model.extend({
       });
     }
     return this._responses;
-  },
-  parse: function(response) {
-    if (response.polls) {
-      this.polls().set(response.polls, {
-        parse: true
-      });
-      delete response.polls;
-    }
-    if (response.responses) {
-      this.responses().set(response.responses, {
-        parse: true
-      });
-      delete response.responses;
-    }
-    return response;
   }
 });
 

@@ -18,13 +18,11 @@ ActiveRecord::Schema.define(version: 20150718170942) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id", null: false
-    t.integer  "chart_id",    null: false
     t.string   "text",        null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "answers", ["chart_id"], name: "index_answers_on_chart_id", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "charts", force: :cascade do |t|
@@ -37,15 +35,15 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   add_index "charts", ["question_id"], name: "index_charts_on_question_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "commenter_id", null: false
-    t.integer  "poll_id",      null: false
-    t.text     "text",         null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "user_id",    null: false
+    t.integer  "poll_id",    null: false
+    t.text     "text",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "comments", ["commenter_id"], name: "index_comments_on_commenter_id", using: :btree
   add_index "comments", ["poll_id"], name: "index_comments_on_poll_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "follows", force: :cascade do |t|
     t.integer  "user_id",     null: false

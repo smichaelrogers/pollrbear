@@ -13,6 +13,4 @@ class Chart < ActiveRecord::Base
   validates :question, :format, presence: true
 
   belongs_to :question
-  has_many :answers
-  has_many :responses, through: :answers, source: :responses
 end

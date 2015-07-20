@@ -10,7 +10,7 @@
 #
 
 class Question < ActiveRecord::Base
-  validates  :content, presence: true
+  validates  :text, presence: true
 
   has_many :charts, dependent: :destroy
   has_many :answers, dependent: :destroy

@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root to: 'pages#root'
 
   resources :users, only: [:new, :create, :edit, :show]
-  resource :session, only: [:new, :show, :create, :destroy]
+  resource :session, only: [:new, :create, :destroy]
+  get 'sessions/current' => 'sessions#current'
 
   namespace :api, default: { format: :json } do
     resources :polls, only: [:index, :create, :show, :update, :destroy]

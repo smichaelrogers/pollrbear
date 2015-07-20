@@ -1,6 +1,5 @@
 module Api
   class ApiController < ApplicationController
-    before_action :require_login!
 
     def require_login!
       unless signed_in?

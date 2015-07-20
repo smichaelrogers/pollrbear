@@ -18,7 +18,9 @@ class Poll < ActiveRecord::Base
   has_many :comments
   has_many :questions
   has_many :answers, through: :questions, source: :answers
+  has_many :responses, through: :answers, source: :responses
   has_many :charts, through: :questions, source: :charts
+  has_many :invites, through: :invited_users, source: :user
   has_many :invited_users,
     class_name: "Invite",
     foreign_key: :poll_id,

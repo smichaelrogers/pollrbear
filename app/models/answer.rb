@@ -16,5 +16,4 @@ class Answer < ActiveRecord::Base
   has_many :responses, dependent: :destroy
   has_many :users, through: :responses, source: :user
   belongs_to :question
-  belongs_to :chart
 end

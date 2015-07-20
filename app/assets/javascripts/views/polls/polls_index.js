@@ -22,19 +22,22 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
 
   delegateAccess: function() {
     var $buttonGroups = this.$('.btn-access');
-    var currentId, poll, pollId;
+    var currentId = 1;
+    var polls = this.collection;
+    var poll, pollId;
     var modButtons = this.buttonGroups['moderator'];
     var pubButtons = this.buttonGroups['visitor'];
-    $.ajax({
-      url: '/session',
-      type: 'get',
-      success: function(data) {
-         currentId = data['current_user_id'];
-      }
-    });
+    // $.ajax({
+    //   url: '/sessions/current',
+    //   type: 'get',
+    //   success: function(data) {
+    //     debugger
+    //      currentId = data.id;
+    //   }
+    // });
     $buttonGroups.each(function(index) {
       var pollId = $(this).attr('data-id');
-      var poll = this.collection.getOrFetch(pollId);
+      var poll = polls.getOrFetch(pollId);
       if (poll.user_id === currentId) {
         $(this).append(modButtons);
       } else {

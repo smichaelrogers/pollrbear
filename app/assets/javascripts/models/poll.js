@@ -4,10 +4,11 @@ PollrBear.Models.Poll = Backbone.Model.extend({
     if (!this._questions) {
       this._questions = new PollrBear.Collections.Questions([], { poll: this });
     }
+    return this._questions;
   },
   comments: function () {
     if (!this._comments) {
-      this._comments = new PollrBear.Collections.Comments([], { board: this });
+      this._comments = new PollrBear.Collections.Comments([], { poll: this });
     }
     return this._comments;
   },
@@ -15,10 +16,6 @@ PollrBear.Models.Poll = Backbone.Model.extend({
     if(response.questions) {
       this.questions().set(response.questions, { parse: true })
       delete response.questions;
-    }
-    if(response.comments) {
-      this.comments().set(response.comments, { parse: true })
-      delete response.comments;
     }
     return response;
   }

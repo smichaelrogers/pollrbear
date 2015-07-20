@@ -21,10 +21,6 @@ PollrBear.Models.Question = Backbone.Model.extend({
       this.answers().set(response.answers, { parse: true });
       delete response.answers;
     }
-    if(response.charts) {
-      this.charts().set(response.charts, { parse: true });
-      delete response.charts;
-    }
     return response;
   }
 });

@@ -2,10 +2,7 @@ module Api
   class PollsController < ApiController
     def index
       @polls = Poll.all
-      @polls.each do |poll|
-        poll.includes(:user, :responses, :comments, :invites, :questions, questions: [:charts, answers: :responses]).find(params[:id])
-      end
-      render json: [@polls, @current_user]
+      render json: @polls
     end
 
     def create
@@ -25,7 +22,7 @@ module Api
     end
 
     def show
-      includes(:user, :responses, :comments, :invites, :questions, questions: [:charts, answers: :responses]).find(params[:id])
+      @poll = Poll.includes(:user, :questions).find(params[:id])
       render :show
     end
 
@@ -36,7 +33,7 @@ module Api
       if params[:id]
         @poll = Poll.find(params[:id])
         @user = @poll.user
-      elsif params[:invite]
+      elsif params[:poll]
         @user = User.find(params[:poll][:user_id])
       end
     end
