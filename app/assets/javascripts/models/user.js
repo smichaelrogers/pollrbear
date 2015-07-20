@@ -1,5 +1,5 @@
 PollrBear.Models.User = Backbone.Model.extend({
-  urlRoot: '/user',
+  urlRoot: '/session',
   polls: function() {
     if (!this._polls) {
       this._polls = new PollrBear.Collections.Polls([], {
@@ -32,7 +32,7 @@ PollrBear.Models.User = Backbone.Model.extend({
   }
 });
 
-PollrBear.Models.CurrentUser = Backbone.Models.User.extend({
+PollrBear.Models.CurrentUser = PollrBear.Models.User.extend({
   url: '/session',
   initialize: function() {
     this.listenTo(this, 'change', this.checkUserState);
@@ -49,6 +49,8 @@ PollrBear.Models.CurrentUser = Backbone.Models.User.extend({
           console.log('You are the current user');
         }
         return data['current_user_id'];
+      }, error: function(data) {
+        console.log('not logged in');
       }
     });
   },

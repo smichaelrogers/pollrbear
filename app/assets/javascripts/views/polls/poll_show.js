@@ -3,11 +3,8 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
   template: JST['polls/show'],
 
   buttonGroups: {
-    'moderator': '
-    <button class=\"btn btn-default show-edit-question-form\" data-id=\"<%= question.id %>\">Edit</button>
-    <button class=\"btn btn-default show-delete-confirmation\" data-id=\"<%= question.id %>\">Delete</button>',
-    'visitor': '
-    <button class=\"btn btn-default show-question-form\" data-id=\"<%= question.id %>\">Answer</button>'
+    'moderator': "<button class=\"btn btn-default show-edit-question-form\" data-id=\"<%= question.id %>\">Edit</button><button class=\"btn btn-default show-delete-confirmation\" data-id=\"<%= question.id %>\">Delete</button>",
+    'visitor': "<button class=\"btn btn-default show-question-form\" data-id=\"<%= question.id %>\">Answer</button>"
   },
 
   events: {

@@ -1,18 +1,9 @@
 module Api
   class QuestionsController < ApiController
     def create
-      @question = Question.create(content: params["question"]["content"], poll_id: params["question"]["poll_id"])
-      q_id = @question.id
-      @display = params["graph"]["display"]
-      @graph = Graph.create!(display: @display, question_id: q_id)
-      @arr = []
-      if params["answer_array"]
-        params["answer_array"].each do |ans|
-          @arr << Answer.create!(text: ans, question_id: q_id)
-        end
-      end
+      @question = current_poll.questions.new(question_params)
 
-      if @question.save && @arr.all?{|ans| ans.save} && @graph.save
+      if @question.save
         render json: @question
       else
         render json: @question.errors.full_messages, status: :unprocessable_entity

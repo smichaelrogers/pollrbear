@@ -6,6 +6,7 @@
 #  user_id    :integer          not null
 #  title      :string           not null
 #  text       :string
+#  privacy    :integer          default(1), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

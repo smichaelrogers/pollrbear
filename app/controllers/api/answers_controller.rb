@@ -7,7 +7,6 @@ module Api
 
     def create
       @answer = current_question.answers.new(answer_params)
-
       if @answer.save
         render json: @answer
       else

@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     class_name: "Invite",
     foreign_key: :user_id,
     primary_key: :id
-  has_many :recieved_invitations,
+  has_many :invites,
     class_name: "Invite",
     foreign_key: :invitee_id,
     primary_key: :id

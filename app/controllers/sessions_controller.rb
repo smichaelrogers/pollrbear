@@ -3,8 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def show
-    current_user_id = @current_user.id
-    render json: current_user_id
+    render json: @current_user
   end
 
   def create
