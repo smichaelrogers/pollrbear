@@ -1,14 +1,16 @@
 PollrBear.Routers.Users = Backbone.Router.extend({
-  initialize: function(options) {
+
+  initialize: function(options){
     this.$rootEl = options.$rootEl;
     this.collection = new PollrBear.Collections.Users();
     this.collection.fetch();
   },
+
   routes: {
-    '': 'index',
-    'users/new': 'new',
-    'users/:id': 'show',
-    'session/new': 'signIn'
+    "": "index",
+    "users/new": "new",
+    "users/:id": "show",
+    "session/new": "signIn"
   },
 
   index: function(){

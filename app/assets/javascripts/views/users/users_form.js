@@ -32,7 +32,7 @@ PollrBear.Views.UsersForm = Backbone.View.extend({
         Backbone.history.navigate("", { trigger: true });
       },
       error: function(data){
-        alert("Form invalid. Let the user know what went wrong.");
+        alert("invalid");
         console.log(data);
       }
     });

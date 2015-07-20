@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :responses
   has_many :polls
   has_many :comments
-  has_many :sent_invitations,
+  has_many :sent_invites,
     class_name: "Invite",
     foreign_key: :user_id,
     primary_key: :id
@@ -41,45 +41,45 @@ class User < ActiveRecord::Base
   after_initialize :ensure_token
   before_validation :ensure_session_token
 
-    def self.find_by_credentials(email, password)
-      user = User.find_by(email: email)
-      return nil if user.nil?
-      user.password_digest.is_password?(password) ? user : nil
-    end
-
-    def self.find_or_create_by_auth_hash(auth_hash)
-      user = User.find_by(
-              provider: auth_hash[:provider],
-              uid: auth_hash[:uid])
-
-      unless user
-        user = User.create!(
-              provider: auth_hash[:provider],
-              uid: auth_hash[:uid],
-              first_name: auth_hash[:info][:name].split.first,
-              last_name: auth_hash[:info][:name].split.last,
-              email: auth_hash[:info][:email],
-              password: SecureRandom::urlsafe_base64)
-      end
-
-      user
-    end
-
-    def password=(password)
-      @password = password
-      self.password_digest = BCrypt::Password.create(password)
-    end
-
-    def password_digest
-      BCrypt::Password.new(super)
-    end
-
-    def ensure_session_token
-      self.session_token ||= SecureRandom::urlsafe_base64
-    end
-
-    def reset_session_token!
-      self.session_token = SecureRandom::urlsafe_base64
-      self.save!
-    end
+  def self.find_by_credentials(email, password)
+    user = User.find_by(email: email)
+    return nil if user.nil?
+    user.password_digest.is_password?(password) ? user : nil
   end
+
+  def self.find_or_create_by_auth_hash(auth_hash)
+    user = User.find_by(
+            provider: auth_hash[:provider],
+            uid: auth_hash[:uid])
+
+    unless user
+      user = User.create!(
+            provider: auth_hash[:provider],
+            uid: auth_hash[:uid],
+            first_name: auth_hash[:info][:name].split.first,
+            last_name: auth_hash[:info][:name].split.last,
+            email: auth_hash[:info][:email],
+            password: SecureRandom::urlsafe_base64)
+    end
+
+    user
+  end
+
+  def password=(password)
+    @password = password
+    self.password_digest = BCrypt::Password.create(password)
+  end
+
+  def password_digest
+    BCrypt::Password.new(super)
+  end
+
+  def ensure_session_token
+    self.session_token ||= SecureRandom::urlsafe_base64
+  end
+
+  def reset_session_token!
+    self.session_token = SecureRandom::urlsafe_base64
+    self.save!
+  end
+end
