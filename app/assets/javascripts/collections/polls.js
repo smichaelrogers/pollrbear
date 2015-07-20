@@ -17,5 +17,3 @@ PollrBear.Collections.Polls = Backbone.Collection.extend({
     return poll;
   }
 });
-
-PollrBear.Collections.polls = new PollrBear.Collections.Polls;

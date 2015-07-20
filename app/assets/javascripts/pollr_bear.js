@@ -3,9 +3,11 @@ window.PollrBear = {
   Collections: {},
   Views: {},
   Routers: {},
-  Mixins: {},
   initialize: function() {
-    new PollrBear.Routers.Router;
+    this.currentUser = new PollrBear.Models.CurrentUser();
+    this.currentUser.fetch();
+    this.header = new PollrBear.Views.Header({ el: "#header" });
+    this.router = new PollrBear.Routers.Users({ $rootEl: $("#content") });
     Backbone.history.start();
   }
 };

@@ -14,6 +14,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'font-awesome-sass'
 gem 'kaminari'
+gem 'figaro'
+gem 'omniauth-twitter'
 
 group :doc do
   gem 'sdoc', require: false

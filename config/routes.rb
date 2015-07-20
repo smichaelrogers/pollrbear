@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   root to: 'pages#root'
 
-  resources :users, only: [:new, :create, :edit, :show]
-  resource :session, only: [:new, :create, :destroy]
-  get 'sessions/current' => 'sessions#current'
+  get "/auth/:provider/callback", to: "api/sessions#omniauth"
 
   namespace :api, default: { format: :json } do
+    resource :session, only: [:show, :create, :destroy]
+    resources :users, only: [:index, :show, :create]
     resources :polls, only: [:index, :create, :show, :update, :destroy]
     resources :questions, only: [:index, :create, :show, :update, :destroy]
     resources :charts, only: [:create, :show, :update, :destroy]
