@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
   has_many :polls
   has_many :invites, inverse_of: :user
   attr_reader :password
-  after_initialize :ensure_token
   before_validation :ensure_session_token
 
   def self.find_by_credentials(email, password)

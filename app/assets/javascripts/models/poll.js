@@ -5,10 +5,10 @@ PollrBear.Models.Poll = Backbone.Model.extend({
       this._questions = new PollrBear.Collections.Questions([], { poll: this });
     }
     return this._questions;
-  }
+  },
   parse: function(response) {
     if(response.questions) {
-      this.questions().set(response.questions, { parse: true })
+      this.questions().set(response.questions, { parse: true });
       delete response.questions;
     }
     return response;

@@ -20,11 +20,11 @@ PollrBear.Models.User = Backbone.Model.extend({
   },
   parse: function(response) {
     if(response.polls) {
-      this.polls().set(response.polls, { parse: true })
+      this.polls().set(response.polls, { parse: true });
       delete response.polls;
     }
     return response;
-  }
+  },
 
   fullName: function(){
     return this.escape("first_name") + " " + this.escape("last_name");

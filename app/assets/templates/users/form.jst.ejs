@@ -1,52 +1,45 @@
-<div id="splash" class="clearfix">&nbsp;
-
+<section class="splash">
   <div id="login" class="splash-panel panel panel-default centered">
     <div class="panel-body">
-      <form class="form-horizontal" action="/users" method="post">
+      <form class="form-horizontal">
         <div class="form-group">
           <div class="col-xs-2">
           </div>
           <div class="col-xs-10">
-            <h1>poll app</h1>
+            <h1>asdf</h1>
             <h4>Sign up</h4>
           </div>
         </div>
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <div class="form-group">
           <label for="inputEmail" class="col-xs-2 control-label">First Name</label>
           <div class="col-xs-10">
-            <input class="form-control" name="user[first_name]" type="text" id="inputEmail" placeholder="email" value="<%= user.escape('first_name') %>">
+            <input class="form-control" name="user[first_name]" type="text" id="inputEmail" placeholder="First" value="<%= user.escape('first_name') %>">
           </div>
         </div>
         <div class="form-group">
           <label for="inputEmail" class="col-xs-2 control-label">Last Name</label>
           <div class="col-xs-10">
-            <input class="form-control" name="user[last_name]" type="text" id="inputEmail" placeholder="email" value="<%= user.escape('last_name') %>">
+            <input class="form-control" name="user[last_name]" type="text" id="inputEmail" placeholder="Last" value="<%= user.escape('last_name') %>">
           </div>
         </div>
         <div class="form-group">
           <label for="inputEmail" class="col-xs-2 control-label">Email</label>
           <div class="col-xs-10">
-            <input class="form-control" name="user[email]" type="text" id="inputEmail" placeholder="email" value="<%= user.escape('email') %>">
+            <input class="form-control" name="user[email]" type="text" id="inputEmail" placeholder="Email" value="<%= user.escape('email') %>">
           </div>
         </div>
         <div class="form-group">
           <label for="inputPassword" class="col-xs-2 control-label">Password</label>
           <div class="col-xs-10">
-            <input class="form-control" id="inputPassword" name="user[password]" type="password" placeholder="password" value="<%= user.escape('password') %>">
+            <input class="form-control" id="inputPassword" name="user[password]" type="password" placeholder="Password" value="<%= user.escape('password') %>">
           </div>
         </div>
         <div class="form-group">
           <div class="col-xs-10 col-xs-offset-2">
-            <button type="reset" class="btn btn-default">Reset</button>
             <button class="btn btn-primary">Submit</button>
           </div>
         </div>
       </form>
-
-      <div class="col-xs-6 col-xs-offset-6">
-        <a href="<%= new_session_url %>">member sign in</a>
-      </div>
       <div>
         <div class="col-xs-12 well">
           guests use login email:
@@ -56,3 +49,4 @@
       </div>
     </div>
   </div>
+</section>

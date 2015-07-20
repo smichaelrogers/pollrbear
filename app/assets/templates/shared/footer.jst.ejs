@@ -1,4 +1,4 @@
-<nav id="footer" class="footer-mid">
+<% if(PollrBear.currentUser.isSignedIn()) { %>
   <section id="footer-content" class="footer-left-hide footer-right-show">
     <div id="footer-left">
       <div class="footer-side-content">
@@ -18,4 +18,4 @@
       </div>
     </div>
   </section>
-</nav>
+<% }; %>

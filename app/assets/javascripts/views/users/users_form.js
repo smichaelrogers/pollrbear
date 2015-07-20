@@ -1,10 +1,9 @@
 PollrBear.Views.UsersForm = Backbone.View.extend({
+  template: JST['users/form'],
 
   initialize: function(options){
     this.listenTo(this.model, "sync change", this.render);
   },
-
-  template: JST['users/form'],
 
   events: {
     "submit form": "submit"

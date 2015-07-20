@@ -11,14 +11,12 @@ body {
   left: 0;
   right: 0;
   min-height: 65px;
-  background: yellow;
   &-content {
     position: relative;
     width: 150%;
     display: block;
     height: 100%;
     border-top: 1px solid black;
-    background: blue;
     &:after {
       content: "";
       display: block;
@@ -33,7 +31,6 @@ body {
     right: 0;
     bottom: 0;
     top: 0;
-    background: blue;
   }
   &-left {
     position: absolute;
@@ -43,7 +40,6 @@ body {
     left: 0;
     bottom: 0;
     top: 0;
-    background: red;
   }
 }
 .footer-side-content {

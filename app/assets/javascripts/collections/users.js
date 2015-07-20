@@ -1,20 +1,24 @@
 PollrBear.Collections.Users = Backbone.Collection.extend({
-  model: PollrBear.Models.user,
-  url: '/users',
-  initialize: function() {},
+  url: "/api/users",
+  model: PollrBear.Models.User,
 
-  getOrFetch: function (id) {
-    var user = this.get(id);
+  getOrFetch: function(id) {
+    var user = this.get(id),
+      users = this;
+
     if (!user) {
-      user = new PollrBear.Models.User({ id: id });
+      user = new this.model({
+        id: id
+      });
       user.fetch({
-        success: function () {
-          this.add(user);
-        }.bind(this)
+        success: function() {
+          users.add(user);
+        }
       });
     } else {
       user.fetch();
     }
+
     return user;
   }
 });

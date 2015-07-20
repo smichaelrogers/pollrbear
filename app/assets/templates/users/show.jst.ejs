@@ -1,4 +1,45 @@
 
-<p>This is <%= user.email %>'s profile page.</p>
+<h2><%= user.email %></h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>Poll</th>
+      <th>Moderator</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <% user.polls.forEach(function (poll) { %>
+      <tr>
+        <td><%= poll.id %> <%= poll.escape('title') %></td>
+        <td><%= poll.escape('created_at') %></td>
+        <td><button class="btn btn-default show-poll" data-id="<%= poll.id %>"></td>
+        <td>
+          <div class="btn-access btn-group" data-id="<%= poll.id %>">
+            <button class="btn btn-default show-poll-info" data-id="<%= poll.id %>"></button>
+            <button class="btn btn-default show-edit-poll-form" data-id="<%= poll.id %>">Edit</button>
+            <button class="btn btn-default show-delete-confirmation" data-id="<%= poll.id %>">Delete</button>
+            <button class="btn btn-default show-invite-form" data-id="<%= poll.id %>">Invite</button>
+            <button class="btn btn-default show-poll-report" data-id="<%= poll.id %>">Report</button>
+          </div>
+        </td>
+      </tr>
+      <tr class="show-delete-confirmation collapsed">
+        <td rowspan="2" colspan="4">
+          <button class="submit-delete">Confirm</button>
+        </td>
+      </tr>
+      <tr class="show-poll-info collapsed">
+        <td rowspan="2" colspan="4">
+          <%= poll.escape('description') %>
+        </td>
+      </tr>
+    <% }); %>
+  </table>
+</div>
+
+
+
+
+
 
 <p><a href="#">Back</a></p>

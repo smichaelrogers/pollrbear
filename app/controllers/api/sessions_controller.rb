@@ -1,5 +1,4 @@
 class Api::SessionsController < ApplicationController
-
   def show
     if current_user
       render :show
@@ -10,8 +9,8 @@ class Api::SessionsController < ApplicationController
 
   def create
     user = User.find_by_credentials(
-                  params[:user][:email],
-                  params[:user][:password])
+      params[:user][:email],
+      params[:user][:password])
 
     if user.nil?
       head :unprocessable_entity

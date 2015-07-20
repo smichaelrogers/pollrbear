@@ -1,12 +1,11 @@
 class Api::UsersController < ApplicationController
-
   def index
     @users = User.all
     render :index
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(polls: [questions: [:charts, answers: :responses]]).find(params[:id])
     render :show
   end
 
@@ -24,6 +23,6 @@ class Api::UsersController < ApplicationController
   protected
 
   def user_params
-    self.params.require(:user).permit(:first_name, :last_name, :email, :password)
+    params.require(:user).permit(:first_name, :last_name, :email, :password)
   end
 end

@@ -12,12 +12,12 @@ module Api
 
     def index
       current = Poll.find(params[:question][:poll_id])
-      @questions = current.questions
+      @questions = current_poll.questions
       render json: @questions
     end
 
     def show
-      @question = Question.includes(:graphs, poll: :participants, answers: :responses).find(params[:id])
+      @question = Question.includes(:charts, answers: :responses).find(params[:id])
       render :show
     end
 
@@ -49,7 +49,7 @@ module Api
     end
 
     def question_params
-      params.require(:question).permit(:poll_id, :text, :content, :context, graph: :display, answer_array: [])
+      params.require(:question).permit(:poll_id, :text)
     end
   end
 end

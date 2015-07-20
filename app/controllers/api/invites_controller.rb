@@ -38,13 +38,14 @@ module Api
     end
 
     private
-    def inviter
+    def current_user
       if params[:id]
         @invite = Invite.find(params[:id])
         @user = @invite.user
       elsif params[:invite]
         @user = User.find(params[:invite][:invitee_id])
       end
+      @user
     end
 
     def invite_params
