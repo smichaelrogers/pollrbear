@@ -12,7 +12,7 @@ PollrBear.Views.UsersForm = Backbone.View.extend({
   render: function(){
     var html = this.template({ user: this.model });
     this.$el.html(html);
-
+    console.log('render user form');
     return this;
   },
 

@@ -2,19 +2,6 @@ Backbone.DashboardView = Backbone.View.extend({
   className: 'idx',
   tagName: 'section',
   events: {
-    'click .toggle-footer-up': 'toggleFooterUp',
-    'click .toggle-footer-down': 'toggleFooterDown',
-    'click .toggle-footer-left': 'toggleFooterLeft',
-    'click .toggle-footer-right': 'toggleFooterRight',
-    'click .show-new-poll-form': 'showNewPollForm',
-    'click .show-edit-poll-form': 'showEditPollForm',
-    'click .submit-poll-form': 'submitPollForm',
-    'click .show-delete-confirmation': 'showDeleteConfirmation',
-    'click .submit-delete': 'submitDelete',
-    'click .show-poll-info': 'showPollInfo',
-    'click .show-poll-info': 'hidePollInfo',
-    'click .show-poll-report': 'showPollReport',
-    'click .show-user-profile': 'showUserProfile',
     'keydown input': 'maybeCreate'
   },
 
@@ -149,7 +136,7 @@ Backbone.DashboardView = Backbone.View.extend({
   _swapView: function(view) {
     this._currentView && this._currentView.remove();
     this._currentView = view;
-    this.$('#container').html(view.$el);
+    this.$el.html(view.$el);
     view.render();
   },
 

@@ -1,11 +1,12 @@
 PollrBear.Views.PollForm = Backbone.DashboardView.extend({
-  template: JST['polls/show'],
+  template: JST['polls/form'],
   initialize: function() {
-    this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.collection, 'sync', this.render);
+    this.render();
   },
   render: function() {
     var content = this.template({
-      poll: this.model
+      collection: this.collection
     });
     this.$el.html(content);
     return this;

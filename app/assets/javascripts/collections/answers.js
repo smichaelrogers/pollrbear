@@ -3,7 +3,6 @@ PollrBear.Collections.Answers = Backbone.Collection.extend({
   url: '/api/answers',
   initialize: function(models, options) {
     this.question = options.question;
-    this.graph = options.graph;
   },
   getOrFetch: function (id) {
     var answer = this.get(id);

@@ -1,9 +1,26 @@
-<h2>index</h2>
-<ul>
-  <% users.each(function(user){ %>
-  <li>
-    <a href="#" data-id="<%= user.id %>"><%= user.escape("first_name") %></a>
-  </li>
-  <% }); %>
-</ul>
 <section id="idx"></section>
+
+<div class="table-responsive">
+  <table class="table table-condensed table-hover">
+    <tr>
+      <thead>
+        <th>User</th>
+        <th>Email</th>
+        <th>id</th>
+      </thead>
+    </tr>
+    <% users.forEach(function(user) { %>
+    <tr>
+      <td>
+        <a class="show-user" href="#" data-id="<%= user.id %>"><%= user.fullName() %></a>
+      </td>
+      <td>
+        <%= user.escape('email') %>
+      </td>
+      <td>
+        <%= user.escape('id') %>
+      </td>
+    </tr>
+    <% }); %>
+  </table>
+</div>

@@ -1,21 +1,23 @@
 PollrBear.Views.UsersIndex = Backbone.DashboardView.extend({
   template: JST['users/index'],
-  events: {
-    'click a': 'showCurrentUser'
-  },
+
   initialize: function(options){
     this.listenTo(this.collection, "sync", this.render);
-    this.showCurrentUser();
   },
+
   render: function(){
-    var html = this.template({ users: this.collection });
-    this.$el.html(html);
+    var content = this.template({
+      users: this.collection
+    });
+    this.$el.html(content);
+    this.addHome();
     return this;
   },
-  showCurrentUser: function(event) {
-    var view = new PollrBear.Views.PollsIndex({
+
+  addHome: function(event) {
+    var view = new PollrBear.Views.UsersShow({
       model: PollrBear.currentUser
     });
-    this.$el.html(view.render().$el);
+    this.addSubview('#idx', view);
   }
 });

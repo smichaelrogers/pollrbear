@@ -27,17 +27,6 @@ module Api
     end
 
     private
-
-    private
-    def current_user
-      if params[:id]
-        @poll = Poll.find(params[:id])
-        @user = @poll.user
-      elsif params[:poll]
-        @user = User.find(params[:poll][:user_id])
-      end
-    end
-
     def poll_params
       params.require(:poll).permit(:user_id, :title, :text, :privacy)
     end

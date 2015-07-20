@@ -2,8 +2,8 @@ PollrBear.Collections.Responses = Backbone.Collection.extend({
   model: PollrBear.Models.Response,
   url: '/api/responses',
   initialize: function(models, options) {
-    this.answer = options.answer,
-    this.user = options.user
+    this.answer = options.answer;
+    this.user = options.user;
   },
   getOrFetch: function (id) {
     var response = this.get(id);

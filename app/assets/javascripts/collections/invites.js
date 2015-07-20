@@ -2,8 +2,8 @@ PollrBear.Collections.Invites = Backbone.Collection.extend({
   model: PollrBear.Models.Invite,
   url: '/api/invites',
   initialize: function(models, options) {
-    this.answer = options.answer,
-    this.user = options.user
+    this.user = options.user;
+    this.poll = options.poll;
   },
   getOrFetch: function (id) {
     var invite = this.get(id);

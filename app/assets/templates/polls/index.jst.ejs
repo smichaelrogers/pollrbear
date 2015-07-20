@@ -1,39 +1,25 @@
-
+<h3>all polls</h3>
 <div class="table-responsive">
-  <table class="table">
-    <thead>
-      <th>Poll</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </thead>
-    <% polls.forEach(function (poll) { %>
-      <tr>
-        <td><a href="#" class="show-poll" data-id="<%= poll.id %>"><%= poll.id %> <%= poll.escape('title') %></a></td>
-        <td></td>
-        <td><button class="btn btn-default show-poll" data-id="<%= poll.id %>">View</button></td>
-        <td>
-          <div class="btn-access btn-group btn-group-sm" data-id="<%= poll.id %>">
-            <button class="btn btn-default show-poll-info" data-id="<%= poll.id %>"></button>
-            <button class="btn btn-default show-edit-poll-form" data-id="<%= poll.id %>">Edit</button>
-            <button class="btn btn-default show-delete-confirmation" data-id="<%= poll.id %>">Delete</button>
-            <button class="btn btn-default show-invite-form" data-id="<%= poll.id %>">Invite</button>
-            <button class="btn btn-default show-poll-report" data-id="<%= poll.id %>">Report</button>
-          </div>
-        </td>
-      </tr>
-      <tr class="show-delete-confirmation collapsed">
-        <td rowspan="2" colspan="4">
-          <button class="submit-delete">Confirm</button>
-        </td>
-      </tr>
-      <tr class="show-poll-info collapsed">
-        <td rowspan="2" colspan="4">
-          <%= poll.escape('description') %>
-          <br>
-          Created by <%= poll.escape('user.email') %>
-        </td>
-      </tr>
+  <table class="table table-condensed table-hover">
+    <tr>
+      <thead>
+        <th>Poll</th>
+        <th>Description</th>
+        <th>Created at</th>
+      </thead>
+    </tr>
+    <% polls.forEach(function(poll) { %>
+    <tr>
+      <td>
+        <a class="show-poll" href="#" data-id="<%= poll.id %>"><%= poll.escape('title') %></a>
+      </td>
+      <td>
+        <%= poll.escape('text') %>
+      </td>
+      <td>
+        <%= poll.escape('created_at') %>
+      </td>
+    </tr>
     <% }); %>
   </table>
 </div>

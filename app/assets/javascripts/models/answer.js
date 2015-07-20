@@ -1,5 +1,5 @@
 PollrBear.Models.Answer = Backbone.Model.extend({
-  urlRoot: '/api/responses',
+  urlRoot: '/api/answers',
   responses: function() {
     if (!this._responses) {
       this._responses = new PollrBear.Collections.Responses([], { answer: this });

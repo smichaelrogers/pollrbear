@@ -2,10 +2,7 @@ json.(user, :id, :first_name, :last_name, :email)
 json.polls user.polls do |poll|
   json.extract! poll, :id, :user_id, :title, :text, :created_at, :updated_at
   json.questions poll.questions do |question|
-    json.extract! question, :id, :poll_id, :text, :created_at, :updated_at
-    json.charts question.charts do |chart|
-      json.extract! chart, :id, :question_id, :format, :created_at, :updated_at
-    end
+    json.extract! question, :id, :poll_id, :text, :chart_type, :created_at, :updated_at
     json.answers question.answers do |answer|
       json.extract! answer, :id, :question_id, :text, :created_at, :updated_at
       json.responses answer.responses do |response|
