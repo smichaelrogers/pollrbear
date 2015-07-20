@@ -1,9 +1,44 @@
-<div id="chart-form">chart</div>
-answers
-<ul class="list-group">
-  <% answers.forEach(function(answer) { %>
-    <li class="list-group-item">
-      <%= answer.escape('text') %>
-    </li>
-  <% }); %>
-</ul>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>Question</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </thead>
+    <% questions.forEach(function (question) { %>
+      <tr>
+        <td><%= question.id %> <%= question.escape('text') %></td>
+        <td><%= question.escape('created_at') %></td>
+        <td>
+          <button class="btn btn-default show-question" data-id="<%= question.id %>"></td>
+        <td>
+          <div class="btn-access btn-group" data-id="<%= question.id %>">
+            <% if (moderator) { %>
+              <button class="btn btn-default show-edit-question-form" data-id="<%= question.id %>">Edit</button>
+              <button class="btn btn-default show-delete-confirmation" data-id="<%= question.id %>">Delete</button>
+              <button class="btn btn-default show-poll-report" data-id="<%= poll.id %>">Report</button>
+            <% } else { %>
+              <button class="btn btn-default show-edit-question-info" data-id="<%= question.id %>">Info</button>
+            <% }; %>
+          </div>
+        </td>
+      </tr>
+      <tr class="show-delete-confirmation collapsed" data-id="<%= question.id %>">
+        <td rowspan="2" colspan="4">
+          <button class="submit-delete">Confirm</button>
+        </td>
+      </tr>
+      <tr class="question-info collapsed" data-id="<%= question.id %>">
+        <td rowspan="2" colspan="4">
+          <%= question.escape('text') %>
+          data data
+        </td>
+      </tr>
+      <tr class="question-content collapsed" data-id="<%= question.id %>">
+        <td colspan="4">
+        </td>
+      </tr>
+    <% }); %>
+  </table>
+</div>

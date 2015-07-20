@@ -1,7 +1,7 @@
-PollrBear.Views.Footer = Backbone.View.extend({
+PollrBear.Views.Footer = Backbone.DashboardView.extend({
 
   initialize: function(options){
-    this.listenTo(PollrBear.currentUser, "signIn signOut", this.render);
+    this.listenTo(PollrBear.currentUser, "sync", this.render);
     this.render();
   },
 

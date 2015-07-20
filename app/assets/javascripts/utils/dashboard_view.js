@@ -19,38 +19,36 @@ Backbone.DashboardView = Backbone.View.extend({
   },
 
   toggleFooterBaseline: function() {
-    this.$('#footer').removeClass('footer-mid, footer-full').addClass('footer-baseline');
+    $('#footer-content').removeClass('footer-baseline footer-mid footer-full').addClass('footer-baseline');
   },
   toggleFooterMid: function() {
-    this.$('#footer').removeClass('footer-baseline, footer-full').addClass('footer-mid');
+    $('#footer-content').removeClass('footer-baseline footer-mid footer-full').addClass('footer-mid');
   },
   toggleFooterFull: function() {
-    this.$('#footer').removeClass('footer-baseline, footer-mid').addClass('footer-baseline');
+    $('#footer-content').removeClass('footer-baseline footer-mid footer-full').addClass('footer-full');
   },
   toggleFooterRight: function(event) {
-    this.$('#footer-left').removeClass('footer-left-show').addClass('footer-left-hide');
-    this.$('#footer-right').removeClass('footer-right-hide').addClass('footer-right-show');
+    $('#footer-content').removeClass('footer-left footer-right').addClass('footer-right');
   },
   toggleFooterLeft: function(event) {
-    this.$('#footer-left').removeClass('footer-left-hide').addClass('footer-left-show');
-    this.$('#footer-right').removeClass('footer-right-show').addClass('footer-right-hide');
+    $('#footer-content').removeClass('footer-left footer-right').addClass('footer-left');
   },
   toggleFooterUp: function(event) {
-    if (this.$('#footer').hasClass('footer-baseline')) {
+    if ($('#footer-content').hasClass('footer-baseline')) {
       this.toggleFooterMid();
-    } else if (this.$('#footer').hasClass('footer-mid')) {
+    } else if ($('#footer-content').hasClass('footer-mid')) {
       this.toggleFooterFull();
     }
   },
   toggleFooterDown: function(event) {
-    if (this.$('#footer').hasClass('footer-full')) {
+    if ($('#footer-content').hasClass('footer-full')) {
       this.toggleFooterMid();
-    } else if (this.$('#footer').hasClass('footer-mid')) {
+    } else if ($('#footer-content').hasClass('footer-mid')) {
       this.toggleFooterBaseline();
     }
   },
   showNewPollForm: function(event) {
-    this.$('#poll-title, #poll-description, #poll-id').val('');
+    $('#poll-title, #poll-description, #poll-id').val('');
     this.toggleFooterRight();
     this.toggleFooterFull();
   },
@@ -58,26 +56,26 @@ Backbone.DashboardView = Backbone.View.extend({
   showEditPollForm: function(event) {
     var pollId = $(event.currentTarget).attr('data-id');
     var poll = this.collection.getOrFetch(pollId);
-    this.$('#poll-title').val(poll.escape('title'));
-    this.$('#poll-description').val(poll.escape('description'));
-    this.$('#poll-id').val(poll.id + '');
+    $('#poll-title').val(poll.escape('title'));
+    $('#poll-description').val(poll.escape('description'));
+    $('#poll-id').val(poll.id + '');
     this.toggleFooterRight();
     this.toggleFooterFull();
   },
 
   submitPollForm: function(event) {
     event.preventDefault();
-    var formData = this.$('#poll-form').serializeJSON();
+    var formData = $('#poll-form').serializeJSON();
     var poll = new PollrBear.Models.Poll(formData);
     poll.save({
       success: function() {
         this.collection.set(poll);
-        this.$('#poll-title, #poll-description, #poll-id').val('');
+        $('#poll-title #poll-description #poll-id').val('');
         this.toggleFooterLeft();
         this.toggleFooterMid();
       },
       error: function() {
-        this.$('#errors-footer').text('Invalid blah blah');
+        $('#errors-footer').text('Invalid blah blah');
       }
     });
   },

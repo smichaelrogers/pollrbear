@@ -1,0 +1,15 @@
+<form>
+  <fieldset>
+    <legend>New Poll</legend>
+    <input type="hidden" name="poll[id]" value="<%= PollrBear.currentUser.id %>">
+    <div class="form-group">
+      <label for="poll-title">Title</label>
+      <input id="poll-title" name="poll[title]" type="text" class="form-control" placeholder="Title">
+    </div>
+    <div class="form-group">
+      <label for="poll-description">Description</label>
+      <texarea id="poll-description" name="poll[description]" rows="3" class="form-control" placeholder="Description">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </fieldset>
+</form>

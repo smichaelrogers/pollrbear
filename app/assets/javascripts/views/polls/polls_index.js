@@ -17,23 +17,6 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
     return this;
   },
 
-  delegateAccess: function() {
-    var $buttonGroups = this.$('.btn-access'),
-        poll, pollId, polls = this.collection,
-        modButtons = this.buttonGroups['moderator'],
-        pubButtons = this.buttonGroups['visitor'],
-        currentUserId = PollrBear.currentUser.id;
-    $buttonGroups.each(function(index) {
-      var pollId = $(this).attr('data-id');
-      var poll = polls.getOrFetch(pollId);
-      if (poll.user_id === currentUserId) {
-        $(this).append(modButtons);
-      } else {
-        $(this).append(pubButtons);
-      };
-    });
-  },
-
   //====================================================================
 
   showPoll: function(event) {

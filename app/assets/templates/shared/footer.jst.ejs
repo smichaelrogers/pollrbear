@@ -1,21 +1,26 @@
 <% if(PollrBear.currentUser.isSignedIn()) { %>
-  <section id="footer-content" class="footer-left-hide footer-right-show">
-    <div id="footer-left">
-      <div class="footer-side-content">
-        <div id="idx-comments">
 
-        </div>
-      </div>
+
+    <nav id="footer-nav">
+      <button class="btn btn-default toggle-footer-left">l</button>
+      <button class="btn btn-default toggle-footer-right">r</button>
+      <button class="btn btn-default toggle-footer-up">u</button>
+      <button class="btn btn-default toggle-footer-down">d</button>
+    </nav>
+    <section id="footer-content" class="footer-baseline footer-left">
+    <div class="footer-inner" id="poll-form">
+      
     </div>
-    <div id="footer-right">
-      <div class="footer-side-content">
-        <form id="poll-form">
-          <input type="text" name="poll[title]" id="poll-title">
-          <input type="text" name="poll[description]" id="poll-title">
-          <input type="hidden" name="poll[id]" id="poll-id" value="">
-          <button class="btn btn-default submit-poll-form">submit</button>
-        </form>
+    <div class="footer-inner">
+      <div>
+        <h4>Comments</h4>
+
       </div>
+
     </div>
   </section>
-<% }; %>
+
+  <% } else { %>
+
+
+    <% }; %>
