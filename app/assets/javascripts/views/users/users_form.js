@@ -27,7 +27,7 @@ PollrBear.Views.UsersForm = Backbone.View.extend({
     this.model.set(userData);
     this.model.save({}, {
       success: function(){
-        BackboneAuthDemo.currentUser.fetch();
+        PollrBear.currentUser.fetch();
         that.collection.add(that.model, { merge: true });
         Backbone.history.navigate("", { trigger: true });
       },

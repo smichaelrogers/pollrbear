@@ -1,5 +1,42 @@
 PollrBear.Models.User = Backbone.Model.extend({
   urlRoot: "/api/users",
+  polls: function() {
+    if (!this._polls) {
+      this._polls = new PollrBear.Collections.Polls([], { user: this });
+    }
+    return this._polls;
+  },
+  comments: function () {
+    if (!this._comments) {
+      this._comments = new PollrBear.Collections.Comments([], { user: this });
+    }
+    return this._comments;
+  },
+  invites: function () {
+    if (!this._invites) {
+      this._invites = new PollrBear.Collections.Invites([], { user: this });
+    }
+    return this._invites;
+  },
+  follows: function () {
+    if (!this._follows) {
+      this._follows = new PollrBear.Collections.Follows([], { user: this });
+    }
+    return this._follows;
+  },
+  responses: function () {
+    if (!this._responses) {
+      this._responses = new PollrBear.Collections.Responses([], { user: this });
+    }
+    return this._respones;
+  },
+  parse: function(response) {
+    if(response.polls) {
+      this.polls().set(response.polls, { parse: true })
+      delete response.polls;
+    }
+    return response;
+  }
 
   fullName: function(){
     return this.escape("first_name") + " " + this.escape("last_name");

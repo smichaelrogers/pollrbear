@@ -1,4 +1,4 @@
-PollrBear.Views.UsersShow = Backbone.View.extend({
+PollrBear.Views.UsersShow = Backbone.DashboardView.extend({
 
   initialize: function(options){
     this.listenTo(this.model, "sync change", this.render);

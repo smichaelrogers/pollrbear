@@ -1,4 +1,4 @@
-PollrBear.Views.UsersIndex = Backbone.View.extend({
+PollrBear.Views.UsersIndex = Backbone.DashboardView.extend({
 
   initialize: function(options){
     this.listenTo(this.collection, "sync", this.render);
@@ -9,7 +9,6 @@ PollrBear.Views.UsersIndex = Backbone.View.extend({
   render: function(){
     var html = this.template({ users: this.collection });
     this.$el.html(html);
-
     return this;
   }
 

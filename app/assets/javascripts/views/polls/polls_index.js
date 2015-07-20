@@ -9,14 +9,15 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   },
   //====================================================================
   initialize: function() {
+    this.collection = this.model.polls();
     this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'change', this.delegateAccess);
   },
   render: function() {
     var content = this.template({
       polls: this.collection
     });
     this.$el.html(content);
-    this.delegateAccess();
     return this;
   },
 
@@ -25,20 +26,14 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
     var currentId = 1;
     var polls = this.collection;
     var poll, pollId;
+    var currentUserId = PollrBear.currentUser.id;
     var modButtons = this.buttonGroups['moderator'];
     var pubButtons = this.buttonGroups['visitor'];
-    // $.ajax({
-    //   url: '/sessions/current',
-    //   type: 'get',
-    //   success: function(data) {
-    //     debugger
-    //      currentId = data.id;
-    //   }
-    // });
+
     $buttonGroups.each(function(index) {
       var pollId = $(this).attr('data-id');
       var poll = polls.getOrFetch(pollId);
-      if (poll.user_id === currentId) {
+      if (poll.user_id === currentUserId) {
         $(this).append(modButtons);
       } else {
         $(this).append(pubButtons);
