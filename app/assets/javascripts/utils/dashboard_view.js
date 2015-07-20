@@ -14,8 +14,6 @@ Backbone.DashboardView = Backbone.View.extend({
     'click .show-poll-info': 'showPollInfo',
     'click .show-poll-info': 'hidePollInfo',
     'click .show-poll-report': 'showPollReport',
-    'click .show-comments': 'showComments',
-    'click .submit-comment': 'submitCommentForm',
     'click .show-user-profile': 'showUserProfile',
     'keydown input': 'maybeCreate'
   },
@@ -133,22 +131,6 @@ Backbone.DashboardView = Backbone.View.extend({
       display: 2
     });
     this._swapView(view);
-  },
-
-  submitComment: function(event) {
-    event.preventDefault();
-    var formData = this.$('#comment-input');
-    var pollId = this.$('#current-poll');
-    var poll = PollrBear.Collections.polls.getOrFetch(pollId);
-    poll.create(formData,{
-      success: function() {
-        this.$('#comment-input').val('');
-        this.toggleFooterMid();
-      },
-      error: function() {
-        this.$('#errors-footer').text('Invalid comment');
-      }
-    });
   },
 
   showUserProfile: function(event) {

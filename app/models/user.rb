@@ -3,7 +3,11 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
+#  first_name      :string           not null
+#  last_name       :string           not null
 #  email           :string           not null
+#  provider        :string
+#  uid             :string
 #  session_token   :string           not null
 #  password_digest :string           not null
 #  created_at      :datetime         not null
@@ -17,26 +21,7 @@ class User < ActiveRecord::Base
 
   has_many :responses
   has_many :polls
-  has_many :comments
-  has_many :sent_invites,
-    class_name: "Invite",
-    foreign_key: :user_id,
-    primary_key: :id
-  has_many :invites,
-    class_name: "Invite",
-    foreign_key: :invitee_id,
-    primary_key: :id
-  belongs_to :follower,
-    class_name: "User",
-    foreign_key: :user_id,
-    primary_key: :id
-  has_many :follows,
-    class_name: "User",
-    foreign_key: :follower_id,
-    primary_key: :id
-
-  has_many :followed_comments, through: :follows, source: :comments
-
+  has_many :invites, inverse_of: :user
   attr_reader :password
   after_initialize :ensure_token
   before_validation :ensure_session_token

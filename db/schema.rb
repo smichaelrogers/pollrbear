@@ -34,28 +34,6 @@ ActiveRecord::Schema.define(version: 20150718170942) do
 
   add_index "charts", ["question_id"], name: "index_charts_on_question_id", using: :btree
 
-  create_table "comments", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "poll_id",    null: false
-    t.text     "text",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "comments", ["poll_id"], name: "index_comments_on_poll_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
-
-  create_table "follows", force: :cascade do |t|
-    t.integer  "user_id",     null: false
-    t.integer  "follower_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "follows", ["follower_id"], name: "index_follows_on_follower_id", using: :btree
-  add_index "follows", ["user_id", "follower_id"], name: "index_follows_on_user_id_and_follower_id", unique: true, using: :btree
-  add_index "follows", ["user_id"], name: "index_follows_on_user_id", using: :btree
-
   create_table "invites", force: :cascade do |t|
     t.integer  "poll_id",    null: false
     t.integer  "user_id",    null: false
@@ -99,7 +77,11 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   add_index "responses", ["user_id"], name: "index_responses_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
+    t.string   "first_name",      null: false
+    t.string   "last_name",       null: false
     t.string   "email",           null: false
+    t.string   "provider"
+    t.string   "uid"
     t.string   "session_token",   null: false
     t.string   "password_digest", null: false
     t.datetime "created_at",      null: false
@@ -107,6 +89,7 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
 
 end

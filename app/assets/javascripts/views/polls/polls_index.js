@@ -22,14 +22,11 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   },
 
   delegateAccess: function() {
-    var $buttonGroups = this.$('.btn-access');
-    var currentId = 1;
-    var polls = this.collection;
-    var poll, pollId;
-    var currentUserId = PollrBear.currentUser.id;
-    var modButtons = this.buttonGroups['moderator'];
-    var pubButtons = this.buttonGroups['visitor'];
-
+    var $buttonGroups = this.$('.btn-access'),
+        poll, pollId, polls = this.collection,
+        modButtons = this.buttonGroups['moderator'],
+        pubButtons = this.buttonGroups['visitor'],
+        currentUserId = PollrBear.currentUser.id;
     $buttonGroups.each(function(index) {
       var pollId = $(this).attr('data-id');
       var poll = polls.getOrFetch(pollId);

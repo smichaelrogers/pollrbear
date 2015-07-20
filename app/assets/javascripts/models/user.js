@@ -6,23 +6,11 @@ PollrBear.Models.User = Backbone.Model.extend({
     }
     return this._polls;
   },
-  comments: function () {
-    if (!this._comments) {
-      this._comments = new PollrBear.Collections.Comments([], { user: this });
-    }
-    return this._comments;
-  },
   invites: function () {
     if (!this._invites) {
       this._invites = new PollrBear.Collections.Invites([], { user: this });
     }
     return this._invites;
-  },
-  follows: function () {
-    if (!this._follows) {
-      this._follows = new PollrBear.Collections.Follows([], { user: this });
-    }
-    return this._follows;
   },
   responses: function () {
     if (!this._responses) {
