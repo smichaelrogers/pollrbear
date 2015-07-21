@@ -1,7 +1,7 @@
-PollrBear.Views.PollForm = Backbone.DashboardView.extend({
-  template: JST['polls/form'],
+PollrBear.Views.QuestionForm = Backbone.DashboardView.extend({
+  template: JST['questions/form'],
   events: {
-    'click .submit-poll-data': 'submitPollData'
+    'click .add-questions': 'addQuestions'
   },
 
   initialize: function() {
@@ -15,7 +15,13 @@ PollrBear.Views.PollForm = Backbone.DashboardView.extend({
     this.$el.html(content);
     return this;
   },
-  submitPollData: function(event) {
+  addQuestions: function() {
+    var view = new PollrBear.Views.QuestionForm({
+      collection: this.collection
+    });
+    this._swapView(view);
+  },
+  submitQuestionData: function(event) {
     var that = this;
     var questions = this.model.questions();
     var poll = this.model;

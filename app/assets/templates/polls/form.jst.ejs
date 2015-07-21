@@ -1,15 +1,39 @@
-<form>
-  <fieldset>
-    <legend>New Poll</legend>
-    <input type="hidden" name="poll[id]" value="<%= PollrBear.currentUser.id %>">
-    <div class="form-group">
-      <label for="poll-title">Title</label>
-      <input id="poll-title" name="poll[title]" type="text" class="form-control" placeholder="Title">
-    </div>
-    <div class="form-group">
-      <label for="poll-description">Description</label>
-      <texarea id="poll-description" name="poll[description]" rows="3" class="form-control" placeholder="Description">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-  </fieldset>
-</form>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">New Poll</h3>
+  </div>
+  <div class="panel-body">
+    <form>
+
+
+      <div class="form-group">
+        <label>Title</label>
+        <input name="poll[title]" type="text" class="form-control" placeholder="Title">
+      </div>
+
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea name="poll[text]" class="form-control" rows="3" placeholder="Description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Access</label>
+        <div class="radio-inline">
+          <label>
+            <input type="radio" name="poll[privacy]" value="1" checked = ""> Public
+          </label>
+          <label>
+            <input type="radio" name="poll[privacy]" value="2"> Private
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <span class="pull-right">
+          <button type="reset" class="btn btn-default">Cancel</button>
+          <button type="submit" class="btn btn-primary">Next</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

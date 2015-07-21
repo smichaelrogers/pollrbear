@@ -11,7 +11,6 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
-gem 'devise'
 gem 'font-awesome-sass'
 gem 'kaminari'
 gem 'figaro'
@@ -30,6 +29,5 @@ group :development do
 end
 
 group :production do
-
   gem 'rails_12factor'
 end

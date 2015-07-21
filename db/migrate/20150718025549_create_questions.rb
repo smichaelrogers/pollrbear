@@ -4,6 +4,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.integer :poll_id, null: false
       t.string :text, null: false
       t.integer :chart_type, default: 1
+      t.string :url
 
       t.timestamps null: false
     end

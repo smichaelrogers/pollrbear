@@ -1,7 +1,7 @@
 PollrBear.Views.UserShow = Backbone.DashboardView.extend({
   template: JST['users/show'],
   tagName: 'section',
-  className: 'container',
+  className: 'container-fluid',
   events: {
     'click .close-panel': 'collapseAnswerPanel',
     'click #add-question': 'addQuestion'
@@ -14,7 +14,6 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
     this.questions = this.model.questions();
     this.answers = this.model.answers();
     this.responses = this.model.responses();
-    this.invites = this.model.invites();
     },
 
   render: function() {
@@ -22,21 +21,27 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
       user: this.model
     });
     this.$el.html(content);
+
     this.showUserPolls();
     this.showUserQuestions();
     this.showUserAnswers();
     this.showUserResponses();
-    this.showUserInvites();
+    this.showPollForm();
     return this;
   },
-
+  showPollForm: function(event) {
+    var view = new PollrBear.Views.PollForm({
+      model: this.model,
+      collection: this.polls
+    });
+    this.$('#new-poll-form').html(view.render().$el);
+  },
   showUserPolls: function(event) {
     var view = new PollrBear.Views.PollsIndex({
       collection: this.polls
     });
     this.$('.user-polls').html(view.render().$el);
   },
-
   showUserQuestions: function(event) {
     var view = new PollrBear.Views.QuestionsIndex({
       collection: this.questions
@@ -54,35 +59,6 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
       collection: this.questions
     });
     this.$('.user-responses').html(view.render().$el);
-  },
-  showUserInvites: function(event) {
-    var view = new PollrBear.Views.InvitesIndex({
-      collection: this.invites
-    });
-    this.$('.user-invites').html(view.render().$el);
-  },
-  addQuestion: function(event) {
-    event.preventDefault();
-    if (!this.formExpanded() ){
-      var question = this.$('#question-queuer').val();
-      var view = new PollrBear.Views.UserSubform({
-        question: question
-      });
-      this.$('#question-queuer').val('');
-      this.addSubview('#question-queue', view);
-    }
-  },
-  formExpanded: function() {
-    if(this.$("#question-queue").hasClass('active')) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  collapseAnswerPanel: function(event) {
-    event.preventDefault();
-    $('#question-queue').html('');
-    $('#question-buttons').removeClass('collapsed');
   }
 
 });
