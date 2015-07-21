@@ -7,7 +7,6 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   initialize: function() {
     this.collection = this.model.polls();
     this.listenTo(this.collection, 'sync', this.render);
-    this.listenTo(this.model, 'sync', this.render);
   },
   render: function() {
     var content = this.template({
@@ -26,6 +25,6 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
     var view = new PollrBear.Views.PollShow({
       model: poll
     });
-    this._swapView(view);
+    this.addSubview('.poll', view);
   }
 });

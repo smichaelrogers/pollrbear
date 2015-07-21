@@ -1,26 +1,2 @@
-<section id="polls"></section>
-<h3><%= PollrBear.currentUser.fullName() %>'s Authored Polls</h3>
-<div class="table-responsive">
-  <table class="table table-condensed table-hover">
-    <tr>
-      <thead>
-        <th>Poll</th>
-        <th>Description</th>
-        <th>Created at</th>
-      </thead>
-    </tr>
-    <% polls.forEach(function(poll) { %>
-    <tr>
-      <td>
-        <a class="show-poll" href="#" data-id="<%= poll.id %>"><%= poll.escape('title') %></a>
-      </td>
-      <td>
-        <%= poll.escape('text') %>
-      </td>
-      <td>
-        <%= poll.escape('created_at') %>
-      </td>
-    </tr>
-    <% }); %>
-  </table>
-</div>
+<a class="show-user-polls" href="#">Show Polls</a>
+<div class="user-polls"></div>

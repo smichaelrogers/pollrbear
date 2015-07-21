@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(polls: [questions: [:charts, answers: :responses]]).find(params[:id])
+    @user = User.includes(polls: [questions:  [answers: :responses]]).find(params[:id])
     render :show
   end
 

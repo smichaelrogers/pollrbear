@@ -1,4 +1,5 @@
-PollrBear.Views.Header = Backbone.View.extend({
+PollrBear.Views.Dashboard = Backbone.View.extend({
+  template: JST['shared/dashboard'],
 
   initialize: function(options){
     this.listenTo(PollrBear.currentUser, "signIn signOut", this.render);
@@ -9,13 +10,16 @@ PollrBear.Views.Header = Backbone.View.extend({
     "click #sign-out-link": "signOut"
   },
 
-  template: JST['shared/header'],
 
   render: function(){
     var html = this.template({ currentUser: PollrBear.currentUser });
     this.$el.html(html);
 
     return this;
+  },
+
+  renderPollForm: function() {
+
   },
 
   signOut: function(event){

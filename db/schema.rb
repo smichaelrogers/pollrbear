@@ -25,15 +25,6 @@ ActiveRecord::Schema.define(version: 20150718170942) do
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
-  create_table "charts", force: :cascade do |t|
-    t.integer  "question_id",             null: false
-    t.integer  "format",      default: 1
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
-  add_index "charts", ["question_id"], name: "index_charts_on_question_id", using: :btree
-
   create_table "invites", force: :cascade do |t|
     t.integer  "poll_id",    null: false
     t.integer  "user_id",    null: false
@@ -58,12 +49,14 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   add_index "polls", ["user_id"], name: "index_polls_on_user_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
-    t.integer  "poll_id",    null: false
-    t.string   "text",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "poll_id",                null: false
+    t.string   "text",                   null: false
+    t.integer  "chart_type", default: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
+  add_index "questions", ["chart_type"], name: "index_questions_on_chart_type", using: :btree
   add_index "questions", ["poll_id"], name: "index_questions_on_poll_id", using: :btree
 
   create_table "responses", force: :cascade do |t|

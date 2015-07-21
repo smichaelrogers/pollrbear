@@ -22,7 +22,7 @@ module Api
     end
 
     def show
-      @poll = Poll.includes(questions: [:charts, answers: :responses]).find(params[:id])
+      @poll = Poll.includes(questions: answers: :responses).find(params[:id])
       render :show
     end
 

@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :create]
     resources :polls, only: [:index, :create, :show, :update, :destroy]
     resources :questions, only: [:index, :create, :show, :update, :destroy]
-    resources :charts, only: [:create, :show, :update, :destroy]
     resources :answers, only:  [:index, :create, :show, :update, :destroy]
     resources :responses, only:  [:index, :create, :show, :update, :destroy]
     resources :invites, only: [:create, :destroy]

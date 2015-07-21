@@ -1,6 +1,10 @@
 PollrBear.Views.UsersShow = Backbone.DashboardView.extend({
   template: JST['users/show'],
 
+  events: {
+    'click .show-user-polls': 'showUserPolls'
+  },
+
   initialize: function(options) {
     this.listenTo(this.model, "sync", this.render);
   },
@@ -8,19 +12,20 @@ PollrBear.Views.UsersShow = Backbone.DashboardView.extend({
   render: function() {
     var polls = PollrBear.currentUser.polls();
     var content = this.template({
-      user: this.model,
-      polls: polls
+      user: this.model
     });
     this.$el.html(content);
-    this.addPollsIndex();
     return this;
   },
 
-  addPollsIndex: function() {
+
+
+  showUserPolls: function(event) {
+    event.preventDefault();
     var view = new PollrBear.Views.PollsIndex({
       model: this.model
     });
-    this.addSubview('#polls', view);
+    this.addSubview('.user-polls', view);
   }
 
 });

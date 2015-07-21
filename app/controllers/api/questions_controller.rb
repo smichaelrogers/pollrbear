@@ -17,7 +17,7 @@ module Api
     end
 
     def show
-      @question = Question.includes(:charts, answers: :responses).find(params[:id])
+      @question = Question.includes(answers: :responses).find(params[:id])
       render :show
     end
 
@@ -49,7 +49,7 @@ module Api
     end
 
     def question_params
-      params.require(:question).permit(:poll_id, :text)
+      params.require(:question).permit(:poll_id, :text, :chart_type)
     end
   end
 end
