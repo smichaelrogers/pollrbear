@@ -16,14 +16,13 @@ gem 'font-awesome-sass'
 gem 'kaminari'
 gem 'figaro'
 gem 'omniauth-twitter'
-
+gem 'faker'
 group :doc do
   gem 'sdoc', require: false
 end
 
 group :development do
   gem 'annotate'
-  gem 'faker'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-rails'
@@ -31,5 +30,6 @@ group :development do
 end
 
 group :production do
+
   gem 'rails_12factor'
 end
