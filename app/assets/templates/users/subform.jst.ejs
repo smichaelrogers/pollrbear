@@ -1,53 +1,57 @@
-<fieldset class="answer-wrapper active">
-  <legend>
-    <%= heading %>
-  </legend>
-  <div class="form-group answer-select">
-    <label class="col-lg-2 control-label">Add Answer</label>
-    <div class="col-lg-10 input-group">
-      <input type="text" class="form-control answer-input" placeholder="Answer">
-    </div>
+<div class="well answer-wrapper active">
+  <div class="panel-body">
+    <h4 class="panel-title">
+      Question:  <strong> <em> &nbsp;<%= heading %></em></strong>
+    </h4>
   </div>
-  <div class="form-group">
-    <div class="col-lg-10 col-lg-offset-2">
-      <button type="reset" class="btn btn-default remove-answer">Remove</button>
-      <button type="button" class="btn btn-primary add-answer">Add</button>
+  <div class="panel-body">
+    <div class="form-group answer-select">
+      <label class="col-lg-2 control-label">Answer</label>
+      <div class="col-lg-10 input-group">
+        <input type="text" class="form-control answer-input" placeholder="Answer">
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="answer-queue" class="col-lg-2 control-label">Answers</label>
-    <div class="col-lg-10">
-      <select multiple="" class="form-control answer-list">
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default remove-answer">Remove</button>
+        <button type="button" class="btn btn-primary add-answer">Add</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="answer-queue" class="col-lg-2 control-label">Answers</label>
+      <div class="col-lg-10">
+        <select multiple="" class="form-control answer-list">
 
-      </select>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label class="col-lg-2 control-label">Chart</label>
-    <div class="col-lg-10">
-      <label class="radio-inline">
-        <input type="radio" name="question[chart_type]" value="1" checked=""> <i class="fa fa-3x fa-bar-chart"></i>
-      </label>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Chart</label>
+      <div class="col-lg-10">
+        <label class="radio-inline">
+          <input type="radio" name="question[chart_type]" value="1" checked=""> <i class="fa fa-3x fa-bar-chart"></i>
+        </label>
 
-      <label class="radio-inline">
-        <input type="radio" name="question[chart_type]" value="2"> <i class="fa fa-3x fa-area-chart"></i>
-      </label>
+        <label class="radio-inline">
+          <input type="radio" name="question[chart_type]" value="2"> <i class="fa fa-3x fa-area-chart"></i>
+        </label>
 
-      <label class="radio-inline">
-        <input type="radio" name="question[chart_type]" value="3"> <i class="fa fa-3x fa-pie-chart"></i>
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="question[chart_type]" value="4"> <i class="fa fa-3x fa-line-chart"></i>
-      </label>
-      <span class="help-block"></span>
-      <span class="help-block"></span>
+        <label class="radio-inline">
+          <input type="radio" name="question[chart_type]" value="3"> <i class="fa fa-3x fa-pie-chart"></i>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="question[chart_type]" value="4"> <i class="fa fa-3x fa-line-chart"></i>
+        </label>
+        <span class="help-block"></span>
+        <span class="help-block"></span>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary close-panel">Submit</button>
+        <button type="reset" class="btn btn-primary close-panel">Cancel</button>
+        <span class="help-block"></span>
+      </div>
     </div>
   </div>
-  <div class="form-group">
-    <div class="col-lg-10 col-lg-offset-2">
-      <button type="submit" class="btn btn-primary close-panel">Submit</button>
-      <button type="reset" class="btn btn-primary close-panel">Cancel</button>
-      <span class="help-block"></span>
-    </div>
-  </div>
-</fieldset>
+</div>
