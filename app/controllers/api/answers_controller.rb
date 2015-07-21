@@ -1,7 +1,7 @@
 module Api
   class AnswersController < ApiController
     def index
-      @answers = current_question.answers
+      @answers = current_user.answers
       render :index
     end
 

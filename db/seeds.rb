@@ -1,14 +1,24 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-#
+
+@users = []
+@polls = []
+@questions = []
+@answers = []
+@invites = []
+@responses =[]
 
 
-
+3.times do
+  @users << User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email)
+end
+20.times do
+  @polls << Poll.create!(user_id:  [1,2,3].sample, title: Faker::Company.catch_phrase, text: Faker::Lorem.sentence)
+end
+50.times do
+  @questions << Question.create!(poll_id: (1..19).to_a.sample, text: "#{Faker::Lorem.sentence}?")
+end
+100.times do
+  @answers << Answer.create!(question_id: (1..19).to_a.sample, text: Faker::Lorem.sentence)
+end
 
 
 

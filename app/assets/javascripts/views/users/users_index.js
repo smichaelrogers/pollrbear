@@ -16,11 +16,9 @@ PollrBear.Views.UsersIndex = Backbone.DashboardView.extend({
 
   showUserPages: function() {
     var that = this;
-    this.collection.forEach(function(user) {
-      var view = new PollrBear.Views.UserShow({
-        model: user
-      });
-      that.addSubview("#users", view);
+    var view = new PollrBear.Views.UserShow({
+      model: PollrBear.currentUser
     });
+    that.addSubview("#users", view);
   }
 });

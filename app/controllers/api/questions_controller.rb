@@ -11,7 +11,7 @@ module Api
     end
 
     def index
-      @questions = current_poll.questions
+      @questions = current_user.questions
       render :index
     end
 

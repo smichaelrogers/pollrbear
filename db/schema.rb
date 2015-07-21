@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 20150718170942) do
     t.string   "email",           null: false
     t.string   "provider"
     t.string   "uid"
-    t.string   "session_token",   null: false
-    t.string   "password_digest", null: false
+    t.string   "session_token"
+    t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
