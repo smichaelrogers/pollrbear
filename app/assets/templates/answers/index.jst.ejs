@@ -7,6 +7,7 @@
         <th>Created at</th>
       </thead>
     </tr>
+    <% if (answers) { %>
     <% answers.forEach(function(answer) { %>
     <tr>
       <td>
@@ -19,5 +20,6 @@
       </td>
     </tr>
     <% }); %>
+    <% }; %>
   </table>
 </div>

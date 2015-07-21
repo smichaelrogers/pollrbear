@@ -1,18 +1,21 @@
 PollrBear.Views.UserShow = Backbone.DashboardView.extend({
   template: JST['users/show'],
-  tagName: 'li',
-  className: 'list-group',
+  tagName: 'section',
+  className: 'container',
   events: {
+    'click .close-panel': 'collapseAnswerPanel',
+    'click #add-question': 'addQuestion'
   },
 
   initialize: function(options) {
     this.listenTo(this.model, "sync", this.render);
+    this.answerOpen = false;
     this.polls = this.model.polls();
     this.questions = this.model.questions();
     this.answers = this.model.answers();
     this.responses = this.model.responses();
-
-  },
+    this.invites = this.model.invites();
+    },
 
   render: function() {
     var content = this.template({
@@ -57,6 +60,29 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
       collection: this.invites
     });
     this.$('.user-invites').html(view.render().$el);
+  },
+  addQuestion: function(event) {
+    event.preventDefault();
+    if (!this.formExpanded() ){
+      var question = this.$('#question-queuer').val();
+      var view = new PollrBear.Views.UserSubform({
+        question: question
+      });
+      this.$('#question-queuer').val('');
+      this.addSubview('#question-queue', view);
+    }
+  },
+  formExpanded: function() {
+    if(this.$("#question-queue").hasClass('active')) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  collapseAnswerPanel: function(event) {
+    event.preventDefault();
+    $('#question-queue').html('');
+    $('#question-buttons').removeClass('collapsed');
   }
 
 });

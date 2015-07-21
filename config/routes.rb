@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :questions, only: [:index, :create, :show, :update, :destroy]
     resources :answers, only:  [:index, :create, :show, :update, :destroy]
     resources :responses, only:  [:index, :create, :show, :update, :destroy]
-    resources :invites, only: [:create, :destroy]
+    resources :invites, only: [:create, :destroy, :index]
   end
   root to: 'pages#root'
 

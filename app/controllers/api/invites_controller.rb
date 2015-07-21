@@ -12,7 +12,7 @@ module Api
 
     def index
       @invites = current_user.invites
-      render json: @invites
+      render :index
     end
 
     def show

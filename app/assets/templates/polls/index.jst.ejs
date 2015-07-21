@@ -7,6 +7,7 @@
         <th>Created at</th>
       </thead>
     </tr>
+    <% if (polls) { %>
     <% polls.forEach(function(poll) { %>
     <tr>
       <td>
@@ -20,5 +21,6 @@
       </td>
     </tr>
     <% }); %>
+    <% }; %>
   </table>
 </div>

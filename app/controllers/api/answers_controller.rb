@@ -2,7 +2,7 @@ module Api
   class AnswersController < ApiController
     def index
       @answers = current_question.answers
-      render json: @answers
+      render :index
     end
 
     def create

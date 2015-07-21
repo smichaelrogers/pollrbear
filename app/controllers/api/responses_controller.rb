@@ -2,7 +2,7 @@ module Api
   class ResponsesController < ApiController
     def index
       @responses = current_answer.responses
-      render json: @responses
+      render :index
     end
 
     def create

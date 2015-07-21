@@ -27,7 +27,7 @@ PollrBear.Routers.Users = Backbone.Router.extend({
     if (!this._requireSignedOut()) { return; }
 
     var model = new this.collection.model();
-    var formView = new PollrBear.Views.UsersForm({
+    var formView = new PollrBear.Views.UserForm({
       collection: this.collection,
       model: model
     });
@@ -39,7 +39,7 @@ PollrBear.Routers.Users = Backbone.Router.extend({
     if (!this._requireSignedIn(callback)) { return; }
 
     var model = this.collection.getOrFetch(id);
-    var showView = new PollrBear.Views.UsersShow({
+    var showView = new PollrBear.Views.UserShow({
       model: model
     });
     this._swapView(showView);

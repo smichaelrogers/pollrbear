@@ -11,9 +11,8 @@ module Api
     end
 
     def index
-      current = Poll.find(params[:question][:poll_id])
       @questions = current_poll.questions
-      render json: @questions
+      render :index
     end
 
     def show

@@ -7,6 +7,7 @@
         <th>Created at</th>
       </thead>
     </tr>
+    <% if (questions) { %>
     <% questions.forEach(function(question) { %>
     <tr>
       <td>
@@ -20,5 +21,6 @@
       </td>
     </tr>
     <% }); %>
+    <% }; %>
   </table>
 </div>
