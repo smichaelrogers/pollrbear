@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="table table-condensed table-hover">
+    <tr>
+      <thead>
+        <th>Invite</th>
+        <th>By</th>
+        <th>Created at</th>
+      </thead>
+    </tr>
+    <% invites.forEach(function(invite) { %>
+    <tr>
+      <td>
+        <a class="show-invite" href="#" data-id="<%= invite.id %>"><%= invite.escape('text') %></a>
+      </td>
+      <td><%= invite.escape('user') %>
+      </td>
+      <td>
+        <%= invite.escape('created_at') %>
+      </td>
+    </tr>
+    <% }); %>
+  </table>
+</div>

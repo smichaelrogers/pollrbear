@@ -1,8 +1,6 @@
 PollrBear.Views.PollShow = Backbone.DashboardView.extend({
   template: JST['polls/show'],
-  events: {
-    'click .show-questions': 'showQuestions'
-  },
+
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
   },
@@ -12,12 +10,5 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
     });
     this.$el.html(content);
     return this;
-  },
-  showQuestions: function() {
-    event.preventDefault();
-    var view = new PollrBear.Views.QuestionsIndex({
-      model: this.model
-    });
-    this.addSubview('.questions', view);
   }
 });

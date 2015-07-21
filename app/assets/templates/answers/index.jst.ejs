@@ -2,21 +2,20 @@
   <table class="table table-condensed table-hover">
     <tr>
       <thead>
-        <th>Poll</th>
-        <th>Description</th>
+        <th>Answer</th>
+        <th>text</th>
         <th>Created at</th>
       </thead>
     </tr>
-    <% polls.forEach(function(poll) { %>
+    <% answers.forEach(function(answer) { %>
     <tr>
       <td>
-        <a class="show-poll" href="#" data-id="<%= poll.id %>"><%= poll.escape('title') %></a>
+        <a class="show-answer" href="#" data-id="<%= answer.id %>"><%= answer.escape('text') %></a>
       </td>
       <td>
-        <%= poll.escape('text') %>
       </td>
       <td>
-        <%= poll.escape('created_at') %>
+        <%= answer.escape('created_at') %>
       </td>
     </tr>
     <% }); %>

@@ -16,13 +16,38 @@ PollrBear.Models.User = Backbone.Model.extend({
     if (!this._responses) {
       this._responses = new PollrBear.Collections.Responses([], { user: this });
     }
-    return this._respones;
+    return this._responses;
+  },
+  answers: function () {
+    if (!this._answers) {
+      this._answers = new PollrBear.Collections.Answers([], { user: this });
+    }
+    return this._answers;
+  },
+  questions: function () {
+    if (!this._questions) {
+      this._questions = new PollrBear.Collections.Questions([], { user: this });
+    }
+    return this._questions;
   },
   parse: function(response) {
     if(response.polls) {
       this.polls().set(response.polls, { parse: true });
       delete response.polls;
-    }
+    };
+    if(response.invites) {
+      this.invites().set(response.invites, { parse: true });
+      delete response.invites;
+    };
+    if(response.responses) {
+      this.responses().set(response.responses, { parse: true });
+      delete response.responses;
+    };
+    if(response.questions) {
+      this.questions().set(response.questions, { parse: true });
+      delete response.questions;
+    };
+
     return response;
   },
 

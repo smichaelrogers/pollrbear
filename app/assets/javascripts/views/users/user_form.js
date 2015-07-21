@@ -1,4 +1,4 @@
-PollrBear.Views.UsersForm = Backbone.View.extend({
+PollrBear.Views.UserForm = Backbone.View.extend({
   template: JST['users/form'],
 
   initialize: function(options){

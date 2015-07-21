@@ -18,8 +18,12 @@ class User < ActiveRecord::Base
   validates :email, :session_token, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :email, uniqueness: true
+
   has_many :responses
   has_many :polls
+  has_many :questions, through: :polls, source: :questions
+  has_many :answers, through: :questions, source: :answers
+  has_many :received_responses, through: :answers, source: :responses
   has_many :invites, inverse_of: :user
 
   attr_reader :password
