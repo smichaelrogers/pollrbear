@@ -1,60 +1,52 @@
-<div class="panel-body">
-  <h4 class="panel-title">
-    Question:
-    <strong>
-      <em> &nbsp;
-        <%= heading %>
-      </em>
-    </strong>
-  </h4>
+<div class="panel-heading">
 </div>
-<div class="panel-body">
-  <div class="form-group answer-select">
-    <label class="col-lg-2 control-label">Answer</label>
-    <div class="col-lg-10 input-group">
-      <input type="text" class="form-control answer-input" placeholder="Answer">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-lg-10 col-lg-offset-2">
-      <button type="reset" class="btn btn-default remove-answer">Remove</button>
-      <button type="button" class="btn btn-primary add-answer">Add</button>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="answer-queue" class="col-lg-2 control-label">Answers</label>
-    <div class="col-lg-10">
-      <select multiple="" class="form-control answer-list">
 
+<div class="panel-body">
+  <form class="new-question-form">
+
+    <div class="form-group">
+      <label>Question:</label>
+      <input name="question[text]" type="text" class="form-control" placeholder="Answer">
+    </div>
+
+    <div class="form-group">
+      <label>Answers:</label>
+      <input type="text" class="form-control" placeholder="Answer">
+    </div>
+
+    <div class="form-group">
+      <div class="btn-group">
+        <button type="reset" class="btn btn-default remove-answer">-</button>
+        <button type="button" class="btn btn-primary add-answer">+</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <select multiple="" class="form-control new-questions">
       </select>
     </div>
-  </div>
-  <div class="form-group">
-    <label class="col-lg-2 control-label">Chart</label>
-    <div class="col-lg-10">
+
+    <div class="form-group">
       <label class="radio-inline">
         <input type="radio" name="question[chart_type]" value="1" checked=""> <i class="fa fa-3x fa-bar-chart"></i>
       </label>
-
       <label class="radio-inline">
         <input type="radio" name="question[chart_type]" value="2"> <i class="fa fa-3x fa-area-chart"></i>
       </label>
-
       <label class="radio-inline">
         <input type="radio" name="question[chart_type]" value="3"> <i class="fa fa-3x fa-pie-chart"></i>
       </label>
       <label class="radio-inline">
         <input type="radio" name="question[chart_type]" value="4"> <i class="fa fa-3x fa-line-chart"></i>
       </label>
-      <span class="help-block"></span>
-      <span class="help-block"></span>
     </div>
-  </div>
-  <div class="form-group">
-    <div class="col-lg-10 col-lg-offset-2">
-      <button type="submit" class="btn btn-primary close-panel">Submit</button>
-      <button type="reset" class="btn btn-primary close-panel">Cancel</button>
-      <span class="help-block"></span>
+
+    <div class="form-group">
+      <span class="pull-right">
+        <button type="submit" class="btn btn-primary add-question">Add Question</button>
+        <button type="submit" class="btn btn-success submit-poll-data">Create Poll</button>
+        <button type="reset" class="btn btn-warning">Cancel</button>
+      </span>
     </div>
-  </div>
+  </form>
 </div>
