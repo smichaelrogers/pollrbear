@@ -12,17 +12,14 @@ PollrBear.Views.UserForm = Backbone.View.extend({
   render: function(){
     var html = this.template({ user: this.model });
     this.$el.html(html);
-    console.log('render user form');
     return this;
   },
 
   submit: function(event){
     event.preventDefault();
-
     var $form = $(event.currentTarget);
     var userData = $form.serializeJSON().user;
     var that = this;
-
     this.model.set(userData);
     this.model.save({}, {
       success: function(){
@@ -32,7 +29,6 @@ PollrBear.Views.UserForm = Backbone.View.extend({
       },
       error: function(data){
         alert("invalid");
-        console.log(data);
       }
     });
   }

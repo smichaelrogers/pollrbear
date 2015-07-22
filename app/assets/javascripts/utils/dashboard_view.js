@@ -18,6 +18,17 @@ Backbone.DashboardView = Backbone.View.extend({
     }
   },
 
+  addErrorsFn: function() {
+    return function(model, response) {
+      var htmlResp = "<ul>";
+      htmlResp += response.responseJSON.map(function(error) {
+        return "<li>" + error + "</li>";
+      }).join("");
+      htmlResp += "</ul>";
+      this.$(".errors").html(htmlResp);
+    }.bind(this);
+  },
+
   addSubview: function(selector, subview) {
     this.subviews(selector).push(subview);
     this.attachSubview(selector, subview.render());

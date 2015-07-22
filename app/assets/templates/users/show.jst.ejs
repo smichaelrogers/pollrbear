@@ -1,71 +1,89 @@
-<div class="row">
-  <div class="clearfix visible-xs-block"></div>
+<div class="clearfix visible-xs-block">
+</div>
 
-  <div class="col-xs-12 col-md-6 col-lg-4">
-    <div class="panel panel-default new-poll-form">
+<div class="col-xs-12 col-md-6 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        Create a New Poll
+      </h4>
+    </div>
+    <div class="panel-body panel-new-poll">
+    </div>
+  </div>
+</div>
+
+<div class="clearfix visible-xs-block"></div>
+
+<div class="col-xs-12 col-md-6 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= user.fullName() %>
+      </h4>
+    </div>
+    <div class="panel-body">
+    </div>
+  </div>
+</div>
+
+<div class="clearfix visible-xs-block"></div>
+
+<div class="col-xs-12 col-md-6 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Your Active Polls</h4>
+    </div>
+    <div class="panel-polls">
+    </div>
+  </div>
+</div>
+
+<div class="clearfix visible-xs-block"></div>
+
+<div class="col-xs-12 col-md-6 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Recent Questions</h4>
+    </div>
+    <div class="panel-questions">
+    </div>
+  </div>
+</div>
+
+<div class="clearfix visible-xs-block"></div>
+
+<div class="col-xs-12 col-md-6 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Recent Answers</h4>
+    </div>
+    <div class="panel-answers">
+    </div>
+  </div>
+</div>
+
+<div class="clearfix visible-xs-block"></div>
+
+<div class="col-xs-12 col-md-6 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Your Responses</h4>
+    </div>
+    <div class="panel-responses">
     </div>
   </div>
 
-  <div class="clearfix visible-xs-block"></div>
+</div>
+<div class="clearfix visible-xs-block"></div>
 
-  <div class="col-xs-12 col-md-6 col-lg-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          Profile
-        </h4>
-      </div>
-      <ul class="list-group user-polls" data-id="<%= user.id %>">
-      </ul>
+<div class="col-xs-12 col-md-6 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Your Invites</h4>
+    </div>
+    <div class="panel-invites">
     </div>
   </div>
 
-  <div class="clearfix visible-xs-block"></div>
-
-  <div class="col-xs-12 col-md-6 col-lg-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">Your Active Polls</h4>
-      </div>
-      <ul class="list-group user-polls" data-id="<%= user.id %>">
-      </ul>
-    </div>
-  </div>
-
-  <div class="clearfix visible-xs-block"></div>
-
-  <div class="col-xs-12 col-md-6 col-lg-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">Recent Questions</h4>
-      </div>
-      <ul class="list-group user-questions" data-id="<%= user.id %>">
-      </ul>
-    </div>
-  </div>
-
-  <div class="clearfix visible-xs-block"></div>
-
-  <div class="col-xs-12 col-md-6 col-lg-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">Recent Answers</h4>
-      </div>
-      <ul class="list-group user-answers" data-id="<%= user.id %>">
-      </ul>
-    </div>
-  </div>
-
-  <div class="clearfix visible-xs-block"></div>
-
-  <div class="col-xs-12 col-md-6 col-lg-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">Your Responses</h4>
-      </div>
-      <ul class="list-group user-responses" data-id="<%= user.id %>">
-      </ul>
-    </div>
-
-  </div>
 </div>

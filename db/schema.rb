@@ -28,12 +28,10 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   create_table "invites", force: :cascade do |t|
     t.integer  "poll_id",    null: false
     t.integer  "user_id",    null: false
-    t.integer  "invitee_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "invites", ["invitee_id"], name: "index_invites_on_invitee_id", using: :btree
   add_index "invites", ["poll_id"], name: "index_invites_on_poll_id", using: :btree
   add_index "invites", ["user_id"], name: "index_invites_on_user_id", using: :btree
 
@@ -74,11 +72,11 @@ ActiveRecord::Schema.define(version: 20150718170942) do
     t.string   "first_name",      null: false
     t.string   "last_name",       null: false
     t.string   "email",           null: false
-    t.string   "gravatar"
+    t.string   "profile_img"
     t.string   "provider"
     t.string   "uid"
-    t.string   "session_token"
-    t.string   "password_digest"
+    t.string   "session_token",   null: false
+    t.string   "password_digest", null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

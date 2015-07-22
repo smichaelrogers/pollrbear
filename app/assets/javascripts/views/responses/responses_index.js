@@ -1,6 +1,5 @@
 PollrBear.Views.ResponsesIndex = Backbone.DashboardView.extend({
   template: JST['responses/index'],
-
   initialize: function() {
     this.listenTo(this.collection, 'sync', this.render);
   },
