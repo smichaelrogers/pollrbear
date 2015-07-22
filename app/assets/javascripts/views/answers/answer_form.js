@@ -6,7 +6,10 @@ PollrBear.Views.AnswerForm = Backbone.DashboardView.extend({
     'click .submit-answer-data': 'submitAnswerData'
   },
 
-  initialize: function(options) {},
+  initialize: function(options) {
+    this.render();
+    this.listenTo(this.model, 'sync', this.render());
+  },
   render: function() {
     var content = this.template();
     this.$el.html(content);
@@ -15,22 +18,36 @@ PollrBear.Views.AnswerForm = Backbone.DashboardView.extend({
   addAnswer: function(event) {
     var answer = this.$('.answer-input').val();
     this.$('.answer-input').val('');
-    this.$('.new-answers').append("<option>" + answer + "</option>");
+    this.$('.new-answers').append("<option value=\"" + answer + "\">" + answer + "</option>");
   },
   removeAnswers: function(event) {
     this.$("select option:selected").each(function() {
       this.remove();
     });
+    this.render();
   },
   submitAnswerData: function(event) {
     event.preventDefault();
-    var formData = this.$('.new-answer-form').serializeJSON();
-    formData.poll_id = this.model.id;
-    var answer = this.collection.create(formData);
-
-    var view = new PollrBear.views.AnswerForm({
-      collection: PollrBear.currentUser.answers(),
-      model: answer
+    var that = this;
+    var answers = this.collection;
+    var question_id = this.model.id;
+    this.$('option').each(function(index, value) {
+      var str = value.value;
+      answers.create({
+        text: str,
+        question_id: question_id
+      }, {
+        success: function() {
+          that.$el.html("<h4>Success!</h4>");
+          var returnView = new PollrBear.Views.PollForm({
+            collection: PollrBear.currentUser.polls()
+          });
+          window.setTimeout(function () {
+            $('.panel-new-poll').html(returnView.render().$el);
+          }, 500)
+        }
+      });
     });
+
   }
 });

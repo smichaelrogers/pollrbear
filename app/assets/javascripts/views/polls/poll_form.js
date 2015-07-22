@@ -20,5 +20,6 @@ PollrBear.Views.PollForm = Backbone.DashboardView.extend({
       collection: PollrBear.currentUser.questions(),
       model: poll
     });
+    this._swapView(view);
   }
 });

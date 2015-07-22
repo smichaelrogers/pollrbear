@@ -1,28 +1,27 @@
+<form class="new-poll-form">
+  <div class="form-group">
+    <label>Title</label>
+    <input name="poll[title]" type="text" class="form-control" placeholder="Title">
+  </div>
 
-  <form class="new-poll-form">
-    <div class="form-group">
-      <label>Title</label>
-      <input name="poll[title]" type="text" class="form-control" placeholder="Title">
-    </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea name="poll[text]" class="form-control" rows="3" placeholder="Description"></textarea>
+  </div>
 
-    <div class="form-group">
-      <label>Description</label>
-      <textarea name="poll[text]" class="form-control" rows="3" placeholder="Description"></textarea>
-    </div>
+  <div class="form-group">
+    <label class="radio-inline">
+      <input type="radio" name="poll[privacy]" value="1" checked=""> Public
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="poll[privacy]" value="2"> Private
+    </label>
+  </div>
 
-    <div class="form-group">
-      <label class="radio-inline">
-        <input type="radio" name="poll[privacy]" value="1" checked=""> Public
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="poll[privacy]" value="2"> Private
-      </label>
-    </div>
-
-    <div class="form-group">
-      <span class="pull-right">
-        <button type="reset" class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-primary submit-poll-data">Next</button>
-      </span>
-    </div>
-  </form>
+  <div class="form-group">
+    <span class="pull-right">
+      <button type="reset" class="btn btn-default">Cancel</button>
+      <button type="submit" class="btn btn-primary submit-poll-data">Next</button>
+    </span>
+  </div>
+</form>
