@@ -26,13 +26,9 @@ PollrBear.Views.PollForm = Backbone.DashboardView.extend({
     this.collection.create(formData, {
       success: function() {
         var view = new PollrBear.Views.QuestionForm({
-          collection: questions,
           model: poll
-        }, {
-          success: function() {
-            that.swapView(view)
-          }
         });
+        that.$el.html(view.render().$el);
       }
     });
   }

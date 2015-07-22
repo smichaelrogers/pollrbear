@@ -1,5 +1,5 @@
 body {
-  font-family: raleway;
+  font-family: 'helvetica neue', sans-serif;
   background: #eee;
 }
 * {
@@ -65,7 +65,7 @@ img.img-chart {
 .content-section-a {
   padding: 50px 0;
   background-color: #f8f8f8;
-  @import box-shadow: 5px 0 8px -2px rgba(0,0,0,.6);
+  box-shadow: 5px 0 8px -2px rgba(0,0,0,.6);
 }
 .content-section-b {
   padding: 50px 0;

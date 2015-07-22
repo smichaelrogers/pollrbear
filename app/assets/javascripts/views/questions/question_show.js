@@ -1,7 +1,6 @@
 PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
 
   template: JST['questions/show'],
-
   events: {
   },
 
@@ -15,5 +14,9 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     });
     this.$el.html(content);
     return this;
+  },
+
+  renderCharts: function() {
+
   }
 });

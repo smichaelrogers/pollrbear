@@ -16,7 +16,6 @@ gem 'kaminari'
 gem 'figaro'
 gem 'omniauth-twitter'
 gem 'faker'
-gem 'chartjs-ror'
 group :doc do
   gem 'sdoc', require: false
 end
