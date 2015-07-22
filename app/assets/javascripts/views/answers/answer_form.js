@@ -3,7 +3,8 @@ PollrBear.Views.AnswerForm = Backbone.DashboardView.extend({
   events: {
     'click .add-answer': 'addAnswer',
     'click .remove-answers': 'removeAnswers',
-    'click .submit-answer-data': 'submitAnswerData'
+    'click .submit-answer-data': 'submitAnswerData',
+    'click .submit-answer-new-question': 'submitAnswerNewQuestion'
   },
 
   initialize: function(options) {
@@ -36,18 +37,32 @@ PollrBear.Views.AnswerForm = Backbone.DashboardView.extend({
       answers.create({
         text: str,
         question_id: question_id
-      }, {
-        success: function() {
-          that.$el.html("<h4>Success!</h4>");
-          var returnView = new PollrBear.Views.PollForm({
-            collection: PollrBear.currentUser.polls()
-          });
-          window.setTimeout(function () {
-            $('.panel-new-poll').html(returnView.render().$el);
-          }, 500)
-        }
       });
+      window.setTimeout(function(){}, 20);
     });
-
+    var view = new PollrBear.Views.PollForm({
+      model: PollrBear.currentUser
+    });
+    $('.panel-new-poll').html(view.render().$el);
   }
+  // submitAnswerNewQuestion: function(event) {
+  //   event.preventDefault();
+  //   var that = this;
+  //   var answers = this.collection;
+  //   var question_id = this.model.id;
+  //   this.$('option').each(function(index, value) {
+  //     var str = value.value;
+  //     answers.create({
+  //       text: str,
+  //       question_id: question_id
+  //     });
+  //   });
+  //   window.setTimeout(function() {
+  //     var pollView = new PollrBear.Views.PollShow({
+  //       model: this.model
+  //     });
+  //     $('#current-poll').html(pollView.render().$el);
+  //   }, 500);
+  //   });
+  // }
 });

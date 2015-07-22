@@ -3,7 +3,6 @@ PollrBear.Views.QuestionForm = Backbone.DashboardView.extend({
   events: {
     'click .submit-question-data': 'submitQuestionData'
   },
-
   initialize: function(options) {
     this.render();
   },
@@ -14,12 +13,16 @@ PollrBear.Views.QuestionForm = Backbone.DashboardView.extend({
   },
   submitQuestionData: function(event) {
     event.preventDefault();
+    var that = this;
     var formData = this.$('.new-question-form').serializeJSON();
     formData.question.poll_id = this.model.id;
-    var view = new PollrBear.Views.AnswerForm({
-      collection: PollrBear.currentUser.answers(),
-      model: this.collection.create(formData)
-    });
-    this._swapView(view);
+    var question = this.collection.create(formData);
+    window.setTimeout(function () {
+      var view = new PollrBear.Views.AnswerForm({
+        collection: PollrBear.currentUser.answers(),
+        model: question
+      });
+      that._swapView(view);
+    }.bind(this), 200);
   }
 });

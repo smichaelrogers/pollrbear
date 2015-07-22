@@ -1,4 +1,6 @@
-<%= poll.escape('title') %>
-<%= poll.escape('description') %>
-
-<div id="questions"></div>
+<div class="container">
+  <h1><%= poll.escape('title') %></h1>
+  <p><%= poll.escape('text') %></p>
+  <div class="poll-results" data-id="<%= poll.id %>">
+  </div>
+</div>
