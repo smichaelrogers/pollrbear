@@ -24,7 +24,7 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
   },
   showPollForm: function(event) {
     var view = new PollrBear.Views.PollForm({
-      model: this.model
+      collection: this.collection
     });
     this.$('.new-poll-form').html(view.render().$el);
   },

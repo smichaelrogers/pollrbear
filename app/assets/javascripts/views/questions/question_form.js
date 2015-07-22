@@ -8,6 +8,7 @@ PollrBear.Views.QuestionForm = Backbone.DashboardView.extend({
   },
 
   initialize: function() {
+    this.collection = this.model.questions();
     this.listenTo(this.collection, 'sync', this.render);
     this.render();
   },
@@ -32,15 +33,19 @@ PollrBear.Views.QuestionForm = Backbone.DashboardView.extend({
     event.preventDefault();
     var answers = this.model.answers();
     var that = this;
-    var questionData = this.$('.new-question-form').serializeJSON();
-    questionData['poll_id'] = this.model.poll_id;
-    var answerData = this.$('.new-answers-form').serializeJSON();
-    answerData['question_id'] = this.model.id;
+
+    var questionData = this.$('.question-form').serializeJSON();
+    questionData['poll_id'] = this.model.id;
+    debugger
     var question = this.collection.create(questionData, {
-      success: function() {
-        answerData['answers'].forEach(function(data) {
-          answers.create(data)
-        });
+      success: function(data) {
+        var question_id = data.id;
+        that.$('option').each(function(index) {
+          PollrBear.currentUser.answers().create({
+            question_id: question_id,
+            text: this.val()
+          })
+        })
       }
     });
   },
@@ -49,7 +54,7 @@ PollrBear.Views.QuestionForm = Backbone.DashboardView.extend({
     var that = this;
     var questions = this.model.questions();
     var poll = this.model;
-    var formData = this.$('.new-question-form').serializeJSON();
+    var formData = this.$('.question-form').serializeJSON();
     formData["poll_id"] = this.model.id;
     this.collection.create(formData, {
       success: function() {
@@ -58,7 +63,7 @@ PollrBear.Views.QuestionForm = Backbone.DashboardView.extend({
           model: poll
         }, {
           success: function() {
-            that.swapView(view)
+            that._swapView(view)
           }
         });
       }
