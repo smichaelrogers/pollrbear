@@ -38,18 +38,9 @@ module Api
     end
 
     private
-    def current_user
-      if params[:id]
-        @invite = Invite.find(params[:id])
-        @user = @invite.user
-      elsif params[:invite]
-        @user = User.find(params[:invite][:invitee_id])
-      end
-      @user
-    end
 
     def invite_params
-      params.require(:invite).permit(:user_id, :inviteer_id, :poll_id)
+      params.require(:invite).permit(:user_id, :poll_id)
     end
   end
 end

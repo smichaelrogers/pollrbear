@@ -8,19 +8,21 @@
       </thead>
     </tr>
     <% if (polls) { %>
-    <% polls.forEach(function(poll) { %>
-    <tr>
-      <td>
-        <a class="show-poll" href="#" data-id="<%= poll.id %>"><%= poll.escape('title') %></a>
-      </td>
-      <td>
-        <%= poll.escape('text') %>
-      </td>
-      <td>
-        <%= poll.escape('created_at') %>
-      </td>
-    </tr>
-    <% }); %>
-    <% }; %>
+      <% polls.forEach(function(poll) { %>
+        <tr>
+          <td>
+            <a class="show-poll" href="#" data-id="<%= poll.id %>">
+              <%= poll.escape('title') %>
+            </a>
+          </td>
+          <td>
+            <%= poll.escape('text') %>
+          </td>
+          <td>
+            <%= poll.escape('created_at') %>
+          </td>
+        </tr>
+        <% }); %>
+          <% }; %>
   </table>
 </div>

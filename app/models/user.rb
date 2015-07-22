@@ -6,10 +6,11 @@
 #  first_name      :string           not null
 #  last_name       :string           not null
 #  email           :string           not null
+#  gravatar        :string
 #  provider        :string
 #  uid             :string
-#  session_token   :string           not null
-#  password_digest :string           not null
+#  session_token   :string
+#  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -23,8 +24,8 @@ class User < ActiveRecord::Base
   has_many :polls
   has_many :questions, through: :polls, source: :questions
   has_many :answers, through: :questions, source: :answers
-  has_many :received_responses, through: :answers, source: :responses
-  has_many :invites, inverse_of: :user
+  has_many :invites
+  has_many :invited_users, through: :invites, source: :user
 
   attr_reader :password
   after_initialize :ensure_session_token

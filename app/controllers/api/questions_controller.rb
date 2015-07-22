@@ -16,7 +16,7 @@ module Api
     end
 
     def show
-      @question = Question.includes(answers: :responses).find(params[:id])
+      @question = Question.includes(answers: [responses: :users]).find(params[:id])
       render :show
     end
 

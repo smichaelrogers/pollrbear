@@ -14,5 +14,5 @@ class Invite< ActiveRecord::Base
   validates :user, :poll, presence: true
 
   belongs_to :poll
-  belongs_to :user, inverse_of: :invites
+  belongs_to :user
 end

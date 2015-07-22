@@ -4,11 +4,11 @@ class CreateUsers < ActiveRecord::Migration
       t.string :first_name, null: false
       t.string :last_name, null: false
       t.string :email, null: false
-      t.string :gravatar
+      t.string :profile_img
       t.string :provider
       t.string :uid
-      t.string :session_token
-      t.string :password_digest
+      t.string :session_token, null: false
+      t.string :password_digest, null: false
       t.timestamps null: false
     end
     add_index :users, :email, unique: true

@@ -9,7 +9,6 @@ PollrBear.Views.UsersIndex = Backbone.DashboardView.extend({
     var content = this.template({
       users: this.collection
     });
-
     this.$el.html(content);
     this.showCurrentUserPage();
     return this;
@@ -20,6 +19,6 @@ PollrBear.Views.UsersIndex = Backbone.DashboardView.extend({
     var view = new PollrBear.Views.UserShow({
       model: PollrBear.currentUser
     });
-    this.addSubview("#users", view);
+    this.$('#user').html(view.render().$el);
   }
 });

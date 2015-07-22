@@ -5440,6 +5440,7 @@ button.close {
   background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.0001)), to(rgba(0, 0, 0, 0.5)));
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0, rgba(0, 0, 0, 0.5) 100%);
   background-repeat: repeat-x;
+  
 }
 .carousel-control:hover, .carousel-control:focus {
   outline: 0;
@@ -6135,15 +6136,18 @@ input[type="checkbox"]:disabled:checked:after, .checkbox input[type="checkbox"]:
   background-color: #bbbbbb;
   border-color: transparent
 }
-.has-warning input:not([type=checkbox]), .has-warning .form-control, .has-warning input:not([type=checkbox]):focus, .has-warning .form-control:focus {
+.has-warning input:not([type=checkbox]), .has-warning .form-control, .has-warning input.form-control[readonly], .has-warning input[type=text][readonly], .has-warning [type=text].form-control[readonly], .has-warning input:not([type=checkbox]):focus, .has-warning .form-control:focus {
+  border-bottom: none;
   -webkit-box-shadow: inset 0 -2px 0 #ff9800;
   box-shadow: inset 0 -2px 0 #ff9800
 }
-.has-error input:not([type=checkbox]), .has-error .form-control, .has-error input:not([type=checkbox]):focus, .has-error .form-control:focus {
+.has-error input:not([type=checkbox]), .has-error .form-control, .has-error input.form-control[readonly], .has-error input[type=text][readonly], .has-error [type=text].form-control[readonly], .has-error input:not([type=checkbox]):focus, .has-error .form-control:focus {
+  border-bottom: none;
   -webkit-box-shadow: inset 0 -2px 0 #e51c23;
   box-shadow: inset 0 -2px 0 #e51c23
 }
-.has-success input:not([type=checkbox]), .has-success .form-control, .has-success input:not([type=checkbox]):focus, .has-success .form-control:focus {
+.has-success input:not([type=checkbox]), .has-success .form-control, .has-success input.form-control[readonly], .has-success input[type=text][readonly], .has-success [type=text].form-control[readonly], .has-success input:not([type=checkbox]):focus, .has-success .form-control:focus {
+  border-bottom: none;
   -webkit-box-shadow: inset 0 -2px 0 #4caf50;
   box-shadow: inset 0 -2px 0 #4caf50
 }

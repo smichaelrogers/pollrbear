@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150718170942) do
     t.integer  "poll_id",                null: false
     t.string   "text",                   null: false
     t.integer  "chart_type", default: 1
+    t.string   "url"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -73,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150718170942) do
     t.string   "first_name",      null: false
     t.string   "last_name",       null: false
     t.string   "email",           null: false
+    t.string   "gravatar"
     t.string   "provider"
     t.string   "uid"
     t.string   "session_token"

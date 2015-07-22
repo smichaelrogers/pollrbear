@@ -1,16 +1,10 @@
 PollrBear.Views.UserShow = Backbone.DashboardView.extend({
   template: JST['users/show'],
-  tagName: 'section',
   className: 'container-fluid',
-  events: {
-    'click .close-panel': 'collapseAnswerPanel',
-    'click #add-question': 'addQuestion'
-  },
 
   initialize: function(options) {
+    this.collection = this.model.polls();
     this.listenTo(this.model, "sync", this.render);
-    this.answerOpen = false;
-    this.polls = this.model.polls();
     this.questions = this.model.questions();
     this.answers = this.model.answers();
     this.responses = this.model.responses();
@@ -21,7 +15,6 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
       user: this.model
     });
     this.$el.html(content);
-
     this.showUserPolls();
     this.showUserQuestions();
     this.showUserAnswers();
@@ -31,14 +24,13 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
   },
   showPollForm: function(event) {
     var view = new PollrBear.Views.PollForm({
-      model: this.model,
-      collection: this.polls
+      model: this.model
     });
-    this.$('#new-poll-form').html(view.render().$el);
+    this.$('.new-poll-form').html(view.render().$el);
   },
   showUserPolls: function(event) {
     var view = new PollrBear.Views.PollsIndex({
-      collection: this.polls
+      collection: this.collection
     });
     this.$('.user-polls').html(view.render().$el);
   },
@@ -56,7 +48,7 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
   },
   showUserResponses: function(event) {
     var view = new PollrBear.Views.ResponsesIndex({
-      collection: this.questions
+      collection: this.responses
     });
     this.$('.user-responses').html(view.render().$el);
   }

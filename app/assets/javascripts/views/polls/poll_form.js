@@ -1,11 +1,12 @@
 PollrBear.Views.PollForm = Backbone.DashboardView.extend({
   template: JST['polls/form'],
   events: {
-    'click .next-to-questions': 'submitPollData'
+    'click .submit-poll-data': 'submitPollData'
   },
 
   initialize: function() {
-    this.listenTo(this.collection, 'sync', this.render);
+    this.collection = this.model.polls();
+    this.listenTo(this.collection, 'add', this.render);
     this.render();
   },
   render: function() {
@@ -16,6 +17,7 @@ PollrBear.Views.PollForm = Backbone.DashboardView.extend({
     return this;
   },
   submitPollData: function(event) {
+    event.preventDefault();
     var that = this;
     var questions = this.model.questions();
     var poll = this.model;
@@ -28,7 +30,7 @@ PollrBear.Views.PollForm = Backbone.DashboardView.extend({
           model: poll
         }, {
           success: function() {
-            that.swapView(new)
+            that.swapView(view)
           }
         });
       }

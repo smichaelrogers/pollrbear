@@ -17,6 +17,8 @@
 //= require underscore
 //= require serialize_json
 //= require backbone
+//= require Chart
+//= require excanvas
 //= require pollr_bear
 //= require_tree ../templates
 //= require_tree ./utils
