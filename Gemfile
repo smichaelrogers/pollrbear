@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+gem 'twilio-ruby'
+gem 'sinatra'
 gem 'backbone-on-rails'
 gem 'rails', '4.2.1'
 gem 'pg'

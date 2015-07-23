@@ -55,6 +55,16 @@ class User < ActiveRecord::Base
     user
   end
 
+  def send_message_via_sms(message)
+    @app_number = ENV['TWILIO_NUMBER']
+    @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
+    sms_message = @client.account.messages.create(
+      from: @app_number,
+      to: self.phone_number,
+      body: message,
+    )
+  end
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)

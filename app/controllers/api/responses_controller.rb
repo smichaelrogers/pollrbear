@@ -14,6 +14,8 @@ module Api
       end
     end
 
+    
+
     def show
       @response = current_answer.responses.find(params[:id])
       render :show
@@ -36,6 +38,7 @@ module Api
     end
 
     private
+
     def current_answer
       if params[:id]
         @response = Response.find(params[:id])
@@ -57,6 +60,7 @@ module Api
     def current_poll
       current_answer.poll
     end
+
     def response_params
       params.require(:response).permit(:answer_id, :user_id)
     end
