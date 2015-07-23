@@ -3,14 +3,14 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
   template: JST['questions/show'],
 
   initialize: function() {
-    this.listenTo(this.model, 'sync', this.render);
+    this.render();
   },
   render: function() {
     var content = this.template({
       question: this.model
     });
     this.$el.html(content);
-    this.renderPieChart();
+
     return this;
   },
 

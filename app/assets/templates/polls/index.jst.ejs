@@ -5,45 +5,41 @@
         <%= poll.escape('title') %>
       </h4>
       <% if(PollrBear.currentUser.id === poll.get('user_id')) { %>
-        <button type="button" class="btn btn-default show-poll" data-poll-id="<%= poll.id %>">Show Poll</button>
+        <button type="button" class="btn btn-default show-questions" data-poll-id="<%= poll.id %>">Show Poll</button>
         <button type="button" class="btn btn-default">Edit</button>
         <button type="button" class="btn btn-default">Delete</button>
         <button type="button" class="btn btn-default">Report</button>
         <% } else { %>
-          <button type="button" class="btn btn-default">Ignore</button>
-          <button type="button" class="btn btn-default show-poll" data-poll-id="<%= poll.id %>">Accept</button>
-          <% }; %>
-            <p class="list-group-item-text">
-              <%= poll.escape('text') %>
-            </p>
-            <a href="#" class="trigger" data-poll-id="<%= poll.id %>">
-              <span class="badge">
-                <%= poll.questions().length %>
-              </span> Questions
-            </a>
-            <ul class="list-group collapsed" data-poll-id="<%= poll.id %>">
-              <% poll.questions().forEach(function(question) { %>
-                <li class="list-group-item">
-                  Question
-                  <br> Text:
-                  <%= question.escape('text') %>
-                    <br> Chart:
-                    <%= question.escape('text') %>
-                      <br>
-                      <br>Answers:
-                      <br>
-                      <br>
-                      <% question.answers().forEach(function(answer) { %>
-
-                        <%= answer.escape('text') %><br>
-
-
-                          <%  }); %>
-
-
-                            <%  }); %>
-                </li>
-            </ul>
+        <button type="button" class="btn btn-default">Ignore</button>
+        <button type="button" class="btn btn-default btn-show-questions" data-poll-id="<%= poll.id %>">Accept</button>
+        <% }; %>
+        <p class="list-group-item-text">
+          <%= poll.escape('text') %>
+        </p>
     </li>
-    <% }); %>
+    <li class="list-group-item">
+      <h5 class="list-group-item-heading">
+        Questions
+      </h5>
+        <% poll.questions().forEach(function(question) { %>
+        <div class="list-group-item-text collapsed" data-poll-id="<%= poll.id %>">
+          <%= question.escape('text') %> (question)
+
+              <form data-poll-id="<%= poll.id %>">
+          <% question.answers().forEach(function(answer) { %>
+            
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="response[answer_id]" value="<%= answer.id %>">
+                    <%= answer.escape('text') %>
+                  </label>
+                </div>
+          <% }); %>
+              </form>
+
+        </p>
+        <% }); %>
+      <button type="button" class="visitor-submit-form" data-poll-id="<%= poll.id %>">Submit</button>
+      </li>
+  <% }); %>
 </ul>

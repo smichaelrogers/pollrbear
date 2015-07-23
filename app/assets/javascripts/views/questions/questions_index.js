@@ -10,16 +10,5 @@ PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
     });
     this.$el.html(content);
     return this;
-  },
-  showQuestions: function(event) {
-    event.preventDefault();
-    var questionId = $(event.currentTarget).attr('data-id');
-    var question = this.collection.getOrFetch(questionId);
-
-    var view = new PollrBear.Views.QuestionShow({
-      model: question
-    });
-
-    this.$('.show-poll').html(view.render().$el);
   }
 });

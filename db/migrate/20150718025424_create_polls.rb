@@ -5,7 +5,9 @@ class CreatePolls < ActiveRecord::Migration
       t.string :title, null: false
       t.string :text
       t.integer :privacy, default: 1, null: false
-      t.integer :duration, default: 86400 #if time is passed it is no longer active but not deleted
+      t.integer :duration, default: 86400
+
+
       t.timestamps null: false
     end
     add_index :polls, :user_id
