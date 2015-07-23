@@ -14,6 +14,7 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
     this.showUserPolls();
     this.showPollForm();
     this.showUserProfile();
+    
     return this;
   },
 
