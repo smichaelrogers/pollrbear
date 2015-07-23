@@ -23,19 +23,19 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     switch (this.model.get('chart_type')) {
       case 1:
         this.renderPieChart();
-      break;
+        break;
       case 2:
         this.renderLineChart();
-      break;
+        break;
       case 3:
         this.renderBarChart();
-      break;
+        break;
       case 4:
         this.renderRadarChart();
-      break;
+        break;
       case 5:
         this.renderPolarAreaChart();
-      break;
+        break;
       default:
         this.renderPieChart();
     };
@@ -73,11 +73,8 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
       chartData.push(answerData);
       i++;
     });
-
     window.chart = new Chart(ctx).Pie(chartData);
   },
-
-
   renderLineChart: function() {
 
   },
