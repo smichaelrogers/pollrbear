@@ -1,4 +1,4 @@
-json.(question, :id, :poll_id, :text, :chart_type, :created_at, :updated_at)
+json.(question, :id, :poll_id, :text, :chart, :created_at, :updated_at)
 
 json.answers question.answers do |answer|
   json.extract! answer, :id, :question_id, :text, :created_at, :updated_at

@@ -5,14 +5,14 @@
 #  id         :integer          not null, primary key
 #  poll_id    :integer          not null
 #  text       :string           not null
-#  chart_type :integer          default(1)
+#  chart :integer          default(1)
 #  url        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class Question < ActiveRecord::Base
-  validates  :text, :chart_type, presence: true
+  validates  :text, :chart, presence: true
 
   has_many :answers, dependent: :destroy
   has_many :responses, through: :answers, source: :responses

@@ -48,7 +48,7 @@ module Api
     end
 
     def question_params
-      params.require(:question).permit(:poll_id, :text, :chart_type)
+      params.require(:question).permit(:poll_id, :text, :chart)
     end
   end
 end

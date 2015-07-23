@@ -50,13 +50,13 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   create_table "questions", force: :cascade do |t|
     t.integer  "poll_id",                null: false
     t.string   "text",                   null: false
-    t.integer  "chart_type", default: 1
-    t.string   "url"
+    t.integer  "chart",      default: 1, null: false
+    t.integer  "format",     default: 1, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  add_index "questions", ["chart_type"], name: "index_questions_on_chart_type", using: :btree
+  add_index "questions", ["chart"], name: "index_questions_on_chart", using: :btree
   add_index "questions", ["poll_id"], name: "index_questions_on_poll_id", using: :btree
 
   create_table "responses", force: :cascade do |t|
