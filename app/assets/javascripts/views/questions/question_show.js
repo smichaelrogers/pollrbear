@@ -4,15 +4,56 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
 
   initialize: function() {
     this.render();
+    this.ctx = this.$(".chart-area").get(0).getContext("2d");
   },
   render: function() {
     var content = this.template({
       question: this.model
     });
     this.$el.html(content);
-
     return this;
   },
+  pieChart: function() {
+    var that = this;
+    var chartData = [];
+    var answerData;
+    var i = 0;
+    var colors = ["#AAAAAA", "#BBBBBBB", "#CCCCCC", "#DDDDDD", "#EEEEEE", "#FFFFFF"];
+    var highlights = ["#AAAAAA", "#BBBBBBB", "#CCCCCC", "#DDDDDD", "#EEEEEE", "#FFFFFF"];
+    question.answers().forEach(function(answer) {
+      answerData = {};
+      answerData['value'] = answer.responses().length;
+      answerData['color'] = colors[i];
+      answerData['highlight'] = highlight[i];
+      answerData['labels'] = answer.get('text');
+      chartData.push(answerData);
+      i++;
+    });
+
+    var pie = new Chart(that.ctx[0]).Pie(chartData);
+  },
+  lineChart: function() {
+
+  },
+  barChart: function() {
+
+  },
+  radarChart: function() {
+
+  },
+  polarAreaChart: function() {
+
+  },
+
+
+  window.onload = function() {
+
+  };
+
+
+
+  < /script> < /body > < /html>
+
 
   generateData: function() {
     var data = [];

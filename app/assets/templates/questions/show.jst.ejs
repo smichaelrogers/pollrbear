@@ -1,0 +1,28 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <h4 class="list-group-item-heading">
+      <%= question.escape('text') %>
+    </h4>
+    <div class="row" data-answer-id="<%= answer.id %>">
+      <div class="col-xs-6">
+        <% question.answers().forEach(function(answer) { %>
+          <p>
+            <%= answer.escape('text') %>
+              <% }); %>
+      </div>
+      <div class="col-xs-2">
+        <% percents.forEach(function(percent) { %>
+          <p>
+            <%= percent %>
+          </p>
+          <% }); %>
+      </div>
+      <div class="col-xs-4">
+        <div class="container chart-area">
+          <canvas data-question-id="<%= question.id %>" width="300" height="300">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

@@ -1,0 +1,21 @@
+<li class="list-group-item">
+  <h5 class="list-group-item-heading">
+  </h5>
+  <% questions.forEach(function(question) { %>
+    <form data-poll-id="<%= pollId %>">
+      <% question.answers().forEach(function(answer) { %>
+        <div class="radio">
+          <label>
+            <input type="radio" name="response[answer_id]" value="<%= answer.id %>">
+            <%= answer.escape('text') %>
+          </label>
+        </div>
+        <% }); %>
+    </form>
+    <div class="question-content" data-question-id="<%= question.id %>">
+      <a href="#" class="show-question" data-question-id="<%= question.id %>">Results</a>
+      </p>
+    </div>
+    <% }); %>
+  <button type="button" class="visitor-submit-form" data-poll-id="<%= poll.id %>">Submit</button>
+</li>

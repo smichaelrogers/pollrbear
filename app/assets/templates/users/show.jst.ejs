@@ -1,7 +1,31 @@
-<div class="col-xs-12 col-lg-7" id="user-info">
+<div class="col-xs-6 col-lg-3 clearfix">
+  <div class="panel">
+    <%= user.polls().length %> Polls
+  </div>
 </div>
-<div class="col-xs-12 col-lg-5" id="user-profile"></div>
+<div class="col-xs-6 col-lg-3 clearfix">
+  <div class="panel">
+    <%= user.questions().length %> Questions
+  </div>
+</div>
+<div class="col-xs-6 col-lg-3 clearfix">
+  <div class="panel">
+    <%= user.answers().length %> Answers
+  </div>
+</div>
+<div class="col-xs-6 col-lg-3 clearfix">
+  <div class="panel">
+    <%= user.responses().length %> Responses
+  </div>
+</div>
 
-<div class="col-xs-12 col-lg-7" id="user-polls">
+
+
+<div class="col-xs-12 col-lg-6 clearfix" id="user-profile">
 </div>
-<div class="col-xs-12 col-lg-5" id="new-poll-form"></div>
+
+<div class="col-xs-12 col-lg-6 clearfix" id="user-polls">
+</div>
+<div class="col-xs-12 col-lg-6 clearfix" id="new-poll-form">
+
+</div>
