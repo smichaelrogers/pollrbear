@@ -1,8 +1,12 @@
 PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   template: JST['polls/index'],
   events: {
-    'click button.show-questions': 'showQuestions',
-    'click button.visitor-submit-form': 'submitForm'
+    'click button.btn-questions-show': 'showQuestions',
+    'click button.visitor-submit-form': 'submitForm',
+    'click button.btn-poll-edit': 'editPoll',
+    'click button.btn-poll-destroy': 'destroyPoll',
+    'click button.btn-poll-report': 'showReport',
+    'click button.btn-poll-ignore': 'ignorePoll'
   },
   initialize: function() {
     this.collection.fetch();
@@ -58,5 +62,25 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
       collection: poll.questions()
     });
     $target.html(view.render().$el);
+  },
+
+  editPoll: function(event) {
+    event.preventDefault();
+    alert('tbd');
+
+  },
+
+  destroyPoll: function(event) {
+    event.preventDefault();
+    alert('tbd');
+  },
+  showReport: function(event) {
+    event.preventDefault();
+    alert('tbd');
+  },
+
+  ignorePoll: function(event) {
+    event.preventDefault();
+    alert('tbd');
   }
 });

@@ -3,11 +3,11 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
 
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
-    this.render();
+    this.percentages = this.percentages();
   },
 
   render: function() {
-    var percentages = this.percentages();
+    var percentages = this.percentages;
     var content = this.template({
       question: this.model,
       percentages: percentages
@@ -46,8 +46,11 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
       len += answer.responses().length;
     });
     this.model.answers().forEach(function(answer) {
-      num = (answer.responses().length / len).toString();
-      data.push(num.slice(0,3));
+      console.log(answer.get('text'));
+
+      num = (answer.responses().length / len) * 100
+
+      data.push(Math.floor(num) + "%");
     });
     return data;
   },
@@ -93,7 +96,6 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     }
     window.chart = new Chart(ctx).Bar(barChartData);
   },
-
   renderRadarChart: function() {
     var element = $("canvas[data-question-id=\"" + this.model.id + "\"]")[0];
     var ctx = element.getContext("2d");
@@ -107,11 +109,11 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
       labels: lbls,
       datasets: [{
         fillColor: "rgba(220,220,220,0.2)",
-				strokeColor: "rgba(220,220,220,1)",
-				pointColor: "rgba(220,220,220,1)",
-				pointStrokeColor: "#fff",
-				pointHighlightFill: "#fff",
-				pointHighlightStroke: "rgba(220,220,220,1)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
         data: chartData
       }]
     }
@@ -134,8 +136,29 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
       chartData.push(answerData);
       i++;
     });
-    window.chart = new Chart(ctx).PolarArea(chartData, {
-      responsive: true
+    window.chart = new Chart(ctx).PolarArea(chartData);
+  },
+  renderLineChart: function() {
+    var element = $("canvas[data-question-id=\"" + this.model.id + "\"]")[0];
+    var ctx = element.getContext("2d");
+    var chartData = [];
+    var lbls = [];
+    this.model.answers().forEach(function(answer) {
+      lbls.push(answer.get('text'));
+      chartData.push(answer.responses().length);
     });
+    var lineChartData = {
+      labels: lbls,
+      datasets: [{
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: chartData
+      }]
+    }
+    window.chart = new Chart(ctx).Line(lineChartData);
   }
 });

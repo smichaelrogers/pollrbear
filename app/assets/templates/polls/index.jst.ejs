@@ -6,13 +6,13 @@
       </h4>
       <div class="btn-group btn-group-sm">
         <% if(PollrBear.currentUser.id === poll.get('user_id')) { %>
-          <button type="button" class="btn btn-default show-questions" data-poll-id="<%= poll.id %>">Show Poll</button>
-          <button type="button" class="btn btn-default">Edit</button>
-          <button type="button" class="btn btn-default">Delete</button>
-          <button type="button" class="btn btn-default">Report</button>
+          <button type="button" class="btn btn-default btn-questions-show" data-poll-id="<%= poll.id %>">Show Poll</button>
+          <button type="button" class="btn btn-default btn-poll-edit">Edit</button>
+          <button type="button" class="btn btn-default btn-poll-destroy">Delete</button>
+          <button type="button" class="btn btn-default btn-poll-report">Report</button>
           <% } else { %>
-            <button type="button" class="btn btn-default">Ignore</button>
-            <button type="button" class="btn btn-default btn-show-questions" data-poll-id="<%= poll.id %>">Accept</button>
+            <button type="button" class="btn btn-default btn-poll-ignore">Ignore</button>
+            <button type="button" class="btn btn-default btn-questions-show" data-poll-id="<%= poll.id %>">Accept</button>
             <% }; %>
       </div>
       <p class="list-group-item-text">

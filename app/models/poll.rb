@@ -7,6 +7,7 @@
 #  title      :string           not null
 #  text       :string
 #  privacy    :integer          default(1), not null
+#  duration   :integer          default(86400)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

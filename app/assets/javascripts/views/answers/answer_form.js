@@ -44,7 +44,7 @@ PollrBear.Views.AnswerForm = Backbone.DashboardView.extend({
     var view = new PollrBear.Views.PollForm({
       model: PollrBear.currentUser
     });
-    $('.panel-new-poll').html(view.render().$el);
+    this._swapView(view);
   },
 
   maybeCreate: function(event) {
