@@ -3,7 +3,7 @@
     <h4 class="list-group-item-heading">
       <%= question.escape('text') %>
     </h4>
-    <div class="row" data-answer-id="<%= answer.id %>">
+    <div class="row" data-question-id="<%= question.id %>">
       <div class="col-xs-6">
         <% question.answers().forEach(function(answer) { %>
           <p>
@@ -11,9 +11,9 @@
               <% }); %>
       </div>
       <div class="col-xs-2">
-        <% percents.forEach(function(percent) { %>
+        <% percentages.forEach(function(percentage) { %>
           <p>
-            <%= percent %>
+            <%= percentage %>
           </p>
           <% }); %>
       </div>

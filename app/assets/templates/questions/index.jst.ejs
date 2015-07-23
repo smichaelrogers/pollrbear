@@ -1,6 +1,4 @@
 <li class="list-group-item">
-  <h5 class="list-group-item-heading">
-  </h5>
   <% questions.forEach(function(question) { %>
     <form data-poll-id="<%= pollId %>">
       <% question.answers().forEach(function(answer) { %>
@@ -12,10 +10,12 @@
         </div>
         <% }); %>
     </form>
-    <div class="question-content" data-question-id="<%= question.id %>">
-      <a href="#" class="show-question" data-question-id="<%= question.id %>">Results</a>
+    <div class="result-content" data-question-id="<%= question.id %>">
+      <a href="#" class="show-result" data-question-id="<%= question.id %>">Result</a>
       </p>
     </div>
-    <% }); %>
-  <button type="button" class="visitor-submit-form" data-poll-id="<%= poll.id %>">Submit</button>
+  <% }); %>
+</li>
+<li class="list-group-item">
+  <button type="button" class="visitor-submit-form" data-poll-id="<%= pollId %>">Submit</button>
 </li>

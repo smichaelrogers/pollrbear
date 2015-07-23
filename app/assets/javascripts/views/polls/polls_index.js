@@ -2,8 +2,7 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   template: JST['polls/index'],
   events: {
     'click button.show-questions': 'showQuestions',
-    'click button.visitor-submit-form': 'submitForm',
-    'click a.show-results': 'showResults'
+    'click button.visitor-submit-form': 'submitForm'
   },
   initialize: function() {
     this.collection.fetch();
@@ -51,9 +50,13 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   },
 
   showQuestions: function(event) {
-    var pollId = $(event.currentTarget).attr("data-poll-id");
+    event.preventDefault();
+    var pollId = $(event.currentTarget).attr('data-poll-id');
     var poll = this.collection.getOrFetch(pollId);
     var $target = this.$("div[data-poll-id=\"" + pollId + "\"]");
-    $target.toggleClass("collapsed");
+    var view = new PollrBear.Views.QuestionsIndex({
+      collection: poll.questions()
+    });
+    $target.html(view.render().$el);
   }
 });

@@ -1,83 +1,93 @@
 PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
-
   template: JST['questions/show'],
 
   initialize: function() {
+    this.listenTo(this.model, 'sync', this.render);
     this.render();
-    this.ctx = this.$(".chart-area").get(0).getContext("2d");
   },
+
   render: function() {
+    var percentages = this.percentages();
     var content = this.template({
-      question: this.model
+      question: this.model,
+      percentages: percentages
     });
     this.$el.html(content);
+    window.setTimeout(function() {
+      this.renderPieChart();
+    }.bind(this), 50);
     return this;
   },
-  pieChart: function() {
-    var that = this;
+
+  delegateChart: function() {
+    switch (this.model.get('chart_type')) {
+      case 1:
+        this.renderPieChart();
+      break;
+      case 2:
+        this.renderLineChart();
+      break;
+      case 3:
+        this.renderBarChart();
+      break;
+      case 4:
+        this.renderRadarChart();
+      break;
+      case 5:
+        this.renderPolarAreaChart();
+      break;
+      default:
+        this.renderPieChart();
+    };
+  },
+
+
+  percentages: function() {
+    var data = [];
+    var num;
+    var len = 0;
+    this.model.answers().forEach(function(answer) {
+      len += answer.responses().length;
+    });
+    this.model.answers().forEach(function(answer) {
+      num = answer.responses().length / len;
+      data.push(num);
+    });
+    return data;
+  },
+
+  renderPieChart: function() {
+    var element = $("canvas[data-question-id=\"" + this.model.id + "\"]")[0];
+    var ctx = element.getContext("2d");
     var chartData = [];
     var answerData;
     var i = 0;
     var colors = ["#AAAAAA", "#BBBBBBB", "#CCCCCC", "#DDDDDD", "#EEEEEE", "#FFFFFF"];
     var highlights = ["#AAAAAA", "#BBBBBBB", "#CCCCCC", "#DDDDDD", "#EEEEEE", "#FFFFFF"];
-    question.answers().forEach(function(answer) {
+    this.model.answers().forEach(function(answer) {
       answerData = {};
       answerData['value'] = answer.responses().length;
       answerData['color'] = colors[i];
-      answerData['highlight'] = highlight[i];
+      answerData['highlight'] = highlights[i];
       answerData['labels'] = answer.get('text');
       chartData.push(answerData);
       i++;
     });
 
-    var pie = new Chart(that.ctx[0]).Pie(chartData);
-  },
-  lineChart: function() {
-
-  },
-  barChart: function() {
-
-  },
-  radarChart: function() {
-
-  },
-  polarAreaChart: function() {
-
+    window.chart = new Chart(ctx).Pie(chartData);
   },
 
 
-  window.onload = function() {
+  renderLineChart: function() {
 
-  };
-
-
-
-  < /script> < /body > < /html>
-
-
-  generateData: function() {
-    var data = [];
-    if (this.model.answers()) {
-
-      this.model.answers().forEach(function(answer) {
-        var obj = {
-          value: answer.responses().length,
-          color: "#333333",
-          highlight: "#ED503D",
-          label: answer.get('text')
-        };
-        data.push(obj);
-      });
-    };
-    return data;
   },
+  renderBarChart: function() {
 
-  renderPieChart: function() {
-    var canvas = this.$('canvas');
-    var data = this.generateData();
-    var ctx = this.$el.get(0).getContext("2d");
-    var options = {};
-    var chart = new Chart(ctx).Pie(data, options);
-    return this;
+  },
+  renderRadarChart: function() {
+
+  },
+  renderPolarAreaChart: function() {
+
   }
 });
