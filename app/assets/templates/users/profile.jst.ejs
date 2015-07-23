@@ -1,0 +1,18 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <img src="<%= user.get('profile_img') %>">
+  </li>
+  <li class="list-group-item">
+    <h4 class="list-group-item-heading">
+      <%= user.fullName() %>
+    </h4>
+    <p class="list-group-item-text">
+      <%= user.escape('email') %>
+    </p>
+  </li>
+  <li class="list-group-item">
+    <p class="list-group-item-text">
+      <%= user.escape('email') %>
+    </p>
+  </li>
+</ul>

@@ -3,22 +3,28 @@
     <h4 class="list-group-item-heading">
       <%= question.escape('text') %>
     </h4>
-    <div class="row" data-question-id="<%= question.id %>">
-      <div class="col-xs-6">
-        <% question.answers().forEach(function(answer) { %>
-          <p>
-            <%= answer.escape('text') %>
+    <div data-question-id="<%= question.id %>">
+      <table>
+        <tr>
+          <td>
+            <% question.answers().forEach(function(answer) { %>
+              <p>
+                <%= answer.escape('text') %>
+                  <% }); %>
+              </p>
+
+          </td>
+          <td>
+            <% percentages.forEach(function(percentage) { %>
+              <p>
+                <%= percentage %>
+              </p>
               <% }); %>
-      </div>
-      <div class="col-xs-2">
-        <% percentages.forEach(function(percentage) { %>
-          <p>
-            <%= percentage %>
-          </p>
-          <% }); %>
-      </div>
-      <div class="col-xs-4">
-        <div class="container chart-area">
+          </td>
+        </tr>
+      </table>
+      <div>
+        <div class="chart-area">
           <canvas data-question-id="<%= question.id %>" width="300" height="300">
           </canvas>
         </div>

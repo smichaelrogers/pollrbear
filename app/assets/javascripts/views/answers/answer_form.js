@@ -39,10 +39,12 @@ PollrBear.Views.AnswerForm = Backbone.DashboardView.extend({
         text: str,
         question_id: question_id
       });
-      window.setTimeout(function() {}, 20);
+      window.setTimeout(function() {
+      }, 20);
     });
-    var view = new PollrBear.Views.PollForm({
-      model: PollrBear.currentUser
+    var question = this.model;
+    var view = new PollrBear.Views.QuestionShow({
+      model: question
     });
     this._swapView(view);
   },

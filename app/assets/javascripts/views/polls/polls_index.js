@@ -10,6 +10,7 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   },
   initialize: function() {
     this.collection.fetch();
+    this.listenTo(this.collection, 'add', this.render);
   },
   render: function() {
     var content = this.template({

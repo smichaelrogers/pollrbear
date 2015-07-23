@@ -13,6 +13,7 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
     this.$el.html(content);
     this.showUserPolls();
     this.showPollForm();
+    this.showUserProfile();
     return this;
   },
 
@@ -34,11 +35,13 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
     var view = new PollrBear.Views.UserProfile({
       model: this.model
     });
+    this.addSubview('#user-profile', view);
   },
 
   showUserInfo: function() {
     var view = new PollrBear.Views.UserInfo({
       model: this.model
     });
+    this.addSubview('#user-info', view);
   }
 });
