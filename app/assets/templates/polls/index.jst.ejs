@@ -1,52 +1,49 @@
-<h3>
-  <%= PollrBear.currentUser.fullName() %>
-</h3>
-<%= PollrBear.currentUser.polls().length %> polls
 <ul class="list-group">
-<% polls.forEach(function(poll) { %>
-  <li class="list-group-item">
-    <div class="row">
-      <div class="col-xs-12 col-lg-6">
-        <h4 class="list-group-item-heading">
-          <%= poll.escape('title') %>
-        </h4>
-      </div>
-      <div class="col-xs-4 btn-group btn-group-sm">
+  <% polls.forEach(function(poll) { %>
+    <li class="list-group-item">
+      <h4 class="list-group-item-heading">
+        <%= poll.escape('title') %>
+      </h4>
+      <% if(PollrBear.currentUser.id === poll.get('user_id')) { %>
+        <button type="button" class="btn btn-default show-poll" data-poll-id="<%= poll.id %>">Show Poll</button>
         <button type="button" class="btn btn-default">Edit</button>
         <button type="button" class="btn btn-default">Delete</button>
         <button type="button" class="btn btn-default">Report</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-lg-8">
-        <p class="list-group-item-text">
-          <%= poll.escape('text') %>
-        </p>
-      </div>
-      <div class="col-xs-12 col-lg-4">
-        <a href="#" class="trigger-collapse" data-poll-id="<%= poll.id %>">
-          <span class="badge">
-            <%= poll.questions().length %>
-          </span> Questions
-        </a>
-      </div>
-    </div>
-    <div class="row collapsible collapsed poll-content" data-poll-id="<%= poll.id %>">
-      <div class="col-xs-12 col-lg-6">
-        <% poll.questions().forEach(function(question) { %>
-          <p>
-            <%= question.escape('text') %>
-          </p>
-          <a href="#" class="trigger-collapse" data-question-id="<%= question.id %>">
-            <span class="badge">
-              <%= question.answers().length %>
-            </span> Answers
-          </a>
-          <div class="collapsible collapsed question-content" data-question-id="<%= question.id %>">
-          </div>
-          <% }); %>
-      </div>
-    </div>
-  </li>
-  <% }); %>
+        <% } else { %>
+          <button type="button" class="btn btn-default">Ignore</button>
+          <button type="button" class="btn btn-default show-poll" data-poll-id="<%= poll.id %>">Accept</button>
+          <% }; %>
+            <p class="list-group-item-text">
+              <%= poll.escape('text') %>
+            </p>
+            <a href="#" class="trigger" data-poll-id="<%= poll.id %>">
+              <span class="badge">
+                <%= poll.questions().length %>
+              </span> Questions
+            </a>
+            <ul class="list-group collapsed" data-poll-id="<%= poll.id %>">
+              <% poll.questions().forEach(function(question) { %>
+                <li class="list-group-item">
+                  Question
+                  <br> Text:
+                  <%= question.escape('text') %>
+                    <br> Chart:
+                    <%= question.escape('text') %>
+                      <br>
+                      <br>Answers:
+                      <br>
+                      <br>
+                      <% question.answers().forEach(function(answer) { %>
+
+                        <%= answer.escape('text') %><br>
+
+
+                          <%  }); %>
+
+
+                            <%  }); %>
+                </li>
+            </ul>
+    </li>
+    <% }); %>
 </ul>

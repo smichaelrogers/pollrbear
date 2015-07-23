@@ -1,16 +1,4 @@
 Backbone.DashboardView = Backbone.View.extend({
-  events: {
-    'click .trigger-collapsible': 'tryCollapse'
-  },
-  //====================================================================
-
-  tryCollapse: function(event) {
-    event.stopPropagation();
-    console.log($(event.currentTarget));
-    console.log($(event.target));
-    
-  },
-
 
   _swapView: function(view) {
     this._currentView && this._currentView.remove();
@@ -18,19 +6,7 @@ Backbone.DashboardView = Backbone.View.extend({
     this.$el.html(view.$el);
     view.render();
   },
-
-
-  addErrorsFn: function() {
-    return function(model, response) {
-      var htmlResp = "<ul>";
-      htmlResp += response.responseJSON.map(function(error) {
-        return "<li>" + error + "</li>";
-      }).join("");
-      htmlResp += "</ul>";
-      this.$(".errors").html(htmlResp);
-    }.bind(this);
-  },
-
+  
   addSubview: function(selector, subview) {
     this.subviews(selector).push(subview);
     this.attachSubview(selector, subview.render());

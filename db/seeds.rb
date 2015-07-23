@@ -1,7 +1,7 @@
 @password = BCrypt::Password.create("asdfasdf");
 @users = []
 @polls = []
-@users << User.create(first_name: "Tom", last_name: "Hanks", email: "wilson@tom.hanks", password_digest: @password, session_token: SecureRandom.urlsafe_base64)
+@users << User.create!(first_name: "Tom", last_name: "Hanks", email: "wilson@tom.hanks", password_digest: @password, session_token: SecureRandom.urlsafe_base64)
 
 
 3.times.each do
@@ -13,14 +13,14 @@ end
 end
 
 100.times.each do
-  Question.create!(poll_id: (1..30).to_a.sample, text: "#{Faker::Hacker.say_something_smart}?", chart_type: [1,2,3,4].sample)
+  Question.create!(poll_id: (1...30).to_a.sample, text: "#{Faker::Hacker.say_something_smart}?", chart_type: [1,2,3,4].sample)
 end
 
 
 300.times.each do
-  Answer.create!(question_id: (1..100).to_a.sample, text: Faker::Hacker.noun)
+  Answer.create!(question_id: (1...100).to_a.sample, text: Faker::Hacker.noun)
 end
 
 300.times.each do
-  Response.create!(answer_id: (1..400).to_a.sample, user_id:  (1..4).to_a.sample)
+  Response.create!(answer_id: (1...300).to_a.sample, user_id:  (1..4).to_a.sample)
 end

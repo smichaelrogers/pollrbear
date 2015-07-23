@@ -1,13 +1,12 @@
 PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   template: JST['polls/index'],
-
   events: {
-    'click .show-poll': 'showPoll'
+    'click a.trigger': 'showPoll'
   },
-
   initialize: function() {
-    this.listenTo(this.collection, 'sync', this.render);
     this.collection.fetch();
+    // this.listenTo(this.collection, 'sync', this.render);
+
   },
   render: function() {
     var content = this.template({
@@ -20,12 +19,15 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
     event.preventDefault();
     var pollId = $(event.currentTarget).attr('data-poll-id');
     var poll = this.collection.getOrFetch(pollId);
-    var $target = this.$("tr[data-poll-id=\"" + pollId + "\"]");
-    var view = new PollrBear.Views.QuestionsIndex({
-      collection: poll.questions()
-    });
-
-    this.addSubview($target, view);
+    var $target = this.$("ul[data-poll-id=\"" + pollId + "\"]");
+    if ( $target.hasClass("collapsed") ) {
+      var view = new PollrBear.Views.QuestionsIndex({
+        collection: poll.questions()
+      });
+      $target.removeClass('collapsed');
+    } else {
+      $target.addClass('collapsed');
+    };
   }
 
 });
