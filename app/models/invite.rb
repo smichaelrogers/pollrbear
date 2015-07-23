@@ -9,9 +9,7 @@
 #  updated_at :datetime
 #
 
-class Invite< ActiveRecord::Base
-  validates :user, :poll, presence: true
-
+class Invite < ActiveRecord::Base
   belongs_to :poll
   belongs_to :user
 end

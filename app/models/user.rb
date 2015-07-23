@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   has_many :questions, through: :polls, source: :questions
   has_many :answers, through: :questions, source: :answers
   has_many :invites
-  has_many :invited_users, through: :invites, source: :user
+  has_many :invited_users, through: :poll, source: :invited_users
 
   attr_reader :password
   after_initialize :ensure_session_token

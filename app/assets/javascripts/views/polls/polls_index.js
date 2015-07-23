@@ -7,6 +7,7 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
 
   initialize: function() {
     this.listenTo(this.collection, 'sync', this.render);
+    this.collection.fetch();
   },
   render: function() {
     var content = this.template({
@@ -17,13 +18,14 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   },
   showPoll: function(event) {
     event.preventDefault();
-
-    var poll = this.collection.getOrFetch($(event.currentTarget).attr('data-id'));
-
-    var view = new PollrBear.Views.PollShow({
-      model: poll
+    var pollId = $(event.currentTarget).attr('data-poll-id');
+    var poll = this.collection.getOrFetch(pollId);
+    var $target = this.$("tr[data-poll-id=\"" + pollId + "\"]");
+    var view = new PollrBear.Views.QuestionsIndex({
+      collection: poll.questions()
     });
 
-    $('#show-poll').html(view.render().$el);
+    this.addSubview($target, view);
   }
+
 });

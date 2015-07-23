@@ -12,12 +12,16 @@
 #
 
 class Poll < ActiveRecord::Base
-  validates :user, :title, presence: true
+  validates :title, presence: true
 
   belongs_to :user
+
+  has_many :invites
+  has_many :invited_users, through: :invites, source: :invited_users
+
+
   has_many :questions
   has_many :answers, through: :questions, source: :answers
   has_many :responses, through: :answers, source: :responses
-  has_many :invites
-  has_many :invited_users, through: :invites, source: :user
+
 end

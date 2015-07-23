@@ -29,7 +29,7 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
       });
     };
     return data;
-  };
+  },
 
   renderPieChart: function() {
     var canvas = this.$('canvas');

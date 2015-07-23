@@ -10,15 +10,6 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
       poll: this.model
     });
     this.$el.html(content);
-
-    if (this.model.questions()) {
-      this.model.questions().forEach(function(question) {
-        var questionView = new PollrBear.Views.QuestionShow({
-          model: question
-        });
-      });
-    }
-
     return this;
   }
 });

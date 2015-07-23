@@ -1,73 +1,8 @@
 body {
-  font-family: 'helvetica neue', sans-serif;
+  font-family: sans-serif;
 }
-* {
-  transition: all 0.3s ease;
-}
-.collapsed {
+
+/* .collapsed {
   display: none !important;
 }
-#login {
-  text-align: left;
-  bottom: 0;
-  padding: 25px;
-  input {
-
-  }
-}
-#splash {
-  padding: 15% 0;
-}
-img.top-logo {
-  width: 360px;
-  height: auto;
-}
-img.img-chart {
-  width: 240px;
-  height: auto;
-  margin-top: 50px;
-}
-.navbar-brand {
-  padding: 10px 30px;
-  & > img {
-    height: 40px;
-    width: auto;
-  }
-}
-.topnav {
-  font-size: 14px;
-}
-.lead {
-  font-size: 16px;
-  font-weight: 400;
-}
-.intro-header {
-  margin-top: -30px;
-  text-align: center;
-  color: #f8f8f8;
-  background: #80deea;
-}
-.intro-message > h1 {
-  margin: 0;
-}
-.intro-divider {
-  width: 400px;
-  border-top: 1px solid #f8f8f8;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
-}
-.network-name {
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 2px;
-}
-.content-section-a {
-  padding: 50px 0;
-  background-color: #f8f8f8;
-  box-shadow: 5px 0 8px -2px rgba(0,0,0,.6);
-}
-.content-section-b {
-  padding: 50px 0;
-  border-top: 1px solid #e7e7e7;
-  border-bottom: 1px solid #e7e7e7;
-}
+ */

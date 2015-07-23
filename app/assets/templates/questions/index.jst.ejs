@@ -1,26 +1,17 @@
-<div class="table-responsive">
-  <table class="table table-condensed table-hover">
-    <tr>
-      <thead>
-        <th>Question</th>
-        <th>text</th>
-        <th>Created at</th>
-      </thead>
-    </tr>
-    <% if (questions) { %>
-    <% questions.forEach(function(question) { %>
-    <tr>
-      <td>
-        <a class="show-question" href="#" data-id="<%= question.id %>"><%= question.escape('text') %></a>
-      </td>
-      <td>
-        <%= question.escape('chart_type') %>
-      </td>
-      <td>
-        <%= question.escape('created_at') %>
-      </td>
-    </tr>
-    <% }); %>
-    <% }; %>
-  </table>
-</div>
+
+
+
+  <div class="clearfix visible-xs-block"></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Questions</h4>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+          <p class="list-group-item-text">
+          </p>
+        </li>
+        <% }); %>
+    </ul>
+  </div>
+  <% }; %>

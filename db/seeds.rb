@@ -1,30 +1,26 @@
-
+@password = BCrypt::Password.create("asdfasdf");
 @users = []
 @polls = []
-@questions = []
-@answers = []
-@invites = []
-@responses =[]
+@users << User.create(first_name: "Tom", last_name: "Hanks", email: "wilson@tom.hanks", password_digest: @password, session_token: SecureRandom.urlsafe_base64)
 
 
-5.times do
-  @users << User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email)
+3.times.each do
+  @users << User.create!(first_name: (Faker::Team.creature), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
 end
-20.times do
-  @polls << Poll.create!(user_id:  [1,2,3,4,5].sample, title: Faker::Company.catch_phrase, text: Faker::Lorem.sentence, privacy: [1,1,1,1,1,2].sample)
+
+30.times.each do
+  @polls << Poll.create!(user_id: (1..4).to_a.sample, title: Faker::Company.catch_phrase, text: Faker::Lorem.sentence, privacy: [1,1,1,1,1,2].sample)
 end
-50.times do
-  @questions << Question.create!(poll_id: (1..19).to_a.sample, text: "#{Faker::Lorem.sentence}?", chart_type: [1,2,3,4].sample)
+
+100.times.each do
+  Question.create!(poll_id: (1..30).to_a.sample, text: "#{Faker::Hacker.say_something_smart}?", chart_type: [1,2,3,4].sample)
 end
-300.times do
-  @answers << Answer.create!(question_id: (1..49).to_a.sample, text: Faker::Lorem.sentence)
+
+
+300.times.each do
+  Answer.create!(question_id: (1..100).to_a.sample, text: Faker::Hacker.noun)
 end
-600.times do
-  @responses << Response.create!(user_id: [1,2,3,4,5].sample, answer_id: (1..99).to_a.sample)
-end
-30.times do
-  @invites << Invite.create!(poll_id: [1,2,3,4,5,6,7,8].sample, user_id: [1,3,5].sample, invitee_id: [2,4].sample)
-end
-30.times do
-  @invites << Invite.create!(poll_id: [1,2,3,4,5,6,7,8].sample, invitee_id: [1,3,5].sample, user_id: [2,4].sample)
+
+300.times.each do
+  Response.create!(answer_id: (1..400).to_a.sample, user_id:  (1..4).to_a.sample)
 end

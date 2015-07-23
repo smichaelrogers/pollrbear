@@ -1,25 +1,17 @@
-<div class="table-responsive">
-  <table class="table table-condensed table-hover">
-    <tr>
-      <thead>
-        <th>Response</th>
-        <th>By</th>
-        <th>Created at</th>
-      </thead>
-    </tr>
-    <% if (responses) { %>
-    <% responses.forEach(function(response) { %>
-    <tr>
-      <td>
-        <a class="show-response" href="#" data-id="<%= response.id %>"><%= response.escape('text') %></a>
-      </td>
-      <td><%= response.escape('user') %>
-      </td>
-      <td>
-        <%= response.escape('created_at') %>
-      </td>
-    </tr>
-    <% }); %>
-    <% }; %>
-  </table>
-</div>
+<% if (responses) { %>
+  <div class="clearfix visible-xs-block"></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Responses</h4>
+    </div>
+    <ul class="list-group">
+      <% responses.forEach(function(response) { %>
+        <li class="list-group-item">
+          <p class="list-group-item-text">
+            Participated in: "<%= response.get('poll').escape('title') %>"
+          </p>
+        </li>
+        <% }); %>
+    </ul>
+  </div>
+  <% }; %>

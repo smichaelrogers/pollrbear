@@ -1,9 +1,16 @@
 Backbone.DashboardView = Backbone.View.extend({
   events: {
-    'keydown input': 'maybeCreate'
+    'click .trigger-collapsible': 'tryCollapse'
+  },
+  //====================================================================
+
+  tryCollapse: function(event) {
+    event.stopPropagation();
+    console.log($(event.currentTarget));
+    console.log($(event.target));
+    
   },
 
-  //====================================================================
 
   _swapView: function(view) {
     this._currentView && this._currentView.remove();
@@ -12,11 +19,6 @@ Backbone.DashboardView = Backbone.View.extend({
     view.render();
   },
 
-  maybeCreate: function(event) {
-    if (event.keyCode === 13) {
-      this.create(event);
-    }
-  },
 
   addErrorsFn: function() {
     return function(model, response) {

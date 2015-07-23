@@ -1,25 +1,17 @@
-<div class="table-responsive">
-  <table class="table table-condensed table-hover">
-    <tr>
-      <thead>
-        <th>Invite</th>
-        <th>By</th>
-        <th>Created at</th>
-      </thead>
-    </tr>
-    <% if (invites) { %>
-    <% invites.forEach(function(invite) { %>
-    <tr>
-      <td>
-        <a class="show-invite" href="#" data-id="<%= invite.id %>"><%= invite.escape('text') %></a>
-      </td>
-      <td><%= invite.escape('user') %>
-      </td>
-      <td>
-        <%= invite.escape('created_at') %>
-      </td>
-    </tr>
-    <% }); %>
-    <% }; %>
-  </table>
-</div>
+<% if (invites) { %>
+  <div class="clearfix visible-xs-block"></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Invites</h4>
+    </div>
+    <ul class="list-group">
+      <% invites.forEach(function(invite) { %>
+        <li class="list-group-item">
+          <p class="list-group-item-text">from
+            <%= invite.get('user').fullName() %> to participate in "
+              <%= invite.get('poll').escape('title') %>"</p>
+        </li>
+        <% }); %>
+    </ul>
+  </div>
+  <% }; %>

@@ -1,25 +1,17 @@
-<div class="table-responsive">
-  <table class="table table-condensed table-hover">
-    <tr>
-      <thead>
-        <th>Answer</th>
-        <th>text</th>
-        <th>Created at</th>
-      </thead>
-    </tr>
-    <% if (answers) { %>
-    <% answers.forEach(function(answer) { %>
-    <tr>
-      <td>
-        <a class="show-answer" href="#" data-id="<%= answer.id %>"><%= answer.escape('text') %></a>
-      </td>
-      <td>
-      </td>
-      <td>
-        <%= answer.escape('created_at') %>
-      </td>
-    </tr>
-    <% }); %>
-    <% }; %>
-  </table>
-</div>
+<% if (answers) { %>
+  <div class="clearfix visible-xs-block"></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Answers</h4>
+    </div>
+    <ul class="list-group">
+      <% answers.forEach(function(answer) { %>
+        <li class="list-group-item">
+          <p class="list-group-item-text">
+            <%= answer.escape('text') %>
+          </p>
+        </li>
+        <% }); %>
+    </ul>
+  </div>
+  <% }; %>

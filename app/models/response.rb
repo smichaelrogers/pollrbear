@@ -10,8 +10,6 @@
 #
 
 class Response < ActiveRecord::Base
-  validates :user, :answer, presence: true
-
   belongs_to :answer
-  belongs_to :user, inverse_of: :responses
+  belongs_to :user
 end

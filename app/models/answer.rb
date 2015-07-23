@@ -10,7 +10,7 @@
 #
 
 class Answer < ActiveRecord::Base
-  validates :question, :text, presence: true
+  validates :text, presence: true
 
   has_many :responses, dependent: :destroy
   belongs_to :question
