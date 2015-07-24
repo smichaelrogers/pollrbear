@@ -2,19 +2,24 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
   template: JST['questions/show'],
 
   initialize: function(options) {
-    this.percentages = this.percentages();
+    this.listenTo(this.collection, 'sync', this.render);
+    this.poll = options.poll;
+    this.collection = this.model.answers();
   },
 
   render: function() {
-    var percentages = this.percentages;
+    var that = this;
+    var percentages = this.percentages();
     var content = this.template({
+      poll: this.poll,
       question: this.model,
       percentages: percentages
     });
     this.$el.html(content);
     window.setTimeout(function() {
       this.delegateChart();
-    }.bind(this), 50);
+      return that;
+    }.bind(this), 100);
     return this;
   },
 
@@ -32,6 +37,9 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
       case 4:
         this.renderRadarChart();
         break;
+      case 5:
+        this.renderLineChart();
+        break;
       default:
         this.renderPieChart();
     };
@@ -41,10 +49,10 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     var data = [];
     var num;
     var len = 0;
-    this.model.answers().forEach(function(answer) {
+    this.collection.forEach(function(answer) {
       len += answer.responses().length;
     });
-    this.model.answers().forEach(function(answer) {
+    this.collection.forEach(function(answer) {
       num = (answer.responses().length / len) * 100
       data.push(Math.floor(num) + "%");
     });
@@ -57,9 +65,9 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     var pieChartData = [];
     var answerData;
     var i = 0;
-    var colors = ["#D93D4A", "#FFC100", "#0DB3D9", "#F29422", "#0367A6","#929292", "#FCD036"];
-    var highlights = ["#da7981", "#ffde75", "#59cde8", "#eca650", "#3281b3","#b5b5b5", "#ffe483"];
-    this.model.answers().forEach(function(answer) {
+    var colors = ["#D93D4A", "#FFC100", "#0DB3D9", "#F29422", "#0367A6", "#929292", "#FCD036"];
+    var highlights = ["#da7981", "#ffde75", "#59cde8", "#eca650", "#3281b3", "#b5b5b5", "#ffe483"];
+    this.collection.forEach(function(answer) {
       answerData = {};
       answerData['value'] = answer.responses().length;
       answerData['color'] = colors[i];
@@ -76,7 +84,7 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     var ctx = element.getContext("2d");
     var chartData = [];
     var lbls = [];
-    this.model.answers().forEach(function(answer) {
+    this.collection.forEach(function(answer) {
       lbls.push(answer.get('text'));
       chartData.push(answer.responses().length);
     });
@@ -97,7 +105,7 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     var ctx = element.getContext("2d");
     var chartData = [];
     var lbls = [];
-    this.model.answers().forEach(function(answer) {
+    this.collection.forEach(function(answer) {
       lbls.push(answer.get('text'));
       chartData.push(answer.responses().length);
     });
@@ -121,9 +129,9 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     var chartData = [];
     var answerData;
     var i = 0;
-    var colors = ["#D93D4A", "#FFC100", "#0DB3D9", "#F29422", "#0367A6","#929292", "#FCD036"];
-    var highlights = ["#da7981", "#ffde75", "#59cde8", "#eca650", "#3281b3","#b5b5b5", "#ffe483"];
-    this.model.answers().forEach(function(answer) {
+    var colors = ["#D93D4A", "#FFC100", "#0DB3D9", "#F29422", "#0367A6", "#929292", "#FCD036"];
+    var highlights = ["#da7981", "#ffde75", "#59cde8", "#eca650", "#3281b3", "#b5b5b5", "#ffe483"];
+    this.collection.forEach(function(answer) {
       answerData = {};
       answerData['value'] = answer.responses().length;
       answerData['color'] = colors[i];
@@ -139,7 +147,7 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     var ctx = element.getContext("2d");
     var chartData = [];
     var lbls = [];
-    this.model.answers().forEach(function(answer) {
+    this.collection.forEach(function(answer) {
       lbls.push(answer.get('text'));
       chartData.push(answer.responses().length);
     });

@@ -3,7 +3,6 @@ PollrBear.Views.PollShow = Backbone.DashboardView.extend({
 
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
-    this.render();
   },
   render: function() {
     var content = this.template({

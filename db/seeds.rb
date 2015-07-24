@@ -13,7 +13,7 @@ end
 end
 
 30.times.each do
-  Question.create!(poll_id: (1...10).to_a.sample, text: "#{Faker::Hacker.say_something_smart}?", chart: [1,2,3,4].sample)
+  Question.create!(poll_id: (1...10).to_a.sample, text: "#{Faker::Hacker.say_something_smart}?", chart: [1,2,3,4,5].sample)
 end
 
 

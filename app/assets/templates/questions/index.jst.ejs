@@ -1,21 +1,13 @@
-<li class="list-group-item">
-  <% questions.forEach(function(question) { %>
-    <form data-poll-id="<%= pollId %>" class="collapsible">
-      <% question.answers().forEach(function(answer) { %>
-        <div class="radio">
-          <label>
-            <input type="radio" name="response[answer_id]" value="<%= answer.id %>">
-            <%= answer.escape('text') %>
-          </label>
-        </div>
-        <% }); %>
-    </form>
-    <div class="result-content" data-question-id="<%= question.id %>">
-      <a href="#" class="show-result" data-question-id="<%= question.id %>">Result</a>
-      </p>
-    </div>
-    <% }); %>
-</li>
-<li class="list-group-item">
-  <button type="button" class="visitor-submit-form" data-poll-id="<%= pollId %>">Submit</button>
-</li>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h4 class="heading-a">
+      <%= poll.escape('title') %>
+    </h4>
+  </div>
+  <ul class="list-group poll-questions">
+  </ul>
+  <div class="panel-body">
+    <button type="button" class="visitor-submit-form btn btn-default pull-right" data-poll-id="<%= poll.id %>">Submit</button>
+    <button class="btn btn-default show-results">Results</button>
+  </div>
+</div>

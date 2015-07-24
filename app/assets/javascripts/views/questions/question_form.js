@@ -4,8 +4,8 @@ PollrBear.Views.QuestionForm = Backbone.DashboardView.extend({
     'click .submit-question-data': 'submitQuestionData'
   },
   initialize: function(options) {
-    this.render();
   },
+  
   render: function() {
     var content = this.template();
     this.$el.html(content);

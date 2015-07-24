@@ -8,6 +8,7 @@ module Api
     def create
       @response = current_answer.responses.new(response_params)
       if @response.save
+        @response.user_id = current_user.id
         render json: @response
       else
         render json: @response.errors.full_messages, status: :unprocessable_entity

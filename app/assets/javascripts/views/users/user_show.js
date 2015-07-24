@@ -6,7 +6,6 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
     this.answers = PollrBear.currentUser.answers();
     this.responses = this.model.responses();
     this.collection.fetch();
-    this.model.fetch();
     this.questions.fetch();
     this.answers.fetch();
     this.responses.fetch();
@@ -18,7 +17,6 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
     var content = this.template({
       user: this.model
     });
-
     this.$el.html(content);
     this.showUserPolls();
     this.showPollForm();

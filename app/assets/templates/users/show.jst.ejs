@@ -5,35 +5,38 @@
     </div>
     <div class="clearfix visible-xs-block"></div>
     <div class="col-sm-12 col-lg-4" id="user-info">
-      <img src="<%= user.get('profile_img') %>">
-      <h4>
-        <%= user.fullName() %>
-      </h4>
-      <h6>
-        <%= user.escape('email') %>
-      </h6>
-      <p>
-        <strong>
-          <%= user.polls().length %>
-        </strong> Polls
-      </p>
-      <p>
-        <strong>
-          <%= user.questions().length %>
-        </strong> Questions
-      </p>
-      <p>
-        <strong>
-          <%= user.answers().length %>
-        </strong> Answers
-      </p>
-      <p>
-        <strong>
-          <%= user.responses().length %>
-        </strong> Responses
-      </p>
+      <div id="user-profile">
+        <img src="<%= user.get('profile_img') %>">
+        <h4>
+          <%= user.fullName() %>
+        </h4>
+        <h5>
+          <%= user.escape('email') %>
+        </h5>
+
+          <strong>
+            <%= user.polls().length %>
+          </strong> Polls
+        <br>
+
+          <strong>
+            <%= user.questions().length %>
+          </strong> Questions
+        <br>
+
+          <strong>
+            <%= user.answers().length %>
+          </strong> Answers
+        <br>
+
+          <strong>
+            <%= user.responses().length %>
+          </strong> Responses
+
+      </div>
+      <div id="new-poll-form">
+      </div>
     </div>
-    <div class="col-sm-12 col-lg-4" id="new-poll-form">
-    </div>
+
   </div>
 </div>

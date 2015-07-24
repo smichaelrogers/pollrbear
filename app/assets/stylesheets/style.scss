@@ -16,9 +16,56 @@ $font-d:  'source code pro', monospace;
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Comfortaa:400,300,700|Open+Sans+Condensed:300,300italic|Montserrat|Raleway|Open+Sans:300italic,400,300);
 body, html {
   font-family: $font-a;
+  background: #eee;
 }
 input {
   box-shadow: none !important;
+}
+#user-info {
+padding: 20px;
+}
+#user-profile {
+
+}
+#new-poll-form {
+
+}
+canvas{
+  z-index: 99999;
+}
+
+.heading-b {
+  font-family: $font-b;
+  color: $grey;
+}
+#user-polls {
+
+}
+
+#dashboard {
+  height: 60px;
+  max-height: 60px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+  .navbar-nav {
+
+    li {
+      a{
+        font-family: $font-a;
+
+      }
+    }
+  }
+  .navbar-brand {
+
+    img {
+      height: 35px;
+      width: auto;
+      transform: translateY(-7px);
+
+    }
+  }
 }
 
 .collapsed {
@@ -73,4 +120,21 @@ input {
   z-index: 9999;
   -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
+}
+
+
+
+
+
+.toggle-collapsed {
+  width: 1px;
+  position: absolute;
+  overflow-x: hidden;
+}
+
+
+.toggle-expand {
+  position: relative;
+  width: auto;
+  overflow: visible;
 }

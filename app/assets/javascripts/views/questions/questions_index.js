@@ -1,28 +1,36 @@
 PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
   template: JST['questions/index'],
   events: {
-    'click a.show-result': 'showResult'
+    'click .show-results': 'showResults'
   },
 
+  initialize: function() {
+    this.render();
+  },
   render: function() {
     var content = this.template({
       questions: this.collection,
-      pollId: this.collection.poll.id
+      poll: this.model
     });
     this.$el.html(content);
+    this.renderQuestions();
     return this;
   },
-  showResult: function(event) {
-    event.preventDefault();
-    var questionId = $(event.currentTarget).attr('data-question-id');
-    var question = this.collection.getOrFetch(questionId);
-    var $target = this.$("div[data-question-id=\"" + questionId + "\"]");
-    var view = new PollrBear.Views.QuestionShow({
-      model: question
-    });
-    $(".result-content").html('');
-    $target.html(view.render().$el);
 
+  renderQuestions: function() {
+    var that = this;
+    this.collection.forEach(function(question) {
+      var view = new PollrBear.Views.QuestionShow({
+        poll: that.collection,
+        model: question
+      });
+      this.addSubview('ul.poll-questions', view);
+    }.bind(this));
+  },
+
+  showResults: function(event) {
+    event.preventDefault();
+    $('li.question-results').removeClass('.collapsed');
   }
 
 });

@@ -3,7 +3,6 @@ PollrBear.Views.PollForm = Backbone.DashboardView.extend({
   events: {
     'click .submit-poll-data': 'submitPollData'
   },
-
   initialize: function(options) {},
   render: function() {
     var content = this.template();

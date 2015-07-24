@@ -1,12 +1,11 @@
 PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   template: JST['polls/index'],
   events: {
-    'click a.a-questions-show': 'showQuestions',
+    'click button.a-questions-show': 'showQuestions',
     'click button.visitor-submit-form': 'submitForm',
-    'click a.a-poll-edit': 'editPoll',
-    'click a.a-poll-destroy': 'destroyPoll',
-    'click a.a-poll-report': 'showReport',
-    'click a.a-poll-ignore': 'ignorePoll'
+    'click button.a-poll-destroy': 'destroyPoll',
+    'click button.a-poll-report': 'showReport',
+    'click button.a-poll-ignore': 'ignorePoll'
   },
   initialize: function() {
     this.listenTo(this.collection, 'add', this.render);
@@ -35,33 +34,18 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
     window.setTimeout(function() {
       that.render();
     }, 100);
-
-  },
-
-  showPoll: function(event) {
-    event.preventDefault();
-    var pollId = $(event.currentTarget).attr('data-poll-id');
-    var poll = this.collection.getOrFetch(pollId);
-    var $target = this.$("ul[data-poll-id=\"" + pollId + "\"]");
-    if ($target.hasClass("collapsed")) {
-      var view = new PollrBear.Views.QuestionsIndex({
-        collection: poll.questions()
-      });
-      $target.removeClass('collapsed');
-    } else {
-      $target.addClass('collapsed');
-    };
   },
 
   showQuestions: function(event) {
     event.preventDefault();
     var pollId = $(event.currentTarget).attr('data-poll-id');
     var poll = this.collection.getOrFetch(pollId);
-    var $target = this.$("div[data-poll-id=\"" + pollId + "\"]");
+    var questions = poll.questions();
     var view = new PollrBear.Views.QuestionsIndex({
-      collection: poll.questions()
+      collection: questions,
+      model: poll
     });
-    $target.html(view.render().$el);
+    this._swapView(view);
   },
 
   editPoll: function(event) {

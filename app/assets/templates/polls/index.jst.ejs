@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-body">
-    <h4 class="panel-title">Active Polls</h4>
+    <h3 class="heading-b">Active Polls</h3>
   </div>
   <ul class="list-group">
     <% polls.forEach(function(poll) { %>
@@ -12,7 +12,7 @@
             </h4>
           </div>
           <div class="col-sm-12 col-lg-4">
-            <div class="btn-group btn-group-sm pull-right">
+            <div class="btn-group btn-group-sm">
               <% if(PollrBear.currentUser.id === poll.get('user_id')) { %>
                 <button type="button" class="btn btn-default a-questions-show" data-poll-id="<%= poll.id %>">Show</button>
                 <button type="button" class="btn btn-default a-poll-destroy">Delete</button>
@@ -26,14 +26,10 @@
         </div>
         <div class="row">
           <div class="col-xs-12">
-            <p class="text-a">
-              <%= poll.escape('text') %>
-            </p>
+            <%= poll.escape('text') %>
           </div>
         </div>
       </li>
-      <div class="show-questions" data-poll-id="<%= poll.id %>">
-      </div>
       <% }); %>
   </ul>
 </div>

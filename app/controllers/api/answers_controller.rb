@@ -1,13 +1,14 @@
 module Api
   class AnswersController < ApiController
     def index
-      @answers = current_user.answers
+      @answers = Answer.all
       render :index
     end
 
     def create
       @answer = current_question.answers.new(answer_params)
       if @answer.save
+        @answer.question_id = current_question.id
         render json: @answer
       else
         render json: @answer.errors.full_messages, status: :unprocessable_entity
