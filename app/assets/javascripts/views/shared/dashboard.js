@@ -3,7 +3,6 @@ PollrBear.Views.Dashboard = Backbone.View.extend({
 
   initialize: function(options){
     this.listenTo(PollrBear.currentUser, "signIn signOut", this.render);
-    this.render();
   },
 
   events: {

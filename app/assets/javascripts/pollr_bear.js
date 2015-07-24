@@ -4,6 +4,7 @@ window.PollrBear = {
   Views: {},
   Routers: {},
   initialize: function() {
+    console.log('initialize');
     this.currentUser = new PollrBear.Models.CurrentUser();
     this.currentUser.fetch();
     this.dashboard = new PollrBear.Views.Dashboard({ el: $("#dashboard") });

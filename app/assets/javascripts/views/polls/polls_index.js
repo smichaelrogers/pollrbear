@@ -9,7 +9,6 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
     'click a.a-poll-ignore': 'ignorePoll'
   },
   initialize: function() {
-    this.collection.fetch();
     this.listenTo(this.collection, 'add', this.render);
   },
   render: function() {
@@ -79,7 +78,6 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
     event.preventDefault();
     alert('tbd');
   },
-
   ignorePoll: function(event) {
     event.preventDefault();
     alert('tbd');

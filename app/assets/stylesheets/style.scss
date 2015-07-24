@@ -9,39 +9,17 @@ $grey: rgb(146,146,146);
 $blue: rgb(13,179,217);
 $bright-orange: rgb(242,148,34);
 $bright-blue: rgb(3,103,166);
-$font-family:  "Source Sans Pro","Open Sans", "Helvetica Neue" ,Helvetica, Arial, sans-serif;
-
-
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
-
-.btn.btn-default {
-  background: none;
+$font-a:  'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-b:  'Comfortaa','Raleway', "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-c:  'Open Sans Condensed', 'open sans',"Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-d:  'source code pro', monospace;
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Comfortaa:400,300,700|Open+Sans+Condensed:300,300italic|Montserrat|Raleway|Open+Sans:300italic,400,300);
+body, html {
+  font-family: $font-a;
 }
-
-*{
-  box-shadow: none!important;
-  text-shadow: none!important;
+input {
+  box-shadow: none !important;
 }
-.navbar {
-  background: none transparent;
-  &-brand img{
-    height:50px;
-    width: auto;
-  }
-}
-html {
-
-}
-
-.sign-in {
-  input, button, .btn, button.btn{
-    background: transparent;
-    border: 1px solid #fff;
-    color: #fff;
-  }
-
-}
-
 
 .collapsed {
   display: none;

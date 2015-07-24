@@ -3,9 +3,7 @@ PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
   events: {
     'click a.show-result': 'showResult'
   },
-  initialize: function() {
-    this.collection.fetch();
-  },
+
   render: function() {
     var content = this.template({
       questions: this.collection,

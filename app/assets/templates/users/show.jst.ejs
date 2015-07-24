@@ -1,15 +1,39 @@
 <div class="container">
-  <div class="clearfix visible-xs-block"></div>
-  <div class="col-sm-12 col-lg-8" id="user-polls">
+  <div class="row">
+    <div class="clearfix visible-xs-block"></div>
+    <div class="col-sm-12 col-lg-8" id="user-polls">
+    </div>
+    <div class="clearfix visible-xs-block"></div>
+    <div class="col-sm-12 col-lg-4" id="user-info">
+      <img src="<%= user.get('profile_img') %>">
+      <h4>
+        <%= user.fullName() %>
+      </h4>
+      <h6>
+        <%= user.escape('email') %>
+      </h6>
+      <p>
+        <strong>
+          <%= user.polls().length %>
+        </strong> Polls
+      </p>
+      <p>
+        <strong>
+          <%= user.questions().length %>
+        </strong> Questions
+      </p>
+      <p>
+        <strong>
+          <%= user.answers().length %>
+        </strong> Answers
+      </p>
+      <p>
+        <strong>
+          <%= user.responses().length %>
+        </strong> Responses
+      </p>
+    </div>
+    <div class="col-sm-12 col-lg-4" id="new-poll-form">
+    </div>
   </div>
-  <div class="clearfix visible-xs-block"></div>
-  <div class="col-sm-12 col-lg-4" id="user-profile">
-  </div>
-  <div class="clearfix visible-xs-block"></div>
-  <div class="col-sm-12 col-lg-8">
-  </div>
-  <div class="clearfix visible-xs-block"></div>
-  <div class="col-sm-12 col-lg-4" id="new-poll-form">
-  </div>
-  <div class="clearfix visible-xs-block"></div>
 </div>

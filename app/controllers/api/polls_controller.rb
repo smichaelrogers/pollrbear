@@ -1,7 +1,7 @@
 module Api
   class PollsController < ApiController
     def index
-      @polls = current_user.polls
+      @polls = Poll.all
       render :index
     end
 
@@ -68,7 +68,7 @@ module Api
 
     private
     def poll_params
-      params.require(:poll).permit(:user_id, :title, :text, :privacy)
+      params.require(:poll).permit(:user_id, :title, :text, :privacy, :duration)
     end
   end
 end
