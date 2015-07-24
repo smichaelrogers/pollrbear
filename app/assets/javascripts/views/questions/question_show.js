@@ -57,8 +57,8 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     var pieChartData = [];
     var answerData;
     var i = 0;
-    var colors = ["#FDF1CC", "#C6D6B8", "#987F69", "#E3AD40", "#FCD036", "#D93D4A", "#FFC100", "#929292", "#0DB3D9", "#F29422", "#0367A6"];
-    var highlights = ["#555555", "#666666", "#777777", "#888888", "#999999", "#444444"];
+    var colors = ["#D93D4A", "#FFC100", "#0DB3D9", "#F29422", "#0367A6","#929292", "#FCD036"];
+    var highlights = ["#da7981", "#ffde75", "#59cde8", "#eca650", "#3281b3","#b5b5b5", "#ffe483"];
     this.model.answers().forEach(function(answer) {
       answerData = {};
       answerData['value'] = answer.responses().length;
@@ -83,10 +83,10 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     var barChartData = {
       labels: lbls,
       datasets: [{
-        fillColor: "rgba(220,220,220,0.5)",
-        strokeColor: "rgba(220,220,220,0.8)",
-        highlightFill: "rgba(220,220,220,0.75)",
-        highlightStroke: "rgba(220,220,220,1)",
+        fillColor: "rgba(3,103,166, 0.5)",
+        strokeColor: "rgba(3,103,166, 0.5)",
+        highlightFill: "rgba(3,103,166, 0.5)",
+        highlightStroke: "rgba(3,103,166, 0.5))",
         data: chartData
       }]
     }
@@ -121,8 +121,8 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     var chartData = [];
     var answerData;
     var i = 0;
-    var colors = ["#FDF1CC", "#C6D6B8", "#987F69", "#E3AD40", "#FCD036", "#D93D4A", "#FFC100", "#929292", "#0DB3D9", "#F29422", "#0367A6"];
-    var highlights = ["#555555", "#666666", "#777777", "#888888", "#999999", "#444444"];
+    var colors = ["#D93D4A", "#FFC100", "#0DB3D9", "#F29422", "#0367A6","#929292", "#FCD036"];
+    var highlights = ["#da7981", "#ffde75", "#59cde8", "#eca650", "#3281b3","#b5b5b5", "#ffe483"];
     this.model.answers().forEach(function(answer) {
       answerData = {};
       answerData['value'] = answer.responses().length;

@@ -14,12 +14,34 @@ $font-family:  "Source Sans Pro","Open Sans", "Helvetica Neue" ,Helvetica, Arial
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
 
-.bg {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.btn.btn-default {
+  background: none;
 }
+
+*{
+  box-shadow: none!important;
+  text-shadow: none!important;
+}
+.navbar {
+  background: none transparent;
+  &-brand img{
+    height:50px;
+    width: auto;
+  }
+}
+html {
+
+}
+
+.sign-in {
+  input, button, .btn, button.btn{
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+  }
+
+}
+
 
 .collapsed {
   display: none;

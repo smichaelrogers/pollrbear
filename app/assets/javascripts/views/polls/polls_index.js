@@ -1,12 +1,12 @@
 PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
   template: JST['polls/index'],
   events: {
-    'click button.btn-questions-show': 'showQuestions',
+    'click a.a-questions-show': 'showQuestions',
     'click button.visitor-submit-form': 'submitForm',
-    'click button.btn-poll-edit': 'editPoll',
-    'click button.btn-poll-destroy': 'destroyPoll',
-    'click button.btn-poll-report': 'showReport',
-    'click button.btn-poll-ignore': 'ignorePoll'
+    'click a.a-poll-edit': 'editPoll',
+    'click a.a-poll-destroy': 'destroyPoll',
+    'click a.a-poll-report': 'showReport',
+    'click a.a-poll-ignore': 'ignorePoll'
   },
   initialize: function() {
     this.collection.fetch();
