@@ -1,6 +1,6 @@
 PollrBear.Views.UserShow = Backbone.DashboardView.extend({
   template: JST['users/show'],
-
+  
   render: function() {
     var content = this.template({
       user: this.model
@@ -14,7 +14,7 @@ PollrBear.Views.UserShow = Backbone.DashboardView.extend({
     this.showUserPolls();
     this.showPollForm();
     this.showUserProfile();
-    
+
     return this;
   },
 

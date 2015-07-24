@@ -1,12 +1,11 @@
 Backbone.DashboardView = Backbone.View.extend({
-
   _swapView: function(view) {
     this._currentView && this._currentView.remove();
     this._currentView = view;
     this.$el.html(view.$el);
     view.render();
   },
-  
+
   addSubview: function(selector, subview) {
     this.subviews(selector).push(subview);
     this.attachSubview(selector, subview.render());

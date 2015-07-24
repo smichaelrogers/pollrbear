@@ -8,10 +8,11 @@
       <% responses.forEach(function(response) { %>
         <li class="list-group-item">
           <p class="list-group-item-text">
-            Participated in: "<%= response.get('poll').escape('title') %>"
+            Participated in: "
+            <%= response.get('poll').escape('title') %>"
           </p>
         </li>
         <% }); %>
     </ul>
   </div>
-  <% }; %>
+<% }; %>

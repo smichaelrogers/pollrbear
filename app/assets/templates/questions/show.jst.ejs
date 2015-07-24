@@ -1,34 +1,35 @@
 <ul class="list-group">
   <li class="list-group-item">
-    <h4 class="list-group-item-heading">
-      <%= question.escape('text') %>
-    </h4>
-    <div data-question-id="<%= question.id %>">
-      <table>
-        <tr>
-          <td>
-            <% question.answers().forEach(function(answer) { %>
-              <p>
-                <%= answer.escape('text') %>
-                  <% }); %>
-              </p>
-
-          </td>
-          <td>
-            <% percentages.forEach(function(percentage) { %>
-              <p>
-                <%= percentage %>
-              </p>
-              <% }); %>
-          </td>
-        </tr>
-      </table>
-      <div>
-        <div class="chart-area">
-          <canvas data-question-id="<%= question.id %>" width="300" height="300">
-          </canvas>
+    <button class="btn btn-block close-cover">Close</button>
+    <li class="list-group-item">
+      <h4 class="list-group-item-heading">
+        <%= question.escape('text') %>
+      </h4>
+      <div data-question-id="<%= question.id %>">
+        <table>
+          <tr>
+            <td>
+              <% question.answers().forEach(function(answer) { %>
+                <p>
+                  <%= answer.escape('text') %>
+                    <% }); %>
+                </p>
+            </td>
+            <td>
+              <% percentages.forEach(function(percentage) { %>
+                <p>
+                  <%= percentage %>
+                </p>
+                <% }); %>
+            </td>
+          </tr>
+        </table>
+        <div>
+          <div class="chart-area">
+            <canvas data-question-id="<%= question.id %>" width="300" height="300">
+            </canvas>
+          </div>
         </div>
       </div>
-    </div>
-  </li>
+    </li>
 </ul>

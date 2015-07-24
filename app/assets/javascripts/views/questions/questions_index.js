@@ -5,7 +5,6 @@ PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
   },
   initialize: function() {
     this.collection.fetch();
-    this.listenTo(this.collection, 'add', this.render);
   },
   render: function() {
     var content = this.template({
@@ -23,7 +22,9 @@ PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
     var view = new PollrBear.Views.QuestionShow({
       model: question
     });
+    $(".result-content").html('');
     $target.html(view.render().$el);
+
   }
 
 });

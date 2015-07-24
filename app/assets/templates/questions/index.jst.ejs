@@ -1,6 +1,6 @@
 <li class="list-group-item">
   <% questions.forEach(function(question) { %>
-    <form data-poll-id="<%= pollId %>">
+    <form data-poll-id="<%= pollId %>" class="collapsible">
       <% question.answers().forEach(function(answer) { %>
         <div class="radio">
           <label>
@@ -14,7 +14,7 @@
       <a href="#" class="show-result" data-question-id="<%= question.id %>">Result</a>
       </p>
     </div>
-  <% }); %>
+    <% }); %>
 </li>
 <li class="list-group-item">
   <button type="button" class="visitor-submit-form" data-poll-id="<%= pollId %>">Submit</button>

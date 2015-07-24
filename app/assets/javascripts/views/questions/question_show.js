@@ -2,7 +2,6 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
   template: JST['questions/show'],
 
   initialize: function(options) {
-    this.listenTo(this.model, 'sync', this.render);
     this.percentages = this.percentages();
   },
 
@@ -158,8 +157,4 @@ PollrBear.Views.QuestionShow = Backbone.DashboardView.extend({
     }
     window.chart = new Chart(ctx).Line(lineChartData);
   }
-
-
-
-
 });

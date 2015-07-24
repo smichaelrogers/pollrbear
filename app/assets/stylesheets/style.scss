@@ -1,5 +1,28 @@
+$light: rgb(253,241,204);
+$light-green: rgb(198,214,184);
+$brown: rgb(152,127,105);
+$orange: rgb(227,173,64);
+$yellow: rgb(252,208,54);
+$red: rgb(217,61,74);
+$bright-yellow: rgb(255,193,0);
+$grey: rgb(146,146,146);
+$blue: rgb(13,179,217);
+$bright-orange: rgb(242,148,34);
+$bright-blue: rgb(3,103,166);
+$font-family:  "Source Sans Pro","Open Sans", "Helvetica Neue" ,Helvetica, Arial, sans-serif;
+
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+
+.bg {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .collapsed {
-  display: none !important;
+  display: none;
 }
 #chart-tooltip {
   opacity: 1;
@@ -47,7 +70,7 @@
   left: 50%;
   top: 100%;
   position: absolute;
-  z-index: 99;
+  z-index: 9999;
   -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
 }
