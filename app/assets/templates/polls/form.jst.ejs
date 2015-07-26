@@ -1,29 +1,46 @@
-<h4>
-  New Poll</h4>
-<form class="new-poll-form">
-  <div class="form-group">
-    <label>Title</label>
-    <input name="poll[title]" type="text" class="form-control" placeholder="Title">
-  </div>
+<div id="poll-preview">
+</div>
 
-  <div class="form-group">
-    <label>Description</label>
-    <textarea name="poll[text]" class="form-control" rows="3" placeholder="Description"></textarea>
-  </div>
 
-  <div class="form-group">
-    <label class="radio-inline">
-      <input type="radio" name="poll[privacy]" value="1" checked=""> Public
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="poll[privacy]" value="2"> Private
-    </label>
+<div class="row">
+  <div class="col-sm-12">
+    <h4 id="poll-title">New Poll</h4>
   </div>
+</div>
 
-  <div class="form-group">
-    <span class="pull-right">
-      <button type="reset" class="btn btn-default">Cancel</button>
-      <button type="submit" class="btn btn-default submit-poll-data">Next</button>
-    </span>
+<div class="row" id="poll-form-poll">
+  <div class="col-sm-12">
+    <form class="new-poll-form">
+      <div class="form-group">
+        <label>Title</label>
+        <input name="poll[title]" type="text" class="form-control" placeholder="Title">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea name="poll[text]" class="form-control" rows="3" placeholder="Description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="radio-inline">
+          <input name="poll[privacy]" type="radio" value="1" checked=""> Public
+        </label>
+        <label class="radio-inline">
+          <input name="poll[privacy]" type="radio" value="2"> Private
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Who would you like to invite?</label>
+        <textarea name="invite[email]" class="form-control" rows="3" placeholder="invite1@email.com, invite2@email.com, etc."></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary submit-poll-data">Next</button>
+      </div>
+    </form>
   </div>
-</form>
+</div>
+
+<div class="row" id="poll-form-questions">
+</div>
+
+<div class="row" id="poll-form-answers">
+</div>

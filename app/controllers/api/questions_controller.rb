@@ -4,7 +4,6 @@ module Api
       @question = current_poll.questions.new(question_params)
 
       if @question.save
-        @question.poll_id = current_poll.id
         render json: @question
       else
         render json: @question.errors.full_messages, status: :unprocessable_entity
@@ -21,7 +20,7 @@ module Api
     end
 
     def show
-      @question = Question.includ).find(params[:id])
+      @question = Question.includes(:answers).find(params[:id])
       render :show
     end
 
@@ -41,8 +40,12 @@ module Api
       end
     end
 
+    def current_user
+      current_poll.user
+    end
+
     def question_params
-      params.require(:question).permit(:poll_id, :text, :chart)
+      params.require(:question).permit(:poll_id, :text, :chart, :format)
     end
   end
 end

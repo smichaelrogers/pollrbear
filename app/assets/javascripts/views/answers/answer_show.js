@@ -1,7 +1,7 @@
 PollrBear.Views.AnswerShow = Backbone.View.extend({
   template: JST['answers/show'],
   events: {
-    "click show-responses": "renderResponses"
+    "click .show-responses": "renderResponses"
   },
   initialize: function() {
     this.listenTo(this.collection, 'sync', this.render);

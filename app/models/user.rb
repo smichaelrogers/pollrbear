@@ -24,8 +24,12 @@ class User < ActiveRecord::Base
   has_many :polls
   has_many :questions, through: :polls, source: :questions
   has_many :answers, through: :questions, source: :answers
-  has_many :invites
-  has_many :invited_users, through: :poll, source: :invited_users
+
+  has_many :invitations,
+    class_name: "Invite",
+    foreign_key: :user_id,
+    primary_key: :id
+  has_many :other_polls, through: :invitations, source: :poll
 
   attr_reader :password
   after_initialize :ensure_session_token

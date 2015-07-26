@@ -1,42 +1,19 @@
-<div class="container">
-  <div class="row">
-    <div class="clearfix visible-xs-block"></div>
-    <div class="col-sm-12 col-lg-8" id="user-polls">
-    </div>
-    <div class="clearfix visible-xs-block"></div>
-    <div class="col-sm-12 col-lg-4" id="user-info">
-      <div id="user-profile">
-        <img src="<%= user.get('profile_img') %>">
-        <h4>
-          <%= user.fullName() %>
-        </h4>
-        <h5>
-          <%= user.escape('email') %>
-        </h5>
-
-          <strong>
-            <%= user.polls().length %>
-          </strong> Polls
-        <br>
-
-          <strong>
-            <%= user.questions().length %>
-          </strong> Questions
-        <br>
-
-          <strong>
-            <%= user.answers().length %>
-          </strong> Answers
-        <br>
-
-          <strong>
-            <%= user.responses().length %>
-          </strong> Responses
-
-      </div>
-      <div id="new-poll-form">
-      </div>
-    </div>
-
+<div class="row">
+  <div class="col-xs-12 col-lg-4">
+    <section id="user-info">
+      <img src="<%= user.get('profile_img') %>">
+      <h4>
+        <%= user.fullName() %>
+      </h4>
+      <h5>
+        <%= user.escape('email') %>
+      </h5>
+    </section>
+    <section id="new-poll">
+    </section>
+  </div>
+  <div class="col-xs-12 col-lg-8">
+    <section id="polls">
+    </section>
   </div>
 </div>

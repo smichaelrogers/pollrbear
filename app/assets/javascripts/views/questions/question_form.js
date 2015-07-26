@@ -5,7 +5,6 @@ PollrBear.Views.QuestionForm = Backbone.View.extend({
   },
   initialize: function(options) {
   },
-
   render: function() {
     var content = this.template();
     this.$el.html(content);
@@ -13,13 +12,20 @@ PollrBear.Views.QuestionForm = Backbone.View.extend({
   },
   submitQuestionData: function(event) {
     event.preventDefault();
-    var that = this;
     var formData = this.$('.new-question-form').serializeJSON();
     formData.question.poll_id = this.model.id;
     var question = this.collection.create(formData);
-    var view = new PollrBear.Views.AnswerForm({
-      collection: PollrBear.currentUser.answers(),
-      model: question
-    });
+    $("#poll-form-questions").addClass("collapsed");
+    $(document).ajaxComplete(function() {
+      var view = new PollrBear.Views.AnswerForm({
+        collection: PollrBear.currentUser.answers(),
+        model: question
+      });
+      var preview = new PollrBear.Views.QuestionPreview({
+        model: question
+      });
+      this.$(".question-preview").html(preview.render().$el);
+      $("#poll-form-answers").html(view.render().$el);
+    }.bind(this));
   }
 });

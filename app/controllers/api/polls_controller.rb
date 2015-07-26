@@ -1,7 +1,7 @@
 module Api
   class PollsController < ApiController
     def index
-      @polls = Poll.all
+      @polls = current_user.polls
       render :index
     end
 
@@ -22,11 +22,12 @@ module Api
     end
 
     def show
-      @poll = Poll.includes(questions: [answers: [responses: :user]]).find(params[:id])
+      @poll = Poll.includes(:questions).find(params[:id])
       render :show
     end
 
     private
+
     def poll_params
       params.require(:poll).permit(:user_id, :title, :text, :privacy)
     end

@@ -3,25 +3,40 @@
     <label>Question:</label>
     <input name="question[text]" type="text" class="form-control" placeholder="Question">
   </div>
+  <div class="form-group">
+    <label class="radio-inline">
+      <input type="radio" name="question[chart]" value="1" checked="">Pie
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="question[chart]" value="2">Bar
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="question[chart]" value="3">Line
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="question[chart]" value="4">Polar Area
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="question[chart]" value="5">Radar
+    </label>
+  </div>
 
   <div class="form-group">
     <label class="radio-inline">
-      <input type="radio" name="question[chart]" value="1" checked=""> <i class="fa fa-3x fa-bar-chart"></i>
+      <input type="radio" name="question[format]" value="1" checked=""> Multiple Choice
     </label>
     <label class="radio-inline">
-      <input type="radio" name="question[chart]" value="2"> <i class="fa fa-3x fa-area-chart"></i>
+      <input type="radio" name="question[format]" value="2"> Open Ended
+      <small>(Word Cloud/Text Wall)</small>
     </label>
     <label class="radio-inline">
-      <input type="radio" name="question[chart]" value="3"> <i class="fa fa-3x fa-pie-chart"></i>
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="question[chart]" value="4"> <i class="fa fa-3x fa-line-chart"></i>
+      <input type="radio" name="question[format]" value="3"> Perspective
+      <small>(Clickable Image/Whiteboard)</small>
     </label>
   </div>
   <div class="form-group">
-    <span class="pull-right">
-      <button type="reset" class="btn btn-default">Cancel</button>
-      <button type="submit" class="btn btn-primary submit-question-data">Next</button>
-    </span>
+    <button type="submit" class="btn btn-primary submit-question-data">Submit</button>
   </div>
 </form>
+<div class="question-preview">
+</div>

@@ -2,7 +2,9 @@ PollrBear.Views.UsersIndex = Backbone.View.extend({
   template: JST['users/index'],
 
   initialize: function() {
+    this.model = PollrBear.currentUser;
     this.listenTo(this.collection, 'sync', this.render);
+    this.model.fetch();
   },
 
   render: function() {
@@ -14,7 +16,7 @@ PollrBear.Views.UsersIndex = Backbone.View.extend({
 
   renderUser: function() {
     var view = new PollrBear.Views.UserShow({
-      model: PollrBear.currentUser
+      model: this.model
     });
     $('#user').html(view.render().$el);
   },
@@ -25,7 +27,7 @@ PollrBear.Views.UsersIndex = Backbone.View.extend({
 
   renderUserSocial: function() {
     var view = new PollrBear.Views.UserSocial({
-      model: PollrBear.currentUser,
+      model: this.model,
       collection: this.collection
     });
     $("#community").html(view.render().$el);

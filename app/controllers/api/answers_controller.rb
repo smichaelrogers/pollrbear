@@ -1,14 +1,13 @@
 module Api
   class AnswersController < ApiController
     def index
-      @answers = Answer.all
+      @answers = current_question.answers
       render :index
     end
 
     def create
       @answer = current_question.answers.new(answer_params)
       if @answer.save
-        @answer.question_id = current_question.id
         render json: @answer
       else
         render json: @answer.errors.full_messages, status: :unprocessable_entity
@@ -16,7 +15,7 @@ module Api
     end
 
     def show
-      @answer = Answer.includes(responses: :user).find(params[:id])
+      @answer = Answer.includes(:responses).find(params[:id])
       render :show
     end
 
@@ -37,6 +36,7 @@ module Api
     end
 
     private
+
     def current_question
       if params[:id]
         @answer = Answer.find(params[:id])
@@ -49,6 +49,11 @@ module Api
     def current_poll
       current_question.poll
     end
+
+    def current_user
+      current_poll.user
+    end
+
     def answer_params
       params.require(:answer).permit(:text, :question_id)
     end

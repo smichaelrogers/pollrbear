@@ -2,7 +2,9 @@ PollrBear.Views.ChartShow = Backbone.View.extend({
   template: JST['charts/show'],
 
   initialize: function(options) {
-    this.listenTo(this.collection, 'change', this.render)
+    this.collection = this.model.answers();
+    this.listenTo(this.collection, 'change', this.render);
+
     this.delegateChartRendering();
   },
 
@@ -157,4 +159,5 @@ PollrBear.Views.ChartShow = Backbone.View.extend({
     }
     window.chart = new Chart(ctx).Line(lineChartData);
   }
+
 });

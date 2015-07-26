@@ -1,14 +1,14 @@
 module Api
   class ResponsesController < ApiController
     def index
-      @responses = current_user.responses
+      @responses = current_answer.responses
       render :index
     end
 
     def create
       @response = current_answer.responses.new(response_params)
       if @response.save
-        @response.user_id = current_user.id
+        @response.user_id = respondent.id
         render json: @response
       else
         render json: @response.errors.full_messages, status: :unprocessable_entity
@@ -36,18 +36,8 @@ module Api
     end
 
     def show
-      @response = current_answer.responses.find(params[:id])
+      @response = Response.find(params[:id])
       render :show
-    end
-
-    def update
-      @response = response.find(params[:id])
-      if @response.update_attributes(response_params)
-        render json: @response
-      else
-        render json: @response.errors.full_messages,
-               status: :unprocessable_entity
-      end
     end
 
     def destroy
@@ -67,17 +57,25 @@ module Api
       end
     end
 
-    def responder
+    def current_question
+      current_answer.question
+    end
+
+    def current_poll
+      current_question.poll
+    end
+
+    def current_user
+      current_poll.user
+    end
+
+    def respondent
       if params[:id]
         @response = Response.find(params[:id])
         @user = @response.user
       elsif params[:response]
         @user = User.find(params[:response][:user_id])
       end
-    end
-
-    def current_poll
-      current_answer.poll
     end
 
     def response_params

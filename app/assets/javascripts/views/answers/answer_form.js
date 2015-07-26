@@ -39,14 +39,17 @@ PollrBear.Views.AnswerForm = Backbone.View.extend({
         text: str,
         question_id: question_id
       });
-      window.setTimeout(function() {
-      }, 20);
     });
+
+  },
+  submitAnswerNewQuestion: function(event) {
+    event.preventDefault();
+    this.submitAnswerData(event);
     var question = this.model;
-    var view = new PollrBear.Views.QuestionShow({
-      model: question
+    $("#poll-form-answers").addClass("collapsed");
+    $(document).ajaxComplete(function() {
+      $("#poll-form-questions").val("").removeClass("collapsed");
     });
-    this._swapView(view);
   },
 
   maybeCreate: function(event) {

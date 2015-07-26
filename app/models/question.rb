@@ -18,7 +18,4 @@ class Question < ActiveRecord::Base
   has_many :responses, through: :answers, source: :responses
   has_many :users, through: :responses, source: :user
   belongs_to :poll
-
-
-
 end

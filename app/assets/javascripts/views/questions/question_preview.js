@@ -1,6 +1,5 @@
-PollrBear.Views.QuestionShow = Backbone.View.extend({
-  template: JST['questions/show'],
-
+PollrBear.Views.QuestionPreview = Backbone.View.extend({
+  template: JST['questions/preview'],
   initialize: function(options) {
     this.listenTo(this.model, 'sync', this.render);
   },
@@ -10,22 +9,16 @@ PollrBear.Views.QuestionShow = Backbone.View.extend({
       question: this.model
     });
     this.$el.html(content);
-    this.renderAnswers();
     return this;
   },
 
-  renderChart: function() {
-    var view = new PollrBear.Views.ChartShow({
-      model: this.model
-    });
-    $("#chart").html(view.render().$el);
-  },
-
-  renderAnswers: function() {
-    var view = new PollrBear.Views.AnswersIndex({
-      model: this.model
-    });
-    $("#answers").html(view.render().$el);
+  updateData: function() {
+    if(this.model.answers()){
+      var view = new PollrBear.Views.ChartShow({
+        model: this.model
+      });
+      $("#chart-preview").html(view.render().$el);
+    }
   },
 
   percentages: function() {

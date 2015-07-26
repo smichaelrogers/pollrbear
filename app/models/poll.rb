@@ -13,15 +13,19 @@
 #
 
 class Poll < ActiveRecord::Base
-  validates :title, :text, presence: true
-  attr_reader :expiration, :expired
+  validates :title, :text, :duration, :privacy, presence: true
 
   belongs_to :user
-  has_many :invites
-  has_many :invited_users, through: :invites, source: :invited_users
   has_many :questions
   has_many :answers, through: :questions, source: :answers
   has_many :responses, through: :answers, source: :responses
+
+  has_many :invites,
+    class_name: "Invite",
+    foreign_key: :poll_id,
+    primary_key: :id
+  has_many :invited_users, through: :invites, source: :user
+
 
   def expiration
     t = Time.at(self.created_at + self.duration)

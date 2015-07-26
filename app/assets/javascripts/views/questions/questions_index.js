@@ -37,20 +37,20 @@ PollrBear.Views.QuestionsIndex = Backbone.View.extend({
     event.preventDefault();
     this.collection.fetch({
       remove: false,
-      data {"page": this.page - 1},
+      data: {"page": this.page - 1},
       success: function() {
         this.page--;
       }
     });
   },
 
-  renderQuestions: function(event) {
-    event.preventDefault();
+  renderQuestions: function() {
+    $("#questions-idx").html("");
     this.collection.forEach(function(question) {
       var view = new PollrBear.Views.QuestionShow({
-        question: this.collection.at(0);
+        question: this.collection.at(0)
       });
-      this.$(".question").append(view.render().$el);
+      $("#questions-idx").append(view.render().$el);
     }.bind(this));
   }
 });

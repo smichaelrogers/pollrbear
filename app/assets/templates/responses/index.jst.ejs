@@ -1,18 +1,3 @@
-<% if (responses) { %>
-  <div class="clearfix visible-xs-block"></div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">Responses</h4>
-    </div>
-    <ul class="list-group">
-      <% responses.forEach(function(response) { %>
-        <li class="list-group-item">
-          <p class="list-group-item-text">
-            Participated in: "
-            <%= response.get('poll').escape('title') %>"
-          </p>
-        </li>
-        <% }); %>
-    </ul>
-  </div>
-<% }; %>
+<% responses.forEach(function(response) { %>
+  <%= response.escape("user_id") %><%= response.escape("answer_id") %>
+<% }); %>

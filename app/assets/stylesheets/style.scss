@@ -1,12 +1,44 @@
-$font-body:  "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-heading:  "Comfortaa","Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-body: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-heading: "Comfortaa","Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Comfortaa:400,300,700|Open+Sans+Condensed:300,300italic|Montserrat|Raleway|Open+Sans:300italic,400,300);
-body, html {
+body,
+html {
   font-family: $font-body;
   background: #eee;
 }
 .collapsed {
-  display: none;
+  display: none !important;
+}
+
+
+/* $greyyellow: rgb(188,189,172);
+$yellow: rgb(207,190,39);
+$orange: rgb(242,116,53);
+$pink: rgb(240,36,117);
+$darkpurple: rgb(59,45,56);
+
+
+ */
+$slate: rgb(85,98,112);
+$teal: rgb(78,205,196);
+$lime: rgb(199,244,100);
+$pink: rgb(255,107,107);
+$red: rgb(196,77,88);
+
+.slate {
+  background-color: $slate;
+}
+.teal {
+  background-color: $teal;
+}
+.lime {
+  background-color: $lime;
+}
+.pink {
+  background-color: $pink;
+}
+.red {
+  background-color: $red;
 }
 
 #chart-tooltip {
@@ -59,20 +91,68 @@ body, html {
   -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
 }
-
-
-
-
-
-.toggle-collapsed {
-  width: 1px;
-  position: absolute;
-  overflow-x: hidden;
+@media(min-width:768px) {
+  header .container {
+    padding-top: 200px;
+    padding-bottom: 100px;
+  }
+  header .intro-text .name {
+    font-size: 4.75em;
+  }
+  header .intro-text .skills {
+    font-size: 1.75em;
+  }
 }
-
-
-.toggle-expand {
-  position: relative;
-  width: auto;
-  overflow: visible;
+@media(min-width:768px) {
+  .navbar-fixed-top {
+    padding: 25px 0;
+    -webkit-transition: padding 0.3s;
+    -moz-transition: padding 0.3s;
+    transition: padding 0.3s;
+  }
+  .navbar-fixed-top .navbar-brand {
+    font-size: 2em;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .navbar-fixed-top.navbar-shrink {
+    padding: 10px 0;
+  }
+  .navbar-fixed-top.navbar-shrink .navbar-brand {
+    font-size: 1.5em;
+  }
+}
+.navbar {
+  text-transform: uppercase;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700;
+}
+.navbar a:focus {
+  outline: 0;
+}
+.navbar .navbar-nav {
+  letter-spacing: 1px;
+}
+.navbar .navbar-nav li a:focus {
+  outline: 0;
+}
+.navbar-default,
+.navbar-inverse {
+  border: 0;
+}
+section {
+  padding: 100px 0;
+}
+section h2 {
+  margin: 0;
+  font-size: 3em;
+}
+@media(max-width:767px) {
+  section {
+    padding: 75px 0;
+  }
+  section.first {
+    padding-top: 75px;
+  }
 }

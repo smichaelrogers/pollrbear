@@ -8,17 +8,19 @@ PollrBear.Views.PollForm = Backbone.View.extend({
     this.$el.html(content);
     return this;
   },
+
   submitPollData: function(event) {
     event.preventDefault();
-    var that = this;
     var formData = this.$('.new-poll-form').serializeJSON();
-    formData.user_id = PollrBear.currentUser.id
-    var view = new PollrBear.Views.QuestionForm({
-      collection: PollrBear.currentUser.questions(),
-      model: this.collection.create(formData)
+    var poll = this.collection.create(formData);
+    $("#poll-form-poll").addClass("collapsed");
+
+    $(document).ajaxComplete(function() {
+      var view = new PollrBear.Views.QuestionForm({
+        collection: PollrBear.currentUser.questions(),
+        model: poll
+      });
+      $("#poll-form-questions").html(view.render().$el);
     });
-    window.setTimeout(function () {
-      this._swapView(view);
-    }.bind(this), 200);
   }
 });

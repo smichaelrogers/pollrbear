@@ -1,35 +1,18 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    <h3 class="heading-b">Active Polls</h3>
+<% polls.forEach(function(poll) { %>
+  <div class="row">
+    <div class="col-sm-12">
+      <a href="#" class="select-poll" data-poll-id="<%= poll.id %>">
+        <h5>
+          <%= poll.escape('title') %>
+        </h5>
+      </a>
+    </div>
   </div>
-  <ul class="list-group">
-    <% polls.forEach(function(poll) { %>
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-sm-12 col-lg-8">
-            <h4 class="heading-a">
-              <%= poll.escape('title') %>
-            </h4>
-          </div>
-          <div class="col-sm-12 col-lg-4">
-            <div class="btn-group btn-group-sm">
-              <% if(PollrBear.currentUser.id === poll.get('user_id')) { %>
-                <button type="button" class="btn btn-default a-questions-show" data-poll-id="<%= poll.id %>">Show</button>
-                <button type="button" class="btn btn-default a-poll-destroy">Delete</button>
-                <button type="button" class="btn btn-default a-poll-report">Report</button>
-                <% } else { %>
-                  <button type="button" class="btn btn-default a-poll-ignore">Ignore</button>
-                  <button type="button" class="btn btn-default a-questions-show" data-poll-id="<%= poll.id %>">Accept</button>
-                  <% }; %>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <%= poll.escape('text') %>
-          </div>
-        </div>
-      </li>
-      <% }); %>
-  </ul>
-</div>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>
+        <%= poll.escape('text') %>
+      </p>
+    </div>
+  </div>
+<% }); %>

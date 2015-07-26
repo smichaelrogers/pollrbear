@@ -1,5 +1,4 @@
 PollrBear.Views.PollsIndex = Backbone.View.extend({
-  tagName: 'section',
   template: JST['polls/index'],
   events: {
     "click .select-poll": "selectPoll"
@@ -34,6 +33,6 @@ PollrBear.Views.PollsIndex = Backbone.View.extend({
     var view = new PollrBear.Views.PollShow({
       model: poll
     });
-    this._swapView(view);
+    this.$el.html(view.render().$el);
   }
 });

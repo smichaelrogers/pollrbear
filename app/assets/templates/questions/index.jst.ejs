@@ -1,13 +1,3 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    <h4 class="heading-a">
-      <%= poll.escape('title') %>
-    </h4>
-  </div>
-  <ul class="list-group poll-questions">
-  </ul>
-  <div class="panel-body">
-    <button type="button" class="visitor-submit-form btn btn-default pull-right" data-poll-id="<%= poll.id %>">Submit</button>
-    <button class="btn btn-default show-results">Results</button>
-  </div>
-</div>
+<button type="button" class="back-question">Back</button>
+<button type="button" class="next-question">Next</button>
+<div id="questions-idx"></div>
