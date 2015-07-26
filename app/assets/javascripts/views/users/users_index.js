@@ -1,25 +1,34 @@
-PollrBear.Views.UsersIndex = Backbone.DashboardView.extend({
+PollrBear.Views.UsersIndex = Backbone.View.extend({
   template: JST['users/index'],
 
   initialize: function() {
-    this.listenTo(this.collection, 'sync', this.render)
-    this.renderUserView();
+    this.listenTo(this.collection, 'sync', this.render);
   },
 
   render: function() {
-    var content = this.template({
-      users: this.collection
-    });
+    var content = this.template();
     this.$el.html(content);
-
+    this.renderUser();
     return this;
   },
 
-  renderUserView: function() {
+  renderUser: function() {
     var view = new PollrBear.Views.UserShow({
       model: PollrBear.currentUser
     });
-    $('#idx').html(view.render().$el);
+    $('#user').html(view.render().$el);
+  },
+
+  generateUserData: function() {
+
+  },
+
+  renderUserSocial: function() {
+    var view = new PollrBear.Views.UserSocial({
+      model: PollrBear.currentUser,
+      collection: this.collection
+    });
+    $("#community").html(view.render().$el);
   }
 
 });

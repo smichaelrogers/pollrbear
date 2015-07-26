@@ -1,11 +1,11 @@
-PollrBear.Views.QuestionForm = Backbone.DashboardView.extend({
+PollrBear.Views.QuestionForm = Backbone.View.extend({
   template: JST['questions/form'],
   events: {
     'click .submit-question-data': 'submitQuestionData'
   },
   initialize: function(options) {
   },
-  
+
   render: function() {
     var content = this.template();
     this.$el.html(content);
@@ -17,12 +17,9 @@ PollrBear.Views.QuestionForm = Backbone.DashboardView.extend({
     var formData = this.$('.new-question-form').serializeJSON();
     formData.question.poll_id = this.model.id;
     var question = this.collection.create(formData);
-    window.setTimeout(function () {
-      var view = new PollrBear.Views.AnswerForm({
-        collection: PollrBear.currentUser.answers(),
-        model: question
-      });
-      that._swapView(view);
-    }.bind(this), 200);
+    var view = new PollrBear.Views.AnswerForm({
+      collection: PollrBear.currentUser.answers(),
+      model: question
+    });
   }
 });

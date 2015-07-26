@@ -1,4 +1,4 @@
-PollrBear.Views.PollReport = Backbone.DashboardView.extend({
+PollrBear.Views.PollReport = Backbone.View.extend({
   template: JST['polls/show'],
 
   initialize: function() {

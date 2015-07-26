@@ -1,7 +1,9 @@
-PollrBear.Views.ResponsesIndex = Backbone.DashboardView.extend({
+PollrBear.Views.ResponsesIndex = Backbone.View.extend({
   template: JST['responses/index'],
   initialize: function() {
+    this.collection = this.model.responses();
     this.listenTo(this.collection, 'sync', this.render);
+    this.collection.fetch();
   },
   render: function() {
     var content = this.template({
@@ -10,5 +12,4 @@ PollrBear.Views.ResponsesIndex = Backbone.DashboardView.extend({
     this.$el.html(content);
     return this;
   }
-
 });

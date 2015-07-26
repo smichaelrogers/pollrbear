@@ -12,24 +12,17 @@ module Api
     end
 
     def index
-      @questions = Question.all
-      render :index
+      @questions = current_poll.questions
+      render json: {
+        models: @questions,
+        page: params[:page],
+        total_pages: @questions.total_pages
+      }
     end
 
     def show
-      @question = Question.includes(answers: [responses: :user]).find(params[:id])
+      @question = Question.includ).find(params[:id])
       render :show
-    end
-
-
-    def update
-      @question = Question.find(params[:id])
-      if @question.update_attributes(question_params)
-        render json: @question
-      else
-        render json: @question.errors.full_messages,
-               status: :unprocessable_entity
-      end
     end
 
     def destroy
@@ -49,7 +42,7 @@ module Api
     end
 
     def question_params
-      params.require(:question).permit(:poll_id, :text, :chart, :poll, :id)
+      params.require(:question).permit(:poll_id, :text, :chart)
     end
   end
 end

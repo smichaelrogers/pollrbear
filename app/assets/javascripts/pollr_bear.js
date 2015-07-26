@@ -7,7 +7,7 @@ window.PollrBear = {
     console.log('initialize');
     this.currentUser = new PollrBear.Models.CurrentUser();
     this.currentUser.fetch();
-    this.dashboard = new PollrBear.Views.Dashboard({ el: $("#dashboard") });
+    this.nav = new PollrBear.Views.Nav({ el: $("#nav") });
     this.router = new PollrBear.Routers.Users({ $rootEl: $("#root") });
     Backbone.history.start();
   }

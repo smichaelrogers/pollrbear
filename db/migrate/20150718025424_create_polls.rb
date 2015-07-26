@@ -5,8 +5,7 @@ class CreatePolls < ActiveRecord::Migration
       t.string :title, null: false
       t.string :text
       t.integer :privacy, default: 1, null: false
-      t.integer :duration, default: 86400
-
+      t.integer :duration, default: 86400, null: false
 
       t.timestamps null: false
     end

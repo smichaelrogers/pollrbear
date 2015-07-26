@@ -1,76 +1,14 @@
-$light: rgb(253,241,204);
-$light-green: rgb(198,214,184);
-$brown: rgb(152,127,105);
-$orange: rgb(227,173,64);
-$yellow: rgb(252,208,54);
-$red: rgb(217,61,74);
-$bright-yellow: rgb(255,193,0);
-$grey: rgb(146,146,146);
-$blue: rgb(13,179,217);
-$bright-orange: rgb(242,148,34);
-$bright-blue: rgb(3,103,166);
-$font-a:  'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-b:  'Comfortaa','Raleway', "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-c:  'Open Sans Condensed', 'open sans',"Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-d:  'source code pro', monospace;
+$font-body:  "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-heading:  "Comfortaa","Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Comfortaa:400,300,700|Open+Sans+Condensed:300,300italic|Montserrat|Raleway|Open+Sans:300italic,400,300);
 body, html {
-  font-family: $font-a;
+  font-family: $font-body;
   background: #eee;
 }
-input {
-  box-shadow: none !important;
-}
-#user-info {
-padding: 20px;
-}
-#user-profile {
-
-}
-#new-poll-form {
-
-}
-canvas{
-  z-index: 99999;
-}
-
-.heading-b {
-  font-family: $font-b;
-  color: $grey;
-}
-#user-polls {
-
-}
-
-#dashboard {
-  height: 60px;
-  max-height: 60px;
-  margin-bottom: 30px;
-  overflow: hidden;
-  border-bottom: 1px solid #ddd;
-  .navbar-nav {
-
-    li {
-      a{
-        font-family: $font-a;
-
-      }
-    }
-  }
-  .navbar-brand {
-
-    img {
-      height: 35px;
-      width: auto;
-      transform: translateY(-7px);
-
-    }
-  }
-}
-
 .collapsed {
   display: none;
 }
+
 #chart-tooltip {
   opacity: 1;
   position: absolute;

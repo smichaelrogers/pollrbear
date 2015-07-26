@@ -1,14 +1,11 @@
-PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
+PollrBear.Views.PollsIndex = Backbone.View.extend({
+  tagName: 'section',
   template: JST['polls/index'],
   events: {
-    'click button.a-questions-show': 'showQuestions',
-    'click button.visitor-submit-form': 'submitForm',
-    'click button.a-poll-destroy': 'destroyPoll',
-    'click button.a-poll-report': 'showReport',
-    'click button.a-poll-ignore': 'ignorePoll'
+    "click .select-poll": "selectPoll"
   },
   initialize: function() {
-    this.listenTo(this.collection, 'add', this.render);
+    this.listenTo(this.collection, "sync", this.render);
   },
   render: function() {
     var content = this.template({
@@ -17,7 +14,6 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
     this.$el.html(content);
     return this;
   },
-
   submitForm: function(event) {
     event.preventDefault();
     var that = this;
@@ -29,41 +25,15 @@ PollrBear.Views.PollsIndex = Backbone.DashboardView.extend({
         answer_id: value.value,
         user_id: PollrBear.currentUser.id
       });
-    });
-
-    window.setTimeout(function() {
-      that.render();
-    }, 100);
+    })
   },
-
-  showQuestions: function(event) {
+  selectPoll: function(event) {
     event.preventDefault();
-    var pollId = $(event.currentTarget).attr('data-poll-id');
+    var pollId = $(event.currentTarget).attr("data-poll-id");
     var poll = this.collection.getOrFetch(pollId);
-    var questions = poll.questions();
-    var view = new PollrBear.Views.QuestionsIndex({
-      collection: questions,
+    var view = new PollrBear.Views.PollShow({
       model: poll
     });
     this._swapView(view);
-  },
-
-  editPoll: function(event) {
-    event.preventDefault();
-    alert('tbd');
-
-  },
-
-  destroyPoll: function(event) {
-    event.preventDefault();
-    alert('tbd');
-  },
-  showReport: function(event) {
-    event.preventDefault();
-    alert('tbd');
-  },
-  ignorePoll: function(event) {
-    event.preventDefault();
-    alert('tbd');
   }
 });

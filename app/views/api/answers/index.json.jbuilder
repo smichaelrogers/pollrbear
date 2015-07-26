@@ -1,1 +1,3 @@
-json.partial! "api/answers/answer", collection: @answers, as: :answer
+json.array! @answers do |answer|
+  json.extract! answer, :id, :question_id, :text, :created_at, :updated_at
+end

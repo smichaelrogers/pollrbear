@@ -16,7 +16,6 @@ PollrBear.Routers.Users = Backbone.Router.extend({
   index: function(){
     var callback = this.index.bind(this);
     if (!this._requireSignedIn(callback)) { return; }
-
     var indexView = new PollrBear.Views.UsersIndex({
       collection: this.collection
     });

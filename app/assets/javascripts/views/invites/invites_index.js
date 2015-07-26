@@ -1,4 +1,4 @@
-PollrBear.Views.InvitesIndex = Backbone.DashboardView.extend({
+PollrBear.Views.InvitesIndex = Backbone.View.extend({
   template: JST['invites/index'],
   initialize: function() {
     this.collection.fetch();

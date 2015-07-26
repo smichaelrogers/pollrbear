@@ -1,9 +1,8 @@
-PollrBear.Views.PollForm = Backbone.DashboardView.extend({
+PollrBear.Views.PollForm = Backbone.View.extend({
   template: JST['polls/form'],
   events: {
     'click .submit-poll-data': 'submitPollData'
   },
-  initialize: function(options) {},
   render: function() {
     var content = this.template();
     this.$el.html(content);

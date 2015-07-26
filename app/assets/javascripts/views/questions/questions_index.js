@@ -1,36 +1,56 @@
-PollrBear.Views.QuestionsIndex = Backbone.DashboardView.extend({
+PollrBear.Views.QuestionsIndex = Backbone.View.extend({
   template: JST['questions/index'],
   events: {
-    'click .show-results': 'showResults'
+    "click .next-question": "paginateNext",
+    "click .back-question": "paginateBack"
+  },
+  initialize: function() {
+    this.page = 0;
+    this.collection = this.model.questions();
+    this.listenTo(this.collection, 'sync', this.render);
+    this.collection.fetch({
+      remove: false,
+      data: {"page": 0},
+      success: function() {}
+    });
   },
 
-  initialize: function() {
-    this.render();
-  },
   render: function() {
-    var content = this.template({
-      questions: this.collection,
-      poll: this.model
-    });
+    var content = this.template();
     this.$el.html(content);
     this.renderQuestions();
     return this;
   },
 
-  renderQuestions: function() {
-    var that = this;
-    this.collection.forEach(function(question) {
-      var view = new PollrBear.Views.QuestionShow({
-        poll: that.collection,
-        model: question
-      });
-      this.addSubview('ul.poll-questions', view);
-    }.bind(this));
+  paginateNext: function(event) {
+    event.preventDefault();
+    this.collection.fetch({
+      remove: false,
+      data: { "page": this.page + 1 },
+      success: function() {
+        this.page++;
+      }
+    });
   },
 
-  showResults: function(event) {
+  paginateBack: function(event) {
     event.preventDefault();
-    $('li.question-results').removeClass('.collapsed');
-  }
+    this.collection.fetch({
+      remove: false,
+      data {"page": this.page - 1},
+      success: function() {
+        this.page--;
+      }
+    });
+  },
 
+  renderQuestions: function(event) {
+    event.preventDefault();
+    this.collection.forEach(function(question) {
+      var view = new PollrBear.Views.QuestionShow({
+        question: this.collection.at(0);
+      });
+      this.$(".question").append(view.render().$el);
+    }.bind(this));
+  }
 });

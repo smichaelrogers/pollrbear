@@ -1,5 +1,5 @@
-PollrBear.Views.Dashboard = Backbone.View.extend({
-  template: JST['shared/dashboard'],
+PollrBear.Views.Nav = Backbone.View.extend({
+  template: JST['shared/nav'],
 
   initialize: function(options){
     this.render();

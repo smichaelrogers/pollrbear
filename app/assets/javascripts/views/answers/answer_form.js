@@ -1,4 +1,4 @@
-PollrBear.Views.AnswerForm = Backbone.DashboardView.extend({
+PollrBear.Views.AnswerForm = Backbone.View.extend({
   template: JST['answers/form'],
   events: {
     'click .add-answer': 'addAnswer',
