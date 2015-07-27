@@ -1,10 +1,10 @@
 PollrBear.Views.PollsIndex = Backbone.View.extend({
   template: JST['polls/index'],
-  initialize: function() {
-    this.listenToOnce(this.collection, 'sync', this.render);
-  },
   events: {
     "click .select-poll": "selectPoll"
+  },
+  initialize: function() {
+    this.trigger('sync');
   },
   render: function() {
     var content = this.template({
@@ -15,12 +15,7 @@ PollrBear.Views.PollsIndex = Backbone.View.extend({
   },
   selectPoll: function(event) {
     event.preventDefault();
-    event.stopPropagation();
     var pollId = $(event.currentTarget).attr("data-poll-id");
-    var poll = this.collection.getOrFetch(pollId);
-    var view = new PollrBear.Views.PollShow({
-      model: poll
-    });
-    this.$("#poll").html(view.render().$el);
+    Backbone.history.navigate("/polls/" + pollId, { trigger: true });
   }
 });

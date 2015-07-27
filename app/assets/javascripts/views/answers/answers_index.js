@@ -4,9 +4,7 @@ PollrBear.Views.AnswersIndex = Backbone.View.extend({
     "click .show-answer": "renderAnswer"
   },
   initialize: function() {
-    this.collection = this.model.answers();
-    this.listenTo(this.collection, 'sync', this.render);
-    this.collection.fetch();
+    this.trigger('sync');
   },
   render: function() {
     var content = this.template({

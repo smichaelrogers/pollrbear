@@ -1,21 +1,12 @@
 PollrBear.Views.UsersIndex = Backbone.View.extend({
-  template: JST['users/index'],
-  initialize: function() {
-    this.model = PollrBear.currentUser;
-    this.listenTo(this.model, 'sync', this.render);
-  },
+  template: JST["users/index"],
+  
   render: function() {
     var content = this.template({
       user: this.model
     });
     this.$el.html(content);
-    this.renderUser();
+    Backbone.history.navigate("/users/" + this.model.id, {trigger: true});
     return this;
-  },
-  renderUser:function() {
-    var view = new PollrBear.Views.UserShow({
-      model: this.model
-    });
-    this.$("#user").html(view.render().$el);
   }
 });

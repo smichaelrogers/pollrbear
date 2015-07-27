@@ -1,18 +1,15 @@
-PollrBear.Views.QuestionShow = Backbone.View.extend({
+PollrBear.Views.QuestionShow = Backbone.CompositeView.extend({
   template: JST['questions/show'],
-
-  initialize: function(options) {
-    window.setTimeout(function() {
-      this.listenTo(this.model, 'sync', this.render);
-      this.renderAnswers();
-    }.bind(this), 1000);
+  initialize: function() {
+    this.trigger('sync');
+    this.collection = this.model.answers();
   },
-
   render: function() {
     var content = this.template({
       question: this.model
     });
     this.$el.html(content);
+    this.renderAnswers();
     return this;
   },
 
@@ -25,9 +22,9 @@ PollrBear.Views.QuestionShow = Backbone.View.extend({
 
   renderAnswers: function() {
     var view = new PollrBear.Views.AnswersIndex({
-      model: this.model
+      collection: this.collection
     });
-    $("#answers").html(view.render().$el);
+    this.addSubview("#answers", view);
   },
 
   percentages: function() {

@@ -12,5 +12,8 @@
 
 class Response < ActiveRecord::Base
   belongs_to :answer
-  belongs_to :user
+  belongs_to :respondent,
+    class_name: "User",
+    foreign_key: :user_id,
+    primary_key: :id
 end

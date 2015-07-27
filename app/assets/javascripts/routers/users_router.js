@@ -10,13 +10,18 @@ PollrBear.Routers.Users = Backbone.Router.extend({
     "": "index",
     "users/new": "new",
     "users/:id": "show",
-    "session/new": "signIn"
+    "session/new": "signIn",
+    "polls/:id": "showPoll",
+    "questions/:id": "showQuestion",
+    "answer/:id": "showAnswer",
+    "response/:id": "showResponse"
   },
 
   index: function(){
     var callback = this.index.bind(this);
     if (!this._requireSignedIn(callback)) { return; }
     var indexView = new PollrBear.Views.UsersIndex({
+      model: PollrBear.currentUser,
       collection: this.collection
     });
     this._swapView(indexView);
@@ -36,14 +41,47 @@ PollrBear.Routers.Users = Backbone.Router.extend({
   show: function(id){
     var callback = this.show.bind(this, id);
     if (!this._requireSignedIn(callback)) { return; }
-
     var model = this.collection.getOrFetch(id);
+    var polls = model.polls();
+    polls.fetch();
     var showView = new PollrBear.Views.UserShow({
-      model: model
+      model: model,
+      collection: polls
     });
     this._swapView(showView);
   },
-
+  showPoll: function(id){
+    var poll = PollrBear.currentUser.polls().getOrFetch(id);
+    var questions = poll.questions();
+    var view = new PollrBear.Views.PollShow({
+      model: poll,
+      collection: questions
+    });
+    this._swapView(view);
+  },
+  showQuestion: function(id){
+    var question = PollrBear.currentUser.questions().getOrFetch(id);
+    var answers = question.answers();
+    var view = new PollrBear.Views.QuestionShow({
+      model: question,
+      collection: answers
+    });
+    this._swapView(view);
+  },
+  showAnswer: function(id){
+    var answer = PollrBear.currentUser.answers().getOrFetch(id);
+    var view = new PollrBear.Views.AnswerShow({
+      model: answer
+    });
+    this._swapView(view);
+  },
+  showResponse: function(id){
+    var response = this.model.responses().getOrFetch(id);
+    var view = new PollrBear.Views.ResponseShow({
+      model: response
+    });
+    this._swapView(view);
+  },
   signIn: function(callback){
     if (!this._requireSignedOut(callback)) { return; }
 

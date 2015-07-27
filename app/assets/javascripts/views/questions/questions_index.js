@@ -4,62 +4,52 @@ PollrBear.Views.QuestionsIndex = Backbone.CompositeView.extend({
     "click .next-question": "paginateNext",
     "click .back-question": "paginateBack"
   },
-
   initialize: function() {
-    this.collection = this.model.questions();
-    var pollId = this.collection.poll.id;
-    this.collection.fetch({
-      remove: false,
-      data: { page: 1,
-      poll_id:  pollId},
-      success:function() {}
-    });
-    window.setTimeout(function() {
-      this.listenTo(this.collection, 'sync', this.render);
-      this.renderQuestions();
-    }.bind(this), 1000);
+    this.page = 1;
   },
-
   render: function() {
-    var content = this.template();
+    var poll = PollrBear.currentUser.polls().getOrFetch(this.model.id)
+    var content = this.template({
+      poll: poll
+    });
     this.$el.html(content);
+    this.collectPage(this.page);
     return this;
   },
 
-  renderQuestions: function() {
-    this.collection.forEach(function(question) {
-      var view = new PollrBear.Views.QuestionShow({
-        model: question
-      });
-      this.addSubview("#questions-idx", view);
-    }.bind(this));
+  collectPage: function(page) {
+    var pollId = this.model.id;
+    var that = this;
+    this.collection.fetch({
+      remove: false,
+      data: {
+        page: page,
+        poll_id: pollId
+      },
+      success: function(response) {
+        that.collection.add(response.models);
+        response.models.forEach(function(question) {
+          var view = new PollrBear.Views.QuestionShow({
+            model: question,
+            collection: response.poll.questions()
+          });
+          $("#questions-idx").append(view.render().$el);
+        });
+      }
+    });
   },
 
   paginateNext: function(event) {
     event.preventDefault();
-    var pollId = this.model.id
-    this.collection.fetch({
-      remove: false,
-      data: {
-        page: this.page + 1
-      },
-      success: function() {
-        this.page++;
-      }
-    });
+    this.page++;
+    this.render();
   },
 
   paginateBack: function(event) {
     event.preventDefault();
-    var pollId = this.model.id
-    this.collection.fetch({
-      remove: false,
-      data: {
-        page: this.page - 1
-      },
-      success: function() {
-        this.page--;
-      }
-    });
+    if(this.page > 1) {
+      this.page--;
+      this.render();
+    }
   }
 });

@@ -1,6 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Comfortaa:400,300,700|Open+Sans+Condensed:300,300italic|Montserrat|Raleway|Open+Sans:300italic,400,300);
 $font-body: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-heading: "Comfortaa","Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Comfortaa:400,300,700|Open+Sans+Condensed:300,300italic|Montserrat|Raleway|Open+Sans:300italic,400,300);
 body,
 html {
   font-family: $font-body;
@@ -8,7 +8,7 @@ html {
 }
 
 body{
-  padding-top: 100px;
+  padding-top: 300px;
 }
 .collapsed {
   display: none !important;

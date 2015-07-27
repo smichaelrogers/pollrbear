@@ -1,8 +1,5 @@
-PollrBear.Views.PollShow = Backbone.View.extend({
+PollrBear.Views.PollShow = Backbone.CompositeView.extend({
   template: JST['polls/show'],
-  initialize: function() {
-    this.listenTo(this.model, 'sync', this.render);
-  },
   render: function() {
     var content = this.template({
       poll: this.model
@@ -13,8 +10,9 @@ PollrBear.Views.PollShow = Backbone.View.extend({
   },
   renderQuestions: function() {
     var view = new PollrBear.Views.QuestionsIndex({
+      collection: this.collection,
       model: this.model
     });
-    this.$el.html(view.render().$el);
+    this.addSubview("#questions", view);
   }
 });

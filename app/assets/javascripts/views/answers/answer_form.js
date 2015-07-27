@@ -51,6 +51,24 @@ PollrBear.Views.AnswerForm = Backbone.View.extend({
       }
     });
   },
+  submitAnswerNewQuestion: function(event) {
+    event.preventDefault();
+    var answerFormData = [];
+    this.$('option').each(function(index, value) {
+      var str = value.value;
+      answerFormData.push(str);
+    });
+    this.questionFormData.answers = answerFormData;
+    this.pollFormData.questions.push(this.questionFormData);
+    var updatedData = this.pollFormData;
+    $("#poll-form-questions, #poll-form-answers").html("");
+    $("#poll-form-questions").removeClass("collapsed");
+    var view = new PollrBear.Views.QuestionForm({
+      pollFormData: updatedData
+    });
+    console.log(this.pollFormData);
+    $("#poll-form-questions").html(view.render().$el);
+  },
 
   maybeCreate: function(event) {
     if (event.keyCode === 13) {

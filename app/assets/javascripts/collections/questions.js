@@ -21,10 +21,16 @@ PollrBear.Collections.Questions = Backbone.Collection.extend({
     return question;
   },
   parse: function(response) {
+    var resp = {};
     this.page = response.page;
-    if(response.poll) {
-      this.poll.set(response.poll);
-    }
-    return response.models;
+    this.total_pages = response.total_pages;
+    resp.models = [];
+    resp.parent = PollrBear.currentUser.polls().getOrFetch(response.parent.id);
+    var q;
+    response.models.forEach(function(question) {
+      q = this.getOrFetch(question.id);
+      resp.models.push(q);
+    }.bind(this));
+    return resp;
   }
 });

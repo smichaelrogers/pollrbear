@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   has_many :polls
   has_many :questions, through: :polls, source: :questions
   has_many :answers, through: :questions, source: :answers
+  has_many :responses, through: :answers, source: :responses
+  has_many :respondents, through: :responses, source: :respondent
 
   attr_reader :password
   after_initialize :ensure_session_token

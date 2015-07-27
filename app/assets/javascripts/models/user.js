@@ -6,7 +6,37 @@ PollrBear.Models.User = Backbone.Model.extend({
     }
     return this._polls;
   },
+  questions: function() {
+    if (!this._questions) {
+      this._questions = new PollrBear.Collections.Questions([], { user: this });
+    }
+    return this._questions;
+  },
+  answers: function() {
+    if (!this._answers) {
+      this._answers = new PollrBear.Collections.Answers([], { user: this });
+    }
+    return this._polls;
+  },
+  responses: function() {
+    if (!this._responses) {
+      this._responses = new PollrBear.Collections.Responses([], { user: this });
+    }
+    return this._responses;
+  },
   parse: function(response) {
+    if(response.responses) {
+      this.responses().set(response.responses, { parse: true});
+      delete response.responses;
+    };
+    if(response.answers) {
+      this.answers().set(response.answers, { parse: true });
+      delete response.answers;
+    };
+    if(response.questions) {
+      this.questions().set(response.questions, { parse: true });
+      delete response.questions;
+    };
     if(response.polls) {
       this.polls().set(response.polls, { parse: true });
       delete response.polls;
