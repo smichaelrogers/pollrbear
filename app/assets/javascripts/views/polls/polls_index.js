@@ -1,7 +1,7 @@
 PollrBear.Views.PollsIndex = Backbone.View.extend({
   template: JST['polls/index'],
   initialize: function() {
-    this.listenTo(this.collection, 'sync', this.render);
+    this.listenToOnce(this.collection, 'sync', this.render);
   },
   events: {
     "click .select-poll": "selectPoll"
@@ -15,6 +15,7 @@ PollrBear.Views.PollsIndex = Backbone.View.extend({
   },
   selectPoll: function(event) {
     event.preventDefault();
+    event.stopPropagation();
     var pollId = $(event.currentTarget).attr("data-poll-id");
     var poll = this.collection.getOrFetch(pollId);
     var view = new PollrBear.Views.PollShow({

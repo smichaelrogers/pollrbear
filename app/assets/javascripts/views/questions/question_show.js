@@ -2,9 +2,10 @@ PollrBear.Views.QuestionShow = Backbone.View.extend({
   template: JST['questions/show'],
 
   initialize: function(options) {
-    this.collection = this.model.answers();
-    this.listenTo(this.model, 'sync', this.render);
-    this.collection.fetch();
+    window.setTimeout(function() {
+      this.listenTo(this.model, 'sync', this.render);
+      this.renderAnswers();
+    }.bind(this), 1000);
   },
 
   render: function() {
@@ -12,7 +13,6 @@ PollrBear.Views.QuestionShow = Backbone.View.extend({
       question: this.model
     });
     this.$el.html(content);
-    this.renderAnswers();
     return this;
   },
 
@@ -25,7 +25,7 @@ PollrBear.Views.QuestionShow = Backbone.View.extend({
 
   renderAnswers: function() {
     var view = new PollrBear.Views.AnswersIndex({
-      collection: this.collection
+      model: this.model
     });
     $("#answers").html(view.render().$el);
   },

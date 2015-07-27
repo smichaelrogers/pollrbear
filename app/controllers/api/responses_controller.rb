@@ -2,7 +2,7 @@ module Api
   class ResponsesController < ApiController
     def index
       @responses = current_answer.responses
-      render :index
+      render json: @responses
     end
 
     def create
@@ -36,7 +36,7 @@ module Api
     end
 
     def show
-      @response = Response.find(params[:id])
+      @response = Response.includes(:user).find(params[:id])
       render :show
     end
 

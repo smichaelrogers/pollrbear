@@ -8,8 +8,7 @@ PollrBear.Models.Question = Backbone.Model.extend({
   },
   parse: function(response) {
     if(response.answers) {
-      this.answers().set(response.answers, { parse: true });
-      delete response.answers;
+      this.answers().set(response.answers);
     }
     return response;
   }

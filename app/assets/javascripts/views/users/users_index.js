@@ -2,8 +2,7 @@ PollrBear.Views.UsersIndex = Backbone.View.extend({
   template: JST['users/index'],
   initialize: function() {
     this.model = PollrBear.currentUser;
-    this.model.fetch();
-    this.listenTo(this.model, 'change', this.renderUser);
+    this.listenTo(this.model, 'sync', this.render);
   },
   render: function() {
     var content = this.template({

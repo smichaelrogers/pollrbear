@@ -4,12 +4,14 @@ PollrBear.Collections.Questions = Backbone.Collection.extend({
   initialize: function(models, options) {
     this.poll = options.poll;
   },
-  getOrFetch: function (id) {
+  getOrFetch: function(id) {
     var question = this.get(id);
     if (!question) {
-      question = new PollrBear.Models.Question({ id: id });
+      question = new PollrBear.Models.Question({
+        id: id
+      });
       question.fetch({
-        success: function () {
+        success: function() {
           this.add(question);
         }.bind(this)
       });
@@ -17,5 +19,12 @@ PollrBear.Collections.Questions = Backbone.Collection.extend({
       question.fetch();
     }
     return question;
+  },
+  parse: function(response) {
+    this.page = response.page;
+    if(response.poll) {
+      this.poll.set(response.poll);
+    }
+    return response.models;
   }
 });

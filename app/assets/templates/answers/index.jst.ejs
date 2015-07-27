@@ -1,11 +1,12 @@
-<form data-poll-id="<%= question.poll_id %>">
-  <% question.answers().forEach(function(answer) { %>
-    <div class="radio-inline">
-      <label>
-        <input type="radio" name="response[answer_id]" value="<%= answer.id %>">
-        <%= answer.escape('text') %>
-      </label>
-      <a href="#" class="show-answer" data-answer-id="<%= answer.id %>">Show</a>
-    </div>
+
+  <form>
+    <% answers.forEach(function(answer) { %>
+      <div class="radio-inline">
+        <label>
+          <input type="radio" name="response[answer_id]" value="<%= answer.id %>">
+          <%= answer.escape('text') %>
+        </label>
+        <a href="#" class="show-answer" data-answer-id="<%= answer.id %>">Show</a>
+      </div>
     <% }); %>
-</form>
+  </form>

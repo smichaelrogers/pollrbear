@@ -3,7 +3,6 @@ PollrBear.Views.UserShow = Backbone.View.extend({
   initialize: function() {
     this.collection = this.model.polls();
     this.collection.fetch();
-    this.listenTo(this.collection, 'change', this.showUserPolls)
   },
 
   render: function() {

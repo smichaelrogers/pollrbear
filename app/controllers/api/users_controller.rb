@@ -1,11 +1,11 @@
 class Api::UsersController < ApplicationController
   def index
     @users = User.all
-    render :index
+    render json: @users
   end
 
   def show
-    @user = User.includes(polls: :questions).find(params[:id])
+    @user = User.includes(polls: [questions: [answers: [responses: :user]]]).find(params[:id])
     render :show
   end
 

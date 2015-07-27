@@ -2,7 +2,7 @@ module Api
   class PollsController < ApiController
     def index
       @polls = current_user.polls
-      render :index
+      render json: @polls
     end
 
     def create
@@ -29,14 +29,14 @@ module Api
     end
 
     def show
-      @poll = Poll.includes(questions: [answers: :responses]).find(params[:id])
+      @poll = Poll.includes(questions: [answers: [responses: :user]]).find(params[:id])
       render :show
     end
 
     private
 
     def poll_params
-      params.require(:poll).permit(:user_id, :title, :text, :privacy, :duration, :questions, :answers, :question, :chart, :format)
+      params.require(:poll).permit(:user_id, :title, :text, :privacy, :duration)
     end
   end
 end

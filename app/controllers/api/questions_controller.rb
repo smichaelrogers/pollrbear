@@ -10,12 +10,15 @@ module Api
     end
 
     def index
-      @questions = current_poll.questions
-      render :index
+      @questions = current_poll.questions.page(params[:page])
+      render json: {
+        models: @questions,
+        page: params[:page]
+      }
     end
 
     def show
-      @question = Question.includes(answers: :responses).find(params[:id])
+      @question = Question.includes(answers: [responses: :user]).find(params[:id])
       render :show
     end
 
@@ -32,11 +35,14 @@ module Api
         @poll = @question.poll
       elsif params[:question]
         @poll = Poll.find(params[:question][:poll_id])
+      else
+        @poll = Poll.find(params[:poll_id])
       end
+      @poll
     end
 
     def question_params
-      params.require(:question).permit(:poll_id, :text, :chart, :format)
+      params.require(:question).permit(:poll_id, :text, :chart, :format, :questions)
     end
   end
 end

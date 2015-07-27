@@ -12,7 +12,5 @@ Rails.application.routes.draw do
   root to: 'pages#root'
 
   get '/api/responses/sms/:id', to: 'api/responses#sms'
-  get '/api/polls/info/:id', to: 'api/polls#info'
-  get '/api/polls/reports/:id', to: 'api/polls#report'
   get '/auth/:provider/callback', to: 'api/sessions#omniauth'
 end

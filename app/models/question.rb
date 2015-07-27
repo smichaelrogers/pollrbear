@@ -14,7 +14,6 @@
 class Question < ActiveRecord::Base
   validates  :text, :chart, presence: true
   has_many :answers, dependent: :destroy
-  has_many :responses, through: :answers, source: :responses
-  has_many :users, through: :responses, source: :user
   belongs_to :poll
+  paginates_per 5
 end
