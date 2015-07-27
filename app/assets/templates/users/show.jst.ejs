@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-lg-4">
-    <section id="user-info">
+    <div id="user-info">
       <img src="<%= user.get('profile_img') %>">
       <h4>
         <%= user.fullName() %>
@@ -8,12 +8,13 @@
       <h5>
         <%= user.escape('email') %>
       </h5>
-    </section>
-    <section id="new-poll">
-    </section>
+    </div>
+    <div id="new-poll">
+    </div>
+    <div id="question-preview"></div>
   </div>
   <div class="col-xs-12 col-lg-8">
-    <section id="polls">
-    </section>
+    <div id="polls">
+    </div>
   </div>
 </div>

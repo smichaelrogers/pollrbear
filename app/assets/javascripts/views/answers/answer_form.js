@@ -7,10 +7,9 @@ PollrBear.Views.AnswerForm = Backbone.View.extend({
     'click .submit-answer-new-question': 'submitAnswerNewQuestion',
     'keydown input': 'maybeCreate'
   },
-
   initialize: function(options) {
-    this.render();
-    this.listenTo(this.model, 'sync', this.render());
+    this.pollFormData = options.pollFormData;
+    this.questionFormData = options.questionFormData;
   },
   render: function() {
     var content = this.template();
@@ -26,29 +25,30 @@ PollrBear.Views.AnswerForm = Backbone.View.extend({
     this.$("select option:selected").each(function() {
       this.remove();
     });
-    this.render();
   },
   submitAnswerData: function(event) {
     event.preventDefault();
-    var that = this;
-    var answers = this.collection;
-    var question_id = this.model.id;
+    var answerFormData = [];
     this.$('option').each(function(index, value) {
       var str = value.value;
-      answers.create({
-        text: str,
-        question_id: question_id
-      });
+      answerFormData.push(str);
     });
-
-  },
-  submitAnswerNewQuestion: function(event) {
-    event.preventDefault();
-    this.submitAnswerData(event);
-    var question = this.model;
-    $("#poll-form-answers").addClass("collapsed");
-    $(document).ajaxComplete(function() {
-      $("#poll-form-questions").val("").removeClass("collapsed");
+    this.questionFormData.answers = answerFormData;
+    this.pollFormData.questions.push(this.questionFormData);
+    var fullData = this.pollFormData;
+    $.ajax({
+      url: "/api/polls",
+      type: "POST",
+      data: fullData,
+      dataType: "json",
+      success: function(payload) {
+        $("#poll-form-questions, #poll-form-answers").html("");
+        $("#poll-form-poll").removeClass("collapsed");
+        $("#poll-form-poll").val("");
+      },
+      error: function(payload) {
+        alert("invalid one thing or another");
+      }
     });
   },
 

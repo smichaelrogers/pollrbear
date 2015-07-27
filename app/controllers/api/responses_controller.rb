@@ -55,6 +55,7 @@ module Api
       elsif params[:response]
         @answer = Answer.find(params[:response][:answer_id])
       end
+      @answer
     end
 
     def current_question
@@ -63,10 +64,6 @@ module Api
 
     def current_poll
       current_question.poll
-    end
-
-    def current_user
-      current_poll.user
     end
 
     def respondent

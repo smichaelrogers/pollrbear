@@ -30,7 +30,7 @@ module Api
     end
 
     def destroy
-      @answer = answer.find(params[:id])
+      @answer = Answer.find(params[:id])
       @answer.destroy
       render json: { message: 'destroyed' }
     end
@@ -48,10 +48,6 @@ module Api
 
     def current_poll
       current_question.poll
-    end
-
-    def current_user
-      current_poll.user
     end
 
     def answer_params

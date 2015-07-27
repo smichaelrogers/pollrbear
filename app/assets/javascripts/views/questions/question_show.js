@@ -2,7 +2,9 @@ PollrBear.Views.QuestionShow = Backbone.View.extend({
   template: JST['questions/show'],
 
   initialize: function(options) {
+    this.collection = this.model.answers();
     this.listenTo(this.model, 'sync', this.render);
+    this.collection.fetch();
   },
 
   render: function() {
@@ -16,14 +18,14 @@ PollrBear.Views.QuestionShow = Backbone.View.extend({
 
   renderChart: function() {
     var view = new PollrBear.Views.ChartShow({
-      model: this.model
+      collection: this.collection
     });
     $("#chart").html(view.render().$el);
   },
 
   renderAnswers: function() {
     var view = new PollrBear.Views.AnswersIndex({
-      model: this.model
+      collection: this.collection
     });
     $("#answers").html(view.render().$el);
   },

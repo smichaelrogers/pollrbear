@@ -33,14 +33,14 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   end
 
   add_index "invites", ["poll_id"], name: "index_invites_on_poll_id", using: :btree
-  add_index "invites", ["user_id"], name: "index_invites_on_user_id", using: :btree
+  add_index "invites", ["user_id"], name: "index_invites_on_user_id", unique: true, using: :btree
 
   create_table "polls", force: :cascade do |t|
     t.integer  "user_id",                    null: false
     t.string   "title",                      null: false
     t.string   "text"
     t.integer  "privacy",    default: 1,     null: false
-    t.integer  "duration",   default: 86400
+    t.integer  "duration",   default: 86400, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   create_table "responses", force: :cascade do |t|
     t.integer  "answer_id",  null: false
     t.integer  "user_id",    null: false
-    t.string   "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

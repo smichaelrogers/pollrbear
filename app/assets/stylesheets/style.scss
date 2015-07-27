@@ -6,6 +6,10 @@ html {
   font-family: $font-body;
   background: #eee;
 }
+
+body{
+  padding-top: 100px;
+}
 .collapsed {
   display: none !important;
 }

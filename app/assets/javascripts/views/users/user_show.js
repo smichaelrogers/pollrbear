@@ -3,7 +3,7 @@ PollrBear.Views.UserShow = Backbone.View.extend({
   initialize: function() {
     this.collection = this.model.polls();
     this.collection.fetch();
-    this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.collection, 'change', this.showUserPolls)
   },
 
   render: function() {
@@ -20,13 +20,13 @@ PollrBear.Views.UserShow = Backbone.View.extend({
     var view = new PollrBear.Views.PollsIndex({
       collection: this.collection
     });
-    $("#polls").html(view.render().$el);
+    this.$("#polls").html(view.render().$el);
   },
 
   showPollForm: function() {
     var view = new PollrBear.Views.PollForm({
       collection: this.collection
     });
-    $("#new-poll").html(view.render().$el);
+    this.$("#new-poll").html(view.render().$el);
   }
 });

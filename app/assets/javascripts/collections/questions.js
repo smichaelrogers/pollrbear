@@ -17,10 +17,5 @@ PollrBear.Collections.Questions = Backbone.Collection.extend({
       question.fetch();
     }
     return question;
-  },
-  parse: function(response) {
-    this.page = response.page;
-    this.total_pages = response.total_pages;
-    return response.models;
   }
 });

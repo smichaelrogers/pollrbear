@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <h4 id="poll-title">New Poll</h4>
+    <h4><i class="fa fa-input"></i> <span id="poll-title">New Poll</span></h4>
   </div>
 </div>
 
@@ -13,7 +13,7 @@
     <form class="new-poll-form">
       <div class="form-group">
         <label>Title</label>
-        <input name="poll[title]" type="text" class="form-control" placeholder="Title">
+        <input id="poll-input-title" name="poll[title]" type="text" class="form-control" placeholder="Title">
       </div>
       <div class="form-group">
         <label>Description</label>
@@ -27,10 +27,6 @@
         <label class="radio-inline">
           <input name="poll[privacy]" type="radio" value="2"> Private
         </label>
-      </div>
-      <div class="form-group">
-        <label>Who would you like to invite?</label>
-        <textarea name="invite[email]" class="form-control" rows="3" placeholder="invite1@email.com, invite2@email.com, etc."></textarea>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary submit-poll-data">Next</button>

@@ -5,18 +5,13 @@ PollrBear.Views.QuestionsIndex = Backbone.View.extend({
     "click .back-question": "paginateBack"
   },
   initialize: function() {
-    this.page = 0;
-    this.collection = this.model.questions();
     this.listenTo(this.collection, 'sync', this.render);
-    this.collection.fetch({
-      remove: false,
-      data: {"page": 0},
-      success: function() {}
-    });
   },
 
   render: function() {
-    var content = this.template();
+    var content = this.template({
+      questions: this.collection
+    });
     this.$el.html(content);
     this.renderQuestions();
     return this;
@@ -24,9 +19,12 @@ PollrBear.Views.QuestionsIndex = Backbone.View.extend({
 
   paginateNext: function(event) {
     event.preventDefault();
+    var pollId = this.model.id
     this.collection.fetch({
       remove: false,
-      data: { "page": this.page + 1 },
+      data: {
+        page: this.page + 1
+      },
       success: function() {
         this.page++;
       }
@@ -35,9 +33,12 @@ PollrBear.Views.QuestionsIndex = Backbone.View.extend({
 
   paginateBack: function(event) {
     event.preventDefault();
+    var pollId = this.model.id
     this.collection.fetch({
       remove: false,
-      data: {"page": this.page - 1},
+      data: {
+        page: this.page - 1
+      },
       success: function() {
         this.page--;
       }
@@ -48,9 +49,9 @@ PollrBear.Views.QuestionsIndex = Backbone.View.extend({
     $("#questions-idx").html("");
     this.collection.forEach(function(question) {
       var view = new PollrBear.Views.QuestionShow({
-        question: this.collection.at(0)
+        model: question
       });
       $("#questions-idx").append(view.render().$el);
-    }.bind(this));
+    });
   }
 });

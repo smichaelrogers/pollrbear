@@ -1,7 +1,8 @@
 PollrBear.Views.PollForm = Backbone.View.extend({
   template: JST['polls/form'],
   events: {
-    'click .submit-poll-data': 'submitPollData'
+    'click .submit-poll-data': 'submitPollData',
+    'input #poll-input-title': 'updateTitle'
   },
   render: function() {
     var content = this.template();
@@ -9,18 +10,20 @@ PollrBear.Views.PollForm = Backbone.View.extend({
     return this;
   },
 
+  updateTitle: function(event) {
+    $("#poll-title").text($("#poll-input-title").val());
+  },
+
   submitPollData: function(event) {
     event.preventDefault();
-    var formData = this.$('.new-poll-form').serializeJSON();
-    var poll = this.collection.create(formData);
-    $("#poll-form-poll").addClass("collapsed");
+    var pollFormData = this.$('.new-poll-form').serializeJSON();
+    pollFormData.questions = [];
 
-    $(document).ajaxComplete(function() {
-      var view = new PollrBear.Views.QuestionForm({
-        collection: PollrBear.currentUser.questions(),
-        model: poll
-      });
-      $("#poll-form-questions").html(view.render().$el);
+    $("#poll-form-poll").addClass("collapsed");
+    var view = new PollrBear.Views.QuestionForm({
+      pollFormData: pollFormData
     });
+    console.log(pollFormData);
+    $("#poll-form-questions").html(view.render().$el);
   }
 });

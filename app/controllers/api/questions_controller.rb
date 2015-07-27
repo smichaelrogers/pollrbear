@@ -2,7 +2,6 @@ module Api
   class QuestionsController < ApiController
     def create
       @question = current_poll.questions.new(question_params)
-
       if @question.save
         render json: @question
       else
@@ -12,20 +11,16 @@ module Api
 
     def index
       @questions = current_poll.questions
-      render json: {
-        models: @questions,
-        page: params[:page],
-        total_pages: @questions.total_pages
-      }
+      render :index
     end
 
     def show
-      @question = Question.includes(:answers).find(params[:id])
+      @question = Question.includes(answers: :responses).find(params[:id])
       render :show
     end
 
     def destroy
-      @question = question.find(params[:id])
+      @question = Question.find(params[:id])
       @question.destroy
       render json: { message: 'destroyed' }
     end
@@ -38,10 +33,6 @@ module Api
       elsif params[:question]
         @poll = Poll.find(params[:question][:poll_id])
       end
-    end
-
-    def current_user
-      current_poll.user
     end
 
     def question_params
