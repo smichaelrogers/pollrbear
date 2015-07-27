@@ -1,2 +1,7 @@
 <div id="user">
 </div>
+<h4><%= user.fullName() %></h4>
+<h5><%= user.escape('email') %></h5>
+<% users.forEach(function(el) { %>
+  <p><%= el.fullName() %></p>
+<% }); %>

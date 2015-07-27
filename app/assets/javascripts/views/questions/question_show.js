@@ -1,7 +1,6 @@
 PollrBear.Views.QuestionShow = Backbone.CompositeView.extend({
   template: JST['questions/show'],
   initialize: function() {
-    this.trigger('sync');
     this.collection = this.model.answers();
   },
   render: function() {

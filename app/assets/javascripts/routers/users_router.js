@@ -40,13 +40,10 @@ PollrBear.Routers.Users = Backbone.Router.extend({
 
   show: function(id){
     var callback = this.show.bind(this, id);
-    if (!this._requireSignedIn(callback)) { return; }
-    var model = this.collection.getOrFetch(id);
-    var polls = model.polls();
-    polls.fetch();
+    if (!this._requireSignedIn(callback)) { return; };
+    var user = this.collection.getOrFetch(id);
     var showView = new PollrBear.Views.UserShow({
-      model: model,
-      collection: polls
+      model: user
     });
     this._swapView(showView);
   },

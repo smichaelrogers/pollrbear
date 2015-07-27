@@ -5,13 +5,13 @@ PollrBear.Views.QuestionsIndex = Backbone.CompositeView.extend({
     "click .back-question": "paginateBack"
   },
   initialize: function() {
+    this.collection = this.model.questions();
+    this.questionSv = [];
+    this.trigger('add');
     this.page = 1;
   },
   render: function() {
-    var poll = PollrBear.currentUser.polls().getOrFetch(this.model.id)
-    var content = this.template({
-      poll: poll
-    });
+    var content = this.template();
     this.$el.html(content);
     this.collectPage(this.page);
     return this;
@@ -19,7 +19,9 @@ PollrBear.Views.QuestionsIndex = Backbone.CompositeView.extend({
 
   collectPage: function(page) {
     var pollId = this.model.id;
+    var svs = [];
     var that = this;
+    $("#questions-idx").html("");
     this.collection.fetch({
       remove: false,
       data: {
@@ -33,10 +35,15 @@ PollrBear.Views.QuestionsIndex = Backbone.CompositeView.extend({
             model: question,
             collection: response.poll.questions()
           });
-          $("#questions-idx").append(view.render().$el);
+          svs.push(view);
         });
       }
     });
+    window.setTimeout(function() {
+      svs.forEach(function(subview) {
+        this.addSubview("#questions-idx", subview);
+      }.bind(this));
+    }.bind(this), 100);
   },
 
   paginateNext: function(event) {
