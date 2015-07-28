@@ -1,5 +1,27 @@
-<h3>polltitle<%= poll.escape("title") %></h3>
-  <h5><%= poll.escape('text') %></h5>
-
-<div id="questions">
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h4>
+      <%= poll.escape("title") %>
+    </h4>
+  </div>
+  <div class="panel-body panel-hidden" id="panel-chart">
+    <div class="row">
+      <div class="col-xs-6">
+        <div id="canvas-holder">
+          <canvas class="chart-area-hidden" id="chart-area" />
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div id="show-question">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <h5>
+      <%= poll.escape('text') %>
+    </h5>
+  </div>
+  <ul class="list-group" id="questions">
+  </ul>
 </div>

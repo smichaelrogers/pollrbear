@@ -10,7 +10,8 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
   },
   renderQuestions: function() {
     var view = new PollrBear.Views.QuestionsIndex({
-      model: this.model
+      model: this.model,
+      collection: this.model.questions()
     });
     this.addSubview("#questions", view);
   }

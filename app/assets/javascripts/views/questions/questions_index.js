@@ -1,61 +1,28 @@
 PollrBear.Views.QuestionsIndex = Backbone.CompositeView.extend({
   template: JST['questions/index'],
   events: {
-    "click .next-question": "paginateNext",
-    "click .back-question": "paginateBack"
+    "click .select-question": "selectQuestion"
   },
   initialize: function() {
-    this.collection = this.model.questions();
-    this.total_pages = this.collection.totalPages();
     this.trigger('add');
-    this.page = 1;
   },
   render: function() {
     var content = this.template({
-      questions: this.collection,
-      pages: this.model.questions().totalPages()
+      questions: this.collection
     });
     this.$el.html(content);
-    this.collectPage();
     return this;
   },
-
-  collectPage: function() {
-    var pollId = this.model.id;
-    var that = this;
-    $("#questions-idx").html("");
-    this.collection.fetch({
-      remove: false,
-      data: {
-        page: that.page,
-        poll_id: pollId
-      },
-      success: function(resp) {
-        that.render();
-        debugger
-        return resp;
-      }
+  selectQuestion: function(event) {
+    event.preventDefault();
+    var questionId = $(event.currentTarget).attr("data-question-id");
+    var question = this.collection.get(questionId);
+    var view = new PollrBear.Views.QuestionShow({
+      model: question
     });
-  },
-
-  selectPage: function(event) {
-    event.preventDefault();
-    var pageNum = $(event.currentTarget).attr("data-target-page");
-    this.page = pageNum;
-    this.collectPage();
-  },
-
-  paginateNext: function(event) {
-    event.preventDefault();
-    this.page++;
-    this.collectPage();
-  },
-
-  paginateBack: function(event) {
-    event.preventDefault();
-    if(this.page > 1) {
-      this.page--;
-      this.collectPage();
-    }
+    $("#questions").addClass("questions-collapsed");
+    $("#panel-chart").removeClass("panel-hidden");
+    $("#chart-area").removeClass("chart-area-hidden").addClass("chart-area-expanded");
+    $("#show-question").html(view.render().$el);
   }
 });

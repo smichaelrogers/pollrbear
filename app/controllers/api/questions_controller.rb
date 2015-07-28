@@ -12,13 +12,8 @@ module Api
     def index
       @poll = Poll.find(params[:poll_id])
 
-      @questions = @poll.questions.page(params[:page]).per(3)
-      render json: {
-        models: @questions,
-        parent: @poll,
-        page: params[:page],
-        total_pages: @questions.total_pages
-      }
+      @questions = @poll.questions
+      render json: @questions
     end
 
     def show

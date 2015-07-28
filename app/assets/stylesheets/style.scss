@@ -15,16 +15,47 @@ html {
 
 body {
 }
-
-div {
-  border: 1px dotted #ddd !important;
-}
 input, textarea {
   background: none transparent;
 }
 
 .main-container {
   padding-top: 100px;
+}
+
+.panel-hidden {
+  padding: 0 !important;
+  height: 1px !important;
+}
+
+#panel-chart {
+  padding: 15px;
+}
+
+#chart-area {
+
+}
+
+.question-data {
+  border: 0;
+  li {
+    border: 0;
+  }
+}
+
+.chart-area-hidden {
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+.chart-area-expanded {
+  height: 300px !important;
+  width: 300px !important;
+  overflow: visible !important;
+}
+
+.questions-collapsed {
+  display: none !important;
 }
 
 #nav {

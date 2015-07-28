@@ -2,9 +2,8 @@
   <form>
     <% answers.forEach(function(answer) { %>
       <div class="radio">
-        <label>
+        <label><%= answer.escape('text') %>
           <input type="radio" name="response[answer_id]" value="<%= answer.id %>">
-          <%= answer.escape('text') %>
         </label>
       </div>
     <% }); %>

@@ -1,22 +1,17 @@
-<nav>
-  <ul class="pagination">
-    <li>
-      <a href="#" class="back-question" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <% for(var i = 1; i <= pages; i++) { %>
-    <li>
-      <a href="#" class="select-page" data-target-page="<%= i %>">
-        <%= i %>
-      </a>
-    </li>
-    <% }; %>
-    <li>
-      <a href="#" class="next-question" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-<div id="questions-idx"></div>
+<li class="list-group-item">
+  <% questions.forEach(function(question) { %>
+    <a href="#" class="select-question" data-question-id="<%= question.id %>">
+      <%= question.escape('text') %>
+    </a>
+    <form data-question-id="<%= question.id %>">
+      <% question.attributes.answers.forEach(function(answer) { %>
+        <div class="radio">
+          <label>
+            <input type="radio" name="response[answer_id]" value="<%= answer.id %>">
+            <%= answer.text %>
+          </label>
+        </div>
+        <% }); %>
+    </form>
+    <% }); %>
+</li>

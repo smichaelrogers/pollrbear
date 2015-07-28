@@ -11,17 +11,15 @@ PollrBear.Routers.Users = Backbone.Router.extend({
     "users/new": "new",
     "users/:id": "show",
     "session/new": "signIn",
-    "polls/:id": "showPoll",
-    "questions/:id": "showQuestion",
-    "answer/:id": "showAnswer",
-    "response/:id": "showResponse"
+    "polls/:id": "showPoll"
   },
 
   index: function(){
     var callback = this.index.bind(this);
     if (!this._requireSignedIn(callback)) { return; }
-    var indexView = new PollrBear.Views.UsersIndex({
-      model: PollrBear.currentUser,
+    var user = this.collection.getOrFetch(PollrBear.currentUser.id);
+    var indexView = new PollrBear.Views.UserShow({
+      model: user,
       collection: this.collection
     });
     this._swapView(indexView);

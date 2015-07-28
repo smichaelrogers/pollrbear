@@ -20,7 +20,7 @@ u3 = User.create!(first_name: (Faker::Name.first_name), last_name: (Faker::Name.
     @uid = [1,2]
   end
   10.times do
-    @polls << Poll.create!(user_id: user.id, title: Faker::Lorem.sentence, text: Faker::Lorem.paragraphs, privacy: [1,1,1,2].sample, duration: (3600 * rand(24)))
+    @polls << Poll.create!(user_id: user.id, title: Faker::Lorem.sentence, text: Faker::Lorem.paragraph, privacy: [1,1,1,2].sample, duration: (3600 * rand(24)))
   end
   @polls.each do |poll|
     Invite.create!(poll_id: poll.id, user_id: @uid.sample)

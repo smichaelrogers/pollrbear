@@ -1,10 +1,9 @@
 PollrBear.Views.QuestionChart = Backbone.View.extend({
   template: JST['questions/chart'],
 
-  initialize: function(options) {
-    this.$canvas = options.$canvas;
+  initialize: function() {
     this.chartType = this.model.attributes.chart;
-    this.ctx = this.$canvas.getContext("2d");
+    this.ctx = document.getElementById("chart-area").getContext("2d");
     this.delegateChartRendering();
   },
 
@@ -42,10 +41,10 @@ PollrBear.Views.QuestionChart = Backbone.View.extend({
     var num;
     var len = 0;
     this.collection.forEach(function(answer) {
-      len += answer.responses().length;
+      len += answer.responses.length;
     });
     this.collection.forEach(function(answer) {
-      num = (answer.responses().length / len) * 100
+      num = (answer.responses.length / len) * 100
       data.push(Math.floor(num) + "%");
     });
     return data;
@@ -59,10 +58,10 @@ PollrBear.Views.QuestionChart = Backbone.View.extend({
     var highlights = ["#da7981", "#ffde75", "#59cde8", "#eca650", "#3281b3", "#b5b5b5", "#ffe483"];
     this.collection.forEach(function(answer) {
       answerData = {};
-      answerData['value'] = answer.responses().length;
+      answerData['value'] = answer.responses.length;
       answerData['color'] = colors[i];
       answerData['highlight'] = highlights[i];
-      answerData['label'] = answer.get('text');
+      answerData['label'] = answer.text;
       pieChartData.push(answerData);
       i++;
     });
@@ -73,8 +72,8 @@ PollrBear.Views.QuestionChart = Backbone.View.extend({
     var chartData = [];
     var lbls = [];
     this.collection.forEach(function(answer) {
-      lbls.push(answer.get('text'));
-      chartData.push(answer.responses().length);
+      lbls.push(answer.text);
+      chartData.push(answer.responses.length);
     });
     var barChartData = {
       labels: lbls,
@@ -92,8 +91,8 @@ PollrBear.Views.QuestionChart = Backbone.View.extend({
     var chartData = [];
     var lbls = [];
     this.collection.forEach(function(answer) {
-      lbls.push(answer.get('text'));
-      chartData.push(answer.responses().length);
+      lbls.push(answer.text);
+      chartData.push(answer.responses.length);
     });
     var radarChartData = {
       labels: lbls,
@@ -117,10 +116,10 @@ PollrBear.Views.QuestionChart = Backbone.View.extend({
     var highlights = ["#da7981", "#ffde75", "#59cde8", "#eca650", "#3281b3", "#b5b5b5", "#ffe483"];
     this.collection.forEach(function(answer) {
       answerData = {};
-      answerData['value'] = answer.responses().length;
+      answerData['value'] = answer.responses.length;
       answerData['color'] = colors[i];
       answerData['highlight'] = highlights[i];
-      answerData['label'] = answer.get('text');
+      answerData['label'] = answer.text;
       chartData.push(answerData);
       i++;
     });
@@ -130,8 +129,8 @@ PollrBear.Views.QuestionChart = Backbone.View.extend({
     var chartData = [];
     var lbls = [];
     this.collection.forEach(function(answer) {
-      lbls.push(answer.get('text'));
-      chartData.push(answer.responses().length);
+      lbls.push(answer.text);
+      chartData.push(answer.responses.length);
     });
     var lineChartData = {
       labels: lbls,
