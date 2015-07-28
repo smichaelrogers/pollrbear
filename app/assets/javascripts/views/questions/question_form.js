@@ -14,7 +14,7 @@ PollrBear.Views.QuestionForm = Backbone.View.extend({
   submitQuestionData: function(event) {
     event.preventDefault();
     var questionFormData = this.$('.new-question-form').serializeJSON();
-    $("#poll-form-questions").addClass("collapsed");
+    $("#poll-form-questions").addClass("form-collapsed");
     var view = new PollrBear.Views.AnswerForm({
       pollFormData: this.pollFormData,
       questionFormData: questionFormData

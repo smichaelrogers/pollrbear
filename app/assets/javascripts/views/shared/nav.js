@@ -23,10 +23,6 @@ PollrBear.Views.Nav = Backbone.View.extend({
         Backbone.history.navigate("session/new", { trigger: true });
       }
     });
-  },
-  toggleOptions: function(event) {
-    event.preventDefault();
-    this.$('.toggle-collapsed').toggleClass('toggle-expand');
   }
 
 });

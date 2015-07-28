@@ -19,7 +19,7 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     var view = new PollrBear.Views.PollShow({
       model: poll
     });
-    $(".row-collapsible").addClass("collapsed");
+    $(".row-collapsible").addClass("form-collapsed");
     this.addSubview("#poll", view);
   }
 });

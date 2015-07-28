@@ -1,21 +1,32 @@
-<div class="row">
-  <div id="new-poll" class="col-xs-12 col-md-4 col-lg-3">
-  </div>
-  <div id="polls" class="col-xs-12 col-md-8 col-lg-6">
-  </div>
-  <div class="clearfix visible-md-block"></div>
-  <div id="user-info" class="col-xs-12 col-md-4 col-lg-3">
-    <div class="thumnail">
-      <img class="profile-img img-responsive" src="<%= user.get('profile_img') %>">
+<div class="container main-container">
+  <div class="row">
+    <div class="col-xs-12 col-md-4 col-lg-3">
+      <div class="row">
+        <div class="col-xs-12" id="trending">
+          <h3>Trending</h3>
+        </div>
+        <div class="col-xs-12" id="new-poll">
+        </div>
+      </div>
     </div>
-    <div>
-      <h4>
-        <%= user.fullName() %>
-      </h4>
-      <h5>
-        <%= user.escape('email') %>
-      </h5>
+    <div id="polls" class="col-xs-12 col-md-8 col-lg-6">
+    </div>
+    <div class="clearfix visible-md-block"></div>
+    <div id="user-info" class="col-xs-12 col-md-4 col-lg-3">
+      <div class="thumbnail">
+        <img class="profile-img img-responsive" src="<%= user.get('profile_img') %>">
+      </div>
+      <div>
+        <h4>
+          <%= user.fullName() %>
+        </h4>
+        <h5>
+          <%= user.escape('email') %>
+        </h5>
+      </div>
+    </div>
+    <div id="poll-footer" class="col-xs-12 col-md-8 col-lg-12 col-md-push-4">
+      <h1>asdf</h1>
     </div>
   </div>
-  <div id="poll-footer" class="col-xs-12 col-md-8 col-lg-12 col-md-push-4"><h1>asdf</h1></div>
 </div>

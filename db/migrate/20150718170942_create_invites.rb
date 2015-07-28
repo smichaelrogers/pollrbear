@@ -7,6 +7,6 @@ class CreateInvites < ActiveRecord::Migration
       t.timestamps
     end
     add_index :invites, :poll_id
-    add_index :invites, :user_id, unique: true
+    add_index :invites, [:poll_id, :user_id]
   end
 end

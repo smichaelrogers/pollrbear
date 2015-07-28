@@ -36,7 +36,7 @@ module Api
     end
 
     def show
-      @response = Response.includes(:user).find(params[:id])
+      @response = Response.includes(:respondent).find(params[:id])
       render :show
     end
 

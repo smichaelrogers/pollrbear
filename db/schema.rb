@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718170942) do
+ActiveRecord::Schema.define(version: 20150728072558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20150718170942) do
     t.datetime "updated_at"
   end
 
+  add_index "invites", ["poll_id", "user_id"], name: "index_invites_on_poll_id_and_user_id", using: :btree
   add_index "invites", ["poll_id"], name: "index_invites_on_poll_id", using: :btree
-  add_index "invites", ["user_id"], name: "index_invites_on_user_id", unique: true, using: :btree
 
   create_table "polls", force: :cascade do |t|
     t.integer  "user_id",                    null: false
@@ -60,14 +60,14 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   add_index "questions", ["poll_id"], name: "index_questions_on_poll_id", using: :btree
 
   create_table "responses", force: :cascade do |t|
-    t.integer  "answer_id",  null: false
-    t.integer  "user_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "answer_id",     null: false
+    t.integer  "respondent_id", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "responses", ["answer_id"], name: "index_responses_on_answer_id", using: :btree
-  add_index "responses", ["user_id"], name: "index_responses_on_user_id", using: :btree
+  add_index "responses", ["respondent_id"], name: "index_responses_on_respondent_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",      null: false
@@ -85,5 +85,16 @@ ActiveRecord::Schema.define(version: 20150718170942) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "user_id",                null: false
+    t.integer  "poll_id",                null: false
+    t.integer  "value",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["poll_id"], name: "index_votes_on_poll_id", using: :btree
+  add_index "votes", ["user_id", "poll_id"], name: "index_votes_on_user_id_and_poll_id", unique: true, using: :btree
 
 end

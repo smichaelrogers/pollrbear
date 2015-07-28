@@ -22,16 +22,17 @@
               <input type="checkbox" data-poll-id="<%= poll.id %>">
             </td>
 
-            <td colspan="4">
-              <h4><a href="#" class="select-poll" data-poll-id="<%= poll.id %>">
+            <td colspan="3">
+              <a href="#" class="select-poll" data-poll-id="<%= poll.id %>">
                 <%= poll.escape('title') %>
-              </a></h4>
-              <p><%= poll.escape('text') %></p>
+              </a>
+              <br>
+              <%= poll.escape('text') %>
             </td>
 
             <td>
             </td>
-
+            <td></td>
             <td>
             </td>
             <td>

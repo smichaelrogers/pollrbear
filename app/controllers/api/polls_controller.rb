@@ -29,7 +29,7 @@ module Api
     end
 
     def show
-      @poll = Poll.includes(questions: [answers: [responses: :user]]).find(params[:id])
+      @poll = Poll.includes(questions: [answers: [responses: :respondent]]).find(params[:id])
       render :show
     end
 

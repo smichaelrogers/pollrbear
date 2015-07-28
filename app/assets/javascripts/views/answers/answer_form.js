@@ -43,8 +43,9 @@ PollrBear.Views.AnswerForm = Backbone.View.extend({
       dataType: "json",
       success: function(payload) {
         $("#poll-form-questions, #poll-form-answers").html("");
-        $("#poll-form-poll").removeClass("collapsed");
-        $("#poll-form-poll").val("");
+        $("#poll-form-poll").removeClass("form-collapsed");
+        $("#poll-form-poll input").val("");
+        $("#poll-form-poll textarea").val("");
       },
       error: function(payload) {
         alert("invalid one thing or another");
@@ -62,7 +63,7 @@ PollrBear.Views.AnswerForm = Backbone.View.extend({
     this.pollFormData.questions.push(this.questionFormData);
     var updatedData = this.pollFormData;
     $("#poll-form-questions, #poll-form-answers").html("");
-    $("#poll-form-questions").removeClass("collapsed");
+    $("#poll-form-questions").removeClass("form-collapsed");
     var view = new PollrBear.Views.QuestionForm({
       pollFormData: updatedData
     });

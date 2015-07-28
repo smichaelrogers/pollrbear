@@ -1,21 +1,57 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Comfortaa:400,300,700|Open+Sans+Condensed:300,300italic|Montserrat|Raleway|Open+Sans:300italic,400,300);
 $font-body: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-heading: "Comfortaa","Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$slate: rgb(85,98,112);
+$teal: rgb(78,205,196);
+$lime: rgb(199,244,100);
+$pink: rgb(255,107,107);
+$red: rgb(196,77,88);
 body,
 html {
   font-family: $font-body;
-  background: none transparent;
+  background: #eee;
   overflow-x: hidden;
 }
 
 body {
-
 }
+
+div {
+  border: 1px dotted #ddd !important;
+}
+input, textarea {
+  background: none transparent;
+}
+
+.main-container {
+  padding-top: 100px;
+}
+
 #nav {
   background: #313131;
 }
 #root {
-  padding-top: 90px;
+}
+#splash {
+  padding-top: 20%;
+  /* background: $pink; */
+  input, button, a, textarea{
+    border: 2px solid #fff;
+    border-radius: 3px;
+    background: none transparent;
+    color: #000;
+  }
+}
+#splash-search {
+  padding-top: 100px;
+}
+.splash-header-top {
+
+}
+
+
+.form-collapsed {
+  display: none !important;
 }
 
 /* $greyyellow: rgb(188,189,172);
@@ -26,11 +62,6 @@ $darkpurple: rgb(59,45,56);
 
 
  */
-$slate: rgb(85,98,112);
-$teal: rgb(78,205,196);
-$lime: rgb(199,244,100);
-$pink: rgb(255,107,107);
-$red: rgb(196,77,88);
 .intro-section {
   height: 100%;
   padding-top: 150px;

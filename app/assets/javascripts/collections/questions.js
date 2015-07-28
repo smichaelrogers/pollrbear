@@ -20,17 +20,27 @@ PollrBear.Collections.Questions = Backbone.Collection.extend({
     }
     return question;
   },
+  totalPages: function() {
+    if(this.total_pages){
+      return this.total_pages;
+    } else {
+      return 1;
+    }
+  },
   parse: function(response) {
-    var resp = {};
-    this.page = response.page;
-    this.total_pages = response.total_pages;
-    resp.models = [];
-    resp.parent = PollrBear.currentUser.polls().getOrFetch(response.parent.id);
-    var q;
-    response.models.forEach(function(question) {
-      q = this.getOrFetch(question.id);
-      resp.models.push(q);
-    }.bind(this));
-    return resp;
-  }
+     var resp = {};
+     this.page = response.page;
+     this.total_pages = response.total_pages;
+     resp.models = [];
+     resp.total_pages = response.total_pages;
+     resp.page = response.page;
+     var q;
+     response.models.forEach(function(question) {
+       q = this.get(question.id);
+       resp.models.push(q);
+     }.bind(this));
+     return resp.models;
+   }
+
+
 });
