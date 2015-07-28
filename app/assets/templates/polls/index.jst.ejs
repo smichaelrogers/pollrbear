@@ -1,20 +1,50 @@
-<h1>polls index</h1>
-<% polls.forEach(function(poll) { %>
-  <div class="row">
-    <div class="col-sm-12">
-      <a href="#" class="select-poll" data-poll-id="<%= poll.id %>">
-        <h5>
-          <%= poll.escape('title') %>
-        </h5>
-      </a>
+<div class="row row-collapsible">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-condensed table-hover">
+        <tr>
+          <thead>
+            <th><i class="fa fa-caret-down"></i></th>
+            <th>Poll</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </thead>
+        </tr>
+
+        <% polls.forEach(function(poll) { %>
+          <tr class="row-collapsible">
+
+            <td>
+              <input type="checkbox" data-poll-id="<%= poll.id %>">
+            </td>
+
+            <td colspan="4">
+              <h4><a href="#" class="select-poll" data-poll-id="<%= poll.id %>">
+                <%= poll.escape('title') %>
+              </a></h4>
+              <p><%= poll.escape('text') %></p>
+            </td>
+
+            <td>
+            </td>
+
+            <td>
+            </td>
+            <td>
+              23
+            </td>
+
+          </tr>
+          <% }); %>
+      </table>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <p>
-        <%= poll.escape('text') %>
-      </p>
-    </div>
+</div>
+<div class="row">
+  <div id="poll" class="col-md-12">
   </div>
-<% }); %>
-<div id="poll"></div>
+</div>

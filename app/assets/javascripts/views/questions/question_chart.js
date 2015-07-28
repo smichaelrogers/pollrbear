@@ -1,24 +1,22 @@
-PollrBear.Views.ChartShow = Backbone.View.extend({
-  template: JST['charts/show'],
+PollrBear.Views.QuestionChart = Backbone.View.extend({
+  template: JST['questions/chart'],
 
   initialize: function(options) {
-    this.collection = this.model.answers();
-    this.listenTo(this.collection, 'change', this.render);
-
+    this.$canvas = options.$canvas;
+    this.chartType = this.model.attributes.chart;
+    this.ctx = this.$canvas.getContext("2d");
     this.delegateChartRendering();
   },
 
   render: function() {
-    var content = this.template({
-      question: this.model
-    });
+    var content = this.template();
     this.$el.html(content);
+
     return this;
   },
 
   delegateChartRendering: function() {
-
-    switch (this.model.get('chart')) {
+    switch (this.chartType) {
       case 1:
         this.renderPieChart();
         break;
@@ -54,8 +52,6 @@ PollrBear.Views.ChartShow = Backbone.View.extend({
   },
 
   renderPieChart: function() {
-    var element = $("canvas[data-question-id=\"" + this.model.id + "\"]")[0];
-    var ctx = element.getContext("2d");
     var pieChartData = [];
     var answerData;
     var i = 0;
@@ -70,12 +66,10 @@ PollrBear.Views.ChartShow = Backbone.View.extend({
       pieChartData.push(answerData);
       i++;
     });
-    window.chart = new Chart(ctx).Pie(pieChartData);
+    window.chart = new Chart(this.ctx).Pie(pieChartData);
   },
 
   renderBarChart: function() {
-    var element = $("canvas[data-question-id=\"" + this.model.id + "\"]")[0];
-    var ctx = element.getContext("2d");
     var chartData = [];
     var lbls = [];
     this.collection.forEach(function(answer) {
@@ -92,11 +86,9 @@ PollrBear.Views.ChartShow = Backbone.View.extend({
         data: chartData
       }]
     }
-    window.chart = new Chart(ctx).Bar(barChartData);
+    window.chart = new Chart(this.ctx).Bar(barChartData);
   },
   renderRadarChart: function() {
-    var element = $("canvas[data-question-id=\"" + this.model.id + "\"]")[0];
-    var ctx = element.getContext("2d");
     var chartData = [];
     var lbls = [];
     this.collection.forEach(function(answer) {
@@ -115,11 +107,9 @@ PollrBear.Views.ChartShow = Backbone.View.extend({
         data: chartData
       }]
     }
-    window.chart = new Chart(ctx).Radar(radarChartData);
+    window.chart = new Chart(this.ctx).Radar(radarChartData);
   },
   renderPolarAreaChart: function() {
-    var element = $("canvas[data-question-id=\"" + this.model.id + "\"]")[0];
-    var ctx = element.getContext("2d");
     var chartData = [];
     var answerData;
     var i = 0;
@@ -134,11 +124,9 @@ PollrBear.Views.ChartShow = Backbone.View.extend({
       chartData.push(answerData);
       i++;
     });
-    window.chart = new Chart(ctx).PolarArea(chartData);
+    window.chart = new Chart(this.ctx).PolarArea(chartData);
   },
   renderLineChart: function() {
-    var element = $("canvas[data-question-id=\"" + this.model.id + "\"]")[0];
-    var ctx = element.getContext("2d");
     var chartData = [];
     var lbls = [];
     this.collection.forEach(function(answer) {
@@ -157,7 +145,7 @@ PollrBear.Views.ChartShow = Backbone.View.extend({
         data: chartData
       }]
     }
-    window.chart = new Chart(ctx).Line(lineChartData);
+    window.chart = new Chart(this.ctx).Line(lineChartData);
   }
 
 });

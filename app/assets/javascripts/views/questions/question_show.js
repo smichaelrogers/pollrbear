@@ -2,6 +2,7 @@ PollrBear.Views.QuestionShow = Backbone.CompositeView.extend({
   template: JST['questions/show'],
   initialize: function() {
     this.collection = this.model.answers();
+    this.$canvas = this.$("canvas.chart[data-question-id=\"" + this.model.id + "\"]").get(0);
   },
   render: function() {
     var content = this.template({
@@ -13,17 +14,19 @@ PollrBear.Views.QuestionShow = Backbone.CompositeView.extend({
   },
 
   renderChart: function() {
-    var view = new PollrBear.Views.ChartShow({
-      collection: this.collection
+    var view = new PollrBear.Views.QuestionChart({
+      collection: this.collection,
+      model: this.model,
+      $canvas: this.$canvas
     });
-    $("#chart").html(view.render().$el);
+    this.addSubview(".chart", view);
   },
 
   renderAnswers: function() {
     var view = new PollrBear.Views.AnswersIndex({
       collection: this.collection
     });
-    this.addSubview("#answers", view);
+    this.addSubview(".answers", view);
   },
 
   percentages: function() {

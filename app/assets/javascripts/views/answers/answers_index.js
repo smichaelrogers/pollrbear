@@ -4,7 +4,7 @@ PollrBear.Views.AnswersIndex = Backbone.View.extend({
     "click .show-answer": "renderAnswer"
   },
   initialize: function() {
-    this.trigger('sync');
+    this.trigger('add');
   },
   render: function() {
     var content = this.template({
@@ -12,14 +12,5 @@ PollrBear.Views.AnswersIndex = Backbone.View.extend({
     });
     this.$el.html(content);
     return this;
-  },
-  renderAnswer: function(event) {
-    event.preventDefault();
-    var answerId = $(event.currentTarget).attr("data-answer-id");
-    var answer = this.collection.getOrFetch(answerId);
-    var view = new PollrBear.Views.AnswerShow({
-      model: answer
-    });
-    $(event.currentTarget).find(".answer-content").html(view.render().$el);
   }
 });

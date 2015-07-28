@@ -12,7 +12,7 @@ module Api
     def index
       @poll = Poll.find(params[:poll_id])
 
-      @questions = @poll.questions.page(params[:page])
+      @questions = @poll.questions.page(params[:page]).per(3)
       render json: {
         models: @questions,
         parent: @poll,

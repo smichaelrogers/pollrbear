@@ -1,7 +1,14 @@
 <div class="row">
-  <div class="col-xs-12 col-lg-4">
-    <div id="user-info">
-      <img src="<%= user.get('profile_img') %>">
+  <div id="new-poll" class="col-xs-12 col-md-4 col-lg-3">
+  </div>
+  <div id="polls" class="col-xs-12 col-md-8 col-lg-6">
+  </div>
+  <div class="clearfix visible-md-block"></div>
+  <div id="user-info" class="col-xs-12 col-md-4 col-lg-3">
+    <div class="thumnail">
+      <img class="profile-img img-responsive" src="<%= user.get('profile_img') %>">
+    </div>
+    <div>
       <h4>
         <%= user.fullName() %>
       </h4>
@@ -9,12 +16,6 @@
         <%= user.escape('email') %>
       </h5>
     </div>
-    <div id="new-poll">
-    </div>
-    <div id="question-preview"></div>
   </div>
-  <div class="col-xs-12 col-lg-8">
-    <div id="polls">
-    </div>
-  </div>
+  <div id="poll-footer" class="col-xs-12 col-md-8 col-lg-12 col-md-push-4"><h1>asdf</h1></div>
 </div>

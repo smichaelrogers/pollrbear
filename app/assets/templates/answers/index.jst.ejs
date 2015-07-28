@@ -1,12 +1,11 @@
 
   <form>
     <% answers.forEach(function(answer) { %>
-      <div class="radio-inline">
+      <div class="radio">
         <label>
           <input type="radio" name="response[answer_id]" value="<%= answer.id %>">
           <%= answer.escape('text') %>
         </label>
-        <a href="#" class="show-answer" data-answer-id="<%= answer.id %>">Show</a>
       </div>
     <% }); %>
   </form>
