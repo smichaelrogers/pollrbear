@@ -5,14 +5,27 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
       poll: this.model
     });
     this.$el.html(content);
-    this.renderQuestions();
     return this;
   },
-  renderQuestions: function() {
-    var view = new PollrBear.Views.QuestionsIndex({
+
+  renderChart: function() {
+    var view = new PollrBear.Views.PollChart({
       model: this.model,
-      collection: this.model.questions()
+      collection: this.collection
     });
-    this.addSubview("#questions", view);
+  },
+
+  percentages: function() {
+    var data = [];
+    var num;
+    var len = 0;
+    this.collection.forEach(function(answer) {
+      len += answer.responses.length;
+    });
+    this.collection.forEach(function(answer) {
+      num = (answer.responses.length / len) * 100
+      data.push(Math.floor(num) + "%");
+    });
+    return data;
   }
 });

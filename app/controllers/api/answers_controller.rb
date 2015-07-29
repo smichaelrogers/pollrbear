@@ -1,12 +1,12 @@
 module Api
   class AnswersController < ApiController
     def index
-      @answers = current_question.answers
+      @answers = current_poll.answers
       render json: @answers
     end
 
     def create
-      @answer = current_question.answers.new(answer_params)
+      @answer = current_poll.answers.new(answer_params)
       if @answer.save
         render json: @answer
       else
@@ -19,16 +19,6 @@ module Api
       render :show
     end
 
-    def update
-      @answer = Answer.find(params[:id])
-      if @answer.update_attributes(answer_params)
-        render json: @answer
-      else
-        render json: @answer.errors.full_messages,
-               status: :unprocessable_entity
-      end
-    end
-
     def destroy
       @answer = Answer.find(params[:id])
       @answer.destroy
@@ -37,21 +27,17 @@ module Api
 
     private
 
-    def current_question
+    def current_poll
       if params[:id]
         @answer = Answer.find(params[:id])
-        @question = @answer.question
+        @poll = @answer.poll
       elsif params[:answer]
-        @question = Question.find(params[:answer][:question_id])
+        @poll = Poll.find(params[:answer][:poll_id])
       end
     end
 
-    def current_poll
-      current_question.poll
-    end
-
     def answer_params
-      params.require(:answer).permit(:text, :question_id)
+      params.require(:answer).permit(:text, :poll_id)
     end
   end
 end

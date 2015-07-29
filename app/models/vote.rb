@@ -12,8 +12,6 @@
 
 class Vote < ActiveRecord::Base
   validates :user, presence: true
-  validates :user_id, uniqueness: { scope: [:votable_id, :votable_type] }
-
-  belongs_to :votable, polymorphic: true
-  belongs_to :user, inverse_of: :votes
+  belongs_to :user
+  belongs_to :poll
 end

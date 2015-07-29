@@ -1,8 +1,8 @@
 PollrBear.Views.UserShow = Backbone.CompositeView.extend({
   template: JST['users/show'],
-  className: "container main-container",
-  initialize: function() {
-    this.collection = this.model.polls();
+  className: "container",
+  initialize: function(options) {
+    this.users = options.users;
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.collection, 'add', this.render);
     this.model.fetch();
@@ -16,19 +16,15 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.showUserPolls();
     this.showPollForm();
-    if (this.subviews) {
-      this.eachSubview(function(subview) {
-        subview.render();
-      });
-    }
     return this;
   },
 
   showUserPolls: function() {
     var view = new PollrBear.Views.PollsIndex({
-      collection: this.collection
+      collection: this.collection,
+      model: this.model
     });
-    $("#polls").html(view.render().$el);
+    $("#main").html(view.render().$el);
   },
 
   showPollForm: function() {

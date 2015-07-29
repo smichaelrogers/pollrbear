@@ -1,5 +1,7 @@
 PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
   template: JST['polls/index'],
+  tagName: "div",
+  className: "list-group",
   events: {
     "click .select-poll": "selectPoll"
   },
@@ -7,7 +9,8 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
   },
   render: function() {
     var content = this.template({
-      polls: this.collection
+      polls: this.collection,
+      user: this.model
     });
     this.$el.html(content);
     return this;
@@ -15,11 +18,12 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
   selectPoll: function(event) {
     event.preventDefault();
     var pollId = $(event.currentTarget).attr("data-poll-id");
+    var $target = $(event.currentTarget).find(".poll-show")
     var poll = this.collection.getOrFetch(pollId);
     var view = new PollrBear.Views.PollShow({
-      model: poll
+      model: poll,
+      collection: poll.answers()
     });
-    $(".row-collapsible").addClass("form-collapsed");
-    this.addSubview("#poll", view);
+    this.addSubview($target, view)
   }
 });

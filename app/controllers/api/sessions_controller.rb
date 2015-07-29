@@ -31,9 +31,7 @@ class Api::SessionsController < ApplicationController
     redirect_to root_url
   end
 
-
   protected
-
   def auth_hash
     request.env['omniauth.auth']
   end

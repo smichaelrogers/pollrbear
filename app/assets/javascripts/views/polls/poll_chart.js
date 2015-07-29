@@ -1,5 +1,5 @@
-PollrBear.Views.QuestionChart = Backbone.View.extend({
-  template: JST['questions/chart'],
+PollrBear.Views.PollChart = Backbone.View.extend({
+  template: JST['polls/chart'],
 
   initialize: function() {
     this.chartType = this.model.attributes.chart;
@@ -34,20 +34,6 @@ PollrBear.Views.QuestionChart = Backbone.View.extend({
       default:
         this.renderPieChart();
     };
-  },
-
-  percentages: function() {
-    var data = [];
-    var num;
-    var len = 0;
-    this.collection.forEach(function(answer) {
-      len += answer.responses.length;
-    });
-    this.collection.forEach(function(answer) {
-      num = (answer.responses.length / len) * 100
-      data.push(Math.floor(num) + "%");
-    });
-    return data;
   },
 
   renderPieChart: function() {

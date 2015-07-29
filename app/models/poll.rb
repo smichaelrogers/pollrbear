@@ -13,15 +13,15 @@
 #
 
 class Poll < ActiveRecord::Base
-  include Votable
-  validates :title, :text, :duration, :privacy, presence: true
+  validates :text, :duration, :privacy, :chart, :format, presence: true
+
   belongs_to :user
   has_many :sent_invitations,
     class_name: "Invite",
     foreign_key: :poll_id,
     primary_key: :id
-
-  has_many :questions
-  has_many :answers, through: :questions, source: :answers
+  has_many :votes
+  has_many :voters, through: :votes, source: :user
+  has_many :answers
   has_many :responses, through: :answers, source: :responses
 end

@@ -88,5 +88,10 @@ Backbone.CompositeView = Backbone.View.extend({
     } else {
       return _(this._subviews);
     }
+  },
+  _swapMainView: function (view) {
+    this._mainView && this._mainView.remove();
+    this._mainView = view;
+    $("#main").html(view.render().$el);
   }
 });

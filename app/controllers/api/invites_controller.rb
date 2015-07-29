@@ -20,17 +20,6 @@ module Api
       render :show
     end
 
-    def update
-      @invite = Invite.find(params[:id])
-      @invite.user_id = current_user.id
-      if @invite.update_attributes(invite_params)
-        render json: @invite
-      else
-        render json: @invite.errors.full_messages,
-        status: :unprocessable_entity
-      end
-    end
-
     def destroy
       @invite = Invite.find(params[:id])
       @invite.destroy

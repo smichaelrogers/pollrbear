@@ -1,51 +1,8 @@
-<div class="row row-collapsible">
-  <div class="col-md-12">
-    <div class="table-responsive">
-      <table class="table table-condensed table-hover">
-        <tr>
-          <thead>
-            <th><i class="fa fa-caret-down"></i></th>
-            <th>Poll</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </thead>
-        </tr>
-
-        <% polls.forEach(function(poll) { %>
-          <tr class="row-collapsible">
-
-            <td>
-              <input type="checkbox" data-poll-id="<%= poll.id %>">
-            </td>
-
-            <td colspan="3">
-              <a href="#" class="select-poll" data-poll-id="<%= poll.id %>">
-                <%= poll.escape('title') %>
-              </a>
-              <br>
-              <%= poll.escape('text') %>
-            </td>
-
-            <td>
-            </td>
-            <td></td>
-            <td>
-            </td>
-            <td>
-              23
-            </td>
-
-          </tr>
-          <% }); %>
-      </table>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div id="poll" class="col-md-12">
-  </div>
-</div>
+<% polls.forEach(function(poll) { %>
+  <a class="list-group-item select-poll" href="#" data-poll-id="<%= poll.id %>">
+    <h3 class="list-group-item-heading">
+      <%= poll.escape('text') %>
+    </h3>
+    <p class="list-group-item-text">by __ at <%= poll.escape('created_at') %></p>
+  </a>
+<% }); %>
