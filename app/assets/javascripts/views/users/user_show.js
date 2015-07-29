@@ -4,7 +4,7 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
   initialize: function(options) {
     this.users = options.users;
     this.listenTo(this.model, 'sync', this.render);
-    this.listenTo(this.collection, 'add', this.render);
+    this.listenTo(this.collection, 'update', this.render);
     this.model.fetch();
     this.collection.fetch();
   },
@@ -21,8 +21,7 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
 
   showUserPolls: function() {
     var view = new PollrBear.Views.PollsIndex({
-      collection: this.collection,
-      model: this.model
+      collection: this.collection
     });
     $("#main").html(view.render().$el);
   },

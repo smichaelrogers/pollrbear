@@ -1,8 +1,10 @@
 <% polls.forEach(function(poll) { %>
   <a class="list-group-item select-poll" href="#" data-poll-id="<%= poll.id %>">
-    <h3 class="list-group-item-heading">
+    <h4 class="heading-a">
       <%= poll.escape('text') %>
-    </h3>
-    <p class="list-group-item-text">by __ at <%= poll.escape('created_at') %></p>
+    </h4>
+    <p>by __ at <%= poll.escape('created_at') %></p>
+    <div class="row show-poll" data-poll-id="<%= poll.id %>">
+    </div>
   </a>
 <% }); %>

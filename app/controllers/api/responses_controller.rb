@@ -34,7 +34,6 @@ module Api
       elsif params[:response]
         @answer = Answer.find(params[:response][:answer_id])
       end
-      @answer
     end
 
     def current_poll
@@ -42,7 +41,7 @@ module Api
     end
 
     def response_params
-      params.require(:response).permit(:answer_id, :user_id)
+      params.require(:response).permit(:answer_id, :respondent_id)
     end
   end
 end

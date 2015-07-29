@@ -1,76 +1,48 @@
-<div class="row">
-  <div class="col-sm-12">
-    <form id="poll-form">
-
-      <div class="form-group">
-        <label>Question: </label>
-        <input name="poll[text]" type="text" class="form-control" placeholder="Question">
-      </div>
-
-
-      <div class="form-group">
-        <label class="radio-inline">
-          <input type="radio" name="poll[chart]" value="1" checked="">Pie
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="poll[chart]" value="2">Polar Area
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="poll[chart]" value="3">Bar
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="poll[chart]" value="4">Radar
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="poll[chart]" value="5">Line
-        </label>
-      </div>
-
-      <div class="form-group">
-        <label class="radio-inline">
-          <input type="radio" name="poll[format]" value="1" checked=""> Multiple Choice
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="poll[format]" value="2"> Open Ended
-          <small>(Word Cloud/Text Wall)</small>
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="poll[format]" value="3"> Perspective
-          <small>(Clickable Image/Whiteboard)</small>
-        </label>
-      </div>
-
-      <div class="form-group">
-        <label class="radio-inline">
-          <input name="poll[privacy]" type="radio" value="1" checked=""> Public
-        </label>
-        <label class="radio-inline">
-          <input name="poll[privacy]" type="radio" value="2"> Private
-        </label>
-      </div>
-
-    </form>
-
-    <form id="answer-form">
-
-      <div class="form-group">
-        <label>Add Answers</label>
-        <input type="text" class="form-control answer-input" placeholder="Answer">
-      </div>
-
-      <div class="form-group">
-        <button type="reset" class="btn btn-default remove-answer"><i class="fa fa-minus"></i></button>
-        <button type="button" class="btn btn-default add-answer"><i class="fa fa-plus"></i></button>
-      </div>
-
-      <div class="form-group">
-        <select multiple class="form-control new-answers">
-        </select>
-      </div>
-    </form>
-
-    <div class="form-group">
-      <button type="button" class="btn btn-default" id="submit-poll-form">Submit</button>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-body text-centered">
+    <h3 class="heading-a">start a poll</h3>
   </div>
+  <form id="poll-form" class="form-collapsible">
+    <div class="panel-heading">
+      <h3 class="panel-title">Question</h3>
+    </div>
+    <textarea name="poll[text]" type="text" rows="4" class="form-control" placeholder="Question" id="poll-text"></textarea>
+    <div class="panel-heading">
+      <h4 class="panel-title">Response Format</h4>
+    </div>
+    <div class="btn-group btn-group-justified">
+      <input type="hidden" name="poll[privacy]" value="1" id="poll-privacy">
+      <input type="hidden" name="poll[format]" value="1" id="poll-format">
+      <a href="#" class="btn btn-default btn-format btn-checked" data-format="1">Multiple Choice</a>
+      <a href="#" class="btn btn-default btn-format" data-format="2">Word Cloud</a>
+    </div>
+    <div class="panel-heading">
+      <h4 class="panel-title">Chart Selection</h4>
+    </div>
+    <div class="btn-group btn-group-justified">
+      <a href="#" class="btn btn-default btn-chart btn-lg btn-checked" data-chart="1"><i class="fa fa-fw fa-pie-chart"></i></a>
+      <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="2"><i class="fa fa-fw fa-bar-chart"></i></a>
+      <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="3"><i class="fa fa-fw fa-line-chart"></i></a>
+      <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="4"><i class="fa fa-fw fa-area-chart"></i></a>
+    </div>
+    <input type="hidden" name="poll[chart]" value="1" id="poll-chart">
+    <div class="btn-group btn-group-lg btn-group-justified">
+      <a href="#" class="btn btn-default" id="submit-poll-form">Next</a>
+    </div>
+  </form>
+  <form id="multiple-choice-form" class="form-collapsible form-collapsed">
+    <div class="panel-heading">
+      <h3 class="panel-title">Input Answers <small>Minimum 2</small></h3>
+    </div>
+    <textarea type="text" rows="4" class="form-control answer-input" placeholder="Answer"></textarea>
+    <div class="btn-group btn-group-justified">
+      <a href="#" class="btn btn-default remove-answers">Remove</a>
+      <a href="#" class="btn btn-default add-answer">Add</a>
+    </div>
+    <ul class="list-group answer-select">
+    </ul>
+    <div class="btn-group btn-group-lg btn-group-justified">
+      <a href="#" class="btn btn-default" id="submit-create-poll">Complete!</a>
+    </div>
+  </form>
 </div>

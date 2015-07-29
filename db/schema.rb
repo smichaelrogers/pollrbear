@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(version: 20150728072558) do
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
-    t.integer  "question_id", null: false
-    t.string   "text",        null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "poll_id",    null: false
+    t.string   "text",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+  add_index "answers", ["poll_id"], name: "index_answers_on_poll_id", using: :btree
 
   create_table "invites", force: :cascade do |t|
     t.integer  "poll_id",    null: false
@@ -37,27 +37,16 @@ ActiveRecord::Schema.define(version: 20150728072558) do
 
   create_table "polls", force: :cascade do |t|
     t.integer  "user_id",                    null: false
-    t.string   "title",                      null: false
-    t.string   "text"
-    t.integer  "privacy",    default: 1,     null: false
+    t.string   "text",                       null: false
     t.integer  "duration",   default: 86400, null: false
+    t.integer  "privacy",    default: 1,     null: false
+    t.integer  "chart",      default: 1,     null: false
+    t.integer  "format",     default: 1,     null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
 
   add_index "polls", ["user_id"], name: "index_polls_on_user_id", using: :btree
-
-  create_table "questions", force: :cascade do |t|
-    t.integer  "poll_id",                null: false
-    t.string   "text",                   null: false
-    t.integer  "chart",      default: 1, null: false
-    t.integer  "format",     default: 1, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "questions", ["chart"], name: "index_questions_on_chart", using: :btree
-  add_index "questions", ["poll_id"], name: "index_questions_on_poll_id", using: :btree
 
   create_table "responses", force: :cascade do |t|
     t.integer  "answer_id",     null: false

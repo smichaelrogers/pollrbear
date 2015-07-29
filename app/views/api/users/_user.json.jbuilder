@@ -1,4 +1,5 @@
-json.(user, :id, :first_name, :last_name, :email, :profile_img)
+json.call(user, :id, :first_name, :last_name, :email, :profile_img)
+json.extract! user, :id, :first_name, :last_name, :email, :profile_img
 json.polls user.polls do |poll|
   json.extract! poll, :id, :user_id, :text, :privacy, :duration, :chart, :format, :created_at
   json.answers poll.answers do |answer|
@@ -7,10 +8,10 @@ json.polls user.polls do |poll|
       json.extract! response, :id, :answer_id, :respondent_id, :created_at
     end
   end
-end
-json.votes user.votes do |vote|
-  json.extract! vote, :id, :user_id, :poll_id, :value, :created_at
-end
-json.invites user.invites do |invite|
-  json.extract! invite, :id, :user_id, :poll_id, :created_at
+  json.votes poll.votes do |vote|
+    json.extract! vote, :id, :user_id, :value, :created_at
+  end
+  json.invites poll.invites do |invite|
+    json.extract! invite, :id, :user_id, :created_at
+  end
 end

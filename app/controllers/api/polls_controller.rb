@@ -6,7 +6,7 @@ module Api
     end
 
     def create
-      @invite = current_user.polls.new(poll_params)
+      @poll = current_user.polls.new(poll_params)
 
       if @poll.save
         render json: @poll
@@ -28,7 +28,7 @@ module Api
 
     private
     def poll_params
-      params.require(:poll).permit(:user_id, :text, :chart, :privacy, :format :duration)
+      params.require(:poll).permit(:user_id, :text, :chart, :privacy, :format, :duration)
     end
   end
 end

@@ -1,14 +1,14 @@
 PollrBear.Models.Poll = Backbone.Model.extend({
   urlRoot: '/api/polls',
-  questions: function() {
-    if (!this._questions) {
-      this._questions = new PollrBear.Collections.Questions([], { poll: this });
+  answers: function() {
+    if (!this._answers) {
+      this._answers = new PollrBear.Collections.Answers([], { poll: this });
     }
-    return this._questions;
+    return this._answers;
   },
   parse: function(response) {
-    if(response.questions) {
-      this.questions().set(response.questions);
+    if(response.answers) {
+      this.answers().set(response.answers);
     }
     return response;
   }
