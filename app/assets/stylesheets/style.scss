@@ -21,6 +21,7 @@ textarea {
   height: 0px !important;
   overflow: hidden !important;
 }
+
 .btn-checked {
   background: #eee;
   &:active, &:hover, &:focus {
@@ -39,6 +40,15 @@ textarea {
 }
 canvas {
   z-index: 9999 !important;
+}
+.circle {
+	border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+	width: 80px;
+	height: 80px;
+  border: 1px solid #ddd;
 }
 #canvas-holder {
   width: 100%;

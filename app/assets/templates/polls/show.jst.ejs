@@ -25,13 +25,29 @@
     </div>
   </div>
   <div class="col-xs-12 col-lg-4">
+
     <% var i = 0; %>
       <% answers.forEach(function(answer) { %>
-        <h5>
-          <%= answer.attributes.text %>
-           <span class="label label-default"><%= percentages[i] %></span>
-        </h5>
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>
+              <button class="btn btn-default circle">
+                <%= percentages[i] %>
+              </span><br>
+
+              <%= answer.attributes.text %>
+            </h5>
+          </div>
+        </div>
         <% i++; %>
           <% }); %>
   </div>
+  <div class="col-xs-12 poll-summary">
+    <p class="user-details">
+    </p>
+  </div>
+
+
+
+
 </div>

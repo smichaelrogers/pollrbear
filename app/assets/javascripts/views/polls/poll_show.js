@@ -6,7 +6,9 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
   },
   initialize: function() {
     this.collection = this.model.answers();
-    this.responses = PollrBear.currentUser.responses();
+    this.listenTo(this.collection, 'add', this.render);
+    this.userResponse;
+    this.majorityResponse;
   },
   render: function() {
     var content = this.template({
@@ -30,27 +32,46 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     event.preventDefault();
     var userId = PollrBear.currentUser.id;
     var answerId = $(event.currentTarget).attr("data-answer-id");
-    this.responses.create({
-      answer_id: answerId,
-      respondent_id: userId
+    var answer = this.collection.getOrFetch(answerId);
+    answer.responses().create({
+      respondent_id: userId,
+      answer_id: answerId
     });
     $("#answers").addClass("form-collapsed");
     $("#results").removeClass("form-collapsed");
     this.delegateChartRendering();
+
+    var respStr = "";
+    this.$(".user-details").text("");
+  },
+
+  percentageChosen: function(answerId) {
+    var answer = this.collection.get(answerId);
+    var numResp = answer.responses().length;
+    return Math.floor(numResp / this.totalVotes());
+  },
+
+  mostChosen: function() {
+
   },
 
   percentages: function() {
     var data = [];
+    var len = this.totalVotes();
     var num;
+    this.collection.forEach(function(answer) {
+      num = (answer.attributes.responses.length / len) * 100
+      data.push(Math.floor(num) + " %");
+    });
+    return data;
+  },
+
+  totalVotes: function() {
     var len = 0;
     this.collection.forEach(function(answer) {
       len += answer.attributes.responses.length;
     });
-    this.collection.forEach(function(answer) {
-      num = (answer.attributes.responses.length / len) * 100
-      data.push(Math.floor(num) + "%");
-    });
-    return data;
+    return len;
   },
 
   delegateChartRendering: function() {

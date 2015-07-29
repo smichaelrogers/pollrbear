@@ -3,7 +3,7 @@ PollrBear.Views.PollForm = Backbone.View.extend({
 
   events: {
     'click .add-answer': 'addAnswer',
-    'click .remove-answers': 'removeAnswers',
+    'click a.remove-answer': 'removeAnswer',
     'click #submit-poll-form': 'submitPollForm',
     'click #submit-create-poll': 'submitCreatePoll',
     'keypress .answer-input': 'maybeAddAnswer',
@@ -83,12 +83,11 @@ PollrBear.Views.PollForm = Backbone.View.extend({
   addAnswer: function(event) {
     var answer = this.$('.answer-input').val();
     this.$('.answer-input').val('');
-    this.$('.answer-select').append("<li class=\"list-group-item answer-item\" data-content=\"" + answer + "\">" + answer + "</li>");
+    this.$('.answer-select').append("<li class=\"list-group-item answer-item\" data-content=\"" + answer + "\">" + answer + "<a href=\"#\" class=\"remove-answer\">Remove</a></li>");
   },
 
-  removeAnswers: function(event) {
-    this.$("select option:selected").each(function() {
-      this.remove();
-    });
+  removeAnswer: function(event) {
+    event.preventDefault();
+    $(event.currentTarget).parent().remove();
   }
 });
