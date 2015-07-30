@@ -1,58 +1,47 @@
-<div class="row">
-  <div class="col-xs-6 col-xs-offset-6">
-    <h3>start a poll</h3>
-  </div>
-</div>
-<div class="row">
-  <form id="poll-form" class="form-collapsible">
-    <div class="col-xs-12">
-      <textarea name="poll[text]" type="text" rows="4" class="form-control" placeholder="Question" id="poll-text"></textarea>
-      <div class="panel-heading">
-        <h4 class="panel-title">Response Format</h4>
-      </div>
-      <div class="btn-group btn-group-justified">
-        <input type="hidden" name="poll[privacy]" value="1" id="poll-privacy">
-        <input type="hidden" name="poll[format]" value="1" id="poll-format">
-        <a href="#" class="btn btn-default btn-format btn-checked" data-format="1">Multiple Choice</a>
-        <a href="#" class="btn btn-default btn-format" data-format="2">Word Cloud</a>
-      </div>
-      <div class="panel-heading">
-        <h4 class="panel-title">Chart Selection</h4>
-      </div>
-      <div class="btn-group btn-group-justified">
-        <a href="#" class="btn btn-default btn-chart btn-lg btn-checked" data-chart="1"><i class="fa fa-fw fa-pie-chart"></i></a>
-        <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="2"><i class="fa fa-fw fa-bar-chart"></i></a>
-        <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="3"><i class="fa fa-fw fa-line-chart"></i></a>
-        <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="4"><i class="fa fa-fw fa-area-chart"></i></a>
+<div class="panel panel-success">
+  <div class="panel-heading"><h3 class="panel-title">Create a New Poll</h3></div>
+  <div class="row">
+    <form id="poll-form" class="form-collapsible">
+      <div class="col-xs-12">
+        <textarea name="poll[text]" type="text" rows="4" class="form-control" placeholder="Question" id="poll-text"></textarea>
+        <div class="panel-heading">
+          <h5 class="panel-title">Response Format</h5>
+        </div>
+        <div class="btn-group btn-group-justified">
+          <input type="hidden" name="poll[privacy]" value="1" id="poll-privacy">
+          <input type="hidden" name="poll[format]" value="1" id="poll-format">
+          <a href="#" class="btn btn-success btn-format" data-format="1">Multiple Choice</a>
+          <a href="#" class="btn btn-default btn-format" data-format="2">Word Cloud</a>
+        </div>
+        <div class="panel-heading panel-sub-heading">
+          <span class="panel-sub-heading">Chart Selection</span>
+        </div>
+        <div class="btn-group btn-group-justified">
+          <a href="#" class="btn btn-success btn-chart btn-lg" data-chart="1"><i class="fa fa-fw fa-pie-chart"></i></a>
+          <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="2"><i class="fa fa-fw fa-bar-chart"></i></a>
+          <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="3"><i class="fa fa-fw fa-line-chart"></i></a>
+          <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="4"><i class="fa fa-fw fa-area-chart"></i></a>
+        </div>
         <input type="hidden" name="poll[chart]" value="1" id="poll-chart">
       </div>
-    </div>
-    <div class="col-xs-12">&nbsp;
-    </div>
-    <div class="col-xs-6 col-xs-offset-6">
-      <div class="btn-group btn-group-lg btn-group-justified">
+      <div class="btn-group btn-group-justified">
         <a href="#" class="btn btn-default" id="submit-poll-form">Next</a>
       </div>
-    </div>
-  </form>
-  <form id="multiple-choice-form" class="form-collapsible form-collapsed">
-    <div class="panel-heading">
-      <h3 class="panel-title">Input Answers
-        <small>Minimum 2</small>
-      </h3>
-    </div>
-
-    <div class="input-group">
-      <input type="text" rows="4" class="form-control answer-input" placeholder="Answer">
-      <div class="input-group-btn">
-        <a href="#" class="btn btn-default add-answer">Add</a>
+    </form>
+    <form id="multiple-choice-form" class="form-collapsible form-collapsed">
+      <div class="panel-heading">
+        <h5 class="panel-title">Answers
+        </h5>
       </div>
-    </div>
-    <ul class="list-group answer-select">
-    </ul>
-    <div class="btn-group btn-group-lg btn-group-justified">
-      <a href="#" class="btn btn-default" id="submit-create-poll">Complete!</a>
-    </div>
-  </form>
-</div>
+
+      <input type="text" rows="4" class="form-control answer-input" placeholder="Answer">
+      <button type="button" class="btn btn-default add-answer">Add</button>
+      <ul class="list-group answer-select">
+      </ul>
+      <div class="btn-group btn-group-justified">
+        <a href="#" class="btn btn-default" id="submit-create-poll">Complete!</a>
+      </div>
+    </form>
+  </div>
+  <div class="panel-footer"></div>
 </div>

@@ -1,31 +1,58 @@
-* {
-  font-family: 'helvetica neue';
-}
+$gray-dark: rgb(123, 138, 139);
+$gray: rgb(149, 165, 166);
+$gray-light: rgb(180, 188, 194);
+$gray-lighter: rgb(236, 240, 241);
+$brand-primary: rgb(112,202,200);
+$brand-success: rgb(252, 109, 100);
+$brand-info: rgb(93,201,240);
+$brand-warning: rgb(247,210,84);
+$brand-danger: rgb(170,216,114);
+$body-bg: #F1F2F7;
+$text-color: rgb(104, 104, 104);
+$link-hover-decoration: none;
+$font-family-sans-serif: "Proxima Nova", "Open Sans", "Helvetica Neue", "Source Sans Pro", Helvetica, Arial, sans-serif;
+$font-family-serif: "Merriweather", "Slabo 27px", "Arvo", Georgia, "Times New Roman", Times, serif;
 body,
 html {
 }
 body {
-  padding-top: 70px;
+  padding-top: 90px;
 }
 textarea {
-  border: 1px 0px solid #ddd !important;
   box-shadow: none !important;
+}
+
+.panel, .list-group, .navbar{
+  box-shadow: -3px 3px 0px -1px rgba(0,0,0,.1);
+}
+#root {
+  .container {
+
+  }
+}
+#main {
+
+}
+
+#new-poll {
+
 }
 .answer-select {
   margin-bottom: 20px;
   border-radius: 50px;
 }
-
 .form-collapsed {
-  transition: .7s ease all;
-  height: 0px !important;
+  transition: 0.7s ease all;
+  height: 0 !important;
   overflow: hidden !important;
 }
-
 .btn-checked {
-  background: #eee;
-  &:active, &:hover, &:focus {
-    background: #eee !important;
+  color: white;
+  background: $brand-primary;
+  &:active,
+  &:hover,
+  &:focus {
+    background: $brand-primary;
   }
   &:hover {
     &:active {
@@ -42,12 +69,12 @@ canvas {
   z-index: 9999 !important;
 }
 .circle {
-	border-radius: 50%;
+  border-radius: 50%;
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-	width: 80px;
-	height: 80px;
+  width: 80px;
+  height: 80px;
   border: 1px solid #ddd;
 }
 #canvas-holder {
@@ -55,7 +82,6 @@ canvas {
   height: auto;
   text-align: center;
 }
-
 #chart {
   width: 100%;
   height: auto;

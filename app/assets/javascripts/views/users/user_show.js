@@ -23,7 +23,7 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
     var view = new PollrBear.Views.PollsIndex({
       collection: this.collection
     });
-    $("#main").html(view.render().$el);
+    $("#main").append(view.render().$el);
   },
 
   showPollForm: function() {

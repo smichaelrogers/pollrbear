@@ -1,6 +1,6 @@
 PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
   template: JST['polls/index'],
-  tagName: "div",
+  tagName: "ul",
   className: "list-group",
   events: {
     "click .select-poll": "selectPoll"

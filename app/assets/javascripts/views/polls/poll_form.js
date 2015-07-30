@@ -47,7 +47,6 @@ PollrBear.Views.PollForm = Backbone.View.extend({
           $("#poll-form").removeClass("form-collapsed");
           $("#poll-text").val("");
           $("#multiple-choice-form").addClass("form-collapsed");
-
         });
       }
     });
@@ -60,18 +59,18 @@ PollrBear.Views.PollForm = Backbone.View.extend({
     } else {
       $(".btn-chart").removeClass("invisible");
     }
-    $(".btn-format").removeClass("btn-checked");
+    $(".btn-format").removeClass("btn-success").addClass("btn-default");
     var format = ($(event.currentTarget).attr("data-format") * 1);
     $("#poll-format").val(format);
-    $(event.currentTarget).addClass("btn-checked");
+    $(event.currentTarget).removeClass("btn-default").addClass("btn-success");
   },
 
   selectChart: function(event) {
     event.preventDefault();
-    $(".btn-chart").removeClass("btn-checked");
+    $(".btn-chart").removeClass("btn-success").addClass("btn-default");
     var chart = ($(event.currentTarget).attr("data-chart") * 1);
     $("#poll-chart").val(chart);
-    $(event.currentTarget).addClass("btn-checked");
+    $(event.currentTarget).removeClass("btn-success").addClass("btn-success");
   },
 
   maybeAddAnswer: function(event) {
