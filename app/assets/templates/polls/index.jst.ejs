@@ -1,17 +1,28 @@
-<% polls.forEach(function(poll) { %>
-  <li class="list-group-item">
-    <div class="row">
-      <div class="col-xs-10">
+<table class="table table-striped">
+  <tr>
+    <thead>
+      <th>
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </thead>
+  </tr>
+
+  <% polls.forEach(function(poll) { %>
+    <tr>
+      <td>
         <%= poll.escape('text') %>
-          <small>
-            <%= polls.user.fullName() %>
-          </small>
-      </div>
-      <div class="col-xs-2">
-        <div class="btn-group btn-group-justified">
-          <button type="button" class="btn btn-default select-poll" data-poll-id="<%= poll.id %>"><i class="fa fa-fw fa-arrow-right"></i></button>
-        </div>
-      </div>
-    </div>
-  </li>
-  <% }); %>
+      </td>
+      <td>
+        <%= polls.user.fullName() %>
+      </td>
+      <td>
+        <%= poll.numResponses() %>
+      </td>
+      <td>
+        <a href="#" class="select-poll" data-poll-id="<%= poll.id %>"><i class="Answer"></i></a>
+      </td>
+    </tr>
+    <% }); %>
+</table>

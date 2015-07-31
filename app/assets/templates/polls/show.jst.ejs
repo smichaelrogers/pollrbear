@@ -16,36 +16,26 @@
     </div>
     <% }); %>
 </div>
-<div id="results" class="row form-collapsed">
-  <div class="col-xs-12 col-lg-8">
+<div id="results" class="form-collapsed">
+  <div class="canvas-wrapper">
     <div id="canvas-holder">
-      <canvas height="300" width="300" id="chart"></canvas>
+      <canvas height="240" width="360" id="chart"></canvas>
     </div>
   </div>
-  <div class="col-xs-12 col-lg-4">
 
+  <table class="table table-striped">
     <% var i = 0; %>
       <% answers.forEach(function(answer) { %>
-        <div class="row">
-          <div class="col-xs-12">
-            <h5>
-              <button class="btn btn-default circle">
-                <%= percentages[i] %>
-              </span><br>
+        <tr>
+          <td>
+            <%= percentages[i] %>
+          </td>
+          <td colspan="3">
+            <%= answer.attributes.text %>
+          </td>
+          <% i++; %>
+        </tr>
 
-              <%= answer.attributes.text %>
-            </h5>
-          </div>
-        </div>
-        <% i++; %>
-          <% }); %>
-  </div>
-  <div class="col-xs-12 poll-summary">
-    <p class="user-details">
-    </p>
-  </div>
-
-
-
-
+        <% }); %>
+  </table>
 </div>

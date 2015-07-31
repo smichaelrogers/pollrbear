@@ -16,6 +16,13 @@ PollrBear.Models.Poll = Backbone.Model.extend({
     }
     return this._responses;
   },
+  numResponses: function() {
+    var n = 0;
+    this.answers().forEach(function(answer) {
+      n += answer.responses().length;
+    });
+    return n;
+  },
   parse: function(response) {
     if (response.answers) {
       this.answers().set(response.answers);

@@ -2,14 +2,14 @@ $gray-dark: rgb(123, 138, 139);
 $gray: rgb(149, 165, 166);
 $gray-light: rgb(180, 188, 194);
 $gray-lighter: rgb(236, 240, 241);
-$brand-primary: rgb(112,202,200);
+$brand-primary: rgb(112, 202, 200);
 $brand-success: rgb(252, 109, 100);
-$brand-info: rgb(93,201,240);
-$brand-warning: rgb(247,210,84);
-$brand-danger: rgb(170,216,114);
-$body-bg: #F1F2F7;
+$brand-info: rgb(93, 201, 240);
+$brand-warning: rgb(247, 210, 84);
+$brand-danger: rgb(170, 216, 114);
+$body-bg: rgb(241, 242, 247);
 $text-color: rgb(104, 104, 104);
-$link-hover-decoration: none;
+
 $font-family-sans-serif: "Proxima Nova", "Open Sans", "Helvetica Neue", "Source Sans Pro", Helvetica, Arial, sans-serif;
 $font-family-serif: "Merriweather", "Slabo 27px", "Arvo", Georgia, "Times New Roman", Times, serif;
 body,
@@ -22,12 +22,14 @@ textarea {
   box-shadow: none !important;
 }
 
+
 .panel, .list-group, .navbar{
-  box-shadow: -3px 3px 0px -1px rgba(0,0,0,.1);
 }
+#canvas-holder {
+}
+
 #root {
   .container {
-
   }
 }
 #main {
@@ -37,6 +39,10 @@ textarea {
 #new-poll {
 
 }
+#chart {
+  background: transparent;
+}
+
 .answer-select {
   margin-bottom: 20px;
   border-radius: 50px;
@@ -46,6 +52,7 @@ textarea {
   height: 0 !important;
   overflow: hidden !important;
 }
+
 .btn-checked {
   color: white;
   background: $brand-primary;

@@ -7,6 +7,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
   initialize: function() {
     this.collection = this.model.answers();
     this.listenTo(this.collection, 'add', this.render);
+    this.colors = ["rgb(112, 202, 200)", "rgb(252, 109, 100)", "rgb(93, 201, 240)", "rgb(247, 210, 84)", "rgb(170, 216, 114)"];
     this.userResponse;
     this.majorityResponse;
   },
@@ -40,7 +41,6 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     $("#answers").addClass("form-collapsed");
     $("#results").removeClass("form-collapsed");
     this.delegateChartRendering();
-
     var respStr = "";
     this.$(".user-details").text("");
   },
@@ -98,8 +98,8 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     var pieChartData = [];
     var answerData;
     var i = 0;
-    var colors = ["#D93D4A", "#FFC100", "#0DB3D9", "#F29422", "#0367A6", "#929292", "#FCD036"];
-    var highlights = ["#da7981", "#ffde75", "#59cde8", "#eca650", "#3281b3", "#b5b5b5", "#ffe483"];
+    var colors = this.colors;
+    var highlights = this.colors;
     this.collection.forEach(function(answer) {
       answerData = {};
       answerData['value'] = answer.attributes.responses.length;
@@ -119,6 +119,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     var ctx = $("#chart")[0].getContext("2d");
     var chartData = [];
     var lbls = [];
+    $("#canvas-holder").css("background: rgb(112, 202, 200);");
     this.collection.forEach(function(answer) {
       lbls.push(answer.attributes.text);
       chartData.push(answer.attributes.responses.length);
@@ -126,16 +127,16 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     var barChartData = {
       labels: lbls,
       datasets: [{
-        fillColor: "rgba(3,103,166, 0.5)",
-        strokeColor: "rgba(3,103,166, 0.5)",
-        highlightFill: "rgba(3,103,166, 0.5)",
-        highlightStroke: "rgba(3,103,166, 0.5))",
+        fillColor: "rgb(112, 202, 200)",
+        strokeColor: "rgb(112, 202, 200)",
+        highlightFill: "rgb(112, 202, 200)",
+        highlightStroke: "rgb(112, 202, 200)",
         data: chartData
       }]
     }
 
 
-    var chart = new Chart(ctx).Bar(barChartData);
+    var chart = new Chart(ctx).Bar(barChartData, this.barChartOptions);
 
   },
   renderRadarChart: function() {
@@ -204,10 +205,20 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
         data: chartData
       }]
     }
-
-
     var chart = new Chart(ctx).Line(lineChartData);
+  },
 
+  barChartOptions: {
+    scaleBeginAtZero: true,
+    scaleShowGridLines: false,
+    scaleGridLineColor: "rgba(255,255,255,0)",
+    scaleGridLineWidth: 0,
+    scaleShowHorizontalLines: false,
+    scaleShowVerticalLines: false,
+    barShowStroke: true,
+    barStrokeWidth: 2,
+    barValueSpacing: 5,
+    barDatasetSpacing: 1,
   }
 
 
