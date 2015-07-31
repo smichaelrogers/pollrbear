@@ -5,7 +5,6 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     'click .go-back': 'goBack'
   },
   initialize: function() {
-    this.collection = this.model.answers();
     this.listenTo(this.collection, 'add', this.render);
     this.colors = ["rgb(112, 202, 200)", "rgb(252, 109, 100)", "rgb(93, 201, 240)", "rgb(247, 210, 84)", "rgb(170, 216, 114)"];
     this.userResponse;
@@ -34,7 +33,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     var userId = PollrBear.currentUser.id;
     var answerId = $(event.currentTarget).attr("data-answer-id");
     var answer = this.collection.getOrFetch(answerId);
-    answer.responses().create({
+    PollrBear.currentUser.responses().create({
       respondent_id: userId,
       answer_id: answerId
     });
@@ -47,7 +46,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 
   percentageChosen: function(answerId) {
     var answer = this.collection.get(answerId);
-    var numResp = answer.responses().length;
+    var numResp = answer.attributes.responses.length;
     return Math.floor(numResp / this.totalVotes());
   },
 

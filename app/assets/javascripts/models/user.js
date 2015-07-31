@@ -17,10 +17,6 @@ PollrBear.Models.User = Backbone.Model.extend({
       this.responses().set(response.responses, { parse: true});
       delete response.responses;
     };
-    if(response.answers) {
-      this.answers().set(response.answers, { parse: true });
-      delete response.answers;
-    };
     if(response.polls) {
       this.polls().set(response.polls, { parse: true });
       delete response.polls;

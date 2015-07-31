@@ -20,17 +20,21 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :email, uniqueness: true
 
-  has_many :responses,
+  has_many :submitted_responses,
     class_name: "Response",
     foreign_key: :respondent_id,
     primary_key: :id
   has_many :polls
   has_many :answers, through: :polls, source: :answers
   has_many :responses, through: :answers, source: :responses
+  has_many :respondents, through: :responses, source: :respondent
   has_many :invites
   has_many :votes
-  has_many :polls_voted_on, through: :votes, source: :poll
 
+
+  def accessible_polls
+    (self.invited_polls + Poll.where(privacy: 1)).uniq
+  end
 
   attr_reader :password
   after_initialize :ensure_session_token

@@ -10,12 +10,13 @@ $brand-danger: rgb(170, 216, 114);
 $body-bg: rgb(241, 242, 247);
 $text-color: rgb(104, 104, 104);
 
-$font-family-sans-serif: "Proxima Nova", "Open Sans", "Helvetica Neue", "Source Sans Pro", Helvetica, Arial, sans-serif;
+$font-family-sans-serif: "Open Sans", "Helvetica Neue", "Source Sans Pro", Helvetica, Arial, sans-serif;
 $font-family-serif: "Merriweather", "Slabo 27px", "Arvo", Georgia, "Times New Roman", Times, serif;
 body,
 html {
 }
 body {
+  background: url("/bg.png");
   padding-top: 90px;
 }
 textarea {
@@ -23,7 +24,8 @@ textarea {
 }
 
 
-.panel, .list-group, .navbar{
+.panel, .navbar{
+  box-shadow: -5px 5px 0 0 rgba(0,0,0,.1);
 }
 #canvas-holder {
 }

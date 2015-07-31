@@ -19,7 +19,7 @@ class Poll < ActiveRecord::Base
   belongs_to :user
   has_many :invites
   has_many :votes
-  has_many :voters, through: :votes, source: :user
   has_many :answers
   has_many :responses, through: :answers, source: :responses
+  has_many :respondents, through: :responses, source: :respondent
 end

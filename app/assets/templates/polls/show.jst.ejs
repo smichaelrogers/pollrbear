@@ -1,10 +1,8 @@
-<div class="row">
-  <div class="col-xs-10">
-    <h3>
-      <%= poll.escape('text') %>
-    </h3>
-    <button type="button" class="btn btn-default go-back"><i class="fa fa-th-list"> Back</i></button>
-  </div>
+<div class="panel-heading">
+  <h3 class="panel-title">
+    <%= poll.escape('text') %>
+  </h3>
+  <button type="button" class="btn btn-default go-back">Back</button>
 </div>
 
 <div class="row" id="answers">
@@ -17,7 +15,7 @@
     <% }); %>
 </div>
 <div id="results" class="form-collapsed">
-  <div class="canvas-wrapper">
+  <div class="canvas-wrapper well">
     <div id="canvas-holder">
       <canvas height="240" width="360" id="chart"></canvas>
     </div>

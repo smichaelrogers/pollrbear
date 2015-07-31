@@ -11,13 +11,13 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
-gem 'font-awesome-sass'
+gem "font-awesome-rails"
 gem 'kaminari'
 gem 'figaro'
 gem 'omniauth-twitter'
 gem 'faker'
 gem 'less-rails', '~> 2.7.0'
-gem 'therubyracer' 
+gem 'therubyracer'
 group :doc do
   gem 'sdoc', require: false
 end

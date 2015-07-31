@@ -12,6 +12,6 @@
 class Answer < ActiveRecord::Base
   validates :text, presence: true
   belongs_to :poll
-  has_many :responses, dependent: :destroy
+  has_many :responses
   has_many :respondents, through: :responses, source: :respondent
 end

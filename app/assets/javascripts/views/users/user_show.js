@@ -16,12 +16,16 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.showUserPolls();
     this.showPollForm();
+    window.setTimeout(function() {
+      this.renderUserData();
+    }.bind(this), 200);
     return this;
   },
 
   showUserPolls: function() {
     var view = new PollrBear.Views.PollsIndex({
-      collection: this.collection
+      collection: this.collection,
+      model: this.model
     });
     $("#main").append(view.render().$el);
   },
@@ -31,5 +35,29 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
       collection: this.collection
     });
     $("#new-poll").html(view.render().$el);
+  },
+
+  renderUserData: function() {
+    var r = 0, p = 0, a = 0, s = 0, i = 0, v = 0;
+
+    this.model.polls().forEach(function(poll) {
+      p++;
+      $("#poll-count").text(p + "");
+      poll.answers().forEach(function(answer) {
+        a++;
+        $("#answer-count").text(a + "");
+        r += answer.attributes.responses.length;
+        $("#response-count").text(r + "");
+      });
+    });
+    if (this.model.attributes.invites) {
+      i = this.model.attributes.invites.length;
+    }
+    if (this.model.attributes.votes) {
+      v = this.model.attributes.votes.length;
+    }
+
+    $("#vote-count").text(v + "");
+    $("#invite-count").text(i + "");
   }
 });

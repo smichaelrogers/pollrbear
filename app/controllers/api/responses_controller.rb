@@ -14,17 +14,6 @@ module Api
       end
     end
 
-    def show
-      @response = Response.includes(:respondent).find(params[:id])
-      render :show
-    end
-
-    def destroy
-      @response = Response.find(params[:id])
-      @response.destroy
-      render json: { message: 'destroyed' }
-    end
-
     private
 
     def current_answer

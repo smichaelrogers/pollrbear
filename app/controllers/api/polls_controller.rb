@@ -1,7 +1,7 @@
 module Api
   class PollsController < ApiController
     def index
-      @polls = current_user.polls
+      @polls = Poll.all
       render json: @polls
     end
 

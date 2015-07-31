@@ -6,29 +6,32 @@
 @polls = []
 u1 = User.create!(first_name: "Tom", last_name: "Hanks", email: "wilson@tom.hanks", password_digest: @password, session_token: SecureRandom.urlsafe_base64)
 
-u2 = User.create!(first_name: (Faker::Name.first_name), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
-u3 = User.create!(first_name: (Faker::Name.first_name), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
-[u1, u2, u3].each do |user|
-  @uid = []
+u2 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.capitalize!), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
+u3 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.capitalize!), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
+u4 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.capitalize!), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
+u5 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.capitalize!), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
+u6 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.capitalize!), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
+u7 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.capitalize!), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
+
+[u1, u2, u3, u4, u5, u6, u7].each do |user|
+  @uid = [1,2,3,4,5,6,7]
   @polls = []
-  if user.id == 1
-    @uid = [2,3]
-  elsif user.id == 2
-    @uid = [1,3]
-  else
-    @uid = [1,2]
-  end
+  @uid.delete(user.id)
   10.times do
-    @polls << Poll.create!(user_id: user.id, text: Faker::Lorem.sentence, chart: [1,2,3,4].sample, format: [1,2].sample, privacy: [1,1,1,2].sample, duration: (3600 * rand(24)))
+    @polls << Poll.create!(user_id: user.id, text: Faker::Hacker.say_something_smart.chop + " " + Faker::Hacker.ingverb + "?", chart: [1,2,3,4].sample, format: [1,2].sample, privacy: [1,1,1,2].sample, duration: (3600 * rand(24)))
   end
   @polls.each do |poll|
-    Invite.create!(poll_id: poll.id, user_id: @uid.sample)
+    @uid.each do |id|
+      Invite.create!(poll_id: poll.id, user_id: id)
+    end
     @answers = []
-    [3,4,5].sample.times do
-      @answers << Answer.create!(poll_id: poll.id, text: Faker::Team.creature)
+    [3,3,4,4,4,5].sample.times do
+      @answers << Answer.create!(poll_id: poll.id, text: Faker::Commerce.product_name)
     end
     @answers.each do |answer|
-      @responses << Response.create!(answer_id: answer.id, respondent_id: @uid.sample)
+      (0..10).to_a.sample.times do
+        @responses << Response.create!(answer_id: answer.id, respondent_id: @uid.sample)
+      end
     end
   end
 end

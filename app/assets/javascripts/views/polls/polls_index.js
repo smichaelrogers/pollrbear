@@ -6,7 +6,6 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     "click .select-poll": "selectPoll"
   },
   render: function() {
-    debugger
     var content = this.template({
       polls: this.collection,
       user: this.model
@@ -20,8 +19,10 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     var poll = this.collection.getOrFetch(pollId);
     var view = new PollrBear.Views.PollShow({
       model: poll,
+      collection: poll.answers(),
       parentView: this
     });
     this._swapMainView(view);
-  }
+  },
+
 });

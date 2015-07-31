@@ -1,20 +1,16 @@
-<div class="panel panel-default">
-  <div class="panel-heading"><h3 class="panel-title">Create a New Poll</h3></div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Create a New Poll</h3>
+  </div>
   <div class="row">
     <form id="poll-form" class="form-collapsible">
       <div class="col-xs-12">
         <textarea name="poll[text]" type="text" rows="4" class="form-control" placeholder="Question" id="poll-text"></textarea>
-        <div class="panel-heading">
-          <h5 class="panel-title">Response Format</h5>
-        </div>
         <div class="btn-group btn-group-justified">
           <input type="hidden" name="poll[privacy]" value="1" id="poll-privacy">
           <input type="hidden" name="poll[format]" value="1" id="poll-format">
           <a href="#" class="btn btn-success btn-format" data-format="1">Multiple Choice</a>
           <a href="#" class="btn btn-default btn-format" data-format="2">Word Cloud</a>
-        </div>
-        <div class="panel-heading panel-sub-heading">
-          <span class="panel-sub-heading">Chart Selection</span>
         </div>
         <div class="btn-group btn-group-justified">
           <a href="#" class="btn btn-success btn-chart btn-lg" data-chart="1"><i class="fa fa-fw fa-pie-chart"></i></a>
@@ -29,11 +25,6 @@
       </div>
     </form>
     <form id="multiple-choice-form" class="form-collapsible form-collapsed">
-      <div class="panel-heading">
-        <h5 class="panel-title">Answers
-        </h5>
-      </div>
-
       <input type="text" rows="4" class="form-control answer-input" placeholder="Answer">
       <button type="button" class="btn btn-default add-answer">Add</button>
       <ul class="list-group answer-select">
@@ -43,5 +34,4 @@
       </div>
     </form>
   </div>
-  <div class="panel-footer"></div>
 </div>

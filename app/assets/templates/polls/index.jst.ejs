@@ -1,8 +1,7 @@
-<table class="table table-striped">
+<table class="table table-striped table-condensed table-hover">
   <tr>
     <thead>
-      <th>
-      </th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,10 +17,9 @@
         <%= polls.user.fullName() %>
       </td>
       <td>
-        <%= poll.numResponses() %>
       </td>
       <td>
-        <a href="#" class="select-poll" data-poll-id="<%= poll.id %>"><i class="Answer"></i></a>
+        <a href="#" class="select-poll" data-poll-id="<%= poll.id %>">Answer!</a>
       </td>
     </tr>
     <% }); %>

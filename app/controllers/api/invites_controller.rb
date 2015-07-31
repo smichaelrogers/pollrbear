@@ -15,11 +15,6 @@ module Api
       render :index
     end
 
-    def show
-      @invite = current_user.invites.find(params[:id])
-      render :show
-    end
-
     def destroy
       @invite = Invite.find(params[:id])
       @invite.destroy

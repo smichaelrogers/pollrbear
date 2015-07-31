@@ -1,8 +1,6 @@
 PollrBear.Collections.Answers = Backbone.Collection.extend({
   model: PollrBear.Models.Answer,
   url: '/api/answers',
-  comparator: function() {
-  },
   initialize: function(models, options) {
     this.poll = options.poll;
   },
