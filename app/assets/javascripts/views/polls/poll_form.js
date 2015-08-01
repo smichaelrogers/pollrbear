@@ -82,7 +82,7 @@ PollrBear.Views.PollForm = Backbone.View.extend({
   addAnswer: function(event) {
     var answer = this.$('.answer-input').val();
     this.$('.answer-input').val('');
-    this.$('.answer-select').append("<li class=\"list-group-item answer-item\" data-content=\"" + answer + "\">" + answer + "<a href=\"#\" class=\"remove-answer\">Remove</a></li>");
+    this.$('.answer-select').append("<div class=\"answer-item\" data-content=\"" + answer + "\">" + answer + "<a href=\"#\" class=\"remove-answer\">Remove</a></div");
   },
 
   removeAnswer: function(event) {

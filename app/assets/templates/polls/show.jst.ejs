@@ -1,16 +1,18 @@
-<div class="panel-heading">
-  <h3 class="panel-title">
+<div class="poll-table-heading">
+  <button type="button" class="btn btn-default go-back">Back</button>
+  <h3>
     <%= poll.escape('text') %>
   </h3>
-  <button type="button" class="btn btn-default go-back">Back</button>
 </div>
 
 <div class="row" id="answers">
   <% answers.forEach(function(answer) { %>
     <div class="col-xs-12 col-md-6">
-      <button type="button" class="btn btn-default btn-block answer-select" data-answer-id="<%= answer.id %>">
-        <%= answer.escape('text') %>
-      </button>
+      <div class="answer-select-wrap">
+        <button type="button" class="btn-answer-select" data-answer-id="<%= answer.id %>">
+          <%= answer.escape('text') %>
+        </button>
+      </div>
     </div>
     <% }); %>
 </div>

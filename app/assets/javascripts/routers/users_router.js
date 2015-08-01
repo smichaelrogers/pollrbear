@@ -1,6 +1,8 @@
 PollrBear.Routers.Users = Backbone.Router.extend({
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
+    this.collection = new PollrBear.Collections.Users();
+    this.collection.fetch();
   },
 
   routes: {
@@ -14,7 +16,7 @@ PollrBear.Routers.Users = Backbone.Router.extend({
     if (!this._requireSignedIn(callback)) {
       return;
     }
-    var users = new PollrBear.Collections.Users();
+    var users = this.collection;
     users.fetch();
     var user = users.getOrFetch(PollrBear.currentUser.id);
     var polls = user.polls();

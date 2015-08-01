@@ -1,7 +1,8 @@
 PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
   template: JST['polls/index'],
-  tagName: "ul",
-  className: "list-group",
+  tagName: "table",
+  className: "table table-striped",
+  id: "poll-list",
   events: {
     "click .select-poll": "selectPoll"
   },
@@ -24,5 +25,9 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     });
     this._swapMainView(view);
   },
+  numResponses: function() {
+    var num = 0;
+
+  }
 
 });

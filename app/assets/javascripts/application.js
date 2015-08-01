@@ -15,6 +15,8 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require Chart
+//= require d3.min.js
+//= require textures.min.js
 //= require underscore
 //= require serialize_json
 //= require backbone

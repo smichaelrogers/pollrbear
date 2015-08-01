@@ -31,11 +31,6 @@ class User < ActiveRecord::Base
   has_many :invites
   has_many :votes
 
-
-  def accessible_polls
-    (self.invited_polls + Poll.where(privacy: 1)).uniq
-  end
-
   attr_reader :password
   after_initialize :ensure_session_token
   after_initialize :ensure_profile_img

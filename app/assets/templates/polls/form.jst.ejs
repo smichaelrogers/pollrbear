@@ -1,9 +1,9 @@
-<div class="panel panel-primary">
+<div class="panel panel-success">
   <div class="panel-heading">
-    <h3 class="panel-title">Create a New Poll</h3>
+    <h3 class="panel-title">New</h3>
   </div>
   <div class="row">
-    <form id="poll-form" class="form-collapsible">
+    <form id="poll-form">
       <div class="col-xs-12">
         <textarea name="poll[text]" type="text" rows="4" class="form-control" placeholder="Question" id="poll-text"></textarea>
         <div class="btn-group btn-group-justified">
@@ -19,18 +19,20 @@
           <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="4"><i class="fa fa-fw fa-area-chart"></i></a>
         </div>
         <input type="hidden" name="poll[chart]" value="1" id="poll-chart">
-      </div>
-      <div class="btn-group btn-group-justified">
-        <a href="#" class="btn btn-default" id="submit-poll-form">Next</a>
+        <div class="btn-group btn-group-justified">
+          <a href="#" class="btn btn-default" id="submit-poll-form">Next</a>
+        </div>
       </div>
     </form>
-    <form id="multiple-choice-form" class="form-collapsible form-collapsed">
-      <input type="text" rows="4" class="form-control answer-input" placeholder="Answer">
-      <button type="button" class="btn btn-default add-answer">Add</button>
-      <ul class="list-group answer-select">
-      </ul>
-      <div class="btn-group btn-group-justified">
-        <a href="#" class="btn btn-default" id="submit-create-poll">Complete!</a>
+    <form id="multiple-choice-form" class="form-collapsed">
+      <div class="col-xs-12">
+        <input type="text" class="form-control answer-input" placeholder="Answer">
+        <button type="button" class="btn btn-default add-answer">Add</button>
+        <div class="answer-select">
+        </div>
+        <div class="btn-group btn-group-justified">
+          <a href="#" class="btn btn-success" id="submit-create-poll">Complete!</a>
+        </div>
       </div>
     </form>
   </div>

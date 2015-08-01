@@ -1,43 +1,57 @@
 <div class="row">
-  <div class="col-xs-12 col-md-8 col-lg-8">
-    <div class="panel panel-primary" id="main">
+  <div class="col-xs-12 col-md-8">
+    <div class="panel panel-success">
       <div class="panel-heading">
         <h3 class="panel-title">Polls</h3>
       </div>
-      <div id="main" class="table-responsive">
+      <div id="main">
       </div>
     </div>
   </div>
-  <div class="col-xs-12 col-md-4 col-lg-4">
+  <div class="col-xs-12 col-md-4">
     <div class="row">
-      <div class="col-xs-7 col-md-12 col-lg-12" id="new-poll">
+      <div class="col-xs-7 col-md-12" id="new-poll">
       </div>
-      <div class="col-xs-5 col-md-12 col-lg-12">
-        <div class="panel panel-primary">
+      <div class="col-xs-5 col-md-12">
+        <div class="panel panel-success">
           <div class="panel-heading">
             <h3 class="panel-title">
               <%= user.escape('first_name') %>
             </h3>
           </div>
           <div class="panel-body">
-            <div class="well">
-              <a href="#" class="thumbnail">
-            <img class="profile-img img-responsive" src="<%= user.get('profile_img') %>">
-          </a>
-              <h4>
-                <%= user.fullName() %>
-              </h4>
-              <h5>
-                <%= user.escape('email') %>
-              </h5>
-              <span id="poll-count" class="badge">0</span> Polls
-              <br>
-              <span id="response-count" class="badge">0</span> Responses
-              <br>
-              <span id="invite-count" class="badge">0</span> Invites
-              <br>
-              <span id="answer-count" class="badge">0</span> Answers
-              <br>
+            <div class="row">
+              <div class="col-xs-12">
+                <a href="#" class="profile-img-wrap">
+                  <img class="profile-img img-responsive" src="<%= user.get('profile_img') %>">
+                </a>
+              </div>
+              <div class="col-xs-12">
+                <div class="user-info">
+                  <h4>
+                    <%= user.fullName() %>
+                  </h4>
+                  <h5>
+                    <%= user.escape('email') %>
+                  </h5>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="user-data">
+                  <span id="poll-count">0</span> Polls
+                </div>
+                <div class="user-data">
+                  <span id="response-count">0</span> Responses
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="user-data">
+                  <span id="invite-count">0</span> Invites
+                </div>
+                <div class="user-data">
+                  <span id="answer-count">0</span> Answers
+                </div>
+              </div>
             </div>
           </div>
         </div>

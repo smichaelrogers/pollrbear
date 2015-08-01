@@ -18,7 +18,7 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
     this.showPollForm();
     window.setTimeout(function() {
       this.renderUserData();
-    }.bind(this), 200);
+    }.bind(this), 50);
     return this;
   },
 

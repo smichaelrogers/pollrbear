@@ -1,26 +1,31 @@
-<table class="table table-striped table-condensed table-hover">
+<tr>
+  <thead>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </thead>
+</tr>
+<% polls.forEach(function(poll) { %>
   <tr>
-    <thead>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </thead>
+    <td>
+      (updown vote)
+    </td>
+    <td>
+      (format)
+    </td>
+    <td>
+      (responses)
+    </td>
+    <td>
+      <% var n = poll.escape('text'); if(n.length > 80){ n = n.slice(0, 50) + "..."; }; %>
+        <%= n %>
+    </td>
+    <td>
+      <%= polls.user.fullName() %>
+    </td>
+    <td>
+      <a href="#" class="select-poll" data-poll-id="<%= poll.id %>">Go!</a>
+    </td>
   </tr>
-
-  <% polls.forEach(function(poll) { %>
-    <tr>
-      <td>
-        <%= poll.escape('text') %>
-      </td>
-      <td>
-        <%= polls.user.fullName() %>
-      </td>
-      <td>
-      </td>
-      <td>
-        <a href="#" class="select-poll" data-poll-id="<%= poll.id %>">Answer!</a>
-      </td>
-    </tr>
-    <% }); %>
-</table>
+  <% }); %>
