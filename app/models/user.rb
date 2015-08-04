@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   has_many :responses, through: :answers, source: :responses
   has_many :respondents, through: :responses, source: :respondent
   has_many :invites
-  has_many :votes
+  has_many :polls, through: :invites, source: :poll
 
   attr_reader :password
   after_initialize :ensure_session_token

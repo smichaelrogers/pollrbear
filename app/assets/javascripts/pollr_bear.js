@@ -52,10 +52,10 @@ Chart.defaults.global = {
   scaleStartValue: null,
 
   // String - Colour of the scale line
-  scaleLineColor: "rgba(0,0,0,.1)",
+  scaleLineColor: "rgb(255,255,255)",
 
   // Number - Pixel width of the scale line
-  scaleLineWidth: 2,
+  scaleLineWidth: 1,
 
   // Boolean - Whether to show labels on the scale
   scaleShowLabels: true,
@@ -73,13 +73,13 @@ Chart.defaults.global = {
   scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 
   // Number - Scale label font size in pixels
-  scaleFontSize: 12,
+  scaleFontSize: 14,
 
   // String - Scale label font weight style
   scaleFontStyle: "normal",
 
   // String - Scale label font colour
-  scaleFontColor: "#666",
+  scaleFontColor: "rgba(255,255,255,1)",
 
   // Boolean - whether or not the chart should be responsive and resize when the browser does.
   responsive: true,
@@ -97,25 +97,25 @@ Chart.defaults.global = {
   tooltipEvents: ["mousemove", "touchstart", "touchmove"],
 
   // String - Tooltip background colour
-  tooltipFillColor: "rgba(0,0,0,0.8)",
+  tooltipFillColor: "rgba(137, 137, 137, 1)",
 
   // String - Tooltip label font declaration for the scale label
   tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 
   // Number - Tooltip label font size in pixels
-  tooltipFontSize: 14,
+  tooltipFontSize: 16,
 
   // String - Tooltip font weight style
   tooltipFontStyle: "normal",
 
   // String - Tooltip label font colour
-  tooltipFontColor: "#fff",
+  tooltipFontColor: "rgba(255,255,255,1)",
 
   // String - Tooltip title font declaration for the scale label
   tooltipTitleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 
   // Number - Tooltip title font size in pixels
-  tooltipTitleFontSize: 14,
+  tooltipTitleFontSize: 15,
 
   // String - Tooltip title font weight style
   tooltipTitleFontStyle: "bold",
@@ -124,16 +124,16 @@ Chart.defaults.global = {
   tooltipTitleFontColor: "#fff",
 
   // Number - pixel width of padding around tooltip text
-  tooltipYPadding: 6,
+  tooltipYPadding: 15,
 
   // Number - pixel width of padding around tooltip text
-  tooltipXPadding: 6,
+  tooltipXPadding: 15,
 
   // Number - Size of the caret on the tooltip
-  tooltipCaretSize: 8,
+  tooltipCaretSize: 0,
 
   // Number - Pixel radius of the tooltip border
-  tooltipCornerRadius: 6,
+  tooltipCornerRadius: 0,
 
   // Number - Pixel offset from point x to tooltip edge
   tooltipXOffset: 10,

@@ -1,25 +1,43 @@
-$brand-primary: #f25f5c; //rgba(254, 74, 73, 100)
-$brand-success: #2ab7ca; //rgba(42, 183, 202, 100)
-$color3: #fed766; //rgba(254, 215, 102, 100)
-$color4: #e6e6ea; //rgba(230, 230, 234, 100)
-$color5: #f4f4f8; //rgba(244, 244, 248, 100)
-$color1: #50514f; //rgba(80, 81, 79, 100)
-$color2: #f25f5c; //rgba(242, 95, 92, 100)
-$color3: #ffe066; //rgba(255, 224, 102, 100)
-$color4: #247ba0; //rgba(36, 123, 160, 100)
-$color5: #70c1b3; //rgba(112, 193, 179, 100)
-$color6: #fe4a49;
+$brand-primary: rgb(166, 216, 222);
+$brand-success: rgb(249, 241, 181);
+$brand-info: rgb(221, 218, 214);
+$brand-warning: rgb(174, 156, 150);
+$brand-danger: rgb(238, 238, 238);
+$body-bg: rgb(241, 240, 236);
+$text-color: rgb(147, 147, 147);
+* {
+  transition: all .5s ease !important;
+}
+
 html,
 body {
-  background: #eee;
+
 }
+input, textarea {
+  box-shadow: none !important;
+  border: none !important;
+}
+#new-poll {
+  #poll-form {
+    #poll-text {
+      font-size: 18px;
+      &:focus {
+        border: none;
+      }
+    }
+  }
+}
+
 .panel-heading,
 .panel-title {
-  font-family: 'Quicksand';
   font-size: 20px;
+  color: rgb(177,177,177);
+  font-family: "josefin sans";
+  text-transform: uppercase;
 }
 .panel {
-  background: #fff;
+  background: rgb(251,250,245);
+  box-shadow: -10px 15px 0 0 rgba(20,20,20,0.1);
   border: 0;
   &-heading {
   }
@@ -41,13 +59,27 @@ a {
   }
 }
 .btn {
+  &-chart {
+
+  }
+  &-select-poll {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid $brand-primary;
+    &:hover {
+      background: $brand-primary;
+      color: #fff;
+    }
+  }
   &-checked {
-    color: white;
-    background: $brand-primary;
+    color: $text-color;
+    background: $brand-success;
     &:active,
     &:hover,
     &:focus {
-      background: $brand-primary;
+      background: $brand-success;
     }
     &:hover {
       &:active {
@@ -144,11 +176,22 @@ a {
   border: 1px solid #ddd;
 }
 #canvas-holder {
-  width: 100%;
-  height: auto;
   text-align: center;
-}
-#chart {
-  width: 100%;
+  width: 70%;
   height: auto;
+  margin: 0 auto;
+  position: relative;
+  
+  background: $brand-primary;
+}
+
+#canvas-wrap {
+  text-align: center;
+  display: block;
+}
+
+#chart {
+  width: 70%;
+  height: auto;
+  padding: 25px;
 }

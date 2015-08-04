@@ -15,11 +15,17 @@
 
 class Poll < ActiveRecord::Base
   validates :text, :duration, :privacy, :chart, :format, presence: true
-
   belongs_to :user
   has_many :invites
-  has_many :votes
   has_many :answers
   has_many :responses, through: :answers, source: :responses
   has_many :respondents, through: :responses, source: :respondent
+
+  def response_count
+    n = 0
+    self.answers.each do |answer|
+      n += answer.responses.count
+    end
+    n
+  end
 end

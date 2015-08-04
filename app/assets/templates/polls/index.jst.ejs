@@ -1,31 +1,67 @@
-<tr>
-  <thead>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </thead>
-</tr>
-<% polls.forEach(function(poll) { %>
+<nav>
+  <ul class="pagination">
+    <li>
+      <span>
+        <a href="#" class="prev-page">Prev</a>
+      </span>
+    </li>
+    <% for (var i = 1; i <= totalPages; i++) { %>
+      <li>
+        <a href="#" class="select-page" data-page-id="<%= i %>">
+          <%= i %>
+        </a>
+      </li>
+      <% }; %>
+        <li>
+          <span>
+            <a href="#" class="next-page">Next</a>
+          </span>
+        </li>
+  </ul>
+</nav>
+<table class="table table-hover">
+
+
   <tr>
-    <td>
-      (updown vote)
-    </td>
-    <td>
-      (format)
-    </td>
-    <td>
-      (responses)
-    </td>
-    <td>
-      <% var n = poll.escape('text'); if(n.length > 80){ n = n.slice(0, 50) + "..."; }; %>
-        <%= n %>
-    </td>
-    <td>
-      <%= polls.user.fullName() %>
-    </td>
-    <td>
-      <a href="#" class="select-poll" data-poll-id="<%= poll.id %>">Go!</a>
-    </td>
+    <thead>
+      <td></td>
+      <td>
+        <em>format</em>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </thead>
   </tr>
-  <% }); %>
+  <% polls.forEach(function(poll) { %>
+    <% var n = poll.id; %>
+      <tr>
+        <td></td>
+        <td>
+          <span class="poll-format" data-poll-id="<%= n %>"></span>
+          <i class="poll-chart" data-poll-id="<%= n %>"></i>
+        </td>
+        <td>
+
+          <span class="poll-text" data-poll-id="<%= n %>">poll
+          </span>
+          <br>
+          <small>
+            <span class="poll-user" data-poll-id="<%= n %>">Anonymous</span>
+          </small>
+
+        </td>
+        <td>
+          <span class="poll-responses" data-poll-id="<%= n %>">0</span>
+          <br>
+          <small>Votes</small>
+        </td>
+        <td>
+          <button type="button" class="select-poll btn btn-select-poll" data-poll-id="<%= n %>"> </button>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <% }); %>
+</table>

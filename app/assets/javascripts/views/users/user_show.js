@@ -4,9 +4,6 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
   initialize: function(options) {
     this.users = options.users;
     this.listenTo(this.model, 'sync', this.render);
-    this.listenTo(this.collection, 'update', this.render);
-    this.model.fetch();
-    this.collection.fetch();
   },
 
   render: function() {
@@ -16,9 +13,6 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.showUserPolls();
     this.showPollForm();
-    window.setTimeout(function() {
-      this.renderUserData();
-    }.bind(this), 50);
     return this;
   },
 
@@ -35,29 +29,5 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
       collection: this.collection
     });
     $("#new-poll").html(view.render().$el);
-  },
-
-  renderUserData: function() {
-    var r = 0, p = 0, a = 0, s = 0, i = 0, v = 0;
-
-    this.model.polls().forEach(function(poll) {
-      p++;
-      $("#poll-count").text(p + "");
-      poll.answers().forEach(function(answer) {
-        a++;
-        $("#answer-count").text(a + "");
-        r += answer.attributes.responses.length;
-        $("#response-count").text(r + "");
-      });
-    });
-    if (this.model.attributes.invites) {
-      i = this.model.attributes.invites.length;
-    }
-    if (this.model.attributes.votes) {
-      v = this.model.attributes.votes.length;
-    }
-
-    $("#vote-count").text(v + "");
-    $("#invite-count").text(i + "");
   }
 });

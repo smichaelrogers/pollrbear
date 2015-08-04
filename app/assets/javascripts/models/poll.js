@@ -11,9 +11,6 @@ PollrBear.Models.Poll = Backbone.Model.extend({
   parse: function(response) {
     if (response.answers) {
       this.answers().set(response.answers);
-    };
-    if (response.responses) {
-      this.responses().set(response.responses);
     }
     return response;
   }

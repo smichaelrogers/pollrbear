@@ -17,13 +17,12 @@
     <% }); %>
 </div>
 <div id="results" class="form-collapsed">
-  <div class="canvas-wrapper well">
+  <div id="canvas-wrap">
     <div id="canvas-holder">
       <canvas height="240" width="360" id="chart"></canvas>
     </div>
   </div>
-
-  <table class="table table-striped">
+  <table class="table">
     <% var i = 0; %>
       <% answers.forEach(function(answer) { %>
         <tr>
@@ -35,7 +34,6 @@
           </td>
           <% i++; %>
         </tr>
-
         <% }); %>
   </table>
 </div>
