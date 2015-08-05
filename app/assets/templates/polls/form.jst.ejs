@@ -1,11 +1,11 @@
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title"></h3>
-  </div>
+<div class="panel panel-default">
   <div class="row">
     <form id="poll-form">
       <div class="col-xs-12">
-        <textarea name="poll[text]" type="text" rows="4" class="form-control" placeholder="Question" id="poll-text"></textarea>
+        <div class="errors"></div>
+      </div>
+      <div class="col-xs-12">
+        <textarea name="poll[text]" type="text" rows="4" class="form-control" placeholder="Ask a question (multiple choice)" id="poll-text"></textarea>
         <div class="btn-group btn-group-justified">
           <input type="hidden" name="poll[privacy]" value="1" id="poll-privacy">
           <input type="hidden" name="poll[format]" value="1" id="poll-format">
@@ -20,18 +20,18 @@
         </div>
         <input type="hidden" name="poll[chart]" value="1" id="poll-chart">
         <div class="btn-group btn-group-justified">
-          <a href="#" class="btn btn-default" id="submit-poll-form">Next</a>
+          <a href="#" class="btn btn-lg btn-info" id="submit-poll-form">Next</a>
         </div>
       </div>
     </form>
     <form id="multiple-choice-form" class="form-collapsed">
       <div class="col-xs-12">
-        <input type="text" class="form-control answer-input" placeholder="Answer">
-        <button type="button" class="btn btn-default add-answer">Add</button>
+        <input type="text" class="form-control answer-input" placeholder="Add an answer...">
+        <button type="button" class="btn btn-info add-answer">Add to list</button>
         <div class="answer-select">
         </div>
         <div class="btn-group btn-group-justified">
-          <a href="#" class="btn btn-success" id="submit-create-poll">Complete</a>
+          <a href="#" class="btn btn-success btn-lg" id="submit-create-poll">Submit</a>
         </div>
       </div>
     </form>

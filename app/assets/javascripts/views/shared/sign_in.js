@@ -6,7 +6,8 @@ PollrBear.Views.SignIn = Backbone.View.extend({
   },
 
   events: {
-    "submit form": "submit"
+    "submit form": "submit",
+    "click #guest-login": "guestLogin"
   },
 
   template: JST['shared/sign_in'],
@@ -19,6 +20,7 @@ PollrBear.Views.SignIn = Backbone.View.extend({
 
   submit: function(event){
     event.preventDefault();
+    var $errors = this.$(".errors");
     var $form = $(event.currentTarget);
     var formData = $form.serializeJSON().user;
 
@@ -26,8 +28,19 @@ PollrBear.Views.SignIn = Backbone.View.extend({
       email: formData.email,
       password: formData.password,
       error: function(){
-        alert("invalid email/password");
+        $errors.addClass("errors-flash").text("Please enter a valid username and/or password");
+        window.setTimeout(function() {
+          $errors.removeClass("errors-flash").text("");
+        }, 2500);
       }
+    });
+  },
+
+  guestLogin: function(event) {
+    event.preventDefault();
+    PollrBear.currentUser.signIn({
+      email: "wilson@tom.hanks",
+      password: "asdfasdf",
     });
   },
 

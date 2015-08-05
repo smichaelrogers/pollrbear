@@ -1,10 +1,20 @@
 <section id="splash">
   <div class="container">
-    <div class="row splash-header">
-      <div class="col-sm-12 col-md-8 splash-header-top">
+    <div class="row">
+      <div class="col-xs-12 splash-logo-header">
+        Pollrbear.com
       </div>
-      <div class="col-sm-6 col-md-4">
+    </div>
+    <div class="row splash-header">
+      <div class="col-xs-12 col-md-8">
+        <img class="placeholder" src="http://placehold.it/720x240">
+      </div>
+      <div class="col-xs-6 col-md-4">
+        <img class="placeholder" src="http://placehold.it/360x240">
         <form class="login-form">
+          <div class="errors">
+
+          </div>
           <div class="form-group">
             <input class="form-control" name="user[email]" type="text" placeholder="Email">
           </div>
@@ -14,169 +24,138 @@
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-default pull-right">Submit</button>
-            <a href="/auth/twitter" class="btn btn-default"><i class="fa fa-twitter fa-fw"></i>Twitter</a>
-            <button type="button" class="btn btn-default">Guest</button>
+            <button type="submit" class="btn btn-splash pull-right">Submit</button>
+            <a href="/auth/twitter" class="btn btn-splash"><i class="fa fa-twitter fa-fw"></i>Login with Twitter</a>
+
+          </div>
+          <div class="form-group">
+            <button type="button" id="guest-login" class="btn btn-default">Guest Login</button>
           </div>
         </form>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-12 text-center" id="splash-search">
+      <div class="col-xs-12 text-center">
         <div class="row">
-          <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-              </span>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<canvas id="canvas"></canvas>
-Ask your friends Ask the class Ask the world
 
 
 
-<script>
-  var width = 500,
-    height = 500,
 
-    // An n X n grid of circles will be created.
-    n = 12,
-    x = d3.scale.linear()
-    .domain([0, n])
-    .range([0, width]),
-    y = d3.scale.linear()
-    .domain([0, n])
-    .range([0, height]),
-    radius = 20,
-    transitionDuration = 1000,
-    svg = d3.select("#canvas").append("svg")
-    .attr("width", width)
-    .attr("height", height)
+<section id="splash-below">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+      </div>
+    </div>
+    <div class="row splash-header">
+      <div class="col-xs-6 col-md-4">
+        <img class="placeholder" src="http://placehold.it/360x240">
+      </div>
+      <div class="col-xs-12 col-md-8">
+        <img class="placeholder" src="http://placehold.it/720x240">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <div class="row">
 
-  // Center the SVG with respect to default width of bl.ocks.
-  .style("position", "absolute")
-    .style("left", 960 / 2 - width / 2),
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="splash-below-below">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+      </div>
+    </div>
+    <div class="row splash-header">
+      <div class="col-xs-6 col-md-4">
+        <img class="placeholder" src="http://placehold.it/360x240">
+      </div>
+      <div class="col-xs-12 col-md-8">
+        <img class="placeholder" src="http://placehold.it/720x240">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <div class="row">
 
-    // Textures need to be generated multiple times,
-    // once for each color they are paired with.
-    textureGenerators = [
-      function() {
-        return textures.lines().thicker();
-      },
-      function() {
-        return textures.circles().size(5);
-      },
-      function() {
-        return textures.paths().d("squares").size(8);
-      }
-    ],
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="splash-below-below-below">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+      </div>
+    </div>
+    <div class="row splash-header">
+      <div class="col-xs-6 col-md-4">
+        <img class="placeholder" src="http://placehold.it/360x240">
+      </div>
+      <div class="col-xs-12 col-md-8">
+        <img class="placeholder" src="http://placehold.it/720x240">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <div class="row">
 
-    // Create a scale that encapsulates texture mappings.
-    textureScale = d3.scale.ordinal()
-    .domain(["X", "Y", "Z"])
-    .range(textureGenerators),
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // Create a scale that encapsulates colors.
-    // Colors from http://colorbrewer2.org/
-    colorScale = d3.scale.ordinal()
-    .domain(["A", "B", "C"])
-    .range(["#1b9e77", "#d95f02", "#7570b3"]),
-
-    // Create a nested ordinal scale for color and texture.
-    colorTextureScale = d3.scale.ordinal()
-
-  // The first level is for color.
-  .domain(colorScale.domain())
-    .range(colorScale.range().map(function(color) {
-
-      // The second level is for texture.
-      return d3.scale.ordinal()
-        .domain(textureScale.domain())
-        .range(textureScale.range().map(function(generateTexture) {
-
-          // Generate a new texture for each (color, texture) pair.
-          return colorizeTexture(generateTexture(), color);
-        }))
-    }));
-
-
-  // Makes the given texture appear as the given color.
-  function colorizeTexture(texture, color) {
-
-    // Use stroke, present on all textures.
-    var texture = texture.stroke(color);
-
-    // Use fill, present only on some textures (e.g. "circles", not "lines").
-    if (texture.fill) {
-      texture.fill(color);
-    }
-
-    return texture;
-  }
-
-  // Initialize defs for each (texture, color) pair.
-  colorTextureScale.range().forEach(function(scale) {
-    scale.range().forEach(svg.call, svg);
-  });
-
-  // Initialize the data grid.
-  var data = [];
-  for (var i = 0; i < n; i++) {
-    for (var j = 0; j < n; j++) {
-      data.push({
-        i: i,
-        j: j,
-
-        // "a" corresponds to color.
-        a: i < n / 3 ? "A" : i < (n * 2 / 3) ? "B" : "C",
-
-        // "b" corresponds to texture.
-        b: j < n / 3 ? "X" : j < (n * 2 / 3) ? "Y" : "Z"
-      });
-    }
-  }
-
-  // Create the marks.
-  var marks = svg.selectAll(".mark")
-    .data(data)
-    .enter().append("circle")
-
-  // The "mark" class is necessary, because
-  // selectAll("circle") conflicts with the circle texture.
-  .attr("class", "mark")
-
-  .attr("cx", function(d) {
-      return x(d.i) + radius;
-    })
-    .attr("cy", function(d) {
-      return y(d.j) + radius;
-    })
-
-  // Use the color scale for the stroke around each circle.
-  .style("stroke", function(d) {
-    return colorScale(d.a);
-  })
-
-  // Use the nested texture & color scale to define the texture.
-  .style("fill", function(d) {
-    return colorTextureScale(d.a)(d.b).url();
-  });
-
-  // Periodically set a random radius on each circle.
-  function randomizeSize() {
-    marks.transition().duration(transitionDuration)
-      .attr("r", function() {
-        return Math.random() * radius;
-      });
-  }
-  randomizeSize();
-  setInterval(randomizeSize, transitionDuration);
-</script>
+<section id="sign-up">
+  <div class="container">
+    <div class="row splash-header">
+      <div class="col-xs-10 col-xs-offset-1 col-md-5 col-md-offset-2">
+        <h2>Sign up</h2>
+        <form class="login-form">
+          <div class="form-group">
+            <label>First Name</label>
+            <input class="form-control" name="user[first_name]" type="text" placeholder="First">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input class="form-control" name="user[last_name]" type="text" placeholder="Last">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" name="user[email]" type="text" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" name="user[password]" type="password" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-splash pull-right">Register</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-xs-10 col-xs-offset-1 col-md-5">
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        pollrbear.com
+      </div>
+    </div>
+  </div>
+</footer>

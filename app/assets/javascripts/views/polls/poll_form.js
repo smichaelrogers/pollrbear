@@ -23,13 +23,20 @@ PollrBear.Views.PollForm = Backbone.View.extend({
 
   submitPollForm: function(event) {
     event.preventDefault();
-    this.pollFormData = $("#poll-form").serializeJSON();
-    $("#poll-form").addClass("form-collapsed");
-    // if ($("#poll-format").attr("data-format") === "2") {
-    //   $("#open-ended-form").removeClass("form-collapsed");
-    // } else {
-    // }
-    $("#multiple-choice-form").removeClass("form-collapsed");
+    if ($("#poll-text").val().length > 6) {
+      this.pollFormData = $("#poll-form").serializeJSON();
+      $("#poll-form").addClass("form-collapsed");
+      // if ($("#poll-format").attr("data-format") === "2") {
+      //   $("#open-ended-form").removeClass("form-collapsed");
+      // } else {
+      // }
+      $("#multiple-choice-form").removeClass("form-collapsed");
+    } else {
+      this.$(".errors").addClass("errors-flash").text("Please enter a valid question");
+      window.setTimeout(function() {
+        this.$(".errors").removeClass("errors-flash").text("");
+      }.bind(this), 2000);
+    }
   },
 
   submitCreatePoll: function(event) {
@@ -56,8 +63,10 @@ PollrBear.Views.PollForm = Backbone.View.extend({
     event.preventDefault();
     if ($(event.currentTarget).attr("data-format") === "2") {
       $(".btn-chart").addClass("invisible");
+      $("#poll-text").attr("placeholder", "Write a prompt (word cloud)");
     } else {
       $(".btn-chart").removeClass("invisible");
+      $("#poll-text").attr("placeholder", "Ask a question (multiple choice)");
     }
     $(".btn-format").removeClass("btn-success").addClass("btn-default");
     var format = ($(event.currentTarget).attr("data-format") * 1);
@@ -81,8 +90,10 @@ PollrBear.Views.PollForm = Backbone.View.extend({
 
   addAnswer: function(event) {
     var answer = this.$('.answer-input').val();
-    this.$('.answer-input').val('');
-    this.$('.answer-select').append("<div class=\"answer-item\" data-content=\"" + answer + "\">" + answer + "<a href=\"#\" class=\"remove-answer\">Remove</a></div");
+    if (answer.length > 0) {
+      this.$('.answer-input').val('');
+      this.$('.answer-select').append("<div class=\"answer-item\" data-content=\"" + answer + "\"><span>" + answer + "</span><a href=\"#\" class=\"remove-answer\"><i class=\"fa fa-lg fa-times-circle\"></i></a></div");
+    }
   },
 
   removeAnswer: function(event) {

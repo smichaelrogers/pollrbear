@@ -16,13 +16,6 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
         page: 1
       }
     });
-
-
-    $(document).ready(function() {
-      window.setTimeout(function() {
-
-      }.bind(this), 500);
-    }.bind(this));
   },
 
 
@@ -35,19 +28,8 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
       polls: this.collection,
       user: this.model
     });
-    if (currentPage === 1) {
-      this.$(".prev-page").addClass("disabled");
-    } else {
-      this.$(".prev-page").removeClass("disabled");
-    }
-    if (currentPage === this.collection.get('total-pages')) {
-      this.$(".next-page").addClass("disabled");
-    } else {
-      this.$(".next-page").removeClass("disabled");
-    }
-    this.$(".select-page").removeClass("active");
-    $("li[data-page-id=\"" + currentPage + "\"]").addClass("active");
     this.$el.html(content);
+    $("li.select-page-item[data-page-id=\"" + currentPage + "\"]").addClass("active");
     if(this.collection.data) {
       this.populatePollData();
     }
@@ -73,7 +55,10 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
       pollResponseCount = pollData.response_count;
       pollText = pollData.text;
       pollChart = pollData.chart;
-      pollUser = pollData.email;
+      pollUser = pollData.user;
+      pollUserId = pollData.user_id;
+      pollEmail = pollData.email;
+      pollCreatedAt = pollData.created_at;
 
       var chartStr;
       switch(pollChart) {
@@ -98,11 +83,12 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
         $("span.poll-format[data-poll-id=\"" + pollId + "\"]").text("WC");
       } else {
         $("span.poll-format[data-poll-id=\"" + pollId + "\"]").text("Q");
-        $("i.poll-chart[data-poll-id=\"" + pollId + "\"]").addClass(chartStr);
       }
 
+
+
       $("span.poll-text[data-poll-id=\"" + pollId + "\"]").text(pollText);
-      $("span.poll-user[data-poll-id=\"" + pollId + "\"]").text(pollUser);
+      $("span.poll-user[data-poll-id=\"" + pollId + "\"]").html(pollCreatedAt + "  <a href=\"#\" class=\"select-show-user\" data-user-id=\"" + pollUserId + "\"> " + pollUser + " </a>");
       $("span.poll-responses[data-poll-id=\"" + pollId + "\"]").text(pollResponseCount);
     });
   },
@@ -122,10 +108,10 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
 
 
   nextPage: function(event) {
-    this.fetchPage(this.collection.get('page') + 1);
+    this.fetchPage((this.collection.page + 1));
   },
 
   prevPage: function(event) {
-    this.fetchPage(this.collection.get('page') - 1);
+    this.fetchPage((this.collection.page - 1));
   }
 });

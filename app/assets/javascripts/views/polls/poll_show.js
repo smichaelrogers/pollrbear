@@ -6,8 +6,23 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
   },
   initialize: function() {
     this.listenTo(this.collection, 'add', this.render);
-    this.colors = ["rgba(255,255,255, 0.15)", "rgba(255,255,255, 0.20)", "rgba(255,255,255, 0.25)", "rgba(255,255,255, 0.3)", "rgba(255,255,255, 0.35)", "rgba(255,255,255, 0.4)"];
-    this.highlights = ["rgba(255,255,255, 0.5)", "rgba(255,255,255, 0.5)", "rgba(255,255,255, 0.5)", "rgba(255,255,255, 0.5)", "rgba(255,255,255, 0.5)", "rgba(255,255,255, 0.5)"];
+    this.colors = [
+      "rgba(255,255,255, 0.15)",
+      "rgba(255,255,255, 0.20)",
+      "rgba(255,255,255, 0.25)",
+      "rgba(255,255,255, 0.3)",
+      "rgba(255,255,255, 0.35)",
+      "rgba(255,255,255, 0.4)"
+    ];
+    this.highlights = [
+      "rgba(255,255,255, 0.5)",
+      "rgba(255,255,255, 0.5)",
+      "rgba(255,255,255, 0.5)",
+      "rgba(255,255,255, 0.5)",
+      "rgba(255,255,255, 0.5)",
+      "rgba(255,255,255, 0.5)"
+    ];
+    this.labels = ["A", "B", "C", "D", "E", "F", "G", "H"];
     this.userResponse;
     this.majorityResponse;
   },
@@ -15,7 +30,8 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     var content = this.template({
       poll: this.model,
       answers: this.collection,
-      percentages: this.percentages()
+      percentages: this.percentages(),
+      labels: this.labels
     });
     this.$el.html(content);
     return this;
@@ -61,7 +77,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     var num;
     this.collection.forEach(function(answer) {
       num = (answer.attributes.responses.length / len) * 100
-      data.push(Math.floor(num) + " %");
+      data.push(Math.floor(num) + "");
     });
     return data;
   },
@@ -105,41 +121,32 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 
   renderPieChart: function() {
     var ctx = $("#chart")[0].getContext("2d");
-    var pieChartData = [];
-    var answerData;
-    var i = 0;
-    var colors = this.colors;
-    var highlights = this.colors;
+    var answerData, pieChartData = [], i = 0;
     this.collection.forEach(function(answer) {
       answerData = {};
       answerData['value'] = answer.attributes.responses.length;
-      answerData['color'] = colors[i];
-      answerData['highlight'] = highlights[i];
-      answerData['label'] = answer.attributes.text;
+      answerData['color'] = this.colors[i];
+      answerData['highlight'] = this.highlights[i];
+      answerData['label'] = this.labels[i];
       pieChartData.push(answerData);
       i++;
-    });
-
-
+    }.bind(this));
     var chart = new Chart(ctx).Pie(pieChartData);
-
   },
 
   renderBarChart: function() {
     var ctx = $("#chart")[0].getContext("2d");
     var chartData = [];
-    var lbls = [];
     this.collection.forEach(function(answer) {
-      lbls.push(answer.attributes.text);
       chartData.push(answer.attributes.responses.length);
     });
     var barChartData = {
-      labels: lbls,
+      labels: this.labels.slice(0, this.collection.length),
       datasets: [{
         fillColor: "rgb(255,255,255)",
         strokeColor: "rgb(255,255,255)",
-        highlightFill: "rgb(255,255,255)",
-        highlightStroke: "rgb(255,255,255)",
+        highlightFill: "rgba(255,255,255,.3)",
+        highlightStroke: "rgba(255,255,255,.3)",
         data: chartData
       }]
     }
@@ -150,13 +157,11 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
   renderRadarChart: function() {
     var ctx = $("#chart")[0].getContext("2d");
     var chartData = [];
-    var lbls = [];
     this.collection.forEach(function(answer) {
-      lbls.push(answer.attributes.text);
       chartData.push(answer.attributes.responses.length);
     });
     var radarChartData = {
-      labels: lbls,
+      labels: this.labels,
       datasets: [{
         fillColor: "rgb(255,255,255)",
         strokeColor: "rgb(255,255,255)",
@@ -177,36 +182,30 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     var chartData = [];
     var answerData;
     var i = 0;
-    var colors = this.colors;
-    var highlights = this.highlights;
     this.collection.forEach(function(answer) {
       answerData = {};
       answerData['value'] = answer.attributes.responses.length;
-      answerData['color'] = colors[i];
-      answerData['highlight'] = highlights[i];
-      answerData['label'] = answer.attributes.text;
+      answerData['color'] = this.colors[i];
+      answerData['highlight'] = this.highlights[i];
+      answerData['label'] = this.labels[i];
       chartData.push(answerData);
       i++;
-    });
-
-
+    }.bind(this));
     var chart = new Chart(ctx).PolarArea(chartData, this.polarAreaChartOptions);
 
   },
   renderLineChart: function() {
     var ctx = $("#chart")[0].getContext("2d");
     var chartData = [];
-    var lbls = [];
     this.collection.forEach(function(answer) {
-      lbls.push(answer.attributes.text);
       chartData.push(answer.attributes.responses.length);
     });
     var lineChartData = {
-      labels: lbls,
+      labels: this.labels.slice(0, this.collection.length),
       datasets: [{
-        fillColor: "rgba(220,220,220,0.2)",
-        strokeColor: "rgba(220,220,220,1)",
-        pointColor: "rgba(220,220,220,1)",
+        fillColor: "rgba(255,255,255, 0)",
+        strokeColor: "rgba(255,255,255, .8)",
+        pointColor: "rgba(255,255,255, .8)",
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgba(220,220,220,1)",
@@ -218,13 +217,13 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 
   barChartOptions: {
     //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-    scaleBeginAtZero: false,
+    scaleBeginAtZero: true,
 
     //Boolean - Whether grid lines are shown across the chart
     scaleShowGridLines: true,
 
     //String - Colour of the grid lines
-    scaleGridLineColor: "rgba(255,255,255,0.05)",
+    scaleGridLineColor: "rgba(255,255,255,0.2)",
 
     //Number - Width of the grid lines
     scaleGridLineWidth: 1,
@@ -233,7 +232,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     scaleShowHorizontalLines: true,
 
     //Boolean - Whether to show vertical lines (except Y axis)
-    scaleShowVerticalLines: false,
+    scaleShowVerticalLines: true,
 
     //Boolean - If there is a stroke on each bar
     barShowStroke: true,
@@ -242,7 +241,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     barStrokeWidth: 1,
 
     //Number - Spacing between each of the X value sets
-    barValueSpacing: 5,
+    barValueSpacing: 10,
 
     //Number - Spacing between data sets within X values
     barDatasetSpacing: 1,
@@ -259,7 +258,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     scaleShowGridLines: true,
 
     //String - Colour of the grid lines
-    scaleGridLineColor: "rgba(255,255,255,0.05)",
+    scaleGridLineColor: "rgba(255,255,255,0.2)",
 
     //Number - Width of the grid lines
     scaleGridLineWidth: 1,
@@ -295,7 +294,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     datasetStrokeWidth: 1,
 
     //Boolean - Whether to fill the dataset with a colour
-    datasetFill: false,
+    datasetFill: true,
 
 
     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
@@ -304,19 +303,19 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 
   polarAreaChartOptions: {
     //Boolean - Show a backdrop to the scale label
-    scaleShowLabelBackdrop: true,
+    scaleShowLabelBackdrop: false,
 
     //String - The colour of the label backdrop
     scaleBackdropColor: "rgba(255,255,255,0)",
 
     // Boolean - Whether the scale should begin at zero
-    scaleBeginAtZero: false,
+    scaleBeginAtZero: true,
 
     //Number - The backdrop padding above & below the label in pixels
-    scaleBackdropPaddingY: 2,
+    scaleBackdropPaddingY: 3,
 
     //Number - The backdrop padding to the side of the label in pixels
-    scaleBackdropPaddingX: 2,
+    scaleBackdropPaddingX: 5,
 
     //Boolean - Show line for each value in the scale
     scaleShowLine: true,
@@ -325,13 +324,13 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     segmentShowStroke: true,
 
     //String - The colour of the stroke on each segement.
-    segmentStrokeColor: "rgba(255,255,255,0.5)",
+    segmentStrokeColor: "rgba(255,255,255,1)",
 
     //Number - The width of the stroke value in pixels
     segmentStrokeWidth: 1,
 
     //Number - Amount of animation steps
-    animationSteps: 40,
+    animationSteps: 100,
 
     //String - Animation easing effect.
     animationEasing: "easeOutBounce",
@@ -352,7 +351,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     segmentShowStroke: true,
 
     //String - The colour of each segment stroke
-    segmentStrokeColor: "rgba(255,255,255,0.5)",
+    segmentStrokeColor: "rgba(255,255,255,1)",
 
     //Number - The width of each segment stroke
     segmentStrokeWidth: 1,
@@ -361,7 +360,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     percentageInnerCutout: 0, // This is 0 for Pie charts
 
     //Number - Amount of animation steps
-    animationSteps: 30,
+    animationSteps: 100,
 
     //String - Animation easing effect
     animationEasing: "easeOutBounce",
@@ -388,10 +387,10 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     scaleShowLabels: false,
 
     // Boolean - Whether the scale should begin at zero
-    scaleBeginAtZero: false,
+    scaleBeginAtZero: true,
 
     //String - Colour of the angle line
-    angleLineColor: "rgba(255,255,255, 0.5)",
+    angleLineColor: "rgba(255,255,255, 0.9)",
 
     //Number - Pixel width of the angle line
     angleLineWidth: 1,

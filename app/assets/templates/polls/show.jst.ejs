@@ -1,39 +1,51 @@
-<div class="poll-table-heading">
-  <button type="button" class="btn btn-default go-back">Back</button>
-  <h3>
-    <%= poll.escape('text') %>
-  </h3>
-</div>
-
-<div class="row" id="answers">
-  <% answers.forEach(function(answer) { %>
-    <div class="col-xs-12 col-md-6">
-      <div class="answer-select-wrap">
-        <button type="button" class="btn-answer-select" data-answer-id="<%= answer.id %>">
-          <%= answer.escape('text') %>
-        </button>
-      </div>
+<div class="panel-body">
+  <button type="button" class="btn btn-default go-back pull-right"> Back to Active Polls</button>
+  <div class="row" id="answers">
+    <div class="col-xs-10 col-xs-offset-1">
+      <h4>
+        <%= poll.escape('text') %>
+      </h4>
     </div>
-    <% }); %>
-</div>
-<div id="results" class="form-collapsed">
-  <div id="canvas-wrap">
-    <div id="canvas-holder">
-      <canvas height="240" width="360" id="chart"></canvas>
-    </div>
-  </div>
-  <table class="table">
     <% var i = 0; %>
       <% answers.forEach(function(answer) { %>
-        <tr>
-          <td>
-            <%= percentages[i] %>
-          </td>
-          <td colspan="3">
-            <%= answer.attributes.text %>
-          </td>
-          <% i++; %>
-        </tr>
+        <div class="col-xs-12 col-md-6">
+          <div class="answer-select-wrap">
+            <button type="button" class="btn btn-primary btn-block btn-answer-select" data-answer-id="<%= answer.id %>">
+              <%= labels[i] + ': ' + answer.escape('text') %>
+                <% i++; %>
+            </button>
+          </div>
+        </div>
         <% }); %>
-  </table>
+  </div>
+  <div id="results" class="row form-collapsed">
+    <div class="col-xs-12">
+      <h3>Poll Results:</h3>
+      <div id="canvas-wrap">
+        <div id="canvas-holder">
+          <canvas height="240" width="360" id="chart"></canvas>
+        </div>
+      </div>
+      <div class="result-data">
+        <h4>To the question, "
+          <%= poll.escape('text') %>":</h4>
+        <% var i = 0; %>
+          <% answers.forEach(function(answer) { %>
+            <strong>
+              <%= percentages[i] %>%</strong> of people selected answer
+            <strong>
+              <%= labels[i] %>:</strong> "
+            <%= answer.attributes.text %>"
+              <br>
+
+
+              <% i++; %>
+                <% }); %>
+                  <br>
+                  <br>
+
+
+      </div>
+    </div>
+  </div>
 </div>

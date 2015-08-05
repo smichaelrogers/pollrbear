@@ -12,9 +12,11 @@ module Api
         pollData[:text] = poll.text
         pollData[:responses] = []
         pollData[:invites] = []
+        pollData[:created_at] = poll.created_at.strftime("Posted %b %d, %Y at %l:%M %p by")
         pollData[:id] = poll.id
-        pollData[:user] = "#{poll.user.first_name} + #{poll.user.last_name}"
+        pollData[:user] = "#{poll.user.first_name} #{poll.user.last_name}"
         pollData[:email] = poll.user.email
+        pollData[:user_id] = poll.user.id
         poll.answers.each do |answer|
           pollData[:answers] << answer
           answer.responses.each do |response|
@@ -37,7 +39,7 @@ module Api
 
     def create
       @poll = current_user.polls.new(poll_params)
-
+      @poll.user_id = current_user.id
       if @poll.save
         render json: @poll
       else
