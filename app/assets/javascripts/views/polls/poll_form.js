@@ -1,4 +1,4 @@
-PollrBear.Views.PollForm = Backbone.View.extend({
+PollrBear.Views.PollForm = Backbone.CompositeView.extend({
   template: JST['polls/form'],
 
   events: {
@@ -8,11 +8,14 @@ PollrBear.Views.PollForm = Backbone.View.extend({
     'click #submit-create-poll': 'submitCreatePoll',
     'keypress .answer-input': 'maybeAddAnswer',
     'click .btn-format': 'selectFormat',
-    'click .btn-chart': 'selectChart'
+    'click .btn-chart': 'selectChart',
+    'click .visit-created-poll': 'visitCreatedPoll',
+    'click .errors-dismiss': 'errorsDismiss'
   },
 
-  initialize: function() {
+  initialize: function(options) {
     this.pollFormData;
+    this.parentView = options.parentView;
   },
 
   render: function() {
@@ -32,10 +35,7 @@ PollrBear.Views.PollForm = Backbone.View.extend({
       // }
       $("#multiple-choice-form").removeClass("form-collapsed");
     } else {
-      this.$(".errors").addClass("errors-flash").text("Please enter a valid question");
-      window.setTimeout(function() {
-        this.$(".errors").removeClass("errors-flash").text("");
-      }.bind(this), 2000);
+      this.$(".errors").addClass("errors-flash").html("Please enter a valid question <a href=\"#\" class=\"errors-dismiss\">Close</a>");
     }
   },
 
@@ -43,6 +43,7 @@ PollrBear.Views.PollForm = Backbone.View.extend({
     event.preventDefault();
     var answerData = $("#answer-form").serializeJSON();
     var formData = this.pollFormData;
+    var $errors = this.$(".errors");
     this.collection.create(formData, {
       success: function(poll) {
         var $answers = $('.answer-item');
@@ -54,9 +55,27 @@ PollrBear.Views.PollForm = Backbone.View.extend({
           $("#poll-form").removeClass("form-collapsed");
           $("#poll-text").val("");
           $("#multiple-choice-form").addClass("form-collapsed");
+          $errors.addClass("errors-flash").html("Your poll has been created! You can view it <a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">here</a><br><a href=\"#\" class=\"errors-dismiss\">Close</a>")
         });
       }
     });
+  },
+
+  errorsDismiss: function(event) {
+    event.preventDefault();
+    this.$(".errors").removeClass("errors-flash").html("");
+  },
+
+  visitCreatedPoll: function(event) {
+    event.preventDefault();
+    var pollId = $(event.currentTarget).attr("data-poll-id");
+    var poll = this.collection.getOrFetch(pollId);
+    var view = new PollrBear.Views.PollShow({
+      model: poll,
+      collection: poll.answers(),
+      parentView: this.parentView
+    });
+    this._swapMainView(view);
   },
 
   selectFormat: function(event) {
@@ -68,18 +87,18 @@ PollrBear.Views.PollForm = Backbone.View.extend({
       $(".btn-chart").removeClass("invisible");
       $("#poll-text").attr("placeholder", "Ask a question (multiple choice)");
     }
-    $(".btn-format").removeClass("btn-success").addClass("btn-default");
+    $(".btn-format").removeClass("btn-selected").addClass("btn-default");
     var format = ($(event.currentTarget).attr("data-format") * 1);
     $("#poll-format").val(format);
-    $(event.currentTarget).removeClass("btn-default").addClass("btn-success");
+    $(event.currentTarget).removeClass("btn-default").addClass("btn-selected");
   },
 
   selectChart: function(event) {
     event.preventDefault();
-    $(".btn-chart").removeClass("btn-success").addClass("btn-default");
+    $(".btn-chart").removeClass("btn-selected").addClass("btn-default");
     var chart = ($(event.currentTarget).attr("data-chart") * 1);
     $("#poll-chart").val(chart);
-    $(event.currentTarget).removeClass("btn-success").addClass("btn-success");
+    $(event.currentTarget).removeClass("btn-selected").addClass("btn-selected");
   },
 
   maybeAddAnswer: function(event) {

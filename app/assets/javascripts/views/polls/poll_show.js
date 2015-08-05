@@ -76,8 +76,10 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
     var len = this.totalVotes();
     var num;
     this.collection.forEach(function(answer) {
-      num = (answer.attributes.responses.length / len) * 100
-      data.push(Math.floor(num) + "");
+      if (answer.attributes.responses) {
+        num = (answer.attributes.responses.length / len) * 100
+        data.push(Math.floor(num) + "");
+      }
     });
     return data;
   },
@@ -85,7 +87,9 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
   totalVotes: function() {
     var len = 0;
     this.collection.forEach(function(answer) {
-      len += answer.attributes.responses.length;
+      if(answer.attributes.responses) {
+        len += answer.attributes.responses.length;
+      }
     });
     return len;
   },

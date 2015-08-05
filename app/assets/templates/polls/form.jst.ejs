@@ -1,22 +1,25 @@
 <div class="panel panel-default">
   <div class="row">
+    <div class="col-xs-12">
+      <div class="errors"></div>
+    </div>
+  </div>
+  <div class="row">
     <form id="poll-form">
-      <div class="col-xs-12">
-        <div class="errors"></div>
-      </div>
+
       <div class="col-xs-12">
         <textarea name="poll[text]" type="text" rows="4" class="form-control" placeholder="Ask a question (multiple choice)" id="poll-text"></textarea>
         <div class="btn-group btn-group-justified">
           <input type="hidden" name="poll[privacy]" value="1" id="poll-privacy">
           <input type="hidden" name="poll[format]" value="1" id="poll-format">
-          <a href="#" class="btn btn-success btn-format" data-format="1">Multiple Choice</a>
-          <a href="#" class="btn btn-default btn-format" data-format="2">Word Cloud</a>
+          <a href="#" class="btn btn-selected btn-format" data-format="1">Multiple Choice</a>
+          <a href="#" class="btn btn-format" data-format="2">Word Cloud</a>
         </div>
         <div class="btn-group btn-group-justified">
-          <a href="#" class="btn btn-success btn-chart btn-lg" data-chart="1"><i class="fa fa-fw fa-pie-chart"></i></a>
-          <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="2"><i class="fa fa-fw fa-bar-chart"></i></a>
-          <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="3"><i class="fa fa-fw fa-line-chart"></i></a>
-          <a href="#" class="btn btn-default btn-chart btn-lg" data-chart="4"><i class="fa fa-fw fa-area-chart"></i></a>
+          <a href="#" class="btn btn-selected btn-chart btn-lg" data-chart="1"><i class="fa fa-fw fa-pie-chart"></i></a>
+          <a href="#" class="btn btn-chart btn-lg" data-chart="2"><i class="fa fa-fw fa-bar-chart"></i></a>
+          <a href="#" class="btn btn-chart btn-lg" data-chart="3"><i class="fa fa-fw fa-line-chart"></i></a>
+          <a href="#" class="btn btn-chart btn-lg" data-chart="4"><i class="fa fa-fw fa-area-chart"></i></a>
         </div>
         <input type="hidden" name="poll[chart]" value="1" id="poll-chart">
         <div class="btn-group btn-group-justified">

@@ -12,7 +12,7 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     this.showUserPolls();
-    this.showPollForm();
+
     return this;
   },
 
@@ -22,11 +22,14 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
       model: this.model
     });
     $("#main").append(view.render().$el);
+    this.showPollForm(view);
   },
 
-  showPollForm: function() {
+  showPollForm: function(parentView) {
     var view = new PollrBear.Views.PollForm({
-      collection: this.collection
+      collection: this.collection,
+      model: this.model,
+      parentView: parentView
     });
     $("#new-poll").html(view.render().$el);
   }

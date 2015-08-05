@@ -17,7 +17,6 @@ body {
 input,
 textarea {
   box-shadow: none !important;
-  border: none !important;
 }
 table.table {
   tr {
@@ -26,9 +25,6 @@ table.table {
         .select-poll {
           display: block;
           padding: 5px 10px;
-          &:hover {
-            background: $brand-success !important;
-          }
         }
       }
       .poll-user {
@@ -58,7 +54,7 @@ button.btn, button.btn-primary, button.btn-success, button.btn-info {
 }
 
 #main {
-  padding-top: 20px;
+  padding: 20px;
 }
 
 
@@ -179,8 +175,15 @@ a {
   padding-bottom: 30px;
 }
 .btn {
+  &-selected {
+    color: $text-color;
+    background: $brand-info !important;
+  }
   &-chart {
 
+  }
+  &-info {
+    color: $text-color;
   }
   &-select-poll {
     height: 30px;
@@ -328,6 +331,12 @@ a {
 .errors {
   display: block;
   width: 100%;
+}
+.errors-success {
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+  background: lighten($brand-primary, 5%);
 }
 .errors-flash {
   padding: 20px;
