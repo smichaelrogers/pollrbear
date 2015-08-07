@@ -1,0 +1,11 @@
+
+<% var i = 0; %>
+  <% answers.forEach(function(answer) { %>
+    <span class="answer-result-heading">
+      <strong>
+        <%= percentages[i] %>%</strong> of people selected answer:</span>
+      <span class="answer-result-text"><strong>
+        <%= labels[i] %>:</strong> "
+      <%= answer.attributes.text %>"</span>
+    <% i++; %>
+      <% }); %>

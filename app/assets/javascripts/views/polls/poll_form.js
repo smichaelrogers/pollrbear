@@ -6,8 +6,8 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
     'click .remove-answer': 'removeAnswer',
     'click #submit-poll-form': 'submitPollForm',
     'click #submit-create-poll': 'submitCreatePoll',
-    'keypress .answer-input': 'maybeAddAnswer',
-    'keypress #poll-text': 'maybeSubmitQuestion',
+    'keypress input': 'delegateKeystroke',
+    'keypress textarea': 'delegateKeystroke',
     'click .btn-format': 'selectFormat',
     'click .btn-chart': 'selectChart',
     'click .visit-created-poll': 'visitCreatedPoll',
@@ -52,7 +52,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
           $("#poll-form").removeClass("form-collapsed");
           $("#poll-text").val("");
           $("#multiple-choice-form").addClass("form-collapsed");
-          $errors.addClass("errors-flash").html("<span class=\"error-text\">Your poll has been created! You can view it <a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">here</a></span><a href=\"#\" class=\"errors-dismiss\">Close</a>")
+          $errors.addClass("errors-flash").html("<span class=\"error-text\">Your poll has been created! <a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">You can view it here</a></span><a href=\"#\" class=\"errors-dismiss\"><i class=\"fa fa-2x fa-times-circle\"></i></a>")
         });
       }
     });
@@ -68,12 +68,12 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
     var pollId = $(event.currentTarget).attr("data-poll-id");
     var poll = this.collection.getOrFetch(pollId);
     var answers = poll.answers();
-    answers.fetch();
     var view = new PollrBear.Views.PollShow({
       model: poll,
       collection: answers,
       parentView: this.parentView
     });
+    this.$(".errors").removeClass("errors-flash").html("");
     this._swapMainView(view);
   },
 
@@ -100,22 +100,24 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
     $(event.currentTarget).removeClass("btn-selected").addClass("btn-selected");
   },
 
-  maybeAddAnswer: function(event) {
-    if (event.keyCode === 13) {
-      this.addAnswer(event);
-    }
-  },
-  maybeSubmitQuestion: function(event) {
-    if (event.keyCode === 13) {
-      this.submitPollForm(event);
+  delegateKeystroke: function(event) {
+    if(event.keyCode === 13) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (event.currentTarget.id === "poll-text") {
+        this.submitPollForm(event);
+      } else if (event.currentTarget.id === "answer-input") {
+        this.addAnswer(event);
+      }
     }
   },
 
   addAnswer: function(event) {
-    var answer = this.$('.answer-input').val();
+    event.preventDefault();
+    var answer = this.$('#answer-text').val();
     if (answer.length > 0) {
-      this.$('.answer-input').val('');
-      this.$('.answer-select').append("<div class=\"answer-item\" data-content=\"" + answer + "\"><span>" + answer + "</span><a href=\"#\" class=\"remove-answer\"><i class=\"fa fa-lg fa-times-circle\"></i></a></div");
+      this.$('#answer-text').val('');
+      this.$('.answer-select').append("<div class=\"answer-item\" data-content=\"" + answer + "\"><a href=\"#\" class=\"remove-answer\">Remove</a><span class=\"answer-input-text\">" + answer +  "</span></div>");
     }
   },
 

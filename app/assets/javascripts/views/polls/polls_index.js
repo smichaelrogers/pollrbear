@@ -65,7 +65,7 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
         textStr = p.text;
       }
       $("div.poll-text[data-poll-id=\"" + p.id + "\"]").text(textStr);
-      $("div.poll-user[data-poll-id=\"" + p.id + "\"]").html(p.created_at + " <a href=\"#\" class=\"select-show-user\" data-user-id=\"" + p.user_id + "\"> " + p.user + " </a><br>" + p.expires_in);
+      $("div.poll-user[data-poll-id=\"" + p.id + "\"]").html(p.created_at + " <a href=\"#\" class=\"select-show-user\" data-user-id=\"" + p.user_id + "\"> " + p.user + " </a>&nbsp;&nbsp;&nbsp;&nbsp;" + p.expires_in);
       var voteStr = ((p.response_count === 0 || p.response_count > 1) ? "votes" : "vote");
       $("div.poll-votes-wrap[data-poll-id=\"" + p.id + "\"]").html("<span class=\"poll-votes\">" + p.response_count + " " + voteStr + "</span>");
       $("div.poll-info[data-poll-id=\"" + p.id + "\"]").html("<span class=\"" + formatClass + "\">" + formatStr + "</span>");

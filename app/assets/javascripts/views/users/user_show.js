@@ -1,6 +1,9 @@
 PollrBear.Views.UserShow = Backbone.CompositeView.extend({
   template: JST['users/show'],
   className: "row",
+  events: {
+    "click .sign-out-link": "signOut"
+  },
   initialize: function(options) {
     this.users = options.users;
     this.listenTo(this.model, 'sync', this.render);
@@ -15,6 +18,14 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
     this.showTrendingPolls();
 
     return this;
+  },
+  signOut: function(event){
+    event.preventDefault();
+    PollrBear.currentUser.signOut({
+      success: function(){
+        Backbone.history.navigate("session/new", { trigger: true });
+      }
+    });
   },
 
   showUserPolls: function() {

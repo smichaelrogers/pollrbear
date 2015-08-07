@@ -1,31 +1,13 @@
 <% if(PollrBear.currentUser.isSignedIn()) { %>
-  <nav class="navbar navbar-default">
-    <div class="container">
-
-
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-          <span class="sr-only">toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-          <img class="logo-nav" src="/logo14.png">
-        </a>
-      </div>
-      <div class="collapse navbar-collapse" id="nav-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="#" class="nav-link">
-              <%= PollrBear.currentUser.fullName() %>
-            </a>
-          </li>
-          <li class="nav-sign-out"><a class="nav-link" href="#" id="sign-out-link">Sign out</a></li>
-        </ul>
+  <div class="row nav-user">
+    <div class="col-xs-12">
+      <div class="nav-logo-wrap">
+        <img class="nav-logo-img" src="/logo14.png">
       </div>
     </div>
-  </nav>
+  </div>
   <% } else { %>
+    <div class="nav-guest">
 
+    </div>
     <% }; %>

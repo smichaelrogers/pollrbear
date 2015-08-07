@@ -2,20 +2,17 @@
   <div id="main" class="row">
   </div>
 </div>
-<div class="col-xs-12 col-md-5 col-lg-4" id="right-side">
+<div class="col-xs-12 col-md-5 col-lg-4 group" id="right-side">
   <div class="row">
-    <div class="col-xs-7 col-md-12" id="new-poll">
-    </div>
     <div class="col-xs-5 col-md-12" id="user-info">
-      <a href="#" class="profile-img">
-        <img src="<%= user.get('profile_img') %>">
-      </a>
       <h4>
-        <%= user.fullName() %>
+        <%= user.fullName() %> &nbsp;<small> <a href="#" class="sign-out-link">Sign out</a></small>
       </h4>
-      <h5>
+      <h6>
         <%= user.escape('email') %>
-      </h5>
+      </h6>
+    </div>
+    <div class="col-xs-7 col-md-12" id="new-poll">
     </div>
   </div>
 </div>

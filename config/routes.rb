@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :create, :show]
     resources :polls, only: [:index, :create, :show, :destroy]
     resources :answers, only: [:index, :create, :show, :destroy]
-    resources :responses, only:  [:index, :create]
+    resources :responses, only:  [:index, :create, :show]
   end
 
   root to: 'pages#root'
