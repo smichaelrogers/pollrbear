@@ -1,42 +1,44 @@
-<div class="panel panel-default">
-  <div class="row">
+<div class="row">
+  <div class="col-xs-12">
+    <h2 class="heading-inverse section-title">Create</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="errors"></div>
+  </div>
+</div>
+<div class="row">
+  <form id="poll-form">
     <div class="col-xs-12">
-      <div class="errors"></div>
+      <textarea id="poll-text" name="poll[text]" type="text" rows="4" class="form-control" placeholder="Ask a question (multiple choice)"></textarea>
+      <input type="hidden" name="poll[privacy]" value="1" id="poll-privacy">
+      <input type="hidden" name="poll[format]" value="1" id="poll-format">
+      <input type="hidden" name="poll[chart]" value="1" id="poll-chart">
     </div>
-  </div>
-  <div class="row">
-    <form id="poll-form">
-
-      <div class="col-xs-12">
-        <textarea name="poll[text]" type="text" rows="4" class="form-control" placeholder="Ask a question (multiple choice)" id="poll-text"></textarea>
-        <div class="btn-group btn-group-justified">
-          <input type="hidden" name="poll[privacy]" value="1" id="poll-privacy">
-          <input type="hidden" name="poll[format]" value="1" id="poll-format">
-          <a href="#" class="btn btn-selected btn-format" data-format="1">Multiple Choice</a>
-          <a href="#" class="btn btn-format" data-format="2">Word Cloud</a>
-        </div>
-        <div class="btn-group btn-group-justified">
-          <a href="#" class="btn btn-selected btn-chart btn-lg" data-chart="1"><i class="fa fa-fw fa-pie-chart"></i></a>
-          <a href="#" class="btn btn-chart btn-lg" data-chart="2"><i class="fa fa-fw fa-bar-chart"></i></a>
-          <a href="#" class="btn btn-chart btn-lg" data-chart="3"><i class="fa fa-fw fa-line-chart"></i></a>
-          <a href="#" class="btn btn-chart btn-lg" data-chart="4"><i class="fa fa-fw fa-area-chart"></i></a>
-        </div>
-        <input type="hidden" name="poll[chart]" value="1" id="poll-chart">
-        <div class="btn-group btn-group-justified">
-          <a href="#" class="btn btn-lg btn-info" id="submit-poll-form">Next</a>
-        </div>
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-selector btn-selected btn-format" data-format="1">Multiple Choice</button>
+      <button type="button" class="btn btn-selector btn-format" data-format="2">Word Cloud</button>
+    </div>
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-selector btn-selected btn-chart" data-chart="1"><i class="fa fa-fw fa-pie-chart"></i></button>
+      <button type="button" class="btn btn-selector btn-chart" data-chart="2"><i class="fa fa-fw fa-bar-chart"></i></button>
+      <button type="button" class="btn btn-selector btn-chart" data-chart="3"><i class="fa fa-fw fa-line-chart"></i></button>
+      <button type="button" class="btn btn-selector btn-chart" data-chart="4"><i class="fa fa-fw fa-area-chart"></i></button>
+    </div>
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-uniq-inverse" id="submit-poll-form">Next</button>
+    </div>
+  </form>
+  <form id="multiple-choice-form" class="form-collapsed">
+    <div class="col-xs-12 add-answer-wrap">
+      <a href="#" class="add-answer"><i class="fa fa-plus-circle fa-3x"></i></a>
+      <input type="text" class="form-control answer-input" placeholder="Add an answer...">
+      <div class="answer-select">
       </div>
-    </form>
-    <form id="multiple-choice-form" class="form-collapsed">
       <div class="col-xs-12">
-        <input type="text" class="form-control answer-input" placeholder="Add an answer...">
-        <button type="button" class="btn btn-info add-answer">Add to list</button>
-        <div class="answer-select">
-        </div>
-        <div class="btn-group btn-group-justified">
-          <a href="#" class="btn btn-success btn-lg" id="submit-create-poll">Submit</a>
-        </div>
+        <button type="button" class="btn btn-uniq-inverse" id="submit-create-poll">Submit</button>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

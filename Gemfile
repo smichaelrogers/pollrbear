@@ -15,7 +15,6 @@ gem "font-awesome-rails"
 gem 'kaminari'
 gem 'figaro'
 gem 'omniauth-twitter'
-gem 'faker'
 gem 'less-rails', '~> 2.7.0'
 gem 'therubyracer'
 group :doc do
@@ -28,6 +27,8 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'rails-erd'
+  gem 'traceroute'
+  gem 'faker'
 end
 
 group :production do

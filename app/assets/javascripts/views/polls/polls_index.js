@@ -1,15 +1,15 @@
 PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
   template: JST['polls/index'],
-  id: "poll-list",
+  className: "col-xs-12",
   events: {
-    "click .select-poll": "selectPoll",
-    "click .next-page": "nextPage",
-    "click .prev-page": "prevPage",
-    "click .select-page": "selectPage"
+    "click .poll-select": "selectPoll",
+    "click .page-nav-next": "nextPage",
+    "click .page-nav-prev": "prevPage",
+    "click .page-nav-select": "selectPage"
   },
 
   initialize: function() {
-    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'sync add', this.render);
     this.collection.fetch({
       remove: true,
       data: {
@@ -30,7 +30,7 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     $("li.select-page-item[data-page-id=\"" + currentPage + "\"]").addClass("active");
-    if(this.collection.data) {
+    if (this.collection.data) {
       this.populatePollData();
     }
     return this;
@@ -47,49 +47,28 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     this._swapMainView(view);
   },
   populatePollData: function() {
-    var pollId, pollFormat, pollText, pollChart, pollUser, pollResponseCount;
+    var formatStr;
+    var formatClass;
+    var textStr = "";
     var pageData = this.collection.data;
-    pageData.forEach(function(pollData) {
-      pollId = pollData.id;
-      pollFormat = pollData.format;
-      pollResponseCount = pollData.response_count;
-      pollText = pollData.text;
-      pollChart = pollData.chart;
-      pollUser = pollData.user;
-      pollUserId = pollData.user_id;
-      pollEmail = pollData.email;
-      pollCreatedAt = pollData.created_at;
-
-      var chartStr;
-      switch(pollChart) {
-        case 1:
-          chartStr = "fa fa-pie-chart";
-          break;
-        case 2:
-          chartStr = "fa fa-bar-chart";
-          break;
-        case 3:
-          chartStr = "fa fa-line-chart";
-          break;
-        case 4:
-          chartStr = "fa fa-area-chart";
-          break;
-        default:
-          chartStr = "";
-      }
-
-      var formatStr;
-      if(pollFormat == 2) {
-        $("span.poll-format[data-poll-id=\"" + pollId + "\"]").text("WC");
+    pageData.forEach(function(p) {
+      if (p.format == 2) {
+        formatStr = "open ended";
+        formatClass = "format-oe";
       } else {
-        $("span.poll-format[data-poll-id=\"" + pollId + "\"]").text("Q");
+        formatStr = "multiple choice";
+        formatClass = "format-mc";
       }
-
-
-
-      $("span.poll-text[data-poll-id=\"" + pollId + "\"]").text(pollText);
-      $("span.poll-user[data-poll-id=\"" + pollId + "\"]").html(pollCreatedAt + "  <a href=\"#\" class=\"select-show-user\" data-user-id=\"" + pollUserId + "\"> " + pollUser + " </a>");
-      $("span.poll-responses[data-poll-id=\"" + pollId + "\"]").text(pollResponseCount);
+      if (p.text.length > 140) {
+        textStr = p.text.slice(0, 140) + "...";
+      } else {
+        textStr = p.text;
+      }
+      $("div.poll-text[data-poll-id=\"" + p.id + "\"]").text(textStr);
+      $("div.poll-user[data-poll-id=\"" + p.id + "\"]").html(p.created_at + " <a href=\"#\" class=\"select-show-user\" data-user-id=\"" + p.user_id + "\"> " + p.user + " </a><br>" + p.expires_in);
+      var voteStr = ((p.response_count === 0 || p.response_count > 1) ? "votes" : "vote");
+      $("div.poll-votes-wrap[data-poll-id=\"" + p.id + "\"]").html("<span class=\"poll-votes\">" + p.response_count + " " + voteStr + "</span>");
+      $("div.poll-info[data-poll-id=\"" + p.id + "\"]").html("<span class=\"" + formatClass + "\">" + formatStr + "</span>");
     });
   },
   fetchPage: function(pageNum) {

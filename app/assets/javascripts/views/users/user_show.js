@@ -1,6 +1,6 @@
 PollrBear.Views.UserShow = Backbone.CompositeView.extend({
   template: JST['users/show'],
-  className: "container",
+  className: "row",
   initialize: function(options) {
     this.users = options.users;
     this.listenTo(this.model, 'sync', this.render);
@@ -12,6 +12,7 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     this.showUserPolls();
+    this.showTrendingPolls();
 
     return this;
   },
@@ -32,5 +33,17 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
       parentView: parentView
     });
     $("#new-poll").html(view.render().$el);
+  },
+
+  showTrendingPolls: function() {
+    var userId = this.model.id;
+    $.ajax({
+      url: "/api/polls/trending/" + userId,
+      dataType: 'json',
+      type: "GET",
+      success: function(trending) {
+        console.log(trending);
+      }
+    });
   }
 });

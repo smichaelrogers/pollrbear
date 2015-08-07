@@ -8,6 +8,3 @@ json.answers poll.answers do |answer|
     json.respondent response.respondent, :id, :email, :first_name, :last_name, :created_at
   end
 end
-json.invites poll.invites do |invite|
-  json.extract! invite, :id, :poll_id, :user_id, :created_at
-end

@@ -1,51 +1,53 @@
-<div class="panel-body">
-  <button type="button" class="btn btn-default go-back pull-right"> Back to Active Polls</button>
-  <div class="row" id="answers">
-    <div class="col-xs-10 col-xs-offset-1">
-      <h4>
-        <%= poll.escape('text') %>
-      </h4>
-    </div>
+<div id="answers" class="row">
+  <div class="col-xs-12">
+    <button type="button" class="btn btn-std-inverse go-back pull-right"> Back to list</button>
+    <h4 class="heading-inverse">Please take a moment to answer the following...</h4>
+    <h3 class="heading-inverse">
+      <%= poll.escape('text') %>
+    </h3>
     <% var i = 0; %>
       <% answers.forEach(function(answer) { %>
-        <div class="col-xs-12 col-md-6">
-          <div class="answer-select-wrap">
-            <button type="button" class="btn btn-primary btn-block btn-answer-select" data-answer-id="<%= answer.id %>">
-              <%= labels[i] + ': ' + answer.escape('text') %>
-                <% i++; %>
-            </button>
-          </div>
-        </div>
+        <button type="button" class="btn btn-std-inverse btn-answer-select" data-answer-id="<%= answer.id %>">
+          <span class="answer-label">
+            <%= labels[i] %>:</span>
+          <span class="answer-text">
+            <%= answer.escape('text') %>
+          </span>
+          <% i++; %>
+        </button>
         <% }); %>
   </div>
-  <div id="results" class="row form-collapsed">
-    <div class="col-xs-12">
-      <h3>Poll Results:</h3>
-      <div id="canvas-wrap">
-        <div id="canvas-holder">
-          <canvas height="240" width="360" id="chart"></canvas>
-        </div>
-      </div>
-      <div class="result-data">
-        <h4>To the question, "
-          <%= poll.escape('text') %>":</h4>
-        <% var i = 0; %>
-          <% answers.forEach(function(answer) { %>
-            <strong>
-              <%= percentages[i] %>%</strong> of people selected answer
+</div>
+<div id="results" class="row form-collapsed">
+  <div class="col-xs-12">
+    <button type="button" class="btn btn-std-inverse go-back pull-right"> Back to list</button>
+    <h3 class="heading-inverse">Here are some results...</h3>
+  </div>
+  <div class="col-xs-12 col-md-5 poll-result-left">
+    <h5 class="heading-inverse">
+      to the question...
+    </h5>
+
+    <h3 class="heading-inverse poll-result-heading">"<%= poll.escape('text') %>"</h3>
+    <% var i = 0; %>
+      <% answers.forEach(function(answer) { %>
+        <span class="answer-result">
+          <strong><%= percentages[i] %>%</strong> of people selected answer: <br>
             <strong>
               <%= labels[i] %>:</strong> "
-            <%= answer.attributes.text %>"
-              <br>
-
-
-              <% i++; %>
-                <% }); %>
-                  <br>
-                  <br>
-
-
+            <%= answer.attributes.text %>"</span>
+        <% i++; %>
+          <% }); %>
+  </div>
+  <div class="col-xs-12 col-md-7">
+    <div id="canvas-wrap">
+      <div id="canvas-holder">
+        <canvas height="360" width="280" id="chart"></canvas>
       </div>
     </div>
   </div>
+</div>
+
+<div class="allow-realign overlay-collapsed">
+  <h2><i class="fa fa-spinner fa-pulse"></i> Hang on...</h2>
 </div>

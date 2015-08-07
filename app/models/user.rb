@@ -28,8 +28,6 @@ class User < ActiveRecord::Base
   has_many :answers, through: :polls, source: :answers
   has_many :responses, through: :answers, source: :responses
   has_many :respondents, through: :responses, source: :respondent
-  has_many :invites
-  has_many :polls, through: :invites, source: :poll
 
   attr_reader :password
   after_initialize :ensure_session_token
@@ -74,7 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def ensure_profile_img
-    self.profile_img ||= '/default/slice' + (0..9).to_a.sample.to_s + '.png'
+    self.profile_img ||= '/default-gravatar.png'
   end
 
   def reset_session_token!

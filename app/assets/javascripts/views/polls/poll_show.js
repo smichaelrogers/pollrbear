@@ -1,5 +1,7 @@
 PollrBear.Views.PollShow = Backbone.CompositeView.extend({
   template: JST['polls/show'],
+  className: "col-xs-12",
+  id: "poll-show",
   events: {
     'click .btn-answer-select': 'selectAnswer',
     'click .go-back': 'goBack'
@@ -55,7 +57,12 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
       answer_id: answerId
     });
     $("#answers").addClass("form-collapsed");
-    $("#results").removeClass("form-collapsed");
+    $(".allow-realign").removeClass("overlay-collapsed");
+    window.setTimeout(function() {
+        $("#results").removeClass("form-collapsed");
+        $(".allow-realign").addClass("overlay-collapsed");
+    }, 800);
+    $("#answers").addClass("form-collapsed");
     this.delegateChartRendering();
     var respStr = "";
     this.$(".user-details").text("");

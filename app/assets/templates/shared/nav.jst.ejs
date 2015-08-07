@@ -1,6 +1,8 @@
 <% if(PollrBear.currentUser.isSignedIn()) { %>
   <nav class="navbar navbar-default">
     <div class="container">
+
+
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
           <span class="sr-only">toggle navigation</span>
@@ -9,22 +11,21 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">
-          Pollrbear.com
+          <img class="logo-nav" src="/logo14.png">
         </a>
       </div>
       <div class="collapse navbar-collapse" id="nav-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="#">
+            <a href="#" class="nav-link">
               <%= PollrBear.currentUser.fullName() %>
             </a>
           </li>
-          <li><a href="#users/<%= PollrBear.currentUser.id %>">Account</a></li>
-          <li><a href="#" id="sign-out-link">Sign Out</a></li>
+          <li class="nav-sign-out"><a class="nav-link" href="#" id="sign-out-link">Sign out</a></li>
         </ul>
       </div>
     </div>
   </nav>
   <% } else { %>
-    
+
     <% }; %>

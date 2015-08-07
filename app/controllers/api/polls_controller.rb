@@ -1,17 +1,25 @@
 module Api
   class PollsController < ApiController
     def index
-      @polls = Poll.all.page(params[:page]).per(10)
+      @polls = Poll.order(created_at: :desc).page(params[:page]).per(10)
       @result = []
       @polls.each do |poll|
         pollData = {}
         pollData[:response_count] = 0
         pollData[:answers] = []
-        pollData[:chart] = poll.chart
         pollData[:format] = poll.format
         pollData[:text] = poll.text
         pollData[:responses] = []
-        pollData[:invites] = []
+        time_left = (Time.now.to_i - poll.created_at.to_i + poll.duration) / 3600.0
+        if time_left >= 2.0
+          pollData[:expires_in] = "ends in #{time_left.to_i.to_s} hours"
+        elsif  time_left > 1.0
+          pollData[:expires_in] = "ends in less than two hours"
+        elsif time_left > 0.0
+          pollData[:expires_in] = "ends in less than an hour"
+        else
+          pollData[:expires_in] = "this poll has ended"
+        end
         pollData[:created_at] = poll.created_at.strftime("Posted %b %d, %Y at %l:%M %p by")
         pollData[:id] = poll.id
         pollData[:user] = "#{poll.user.first_name} #{poll.user.last_name}"
@@ -24,9 +32,6 @@ module Api
             pollData[:response_count] += 1
           end
         end
-        poll.invites.each do |invite|
-          pollData[:invites] << invite
-        end
         @result << pollData
       end
       render :json => {
@@ -35,6 +40,27 @@ module Api
         :page => params[:page],
         :total_pages => @polls.total_pages
       }
+    end
+
+    def trending
+      @polls = Poll.trending
+      @data = {}
+      @data[:polls] = []
+      @polls.each do |poll|
+        poll_data = {}
+        poll_data[:poll] = poll
+        poll_data[:answers] = []
+        poll_data[:responses] = []
+        poll.answers.each do |answer|
+          poll_data[:answers] << answer
+          answer.responses.each do |response|
+            poll_data[:responses] << response
+          end
+        end
+        @data[:polls] << poll_data
+      end
+
+      render json: @data
     end
 
     def create
@@ -54,7 +80,7 @@ module Api
     end
 
     def show
-      @poll = Poll.includes(:invites, :user, answers: [responses: :respondent]).find(params[:id])
+      @poll = Poll.includes(answers: [responses: :respondent]).find(params[:id])
       render :show
     end
 

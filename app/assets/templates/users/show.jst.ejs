@@ -1,37 +1,21 @@
-<div class="row">
-  <div class="col-xs-12 col-md-8">
-    <div class="panel panel-default">
-      <div id="main">
-      </div>
-    </div>
+<div class="col-xs-12 col-md-7 col-lg-8" id="left-side">
+  <div id="main" class="row">
   </div>
-  <div class="col-xs-12 col-md-4">
-    <div class="row">
-      <div class="col-xs-7 col-md-12" id="new-poll">
-      </div>
-      <div class="col-xs-5 col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-xs-12">
-                <a href="#" class="profile-img-wrap">
-                  <img class="profile-img img-responsive" src="<%= user.get('profile_img') %>">
-                </a>
-              </div>
-              <div class="col-xs-12">
-                <div class="user-info">
-                  <h4>
-                    <%= user.fullName() %>
-                  </h4>
-                  <h5>
-                    <%= user.escape('email') %>
-                  </h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+</div>
+<div class="col-xs-12 col-md-5 col-lg-4" id="right-side">
+  <div class="row">
+    <div class="col-xs-7 col-md-12" id="new-poll">
+    </div>
+    <div class="col-xs-5 col-md-12" id="user-info">
+      <a href="#" class="profile-img">
+        <img src="<%= user.get('profile_img') %>">
+      </a>
+      <h4>
+        <%= user.fullName() %>
+      </h4>
+      <h5>
+        <%= user.escape('email') %>
+      </h5>
     </div>
   </div>
 </div>

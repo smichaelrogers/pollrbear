@@ -21,12 +21,9 @@ u7 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.c
     @polls << Poll.create!(user_id: user.id, text: Faker::Hacker.say_something_smart.chop + " " + Faker::Hacker.ingverb + "?", chart: [1,2,3,4].sample, format: [1,2].sample, privacy: [1,1,1,2].sample, duration: (3600 * rand(24)))
   end
   @polls.each do |poll|
-    @uid.each do |id|
-      Invite.create!(poll_id: poll.id, user_id: id)
-    end
     @answers = []
     [3,3,4,4,4,5].sample.times do
-      @answers << Answer.create!(poll_id: poll.id, text: Faker::Commerce.product_name)
+      @answers << Answer.create!(poll_id: poll.id, text: Faker::Company.catch_phrase)
     end
     @answers.each do |answer|
       (0..10).to_a.sample.times do

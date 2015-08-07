@@ -1,12 +1,13 @@
 PollrBear.Views.PollForm = Backbone.CompositeView.extend({
   template: JST['polls/form'],
-
+  id: "poll-form-wrap",
   events: {
     'click .add-answer': 'addAnswer',
-    'click a.remove-answer': 'removeAnswer',
+    'click .remove-answer': 'removeAnswer',
     'click #submit-poll-form': 'submitPollForm',
     'click #submit-create-poll': 'submitCreatePoll',
     'keypress .answer-input': 'maybeAddAnswer',
+    'keypress #poll-text': 'maybeSubmitQuestion',
     'click .btn-format': 'selectFormat',
     'click .btn-chart': 'selectChart',
     'click .visit-created-poll': 'visitCreatedPoll',
@@ -29,13 +30,9 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
     if ($("#poll-text").val().length > 6) {
       this.pollFormData = $("#poll-form").serializeJSON();
       $("#poll-form").addClass("form-collapsed");
-      // if ($("#poll-format").attr("data-format") === "2") {
-      //   $("#open-ended-form").removeClass("form-collapsed");
-      // } else {
-      // }
       $("#multiple-choice-form").removeClass("form-collapsed");
     } else {
-      this.$(".errors").addClass("errors-flash").html("Please enter a valid question <a href=\"#\" class=\"errors-dismiss\">Close</a>");
+      this.$(".errors").addClass("errors-flash").html("<span class=\"error-text\">Please enter a valid question</span> <a href=\"#\" class=\"errors-dismiss\"><i class=\"fa fa-2x fa-times-circle-o\"></i></a>");
     }
   },
 
@@ -55,7 +52,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
           $("#poll-form").removeClass("form-collapsed");
           $("#poll-text").val("");
           $("#multiple-choice-form").addClass("form-collapsed");
-          $errors.addClass("errors-flash").html("Your poll has been created! You can view it <a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">here</a><br><a href=\"#\" class=\"errors-dismiss\">Close</a>")
+          $errors.addClass("errors-flash").html("<span class=\"error-text\">Your poll has been created! You can view it <a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">here</a></span><a href=\"#\" class=\"errors-dismiss\">Close</a>")
         });
       }
     });
@@ -70,9 +67,11 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
     event.preventDefault();
     var pollId = $(event.currentTarget).attr("data-poll-id");
     var poll = this.collection.getOrFetch(pollId);
+    var answers = poll.answers();
+    answers.fetch();
     var view = new PollrBear.Views.PollShow({
       model: poll,
-      collection: poll.answers(),
+      collection: answers,
       parentView: this.parentView
     });
     this._swapMainView(view);
@@ -103,7 +102,12 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 
   maybeAddAnswer: function(event) {
     if (event.keyCode === 13) {
-      this.addAnswer();
+      this.addAnswer(event);
+    }
+  },
+  maybeSubmitQuestion: function(event) {
+    if (event.keyCode === 13) {
+      this.submitPollForm(event);
     }
   },
 

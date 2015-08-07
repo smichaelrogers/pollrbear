@@ -19,12 +19,6 @@ module Api
       render :show
     end
 
-    def destroy
-      @answer = Answer.find(params[:id])
-      @answer.destroy
-      render json: { message: 'destroyed' }
-    end
-
     private
 
     def current_poll
