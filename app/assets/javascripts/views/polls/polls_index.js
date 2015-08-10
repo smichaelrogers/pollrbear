@@ -29,9 +29,15 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
       user: this.model
     });
     this.$el.html(content);
-    $("li.select-page-item[data-page-id=\"" + currentPage + "\"]").addClass("active");
     if (this.collection.data) {
       this.populatePollData();
+    }
+    $(".page-nav-select[data-page-id=\"" + currentPage + "\"]").addClass("page-nav-active");
+    if(currentPage === 1){
+      $(".page-nav-prev").addClass("page-nav-disabled");
+    }
+    if(currentPage === this.collection.total_pages) {
+      $(".page-nav-next").addClass("page-nav-disabled");
     }
     return this;
   },

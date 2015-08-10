@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20150718025731) do
     t.integer  "user_id",                    null: false
     t.string   "text",                       null: false
     t.integer  "duration",   default: 86400, null: false
-    t.integer  "privacy",    default: 1,     null: false
     t.integer  "chart",      default: 0,     null: false
     t.integer  "format",     default: 1,     null: false
     t.datetime "created_at",                 null: false
@@ -52,7 +51,6 @@ ActiveRecord::Schema.define(version: 20150718025731) do
     t.string   "first_name",      null: false
     t.string   "last_name",       null: false
     t.string   "email",           null: false
-    t.string   "profile_img"
     t.string   "provider"
     t.string   "uid"
     t.string   "session_token",   null: false

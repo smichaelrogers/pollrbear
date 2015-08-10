@@ -17,8 +17,8 @@ u7 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.c
   @uid = [1,2,3,4,5,6,7]
   @polls = []
   @uid.delete(user.id)
-  2.times do
-    @polls << Poll.create!(user_id: user.id, text: Faker::Hacker.say_something_smart.chop + " ?", chart: [1,2,3,4].sample, format: [1,2].sample, privacy: [1,1,1,2].sample, duration: (3600 * rand(24)))
+  10.times do
+    @polls << Poll.create!(user_id: user.id, text: Faker::Hacker.say_something_smart.chop + " ?", chart: [1,2,3,4].sample, format: [1,2].sample, duration: (3600 * rand(24)))
   end
   @polls.each do |poll|
     @answers = []
