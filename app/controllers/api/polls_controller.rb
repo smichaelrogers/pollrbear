@@ -46,12 +46,12 @@ module Api
       @polls = Poll.trending
       @data = {}
       @data[:polls] = []
-      @polls.each do |poll|
+      5.times do |idx|
         poll_data = {}
-        poll_data[:poll] = poll
+        poll_data[:poll] = @polls[idx]
         poll_data[:answers] = []
         poll_data[:responses] = []
-        poll.answers.each do |answer|
+        @polls[idx].answers.each do |answer|
           poll_data[:answers] << answer
           answer.responses.each do |response|
             poll_data[:responses] << response
@@ -86,7 +86,7 @@ module Api
 
     private
     def poll_params
-      params.require(:poll).permit(:user_id, :text, :chart, :privacy, :format, :duration, :page, :total_pages)
+      params.require(:poll).permit(:user_id, :text, :chart, :format, :duration, :page, :total_pages)
     end
   end
 end

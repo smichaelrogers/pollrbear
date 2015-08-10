@@ -52,23 +52,20 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     var textStr = "";
     var pageData = this.collection.data;
     pageData.forEach(function(p) {
-      if (p.format == 2) {
-        formatStr = "open ended";
-        formatClass = "format-oe";
+      if (p.format === 2) {
+        formatStr = "Open Ended";
       } else {
-        formatStr = "multiple choice";
-        formatClass = "format-mc";
+        formatStr = "Multiple Choice";
       }
-      if (p.text.length > 140) {
-        textStr = p.text.slice(0, 140) + "...";
+      if (p.text.length > 60) {
+        textStr = p.text.slice(0, 60) + " ... ";
       } else {
         textStr = p.text;
       }
+
       $("div.poll-text[data-poll-id=\"" + p.id + "\"]").text(textStr);
-      $("div.poll-user[data-poll-id=\"" + p.id + "\"]").html(p.created_at + " <a href=\"#\" class=\"select-show-user\" data-user-id=\"" + p.user_id + "\"> " + p.user + " </a>&nbsp;&nbsp;&nbsp;&nbsp;" + p.expires_in);
-      var voteStr = ((p.response_count === 0 || p.response_count > 1) ? "votes" : "vote");
-      $("div.poll-votes-wrap[data-poll-id=\"" + p.id + "\"]").html("<span class=\"poll-votes\">" + p.response_count + " " + voteStr + "</span>");
-      $("div.poll-info[data-poll-id=\"" + p.id + "\"]").html("<span class=\"" + formatClass + "\">" + formatStr + "</span>");
+      $("div.poll-votes[data-poll-id=\"" + p.id + "\"]").html(p.response_count + "");
+      $("div.poll-info[data-poll-id=\"" + p.id + "\"]").html(formatStr + " | " + p.created_at + " by " +  p.user + ", " + p.expires_in);
     });
   },
   fetchPage: function(pageNum) {

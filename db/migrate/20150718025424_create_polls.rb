@@ -4,7 +4,6 @@ class CreatePolls < ActiveRecord::Migration
       t.integer :user_id, null: false
       t.string :text, null: false
       t.integer :duration, default: 86400, null: false
-      t.integer :privacy, default: 1, null: false
       t.integer :chart, default: 0, null: false
       t.integer :format, default: 1, null: false
 

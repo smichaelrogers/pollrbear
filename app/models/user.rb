@@ -31,7 +31,6 @@ class User < ActiveRecord::Base
 
   attr_reader :password
   after_initialize :ensure_session_token
-  after_initialize :ensure_profile_img
   before_validation :ensure_session_token
 
   def self.find_by_credentials(email, password)
@@ -69,10 +68,6 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token ||= SecureRandom.urlsafe_base64
-  end
-
-  def ensure_profile_img
-    self.profile_img ||= '/default-gravatar.png'
   end
 
   def reset_session_token!

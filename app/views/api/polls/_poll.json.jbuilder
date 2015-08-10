@@ -1,5 +1,5 @@
-json.(poll, :id, :user_id, :text, :privacy, :duration, :chart, :format, :created_at)
-json.extract! poll, :id, :user_id, :text, :privacy, :duration, :chart, :format, :created_at
+json.(poll, :id, :user_id, :text, :duration, :chart, :format, :created_at)
+json.extract! poll, :id, :user_id, :text, :duration, :chart, :format, :created_at
 
 json.answers poll.answers do |answer|
   json.extract! answer, :id, :poll_id, :text, :created_at

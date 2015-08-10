@@ -1,38 +1,30 @@
-<h2 class="heading section-title">Active Polls</h2>
+<h2 class="section-title">Active Polls</h2>
 <div class="page-nav">
-  <a href="#" class="page-nav-prev">Previous</a>
-  <% for (var i = 1; i <= totalPages; i++) { %>
-    <a href="#" class="page-nav-select" data-page-id="<%= i %>">
-      <%= i %>
-    </a>
-    <% }; %>
-      <a href="#" class="page-nav-next">Next</a>
+    <a href="#" class="page-nav-prev"><i class="fa fa-angle-left"></i></a>
+    <% for (var i = 1; i <= totalPages; i++) { %>
+        <a href="#" class="page-nav-select" data-page-id="<%= i %>">
+            <%= i %>
+        </a>
+        <% }; %>
+            <a href="#" class="page-nav-next"><i class="fa fa-angle-right"></i></a>
 </div>
 <% polls.forEach(function(poll) { %>
-  <% var n = poll.id; %>
-    <div class="poll-wrap group">
-      <div class="poll-start">
-      </div>
-      <div class="poll-left">
-        <div class="poll-votes-wrap" data-poll-id="<%= n %>"></div>
-        <div class="poll-info" data-poll-id="<%= n %>"></div>
-      </div>
-      <div class="poll-right">
-        <div class="poll-text" data-poll-id="<%= n %>"></div>
-        <div class="poll-user" data-poll-id="<%= n %>"></div>
-      </div>
-      <div class="poll-end">
-        <a href="#" class="poll-select" data-poll-id="<%= n %>"> <i class="icon fa fa-2x fa-fw fa-angle-right"></i> </a>
-      </div>
-    </div>
-    <% }); %>
+    <% var n = poll.id; %>
 
-      <div class="page-nav">
-        <a href="#" class="page-nav-prev">Previous</a>
-        <% for (var i = 1; i <= totalPages; i++) { %>
-          <a href="#" class="page-nav-select" data-page-id="<%= i %>">
-            <%= i %>
-          </a>
-          <% }; %>
-            <a href="#" class="page-nav-next">Next</a>
-      </div>
+        <a class="poll-select group" href="#" data-poll-id="<%= n %>">
+              <div class="poll-votes" data-poll-id="<%= n %>">
+              </div>
+              <div class="poll-text" data-poll-id="<%= n %>"></div>
+              <div class="poll-info" data-poll-id="<%= n %>"></div>
+        </a>
+        <% }); %>
+
+            <div class="page-nav">
+                <a href="#" class="page-nav-prev"><i class="fa fa-angle-left"></i></a>
+                <% for (var i = 1; i <= totalPages; i++) { %>
+                    <a href="#" class="page-nav-select" data-page-id="<%= i %>">
+                        <%= i %>
+                    </a>
+                    <% }; %>
+                        <a href="#" class="page-nav-next"><i class="fa fa-angle-right"></i></a>
+            </div>

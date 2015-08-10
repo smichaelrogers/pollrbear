@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:submitted_responses, polls: [answers: [responses: :respondent]]).find(params[:id])
+    @user = User.includes(:submitted_responses, polls: [answers: :responses]).find(params[:id])
     render :show
   end
 
@@ -23,6 +23,6 @@ class Api::UsersController < ApplicationController
   protected
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :profile_img)
+    params.require(:user).permit(:first_name, :last_name, :email, :password)
   end
 end

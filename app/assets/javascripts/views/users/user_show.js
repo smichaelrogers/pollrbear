@@ -1,60 +1,69 @@
 PollrBear.Views.UserShow = Backbone.CompositeView.extend({
-  template: JST['users/show'],
-  className: "row",
-  events: {
-    "click .sign-out-link": "signOut"
-  },
-  initialize: function(options) {
-    this.users = options.users;
-    this.listenTo(this.model, 'sync', this.render);
-  },
+	template: JST['users/show'],
+	className: "row",
+	events: {
+		"click .sign-out-link": "signOut"
+	},
+	initialize: function (options) {
+		this.users = options.users;
+		this.listenTo(this.model, 'sync', this.render);
+	},
 
-  render: function() {
-    var content = this.template({
-      user: this.model
-    });
-    this.$el.html(content);
-    this.showUserPolls();
-    this.showTrendingPolls();
+	render: function () {
+		var content = this.template({
+			user: this.model
+		});
+		this.$el.html(content);
+		this.showUserPolls();
+    this.trends();
+		return this;
+	},
+	signOut: function (event) {
+		event.preventDefault();
+		PollrBear.currentUser.signOut({
+			success: function () {
+				Backbone.history.navigate("session/new", {
+					trigger: true
+				});
+			}
+		});
+	},
 
-    return this;
-  },
-  signOut: function(event){
-    event.preventDefault();
-    PollrBear.currentUser.signOut({
-      success: function(){
-        Backbone.history.navigate("session/new", { trigger: true });
-      }
-    });
-  },
+	showUserPolls: function () {
+		var view = new PollrBear.Views.PollsIndex({
+			collection: this.collection,
+			model: this.model
+		});
+		$("#main").append(view.render().$el);
+		this.showPollForm(view);
+	},
 
-  showUserPolls: function() {
-    var view = new PollrBear.Views.PollsIndex({
-      collection: this.collection,
-      model: this.model
-    });
-    $("#main").append(view.render().$el);
-    this.showPollForm(view);
-  },
+	showPollForm: function (parentView) {
+		var view = new PollrBear.Views.PollForm({
+			collection: this.collection,
+			model: this.model,
+			parentView: parentView
+		});
+		$("#new-poll").html(view.render().$el);
+	},
 
-  showPollForm: function(parentView) {
-    var view = new PollrBear.Views.PollForm({
-      collection: this.collection,
-      model: this.model,
-      parentView: parentView
-    });
-    $("#new-poll").html(view.render().$el);
-  },
-
-  showTrendingPolls: function() {
-    var userId = this.model.id;
-    $.ajax({
-      url: "/api/polls/trending/" + userId,
-      dataType: 'json',
-      type: "GET",
-      success: function(trending) {
+	trends: function () {
+		var userId = this.model.id;
+		var s;
+		$.ajax({
+			url: "/api/polls/trending/" + userId,
+			dataType: 'json',
+			type: "GET",
+			success: function (trending) {
         console.log(trending);
-      }
-    });
-  }
+        $("#trending-polls").html("");
+				trending.polls.forEach(function (poll) {
+					s = "";
+					s += "<a href=\"#\" data-poll-id=\"" + poll.poll.id + "\"><span class=\"tleft\">" +  poll.responses.length + "</span><span class=\"tright\">" + poll.poll.text + "</span></a>";
+					$("#trending-polls").append(s);
+				});
+
+			}
+		});
+	}
 });

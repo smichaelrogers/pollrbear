@@ -1,13 +1,17 @@
-<button type="button" class="btn btn-std-inverse go-back">Back to list</button>
+
+<button type="button" class="btn btn-std go-back">Back to list</button>
+<div class="allow-realign overlay-collapsed">
+  <h2><i class="fa fa-spinner fa-pulse"></i> Hang on...</h2>
+</div>
 <div id="answers" class="row">
   <div class="col-xs-12">
-    <h4 class="heading-inverse">Please take a moment to answer the following...</h4>
-    <h3 class="heading-inverse">
+    <h4 class="heading">Please take a moment to answer the following...</h4>
+    <h3 class="heading">
       <%= poll.escape('text') %>
     </h3>
     <% var i = 0; %>
       <% answers.forEach(function(answer) { %>
-        <button type="button" class="btn btn-std-inverse btn-answer-select" data-answer-id="<%= answer.id %>">
+        <button type="button" class="btn btn-std btn-answer-select" data-answer-id="<%= answer.id %>">
           <span class="answer-label">
             <%= labels[i] %>:</span>
           <span class="answer-text">
@@ -20,11 +24,11 @@
 </div>
 <div id="results" class="row form-collapsed">
   <div class="col-xs-12">
-    <h4 class="heading-inverse">
+    <h4 class="section-heading">
     <em>to the question:</em>
     </h4>
 
-    <h3 class="heading-inverse poll-result-heading">"
+    <h3 class="section-heading">"
       <%= poll.escape('text') %>"</h3>
   </div>
   <div id="poll-results" class="col-xs-12 col-md-5">
@@ -36,8 +40,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="allow-realign overlay-collapsed">
-  <h2><i class="fa fa-spinner fa-pulse"></i> Hang on...</h2>
 </div>
