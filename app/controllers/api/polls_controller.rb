@@ -1,7 +1,7 @@
 module Api
   class PollsController < ApiController
     def index
-      @polls = Poll.order(created_at: :desc).page(params[:page]).per(10)
+      @polls = Poll.order(created_at: :desc).page(params[:page]).per(8)
       @result = []
       @polls.each do |poll|
         pollData = {}
@@ -61,6 +61,21 @@ module Api
       end
 
       render json: @data
+    end
+
+    def word_cloud
+      @poll = Poll.includes(answers: :responses).find(params[:id])
+      @words = Hash.new(0)
+      @poll.answers.each do |answer|
+        answer.responses.each do |response|
+          response.text.split.each do |word|
+            if word.length > 4
+              @words[word] += 1
+            end
+          end
+        end
+      end
+      render json: @words.sort_by{|k,v| -v}
     end
 
     def create

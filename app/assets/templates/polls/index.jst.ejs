@@ -1,4 +1,4 @@
-<div class="page-nav">
+<div class="page-nav group">
     <a href="#" class="page-nav-prev"><i class="fa fa-angle-left"></i></a>
     <% for (var i = 1; i <= totalPages; i++) { %>
         <a href="#" class="page-nav-select" data-page-id="<%= i %>">
@@ -17,7 +17,7 @@
       </a>
         <% }); %>
 
-            <div class="page-nav">
+            <div class="page-nav group">
                 <a href="#" class="page-nav-prev"><i class="fa fa-angle-left"></i></a>
                 <% for (var i = 1; i <= totalPages; i++) { %><a href="#" class="page-nav-select" data-page-id="<%= i %>"><%= i %></a><% }; %>
                         <a href="#" class="page-nav-next"><i class="fa fa-angle-right"></i></a>

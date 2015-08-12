@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20150718025731) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "poll_id",    null: false
-    t.string   "text",       null: false
+    t.string   "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150718025731) do
   create_table "responses", force: :cascade do |t|
     t.integer  "answer_id",     null: false
     t.integer  "respondent_id", null: false
+    t.text     "text"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end

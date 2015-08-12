@@ -63,15 +63,15 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
       } else {
         formatStr = "Multiple Choice";
       }
-      if (p.text.length > 60) {
-        textStr = p.text.slice(0, 60) + " ... ";
+      if (p.text.length > 80) {
+        textStr = p.text.slice(0, 80) + " ... ";
       } else {
         textStr = p.text;
       }
 
       $("div.poll-text[data-poll-id=\"" + p.id + "\"]").text(textStr);
       $("div.poll-votes[data-poll-id=\"" + p.id + "\"]").html(p.response_count + "");
-      $("div.poll-info[data-poll-id=\"" + p.id + "\"]").html(formatStr + " | " + p.created_at + " by " +  p.user + ", " + p.expires_in);
+      $("div.poll-info[data-poll-id=\"" + p.id + "\"]").html("<div class=\"poll-format\">" + formatStr + " </div><div class=\"poll-created\">" + p.created_at + " by " +  p.user + ", " + p.expires_in + "</div>");
     });
   },
   fetchPage: function(pageNum) {

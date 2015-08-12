@@ -30,7 +30,7 @@ module Api
     end
 
     def response_params
-      params.require(:response).permit(:answer_id, :respondent_id)
+      params.require(:response).permit(:answer_id, :respondent_id, :text)
     end
   end
 end

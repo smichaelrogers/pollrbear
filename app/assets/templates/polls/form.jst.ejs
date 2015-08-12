@@ -1,50 +1,80 @@
 <div class="row">
-  <div class="col-xs-12">
-    <h2 class="page-title">Create</h2>
-  </div>
+    <div class="col-xs-12">
+        <h2 class="page-title">Create</h2>
+    </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
-    <div class="errors"></div>
-  </div>
+    <div class="col-xs-12">
+        <div class="notice"></div>
+    </div>
 </div>
 <div class="row">
-  <form id="poll-form">
-    <div class="col-xs-12">
-      <textarea id="poll-text" name="poll[text]" type="text" rows="4" class="form-control" placeholder="Ask a question (multiple choice)"></textarea>
-      <input type="hidden" name="poll[privacy]" value="1" id="poll-privacy">
-      <input type="hidden" name="poll[format]" value="1" id="poll-format">
-      <input type="hidden" name="poll[chart]" value="1" id="poll-chart">
-    </div>
-    <div class="col-xs-12">
-      <button type="button" class="btn btn-selector btn-selected btn-format" data-format="1">Multiple Choice</button>
-      <button type="button" class="btn btn-selector btn-format" data-format="2">Word Cloud</button>
-    </div>
-    <div class="col-xs-12">
-      <button type="button" class="btn btn-selector btn-selected btn-chart" data-chart="1"><i class="fa fa-fw fa-pie-chart"></i></button>
-      <button type="button" class="btn btn-selector btn-chart" data-chart="2"><i class="fa fa-fw fa-bar-chart"></i></button>
-      <button type="button" class="btn btn-selector btn-chart" data-chart="3"><i class="fa fa-fw fa-line-chart"></i></button>
-      <button type="button" class="btn btn-selector btn-chart" data-chart="4"><i class="fa fa-fw fa-area-chart"></i></button>
-    </div>
-    <div class="col-xs-12">
-      <button type="button" class="btn btn-uniq pull-right" id="submit-poll-form">Next</button>
-    </div>
-  </form>
-  <form id="multiple-choice-form" class="form-collapsed">
-    <div class="col-xs-12">
-      <div class="row">
+    <form id="poll-form">
         <div class="col-xs-12">
-          <input type="text" class="form-control" id="answer-text" placeholder="Add an answer...">
+            <textarea id="poll-text" name="poll[text]" type="text" rows="5" class="form-class form-control" placeholder="Ask a question (multiple choice)"></textarea>
+            <input type="hidden" name="poll[format]" value="1" id="poll-format">
+            <input type="hidden" name="poll[chart]" value="1" id="poll-chart">
         </div>
-        <div class="col-xs-4 col-xs-offset-8">
-          <button type="button" class="btn btn-std add-answer">Add</button>
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-6" id="format-buttons">
+                    <button type="button" class="btn btn-selector btn-selected btn-format" data-format="1">Multiple Choice</button>
+                </div>
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-selector btn-format" data-format="2">Word Cloud</button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="answer-select">
-      </div>
-      <div class="col-xs-12">
-        <button type="button" class="btn btn-uniq pull-right" id="submit-create-poll">Submit</button>
-      </div>
-    </div>
-  </form>
+        <div class="col-xs-12">
+            <div class="row" id="chart-buttons">
+                <div class="col-xs-3">
+                    <button type="button" class="btn btn-selector btn-selected btn-chart" data-chart="1"><i class="fa fa-fw fa-lg fa-pie-chart"></i></button>
+                </div>
+                <div class="col-xs-3">
+                    <button type="button" class="btn btn-selector btn-chart" data-chart="2"><i class="fa fa-fw fa-lg fa-bar-chart"></i></button>
+                </div>
+                <div class="col-xs-3">
+                    <button type="button" class="btn btn-selector btn-chart" data-chart="3"><i class="fa fa-fw fa-lg fa-line-chart"></i></button>
+                </div>
+                <div class="col-xs-3">
+                    <button type="button" class="btn btn-selector btn-chart" data-chart="4"><i class="fa fa-fw fa-lg fa-area-chart"></i></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-uniq" id="submit-poll-form"> <i class="fa fa-chevron-right fa-2x"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form id="multiple-choice-form" class="form-collapsed">
+        <div class="col-xs-12">
+            <h3 id="new-poll-title"></h3>
+        </div>
+        <div class="col-xs-12">
+            <input type="text" class="form-class form-control" id="answer-text" placeholder="Add an answer...">
+        </div>
+        <div class="col-xs-6">
+            <button type="button" class="btn btn-std add-answer">Add</button>
+        </div>
+        <div class="col-xs-6">
+            <button type="button" class="btn btn-uniq" id="submit-create-poll">Submit</button>
+        </div>
+        <div class="col-xs-12 answer-select">
+        </div>
+    </form>
+    <form id="open-ended-form" class="form-collapsed">
+        <div class="col-xs-12">
+            <h3 id="new-poll-title"></h3>
+        </div>
+        <div class="col-xs-12">
+            <h4>That's it! Click Submit</h4>
+        </div>
+        <div class="col-xs-6">
+
+        </div>
+        <div class="col-xs-6">
+            <button type="button" class="btn btn-uniq" id="submit-create-poll">Submit</button>
+        </div>
+    </form>
 </div>

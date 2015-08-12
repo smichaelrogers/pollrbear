@@ -3,6 +3,7 @@ class CreateResponses < ActiveRecord::Migration
     create_table :responses do |t|
       t.integer :answer_id, null: false
       t.integer :respondent_id, null: false
+      t.text :text
 
       t.timestamps null: false
     end
