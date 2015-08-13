@@ -9,7 +9,7 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 	},
 	initialize: function () {
 		this.listenTo(this.collection, 'add', this.render);
-
+		this.listenTo(this.model, 'sync', this.render);
 		this.labels = ["A", "B", "C", "D", "E", "F", "G", "H"];
 	},
 	render: function () {
@@ -34,9 +34,10 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 		event.preventDefault();
 		var poll = this.model;
 		var userId = PollrBear.currentUser.id;
-		var answer = this.collection.at(0);
+		var answer = poll.answers().at(0);
+		var responses = answer.responses();
 		var responseText = $(".word-cloud-text").text();
-		answer.responses().create({
+		responses.create({
 			respondent_id: userId,
 			answer_id: answer.id,
 			text: responseText
@@ -48,7 +49,8 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 			$("#results").removeClass("form-collapsed");
 			var view = new PollrBear.Views.PollCloud({
 				model: poll,
-				collection: answer.responses()
+				answer: answer,
+				collection: responses
 			});
 			$("#poll-results-cloud").html(view.render().$el);
 		}, 800);

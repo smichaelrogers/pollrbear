@@ -4,13 +4,15 @@
 
         </div>
         <div class="col-xs-4" id="user-info">
-            <span>
+            <span class="user-wrap">
                 <%= user.fullName() %> &nbsp;
                     <small>
                         <%= user.escape('email') %>
                     </small>
             </span>
-            <button type="button" class="btn btn-std sign-out-link">Sign out</button>
+            <span class="sign-out-button-wrap">
+                <button type="button" class="btn btn-std sign-out-link">Sign out</button>
+            </span>
         </div>
     </div>
     <div id="logo" class="row">

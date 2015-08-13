@@ -1,5 +1,6 @@
 PollrBear.Views.PollResults = Backbone.CompositeView.extend({
 	template: JST['polls/results'],
+	className: "multiple-choice-results",
 	initialize: function () {
 		this.listenTo(this.collection, 'sync', this.delegateChartRendering);
 		this.colors = [
@@ -56,7 +57,8 @@ PollrBear.Views.PollResults = Backbone.CompositeView.extend({
 			poll: this.model,
 			answers: this.collection,
 			percentages: this.percentages(),
-			labels: this.labels
+			labels: this.labels,
+			colors: this.highlights
 		});
 		this.$el.html(content);
 		this.delegateChartRendering();

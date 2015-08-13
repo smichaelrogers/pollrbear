@@ -7,6 +7,7 @@ module Api
 
     def create
       @response = current_answer.responses.new(response_params)
+      @response.respondent_id = current_user.id
       if @response.save
         render json: @response
       else
@@ -21,7 +22,7 @@ module Api
         @response = Response.find(params[:id])
         @answer = @response.answer
       elsif params[:response]
-        @answer = Answer.find(params[:response][:answer_id])
+        @answer = Answer.find(params[:answer_id])
       end
     end
 

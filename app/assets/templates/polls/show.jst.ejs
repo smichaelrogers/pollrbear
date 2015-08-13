@@ -1,11 +1,27 @@
-<button type="button" class="btn btn-std go-back">
-    Back to list</button>
+<div class="row">
+    <div class="col-xs-6">
+        <button type="button" class="btn btn-std go-back">
+            Back to list</button>
+    </div>
+    <div class="col-xs-6 poll-show-heading-wrap">
+        <div class="poll-show-heading">
+            <% if(poll.attributes.format === 1) { %>
+                <span class="poll-show-heading-text">Multiple Choice</span>
+                <span class="chart-icon"></span>
+                <% } else { %>
+                    <span class="poll-show-heading-text">Open Ended</span>
+                    <span class="cloud-icon"></span>
+                    <% }; %>
+        </div>
+    </div>
+</div>
+
 <div class="allow-realign overlay-collapsed">
     <h2><i class="fa fa-spinner fa-pulse"></i> Hang on...</h2>
 </div>
 <div id="answers" class="row">
-    <div class="col-xs-10">
-        <h3 class="page-title">
+    <div class="col-xs-12 answer-wrap">
+        <h3 class="answer-wrap-title">
             <%= poll.escape('text') %>
         </h3>
 
@@ -32,28 +48,27 @@
     </div>
 </div>
 <div id="results" class="row form-collapsed">
-    <div class="col-xs-12">
-        <h3 class="page-title">
+    <div class="col-xs-12 answer-wrap">
+        <h3 class="answer-wrap-title">
             <%= poll.escape('text') %>
         </h3>
-    </div>
-    <div class="col-xs-12">
-        <div class="row">
-            <div id="poll-results" class="col-xs-12 col-md-5">
-            </div>
-            <% if(poll.attributes.format === 1) { %>
-                <div class="col-xs-12 col-md-7">
+        <% if(poll.attributes.format === 1) { %>
+            <div class="row">
+                <div id="poll-results" class="col-xs-12 col-md-12 col-lg-5">
+                </div>
+                <div class="col-xs-12 col-md-12 col-lg-7">
                     <div id="canvas-wrap">
                         <div id="canvas-holder">
-                            <canvas height="320" width="320" id="chart"></canvas>
+                            <canvas height="360" width="360" id="chart"></canvas>
                         </div>
                     </div>
                 </div>
-        </div>
-        <% };%>
-            <div class="row">
-                <div id="poll-results-cloud" class="col-xs-12 group">
-                </div>
             </div>
+            <% } else { %>
+                <div class="row">
+                    <div id="poll-results-cloud" class="col-xs-12">
+                    </div>
+                </div>
+                <% }; %>
     </div>
 </div>

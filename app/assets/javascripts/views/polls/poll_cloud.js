@@ -1,7 +1,8 @@
 PollrBear.Views.PollCloud = Backbone.CompositeView.extend({
 	template: JST['polls/cloud'],
-	initialize: function () {
-		this.listenTo(this.collection, 'sync', this.generateWordCloud);
+	initialize: function (options) {
+		this.listenTo(this.collection, 'sync', this.render);
+		this.answer = options.answer;
 		this.colors = [
       "rgba(42, 183, 201, 1.0)",
       "rgba(254,215,101, 1.0)",
@@ -28,15 +29,23 @@ PollrBear.Views.PollCloud = Backbone.CompositeView.extend({
 
 	generateWordCloud: function () {
 		var pollId = this.model.id;
+		var answerId = this.answer.id;
 		var s;
 		var userId = PollrBear.currentUser.id;
 		var r1, r2, r3;
 		$.ajax({
-			url: "/api/polls/cloud/" + userId,
+			url: "/api/polls/cloud/" + pollId,
+			data: {
+				answer_id: answerId,
+				user_id: userId,
+				poll_id: pollId
+			},
 			dataType: 'json',
 			type: "GET",
 			success: function (wordData) {
-				console.log(wordData);
+				if(wordData.length < 3) {
+					return;
+				}
 				$("#cloud").html("");
 				var htmlStr;
 				var numWords;
@@ -64,8 +73,8 @@ PollrBear.Views.PollCloud = Backbone.CompositeView.extend({
 					} else {
 						dir = "cloud-right";
 					}
-					var n = Math.floor(8 + (Math.pow(val / most, 1.4) * 100)) + "";
-					styleStr = "margin-top: -" + Math.floor(n * .7) + "px; z-index: " + val + ";";
+					var n = Math.floor(5 + (Math.pow(val / most, 2) * 100)) + "";
+					styleStr = "margin-top: -" + Math.floor(n*.7) + "px; z-index: " + val + ";";
 					htmlStr += "<span class=\" cloud cloud-" + Math.floor(idx / numWords * 16.0 + 1.0) + " " + dir + "\" style=\"font-size:" + n + "px;" + styleStr + "\">" + str + "</span>";
 					cloudData.push(htmlStr);
 					idx++;

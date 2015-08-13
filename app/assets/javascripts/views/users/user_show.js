@@ -2,11 +2,13 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
 	template: JST['users/show'],
 	className: "row",
 	events: {
-		"click .sign-out-link": "signOut"
+		"click .sign-out-link": "signOut",
+		"click .select-trending-poll": "showTrendingPoll"
 	},
 	initialize: function (options) {
 		this.users = options.users;
 		this.listenTo(this.model, 'sync', this.render);
+		this.indexView;
 	},
 
 	render: function () {
@@ -30,12 +32,12 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
 	},
 
 	showUserPolls: function () {
-		var view = new PollrBear.Views.PollsIndex({
+		this.indexView = new PollrBear.Views.PollsIndex({
 			collection: this.collection,
 			model: this.model
 		});
-		$("#main").append(view.render().$el);
-		this.showPollForm(view);
+		$("#main").html(this.indexView.render().$el);
+		this.showPollForm(this.indexView);
 	},
 
 	showPollForm: function (parentView) {
@@ -55,15 +57,25 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
 			dataType: 'json',
 			type: "GET",
 			success: function (trending) {
-        console.log(trending);
         $("#trending-polls").html("");
 				trending.polls.forEach(function (poll) {
 					s = "";
-					s += "<a href=\"#\" data-poll-id=\"" + poll.poll.id + "\"><span class=\"tleft\">" +  poll.responses.length + "</span><span class=\"tright\">" + poll.poll.text + "</span></a>";
+					s += "<a class=\"select-trending-poll\" href=\"#\" data-trend-id=\"" + poll.poll.id + "\"><span class=\"tleft\">" +  poll.responses.length + "</span><span class=\"tright\">" + poll.poll.text + "</span></a>";
 					$("#trending-polls").append(s);
 				});
-
 			}
 		});
+	},
+
+	showTrendingPoll: function(event) {
+		event.preventDefault();
+		var pollId = $(event.currentTarget).attr("data-trend-id");
+		var poll = this.collection.getOrFetch(pollId);
+		var view = new PollrBear.Views.PollShow({
+			model: poll,
+			collection: poll.answers(),
+			parentView: this.indexView
+		});
+		this._swapMainView(view);
 	}
 });

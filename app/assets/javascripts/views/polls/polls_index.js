@@ -5,11 +5,12 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     "click .poll-select": "selectPoll",
     "click .page-nav-next": "nextPage",
     "click .page-nav-prev": "prevPage",
-    "click .page-nav-select": "selectPage"
+    "click .page-nav-select": "selectPage",
+    "click .poll-delete": "deletePoll"
   },
 
   initialize: function() {
-    this.listenTo(this.collection, 'sync add', this.render);
+    this.listenTo(this.collection, 'sync add destroy', this.render);
     this.collection.fetch({
       remove: true,
       data: {
@@ -43,15 +44,29 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
   },
   selectPoll: function(event) {
     event.preventDefault();
-    var pollId = $(event.currentTarget).attr("data-poll-id");
-    var poll = this.collection.getOrFetch(pollId);
-    var view = new PollrBear.Views.PollShow({
-      model: poll,
-      collection: poll.answers(),
-      parentView: this
-    });
-    this._swapMainView(view);
+    if($(event.target).attr("type") === "button"){
+      return;
+    } else {
+      var pollId = $(event.currentTarget).attr("data-poll-id");
+      var poll = this.collection.getOrFetch(pollId);
+      var view = new PollrBear.Views.PollShow({
+        model: poll,
+        collection: poll.answers(),
+        parentView: this
+      });
+      this._swapMainView(view);
+    }
   },
+
+  deletePoll: function(event) {
+    event.preventDefault();
+    var pollId = $(event.currentTarget).attr("data-destroy-poll-id");
+    var poll = this.collection.get(pollId);
+    poll.destroy();
+  },
+
+
+
   populatePollData: function() {
     var formatStr;
     var formatClass;
@@ -59,19 +74,23 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
     var pageData = this.collection.data;
     pageData.forEach(function(p) {
       if (p.format === 2) {
-        formatStr = "Open Ended";
+        formatStr = "<span class=\"poll-open-ended\">Open Ended</span>";
       } else {
-        formatStr = "Multiple Choice";
+        formatStr = "<span class=\"poll-multiple-choice\">Multiple Choice</span>";
       }
-      if (p.text.length > 80) {
-        textStr = p.text.slice(0, 80) + " ... ";
+      if (p.text.length > 120) {
+        textStr = "<p>" + p.text.slice(0, 120) + " ... </p>";
       } else {
-        textStr = p.text;
+        textStr = "<p>" + p.text + "</p>";
       }
-
-      $("div.poll-text[data-poll-id=\"" + p.id + "\"]").text(textStr);
+      if (p.user_id === PollrBear.currentUser.id) {
+        textStr += "<span><button type=\"button\" class=\"btn btn-std poll-delete\" data-destroy-poll-id=\"" + p.id + "\">Delete</button></span>";
+      } else {
+        textStr += "<span></span>";
+      }
+      $("div.poll-text[data-poll-id=\"" + p.id + "\"]").html(textStr);
       $("div.poll-votes[data-poll-id=\"" + p.id + "\"]").html(p.response_count + "");
-      $("div.poll-info[data-poll-id=\"" + p.id + "\"]").html("<div class=\"poll-format\">" + formatStr + " </div><div class=\"poll-created\">" + p.created_at + " by " +  p.user + ", " + p.expires_in + "</div>");
+      $("div.poll-info[data-poll-id=\"" + p.id + "\"]").html("<div class=\"poll-format\">" + formatStr + " </div><div class=\"poll-created\">" + p.created_at + " by " +  p.user + "</div>");
     });
   },
   fetchPage: function(pageNum) {

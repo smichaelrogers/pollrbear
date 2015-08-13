@@ -14,7 +14,7 @@
 #
 
 class Poll < ActiveRecord::Base
-  validates :text, :duration, :chart, :format, presence: true
+  validates :text, :chart, :format, presence: true
   belongs_to :user
   has_many :answers
   has_many :responses, through: :answers, source: :responses

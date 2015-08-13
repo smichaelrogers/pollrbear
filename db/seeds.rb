@@ -5,7 +5,6 @@
 @responses = []
 @polls = []
 u1 = User.create!(first_name: "Tom", last_name: "Hanks", email: "wilson@tom.hanks", password_digest: @password, session_token: SecureRandom.urlsafe_base64)
-
 u2 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.capitalize!), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
 u3 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.capitalize!), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
 u4 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.capitalize!), last_name: (Faker::Name.last_name), email: Faker::Internet.email, password_digest: @password, session_token: SecureRandom.urlsafe_base64)
@@ -18,7 +17,7 @@ u7 = User.create!(first_name: (Faker::Name.prefix + " " + Faker::Team.creature.c
   @polls = []
   @uid.delete(user.id)
   10.times do
-    @polls << Poll.create!(user_id: user.id, text: Faker::Hacker.say_something_smart.chop + " ?", chart: [1,2,3,4].sample, format: [1,1,2].sample, duration: (3600 * rand(24)))
+    @polls << Poll.create!(user_id: user.id, text: Faker::Hacker.say_something_smart.chop + " ?", chart: [1,2,3,4].sample, format: [1,1,2].sample)
   end
   @polls.each do |poll|
     @answers = []

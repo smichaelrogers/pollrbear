@@ -10,16 +10,6 @@ module Api
         pollData[:format] = poll.format
         pollData[:text] = poll.text
         pollData[:responses] = []
-        time_left = (Time.now.to_i - poll.created_at.to_i + poll.duration) / 3600.0
-        if time_left >= 2.0
-          pollData[:expires_in] = "ends in #{time_left.to_i.to_s} hours"
-        elsif  time_left > 1.0
-          pollData[:expires_in] = "ends in less than two hours"
-        elsif time_left > 0.0
-          pollData[:expires_in] = "ends in less than an hour"
-        else
-          pollData[:expires_in] = "this poll has ended"
-        end
         pollData[:created_at] = poll.created_at.strftime("Posted %b %d, %Y at %l:%M %p by")
         pollData[:id] = poll.id
         pollData[:user] = "#{poll.user.first_name} #{poll.user.last_name}"
@@ -64,7 +54,7 @@ module Api
     end
 
     def word_cloud
-      @poll = Poll.includes(answers: :responses).find(params[:id])
+      @poll = Poll.includes(answers: :responses).find(params[:poll_id])
       @words = Hash.new(0)
       @poll.answers.each do |answer|
         answer.responses.each do |response|
@@ -101,7 +91,7 @@ module Api
 
     private
     def poll_params
-      params.require(:poll).permit(:user_id, :text, :chart, :format, :duration, :page, :total_pages)
+      params.require(:poll).permit(:user_id, :text, :chart, :format, :page, :total_pages)
     end
   end
 end

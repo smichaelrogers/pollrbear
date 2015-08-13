@@ -26,13 +26,12 @@ ActiveRecord::Schema.define(version: 20150718025731) do
   add_index "answers", ["poll_id"], name: "index_answers_on_poll_id", using: :btree
 
   create_table "polls", force: :cascade do |t|
-    t.integer  "user_id",                    null: false
-    t.string   "text",                       null: false
-    t.integer  "duration",   default: 86400, null: false
-    t.integer  "chart",      default: 0,     null: false
-    t.integer  "format",     default: 1,     null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "user_id",                null: false
+    t.string   "text",                   null: false
+    t.integer  "chart",      default: 0, null: false
+    t.integer  "format",     default: 1, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "polls", ["user_id"], name: "index_polls_on_user_id", using: :btree

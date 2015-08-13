@@ -36,7 +36,8 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 			} else {
 				$("#multiple-choice-form").removeClass("form-collapsed");
 			}
-			$("#new-poll-title").text(this.pollFormData.poll.text);
+			this.$(".notice").removeClass("notice-flash").html("");
+			$("#new-poll-title").text("\"" + this.pollFormData.poll.text + "\"");
 		} else {
 			this.$(".notice").addClass("notice-flash").html("<span class=\"notice-text\">Please enter a valid question</span> <a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
 		}
@@ -46,31 +47,35 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 		event.preventDefault();
 		var formData = this.pollFormData;
 		var $notice = this.$(".notice");
+		var $answers = $('.answer-item');
 		$notice.removeClass("notice-flash");
-		this.collection.create(formData, {
-			success: function (poll) {
-				debugger
-				if (formData.poll.format === "1") {
-					var $answers = $('.answer-item');
-					$answers.each(function (index) {
-						poll.answers().create({
-							poll_id: poll.id,
-							text: $answers.eq(index).attr("data-content")
+		$notice.html("");
+		if ($answers.length < 2 && this.pollFormData.poll.format === "1") {
+			this.$(".notice").addClass("notice-flash").html("<span class=\"notice-text\">It's called <strong>multiple</strong> choice</span>, please add at least two answers <a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
+		} else {
+			this.collection.create(formData, {
+				success: function (poll) {
+					if (formData.poll.format === "1") {
+						$answers.each(function (index) {
+							poll.answers().create({
+								poll_id: poll.id,
+								text: $answers.eq(index).attr("data-content")
+							});
 						});
-					});
-				} else {
-					poll.answers().create({
-						poll_id: poll.id
-					});
+					} else {
+						poll.answers().create({
+							poll_id: poll.id
+						});
+					}
+					$("#poll-form").removeClass("form-collapsed");
+					$("#poll-text").val("");
+					$('.answer-item').html("");
+					$("#multiple-choice-form").addClass("form-collapsed");
+					$("#open-ended-form").addClass("form-collapsed");
+					$notice.addClass("notice-flash").html("<span class=\"notice-text\"><strong>Success!</strong><br><a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">Your poll has been created</a></span><a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
 				}
-				$("#poll-form").removeClass("form-collapsed");
-				$("#poll-text").val("");
-				$('.answer-item').html("");
-				$("#multiple-choice-form").addClass("form-collapsed");
-				$("#open-ended-form").addClass("form-collapsed");
-				$notice.addClass("notice-flash").html("<span class=\"notice-text\"><strong>Success!</strong><br><a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">Your poll has been created</a></span><a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
-			}
-		});
+			});
+		}
 	},
 
 	noticeDismiss: function (event) {
@@ -131,7 +136,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 		var answer = this.$('#answer-text').val();
 		if (answer.length > 0) {
 			this.$('#answer-text').val('');
-			this.$('.answer-select').append("<div class=\"answer-item\" data-content=\"" + answer + "\"><a href=\"#\" class=\"remove-answer\">Remove</a><span class=\"answer-input-text\">" + answer + "</span></div>");
+			this.$('.answer-select').append("<div class=\"answer-item-wrap\"><div class=\"answer-item\" data-content=\"" + answer + "\"><a href=\"#\" class=\"remove-answer\"><i class=\"fa fa-times fa-lg\"></i></a><span class=\"answer-input-text\">" + answer + "</span></div></div>");
 		} else {
 			this.$(".notice").addClass("notice-flash").html("<span class=\"notice-text\">Please enter a valid answer</span><a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
 		}
@@ -139,6 +144,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 
 	removeAnswer: function (event) {
 		event.preventDefault();
+		$(event.currentTarget).parent().parent().remove();
 		$(event.currentTarget).parent().remove();
 
 	}
