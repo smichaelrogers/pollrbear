@@ -112,9 +112,10 @@ button.btn {
     a.btn-uniq {
         border    : 2px solid $blue;
         color     : $mid-grey;
+
         background: transparent;
         &:hover {
-            border    : 2px solid $blue-alt;
+            border    : 2px solid darken($blue, 10%);
             background: transparent;
             color     : $dark-grey;
         }
@@ -164,9 +165,36 @@ button.btn {
     }
 }
 #submit-poll-form {
-    padding      : 12px 20px 8px;
+    padding      : 12px;
     border-radius: 10px;
     float        : right;
+}
+
+button.btn.add-answer {
+  border-radius: 10px;
+  border: 2px solid $light-grey;
+  color: $grey;
+  &:hover {
+      border: 2px solid $grey;
+      color : darken($grey, 10%);
+  }
+}
+
+
+.add-button {
+  display: inline-block;
+  line-height: 24px;
+  margin-left: 6px;
+  margin-right: 12px;
+  color: $mid-grey;
+}
+
+.next-button {
+  display: inline-block;
+  margin-right: 12px;
+  margin-left: 6px;
+  line-height: 24px;
+  color: $mid-grey;
 }
 #submit-create-poll {
     padding      : 10px 20px;
@@ -199,9 +227,6 @@ button.btn {
 }
 .notice {
     display   : block;
-    padding   : 8px 16px 8px 8px;
-    font-size : 16px;
-    text-align: center;
     width     : 100%;
 }
 .notice-dismiss {
@@ -217,18 +242,27 @@ button.btn {
             color     : $mid-grey;
             background: transparent;
         }
+        &:hover:before {
+          color: $dark-grey;
+        }
     }
 }
 .notice-text {
-    padding: 10px;
+  display: block;
+  padding: 8px;
+  font-size: 15px;
 }
 .notice-flash {
     background   : $lighter-grey;
     position     : relative;
-    font-weight  : 400;
+    color: $mid-grey;
+    text-align: center;
+    margin-bottom: 12px;
+    display: block;
+    width: 100%;
+    min-height: 50px;
     border-radius: 6px;
-    padding      : 6px 16px 4px 6px;
-    margin-bottom: 6px;
+    padding      : 8px 24px 8px 8px;
 }
 .placeholder {
     opacity: 0;
@@ -283,6 +317,7 @@ h6 {
     overflow: hidden;
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -299,20 +334,18 @@ h6 {
 }
 #left-side {
     color        : $base-grey;
-    padding-right: 0;
-    padding-top  : 30px;
-    padding-left : 30px;
-    padding-bottom: 60px;
-    border-left: 2px solid $lighter-grey;
-    border-bottom: 2px solid $lighter-grey;
-    border-right: 2px solid $lighter-grey;
+    padding      : 24px 0 50px 24px;
+    border-left  : 1px solid $lighter-grey;
+    border-right : 1px solid $lighter-grey;
 }
 #top-left {
     display: block;
     width  : 100%;
 }
 #right-side {
-    padding    : 30px;
+    padding: 24px;
+    border-left  : 1px solid $lighter-grey;
+    border-right : 1px solid $lighter-grey;
     #new-poll {
         background: transparent;
     }
@@ -333,12 +366,17 @@ h6 {
         }
     }
     span.sign-out-button-wrap {
-      display: block;
-      width: 40%;
-      float: right;
+        display: block;
+        width  : 40%;
+        float  : right;
         button.btn.sign-out-link {
-            padding: 6px 8px;
+          font-size: 14px;
+          color: $grey;
+            padding: 8px 12px;
             display: block;
+            &:hover {
+              color: $mid-grey;
+            }
         }
     }
 }
@@ -348,11 +386,31 @@ h6 {
 #wrapper {
     border-top   : 20px solid $yellow;
     border-bottom: 20px solid $lighter-grey;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin-bottom: 24px;
     background   : $white;
-    box-shadow   : -3px 3px 3px 0 rgba(0,0,0,0.1);
+    box-shadow   : -2px 2px 2px 2px rgba(0,0,0,0.15);
     #root {
 
     }
+}
+#footer {
+  font-size: 12px;
+  background: $lighter-grey;
+  border-top: 20px solid $white;
+  display: block;
+  padding-bottom: 20px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  box-shadow   : -3px 3px 3px 2px rgba(0,0,0,0.15);
+  .copyright {
+    span {
+      display: block;
+      padding: 10px;
+      color: $grey;
+    }
+  }
 }
 .nav-logo-wrap {
     padding-bottom: 20px;
@@ -384,7 +442,7 @@ h6 {
         float        : left;
         .poll-show-heading-text {
             font-size     : 24px;
-            color         : $lighter-grey;
+            color         : rgb(209, 209, 209);
             letter-spacing: 1.5px;
             display       : block;
             float         : left;
@@ -434,11 +492,11 @@ h6 {
             text-align: left;
         }
         .answer-result-heading {
-          border-top: 1px solid $lighter-grey;
-          padding-top: 6px;
-            font-size: 13px;
-            color    : $light-grey;
-            display  : block;
+            border-top : 1px solid $lighter-grey;
+            padding-top: 6px;
+            font-size  : 13px;
+            color      : $light-grey;
+            display    : block;
         }
         .answer-result-text {
             font-size     : 16px;
@@ -455,10 +513,10 @@ h6 {
         position: relative;
     }
     #cloud-container {
-        position  : relative;
-        height    : 100%;
-        width     : 100%;
-        display   : block;
+        position: relative;
+        height  : 100%;
+        width   : 100%;
+        display : block;
     }
 }
 .logo-wrap {
@@ -499,6 +557,7 @@ h6 {
 #splash {
 
 }
+
 input.form-class,
 textarea.form-class {
     margin-bottom: 16px;
@@ -520,10 +579,8 @@ textarea.form-class {
     }
 }
 #trending {
-
-  padding-top: 40px;
+    padding-top: 40px;
 }
-
 #trending-polls {
     a {
         border-top   : 1px solid $lighter-grey;
@@ -565,10 +622,14 @@ textarea.form-class {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.poll-index-wrap {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
 .poll-select {
-  &:last-child {
-    border-bottom: 1px solid $lighter-grey;
-  }
     display                  : block;
     border-top               : 1px solid $lighter-grey;
     border-bottom-left-radius: 10px;
@@ -720,6 +781,7 @@ textarea.form-class {
                 float       : left;
                 display     : block;
                 padding-left: 20px;
+                word-wrap: break-word;
                 width       : 80%;
                 color       : $mid-grey;
             }
@@ -730,6 +792,15 @@ textarea.form-class {
                 text-align: center;
                 color     : $grey;
                 float     : left;
+                i {
+                    &:before {
+                        color     : $mid-grey;
+                        background: transparent;
+                    }
+                    &:hover:before {
+                      color: $dark-grey;
+                    }
+                }
             }
         }
     }
@@ -745,7 +816,23 @@ textarea.form-class {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.page-nav-wrap{
+  &-top {
+    display: block;
+
+  }
+  &-bottom {
+    display: block;
+    border-top: 1px solid $lighter-grey;
+  }
+}
+
 .page-nav {
+  &-top {
+
+  }
+  &-bottom {
+  }
     display       : block;
     font-weight   : bold;
     padding-bottom: 6px;

@@ -16,6 +16,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 
 	initialize: function (options) {
 		this.pollFormData;
+		this.$notice = this.$(".notice");
 		this.parentView = options.parentView;
 	},
 
@@ -27,7 +28,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 
 	submitPollForm: function (event) {
 		event.preventDefault();
-		if ($("#poll-text").val().length > 6) {
+		if ($("#poll-text").val().length > 1) {
 			this.pollFormData = $("#poll-form").serializeJSON();
 			$(".notice").removeClass("notice-flash");
 			$("#poll-form").addClass("form-collapsed");
@@ -37,7 +38,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 				$("#multiple-choice-form").removeClass("form-collapsed");
 			}
 			this.$(".notice").removeClass("notice-flash").html("");
-			$("#new-poll-title").text("\"" + this.pollFormData.poll.text + "\"");
+			$("#new-poll-title").text(this.pollFormData.poll.text);
 		} else {
 			this.$(".notice").addClass("notice-flash").html("<span class=\"notice-text\">Please enter a valid question</span> <a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
 		}
@@ -51,7 +52,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 		$notice.removeClass("notice-flash");
 		$notice.html("");
 		if ($answers.length < 2 && this.pollFormData.poll.format === "1") {
-			this.$(".notice").addClass("notice-flash").html("<span class=\"notice-text\">It's called <strong>multiple</strong> choice</span>, please add at least two answers <a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
+			this.$(".notice").addClass("notice-flash").html("<span class=\"notice-text\">It's called <strong>multiple</strong> choice,</span> please provide at least two answers<a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
 		} else {
 			this.collection.create(formData, {
 				success: function (poll) {
@@ -72,7 +73,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 					$('.answer-item').html("");
 					$("#multiple-choice-form").addClass("form-collapsed");
 					$("#open-ended-form").addClass("form-collapsed");
-					$notice.addClass("notice-flash").html("<span class=\"notice-text\"><strong>Success!</strong><br><a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">Your poll has been created</a></span><a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
+					$notice.addClass("notice-flash").html("<span class=\"notice-text\"><strong>Success</strong><br><a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">Your poll has been created</a></span><a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
 				}
 			});
 		}
@@ -121,11 +122,12 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 	},
 
 	delegateKeystroke: function (event) {
+
 		if (event.keyCode === 13) {
 			event.preventDefault();
 			if (event.currentTarget.id === "poll-text") {
 				this.submitPollForm(event);
-			} else if (event.currentTarget.id === "answer-input") {
+			} else if (event.currentTarget.id === "answer-text") {
 				this.addAnswer(event);
 			}
 		}

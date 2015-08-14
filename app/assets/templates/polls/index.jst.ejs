@@ -1,24 +1,34 @@
-<div class="page-nav group">
-    <a href="#" class="page-nav-prev"><i class="fa fa-angle-left"></i></a>
-    <% for (var i = 1; i <= totalPages; i++) { %>
-        <a href="#" class="page-nav-select" data-page-id="<%= i %>">
-            <%= i %>
-        </a>
-        <% }; %>
-            <a href="#" class="page-nav-next"><i class="fa fa-angle-right"></i></a>
+<div class="page-nav-wrap page-nav-wrap-top">
+    <div class="page-nav group page-nav-top">
+        <a href="#" class="page-nav-prev"><i class="fa fa-angle-left"></i></a>
+        <% for (var i = 1; i <= totalPages; i++) { %>
+            <a href="#" class="page-nav-select" data-page-id="<%= i %>">
+                <%= i %>
+            </a>
+            <% }; %>
+                <a href="#" class="page-nav-next"><i class="fa fa-angle-right"></i></a>
+    </div>
 </div>
-<% polls.forEach(function(poll) { %>
-    <% var n = poll.id; %>
-        <a class="poll-select group" href="#" data-poll-id="<%= n %>">
+<div class="poll-index-wrap group">
+    <% polls.forEach(function(poll) { %>
+        <% var n = poll.id; %>
+            <a class="poll-select group" href="#" data-poll-id="<%= n %>">
             <div class="poll-votes group" data-poll-id="<%= n %>">
             </div>
             <div class="poll-text" data-poll-id="<%= n %>"></div>
             <div class="poll-info" data-poll-id="<%= n %>"></div>
       </a>
-        <% }); %>
+            <% }); %>
+</div>
 
-            <div class="page-nav group">
-                <a href="#" class="page-nav-prev"><i class="fa fa-angle-left"></i></a>
-                <% for (var i = 1; i <= totalPages; i++) { %><a href="#" class="page-nav-select" data-page-id="<%= i %>"><%= i %></a><% }; %>
-                        <a href="#" class="page-nav-next"><i class="fa fa-angle-right"></i></a>
-            </div>
+<div class="page-nav-wrap page-nav-wrap-bottom">
+    <div class="page-nav group page-nav-bottom">
+        <a href="#" class="page-nav-prev"><i class="fa fa-angle-left"></i></a>
+        <% for (var i = 1; i <= totalPages; i++) { %>
+            <a href="#" class="page-nav-select" data-page-id="<%= i %>">
+                <%= i %>
+            </a>
+            <% }; %>
+                <a href="#" class="page-nav-next"><i class="fa fa-angle-right"></i></a>
+    </div>
+</div>

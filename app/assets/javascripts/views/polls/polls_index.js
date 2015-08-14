@@ -10,6 +10,7 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
   },
 
   initialize: function() {
+    this.chartIcons = ["","fa-pie-chart", "fa-bar-chart", "fa-line-chart", "fa-area-chart"];
     this.listenTo(this.collection, 'sync add destroy', this.render);
     this.collection.fetch({
       remove: true,
