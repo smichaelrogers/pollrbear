@@ -6,7 +6,6 @@
 #  first_name      :string           not null
 #  last_name       :string           not null
 #  email           :string           not null
-#  profile_img     :string
 #  provider        :string
 #  uid             :string
 #  session_token   :string           not null

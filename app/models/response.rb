@@ -5,6 +5,7 @@
 #  id            :integer          not null, primary key
 #  answer_id     :integer          not null
 #  respondent_id :integer          not null
+#  text          :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

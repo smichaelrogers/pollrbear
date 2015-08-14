@@ -15,12 +15,10 @@ gem "font-awesome-rails"
 gem 'kaminari'
 gem 'figaro'
 gem 'omniauth-twitter'
-gem 'less-rails', '~> 2.7.0'
-gem 'therubyracer'
+gem 'faker'
 group :doc do
   gem 'sdoc', require: false
 end
-
 group :development do
   gem 'annotate'
   gem 'better_errors'
@@ -28,9 +26,7 @@ group :development do
   gem 'pry-rails'
   gem 'rails-erd'
   gem 'traceroute'
-  gem 'faker'
 end
-
 group :production do
   gem 'rails_12factor'
 end
