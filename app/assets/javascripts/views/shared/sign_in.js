@@ -5,6 +5,7 @@ PollrBear.Views.SignIn = Backbone.View.extend({
 		this.callback = options.callback;
 		this.listenTo(PollrBear.currentUser, "signIn", this.signInCallback);
 	},
+	//<a href="/auth/twitter" class="btn btn-std" id="twitter-login"><i class="fa fa-twitter fa-fw"></i>Login with Twitter</a>
 
 	events: {
 		"click #standard-login": "standardLogin",

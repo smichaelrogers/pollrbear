@@ -987,7 +987,7 @@ textarea.form-class {
 .login-panel {
     padding: 30px;
     .button-wrap {
-        padding: 6px 24px;
+        padding: 4px 32px;
         button {
 
         }
@@ -1016,7 +1016,8 @@ textarea.form-class {
 }
 #guest-login,
 #twitter-login {
-    float: left;
+    float: right;
+    margin-right: 12px;
 }
 #twitter-login {
 
