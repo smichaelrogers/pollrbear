@@ -40,7 +40,7 @@ PollrBear.Views.SignIn = Backbone.View.extend({
 	guestLogin: function (event) {
 		event.preventDefault();
 		PollrBear.currentUser.signIn({
-			email: "wilson@tom.hanks",
+			email: "guest@guest.com",
 			password: "asdfasdf",
 		});
 	},
