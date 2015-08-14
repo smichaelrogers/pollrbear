@@ -31,7 +31,7 @@ PollrBear.Routers.Users = Backbone.Router.extend({
       return;
     }
     var model = new this.collection.model();
-    var formView = new PollrBear.Views.UserForm({
+    var formView = new PollrBear.Views.SignIn({
       collection: this.collection,
       model: model
     });
@@ -42,7 +42,6 @@ PollrBear.Routers.Users = Backbone.Router.extend({
     if (!this._requireSignedOut(callback)) {
       return;
     }
-
     var signInView = new PollrBear.Views.SignIn({
       callback: callback
     });

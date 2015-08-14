@@ -81,7 +81,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 
 	noticeDismiss: function (event) {
 		event.preventDefault();
-		this.$(".notice").removeClass("notice-flash").html("");
+		$(".notice").removeClass("notice-flash").html("");
 	},
 
 	visitCreatedPoll: function (event) {

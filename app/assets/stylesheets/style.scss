@@ -112,7 +112,6 @@ button.btn {
     a.btn-uniq {
         border    : 2px solid $blue;
         color     : $mid-grey;
-
         background: transparent;
         &:hover {
             border    : 2px solid darken($blue, 10%);
@@ -169,32 +168,28 @@ button.btn {
     border-radius: 10px;
     float        : right;
 }
-
 button.btn.add-answer {
-  border-radius: 10px;
-  border: 2px solid $light-grey;
-  color: $grey;
-  &:hover {
-      border: 2px solid $grey;
-      color : darken($grey, 10%);
-  }
+    border-radius: 10px;
+    border       : 2px solid $light-grey;
+    color        : $grey;
+    &:hover {
+        border: 2px solid $grey;
+        color : darken($grey, 10%);
+    }
 }
-
-
 .add-button {
-  display: inline-block;
-  line-height: 24px;
-  margin-left: 6px;
-  margin-right: 12px;
-  color: $mid-grey;
+    display     : inline-block;
+    line-height : 24px;
+    margin-left : 6px;
+    margin-right: 12px;
+    color       : $mid-grey;
 }
-
 .next-button {
-  display: inline-block;
-  margin-right: 12px;
-  margin-left: 6px;
-  line-height: 24px;
-  color: $mid-grey;
+    display     : inline-block;
+    margin-right: 12px;
+    margin-left : 6px;
+    line-height : 24px;
+    color       : $mid-grey;
 }
 #submit-create-poll {
     padding      : 10px 20px;
@@ -226,8 +221,8 @@ button.btn.add-answer {
     visibility: hidden;
 }
 .notice {
-    display   : block;
-    width     : 100%;
+    display: block;
+    width  : 100%;
 }
 .notice-dismiss {
     color   : $mid-grey;
@@ -243,24 +238,24 @@ button.btn.add-answer {
             background: transparent;
         }
         &:hover:before {
-          color: $dark-grey;
+            color: $dark-grey;
         }
     }
 }
 .notice-text {
-  display: block;
-  padding: 8px;
-  font-size: 15px;
+    display  : block;
+    padding  : 8px;
+    font-size: 15px;
 }
 .notice-flash {
     background   : $lighter-grey;
     position     : relative;
-    color: $mid-grey;
-    text-align: center;
+    color        : $mid-grey;
+    text-align   : center;
     margin-bottom: 12px;
-    display: block;
-    width: 100%;
-    min-height: 50px;
+    display      : block;
+    width        : 100%;
+    min-height   : 50px;
     border-radius: 6px;
     padding      : 8px 24px 8px 8px;
 }
@@ -317,7 +312,6 @@ h6 {
     overflow: hidden;
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -333,19 +327,19 @@ h6 {
 
 }
 #left-side {
-    color        : $base-grey;
-    padding      : 24px 0 50px 24px;
-    border-left  : 1px solid $lighter-grey;
-    border-right : 1px solid $lighter-grey;
+    color       : $base-grey;
+    padding     : 24px 0 50px 24px;
+    border-left : 1px solid $lighter-grey;
+    border-right: 1px solid $lighter-grey;
 }
 #top-left {
     display: block;
     width  : 100%;
 }
 #right-side {
-    padding: 24px;
-    border-left  : 1px solid $lighter-grey;
-    border-right : 1px solid $lighter-grey;
+    padding     : 24px;
+    border-left : 1px solid $lighter-grey;
+    border-right: 1px solid $lighter-grey;
     #new-poll {
         background: transparent;
     }
@@ -370,47 +364,44 @@ h6 {
         width  : 40%;
         float  : right;
         button.btn.sign-out-link {
-          font-size: 14px;
-          color: $grey;
-            padding: 8px 12px;
-            display: block;
+            font-size: 14px;
+            color    : $grey;
+            padding  : 8px 12px;
+            display  : block;
             &:hover {
-              color: $mid-grey;
+                color: $mid-grey;
             }
         }
     }
 }
-#splash-login {
-
-}
 #wrapper {
-    border-top   : 20px solid $yellow;
-    border-bottom: 20px solid $lighter-grey;
+    border-top                : 20px solid $yellow;
+    border-bottom             : 20px solid $lighter-grey;
     border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    margin-bottom: 24px;
-    background   : $white;
-    box-shadow   : -2px 2px 2px 2px rgba(0,0,0,0.15);
+    border-bottom-left-radius : 20px;
+    margin-bottom             : 24px;
+    background                : $white;
+    box-shadow                : -2px 2px 2px 2px rgba(0,0,0,0.15);
     #root {
 
     }
 }
 #footer {
-  font-size: 12px;
-  background: $lighter-grey;
-  border-top: 20px solid $white;
-  display: block;
-  padding-bottom: 20px;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
-  box-shadow   : -3px 3px 3px 2px rgba(0,0,0,0.15);
-  .copyright {
-    span {
-      display: block;
-      padding: 10px;
-      color: $grey;
+    font-size              : 12px;
+    background             : $lighter-grey;
+    border-top             : 20px solid $white;
+    display                : block;
+    padding-bottom         : 20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius : 20px;
+    box-shadow             : -3px 3px 3px 2px rgba(0,0,0,0.15);
+    .copyright {
+        span {
+            display: block;
+            padding: 10px;
+            color  : $grey;
+        }
     }
-  }
 }
 .nav-logo-wrap {
     padding-bottom: 20px;
@@ -519,13 +510,6 @@ h6 {
         display : block;
     }
 }
-.logo-wrap {
-    padding: 30px;
-}
-#splash-logo-right {
-    width : 100%;
-    height: auto;
-}
 #poll-form-wrap {
     margin-top   : 20px;
     margin-bottom: 20px;
@@ -554,10 +538,6 @@ h6 {
 #answer-input {
 
 }
-#splash {
-
-}
-
 input.form-class,
 textarea.form-class {
     margin-bottom: 16px;
@@ -623,12 +603,11 @@ textarea.form-class {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .poll-index-wrap {
-  display: block;
-  margin: 0;
-  padding: 0;
-  position: relative;
+    display : block;
+    margin  : 0;
+    padding : 0;
+    position: relative;
 }
-
 .poll-select {
     display                  : block;
     border-top               : 1px solid $lighter-grey;
@@ -781,7 +760,7 @@ textarea.form-class {
                 float       : left;
                 display     : block;
                 padding-left: 20px;
-                word-wrap: break-word;
+                word-wrap   : break-word;
                 width       : 80%;
                 color       : $mid-grey;
             }
@@ -798,7 +777,7 @@ textarea.form-class {
                         background: transparent;
                     }
                     &:hover:before {
-                      color: $dark-grey;
+                        color: $dark-grey;
                     }
                 }
             }
@@ -816,23 +795,22 @@ textarea.form-class {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.page-nav-wrap{
-  &-top {
-    display: block;
-
-  }
-  &-bottom {
-    display: block;
-    border-top: 1px solid $lighter-grey;
-  }
+.page-nav-wrap {
+    &-top {
+        display: block;
+    }
+    &-bottom {
+        display   : block;
+        border-top: 1px solid $lighter-grey;
+    }
 }
-
 .page-nav {
-  &-top {
+    &-top {
 
-  }
-  &-bottom {
-  }
+    }
+    &-bottom {
+
+    }
     display       : block;
     font-weight   : bold;
     padding-bottom: 6px;
@@ -936,4 +914,85 @@ textarea.form-class {
     &-17 {
         color: rgb(218, 232, 233);
     }
+}
+
+#signup, #splash {
+  padding: 0 6%;
+}
+
+#splash {
+  border-bottom: 1px solid $lighter-grey;
+}
+
+
+.splash-logo-wrap {
+  position: relative;
+  display: block;
+  text-align: center;
+  padding: 24px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid $lighter-grey;
+  img {
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+}
+.register-heading {
+  h3.page-title {
+    font-size: 24px;
+    margin-bottom: -12px;
+  }
+}
+
+#signup {
+  .register-heading {
+
+  }
+}
+
+.login-panel {
+  padding: 30px;
+
+  .button-wrap {
+    padding: 6px 24px;
+    button {
+
+    }
+  }
+  .form-wrap {
+    padding: 2px 32px;
+    label {
+      display: block;
+      width: 100px;
+      float: right;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      color: rgb(223, 223, 223);
+      letter-spacing: 1px;
+      font-size: 12px;
+      text-align: center;
+      text-transform: lowercase;
+    }
+    input {
+
+    }
+  }
+}
+.btn-signin {
+  background: $lighter-grey !important;
+}
+
+#guest-login, #twitter-login {
+  float: left;
+
+}
+#standard-login, #register-login {
+  float: right;
+}
+
+.register-heading {
+  padding: 0px 32px;
 }

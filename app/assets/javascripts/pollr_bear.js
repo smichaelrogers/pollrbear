@@ -6,6 +6,8 @@ window.PollrBear = {
 	initialize: function () {
 		this.currentUser = new PollrBear.Models.CurrentUser();
 		this.currentUser.fetch();
+		this.users = new PollrBear.Collections.Users();
+		this.users.fetch();
 		this.router = new PollrBear.Routers.Users({
 			$rootEl: $("#root")
 		});
