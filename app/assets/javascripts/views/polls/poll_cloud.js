@@ -73,7 +73,7 @@ PollrBear.Views.PollCloud = Backbone.CompositeView.extend({
 					} else {
 						dir = "cloud-right";
 					}
-					var n = Math.floor(5 + (Math.pow(val / most, 2) * 100)) + "";
+					var n = Math.floor(4 + (Math.pow(val / most, 1.7) * 120)) + "";
 					styleStr = "margin-top: -" + Math.floor(n*.5) + "px; z-index: " + val + ";";
 					htmlStr += "<span class=\" cloud cloud-" + Math.floor(idx / numWords * 16.0 + 1.0) + " " + dir + "\" style=\"font-size:" + n + "px;" + styleStr + "\">" + str + "</span>";
 					cloudData.push(htmlStr);

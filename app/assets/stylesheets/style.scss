@@ -81,7 +81,7 @@ a {
 button.btn {
     background: transparent;
 }
-button.btn {
+button.btn, a.btn {
     transition    : border-color 0.05s linear;
     transition    : color 0.05s linear;
     transition    : background 0.05s linear;
@@ -94,8 +94,7 @@ button.btn {
     &:focus {
         outline: none;
     }
-    &-std,
-    a.btn-std {
+    &-std, {
         border: 2px solid $lighter-grey;
         color : $mid-grey;
         &:hover {
@@ -674,9 +673,46 @@ textarea.form-class {
             display: block;
             width  : 20%;
             float  : left;
+            .chart-icon {
+                display: block;
+                width  : 30%;
+                float  : left;
+            }
+            .chart-cloud {
+                color: rgba(254,215,101, 1.0);
+                &:before {
+
+                }
+            }
+            .chart-pie {
+                color: rgba(6, 214, 160, 1.0);
+                &:before {
+
+                }
+            }
+            .chart-bar {
+                color: rgba(42, 183, 201, 1.0);
+                &:before {
+
+                }
+            }
+            .chart-line {
+                color: rgba(247, 108, 108, 1);
+                &:before {
+
+                }
+            }
+            .chart-area {
+                color: rgba(194, 100, 209, 1.0);
+                &:before {
+
+                }
+            }
             .poll-open-ended,
             .poll-multiple-choice {
+                width  : 70%;
                 display: block;
+                float  : left;
                 color  : $grey;
             }
             .poll-open-ended {
@@ -819,7 +855,7 @@ textarea.form-class {
         font-weight   : normal;
         vertical-align: middle;
         height        : 24px;
-        padding       : 10px 6px;
+        padding       : 4px 2px;
         color         : $blue;
     }
     .page-nav-active {
@@ -915,84 +951,82 @@ textarea.form-class {
         color: rgb(218, 232, 233);
     }
 }
-
-#signup, #splash {
-  padding: 0 6%;
-}
-
+#signup,
 #splash {
-  border-bottom: 1px solid $lighter-grey;
+    padding: 0 6%;
 }
-
-
+#splash {
+    border-bottom: 1px solid $lighter-grey;
+}
 .splash-logo-wrap {
-  position: relative;
-  display: block;
-  text-align: center;
-  padding: 24px;
-  margin-bottom: 12px;
-  border-bottom: 1px solid $lighter-grey;
-  img {
-    margin: 0 auto;
-    display: block;
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-  }
+    position     : relative;
+    display      : block;
+    text-align   : center;
+    padding      : 24px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid $lighter-grey;
+    img {
+        margin   : 0 auto;
+        display  : block;
+        width    : 100%;
+        max-width: 300px;
+        height   : auto;
+    }
 }
 .register-heading {
-  h3.page-title {
-    font-size: 24px;
-    margin-bottom: -12px;
-  }
+    h3.page-title {
+        font-size    : 24px;
+        margin-bottom: -12px;
+    }
 }
-
 #signup {
-  .register-heading {
+    .register-heading {
 
-  }
+    }
 }
-
 .login-panel {
-  padding: 30px;
+    padding: 30px;
+    .button-wrap {
+        padding: 6px 24px;
+        button {
 
-  .button-wrap {
-    padding: 6px 24px;
-    button {
+        }
+    }
+    .form-wrap {
+        padding: 2px 32px;
+        label {
+            display       : block;
+            width         : 100px;
+            float         : right;
+            margin-bottom : 0;
+            padding-bottom: 0;
+            color         : rgb(223, 223, 223);
+            letter-spacing: 1px;
+            font-size     : 12px;
+            text-align    : center;
+            text-transform: lowercase;
+        }
+        input {
 
+        }
     }
-  }
-  .form-wrap {
-    padding: 2px 32px;
-    label {
-      display: block;
-      width: 100px;
-      float: right;
-      margin-bottom: 0;
-      padding-bottom: 0;
-      color: rgb(223, 223, 223);
-      letter-spacing: 1px;
-      font-size: 12px;
-      text-align: center;
-      text-transform: lowercase;
-    }
-    input {
-
-    }
-  }
 }
 .btn-signin {
-  background: $lighter-grey !important;
+    background: $lighter-grey !important;
+}
+#guest-login,
+#twitter-login {
+    float: left;
+}
+#twitter-login {
+
 }
 
-#guest-login, #twitter-login {
-  float: left;
 
+#standard-login,
+#register-login {
+    float: right;
 }
-#standard-login, #register-login {
-  float: right;
-}
-
 .register-heading {
-  padding: 0px 32px;
+    padding: 0 32px;
 }

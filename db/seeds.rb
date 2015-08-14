@@ -1195,20 +1195,60 @@ idx = 0
     }"]
 
 
+
+
+
+
+@questions_oe = ["Why is the time of day when the traffic is slowest called the ‘rush hour’?","Why isn’t ‘phonetics’ spelled the way it sounds?","Why are homes called apartments when they are all stuck together?","Why do we drive in parks and park in drives?","Why don’t sheep shrink in the rain?","If nothing sticks to teflon, how do they make it stick to the pan?","Why is it for each and every action, there is an equal and greater criticism?","If fire fighters fight fires and crime fighters fight crime, what do freedom fighters fight?","If a service station never closes, why do they still have locks on the door?","Do vegetarians eat animal biscuits?","How come an iron has a setting for ‘permanent press’?","If Barbie (the doll of course) is so popular, why do you need to buy her friends?","What’s another word for ‘Thesaurus’?","If you had everything in the world, where would you put it?","After they make styrofoam, what do they ship it in?","When you see a microwave, do you wave back?","Why is experience something you don’t get until just after you need it?"]
+
+
+@questions_oe += ["Why is the severity of an itch inversely proportional to your ability to reach it?","Why is change inevitable, except from vending machines?","Why do bills travel through the mail at twice the speed of cheques?","Why is the 3rd hand on the watch called the second hand?","If a word is misspelled in the dictionary, how would we ever know?","If Webster wrote the first dictionary, where did he find the words?","Why do we say something is ‘out of whack’? What is a whack?","Why does ‘slow down’ and ‘slow up’ mean the same thing?","Why does ‘fat chance’ and ‘slim chance’ mean the same thing?","Why do ‘tug’ boats’ push their charges?","Why do we sing, ‘Take me Out To The Ballgame’ when we are already there?","Why are they called ‘stands’ when they are made for sitting on?","Why is it called ‘after dark’ when it is really ‘after light’?","Doesn’t ‘expecting the unexpected’ make the unexpected expected?","Why are a ‘wise man’ and a ‘wise guy’ opposites?","Why do ‘overlook and ‘oversee’ mean different things?","If work is so terrific, why do they have to pay you to do it?","If all the world is a stage, where is the audience sitting?","If love is blind, why is lingerie so popular?","Why do you press harder on a remote control when you know that the batteries are dead?","Why do we put suits in garment bags and garments in a suitcase?","How come ‘abbreviated’ is such a long word?","Why do we wash bath towels? Aren’t we clean when we use them?"]
+@questions_oe += ["Why doesn’t glue stick to the inside of the bottle?","If ‘Peter Piper picked a peck of pickled peppers’, where did he find a pickled pepper bush?"]
+
+@questions_oe += ["How do you get off a non-stop flight?","How come that no-one is listening until you make a mistake?","Why is it that the colder the x-ray table, the more of your body is required on it?","Why are credit cards always in debit?","Why did Kamikaze pilots wear helmets?","Do illiterate people get the full affect of alphabet soup?","Why when you blow in a dog's face he gets mad at you, but when you take him in a car he sticks his head out the window?","Why is anyone going slower than you an idiot, but anyone going faster than you a maniac?","How come SUPERMAN could stop bullets with his chest, but always ducked when someone threw a gun at him?","If it was only a 3 hour cruise, why did MRS. HOWELL have so many clothes?","Why does SOUR CREAM have an Expiration date?","Why buy a product that it takes 2000 flushes to get rid of?","Why do we wait until a PIG is dead, to CURE it?","Why is a Mom with two or more kids called a \"single Mom\"?","Why do doctors call what they do \"a practice\"?","Why doesn't Tarzan have a beard?","If man evolved from monkeys and apes, why do we still have monkeys and apes?","If all those psychics know the winning lottery numbers, why are they all still working?","Where did Webster look up the definitions when he wrote the dictionary?","Why is there a road sign that says \"Braille Institute, Next Exit?"]
+@questions_oe += ["When an octopus puts on deodorant, how does he remember where he started?","Why is it, when a door is open it's ajar, but when a jar is open, it's not a door?","Why are they called buildings, when they're already finished? Shouldn't they be called builts?","Why do people without a watch look at their wrist when you ask them what time it is?"]
+@questions_oe += ["Why do women wear evening gowns to nightclubs? Shouldn't they be wearing night gowns?","Why is it that if someone tells you that there are billion stars in the universe you will believe them, but if they tell you a wall has wet paint you will have to touch it to be sure?","Why do psychics have to ask you for your name?","Why put off 'til tomorrow what you'll never do anyway?","Why is the alphabet in that order?","Why is a carrot more orange than an orange?","Why is the man who invests all your money called a broker?","Where do forest rangers go to \"get away from it all?\"Have you ever wondered why just one letter makes all the difference between laughter and slaughter.","Why, when I wind up my watch, I start it; but when I wind up a project, I end it?","Does the reverse side also have a reverse side?","If a book on \"Failure\" doesn't sell, is it a success?","Does a bankruptcy lawyer expect to get paid?","Why does food with half the calories costs twice as much?","Why is it that the only vacant parking space is always on the other side of the street?","Why is it that there are always more last-minute details than there are last minutes?","Why are natural, unprocessed foods so much more expensive than their synthetic, over-processed counterparts?","Why does Hot Point make refrigerators while Frigid Air makes stoves?","Why is the man who invests all our money called a broker?","If its called chilli, why is it served hot?","Why is it can you \"slow up,\" but you can't \"speed down.\"?"]
+@questions_oe += ["Why do banks charge you a \"insufficient funds fee\" on money they already know you don't have?","Why do you ask someone without a watch what time it is?","Why is it that the guy who comes up behind you while you're waiting for an elevator presses the already lit \"up\" button - as though he somehow has magical powers that you didn't when you pressed it the first time?","Day light savings time - why are they saving it and where do they keep it?","How do you throw away a garbage can?","Why are buttons on guys' shirts on a different side than girls' shirts?","Why does caregiver and caretaker mean the same thing?","If you were on a plane going the speed of sound and walked from the back of the plane to the front, would you be walking faster than the speed of sound?","What does OK actually mean?","Why do we feel \"blue\"?","Why don't you hear thunder with heat lightning?","If one man says, \"It was an uphill battle,\" and another says, \"It went downhill from there,\" how could they both be having troubles?","Why is it you walk down a road, even if it goes uphill?","Why is it that it's bad to be mean, but for something to have \"mean\"ing can be good?","Why do we play in recitals and recite in plays?","Why is it that one person lives and many people live? Shouldn't it be one person live and many people lives?","If time heals all wounds, how come the belly button stays the same?","How is it that ‘back seat drivers’ usually sit in the front seat? (David Tait)"]
+@questions_oe += ["What would chairs look like if our legs bent the other way?","How is it that those who hate mice can still manage to operate a computer? (David Tait)","Can God make a rock so big that he can’t lift it?","Why are there interstate highways in Hawaii?","Why are there flotation devices under plane seats instead of parachutes?","Why are cigarettes sold in gas stations when smoking is prohibited there?","Why do fat chance and slim chance mean the same thing?","Do you need a silencer if you are going to shoot a mime?","Have you ever imagined a world with no hypothetical situations?","How does the guy who drives the snowplough get to work in the mornings?","If 7-11 is open 24 hours a day, 365 days a year, why are there locks on the doors?","If you're in a vehicle going the speed of light, what happens when you turn on the headlights?","Why do they put Braille dots on the keypad of the drive-up ATM?","Why isn't \"palindrome\" spelled the same way backwards?","Why is it that when you transport something by car, it's called a shipment, but when you transport something by ship, it's called cargo?","You know that little indestructible black box that is used on planes, why can't they make the whole plane out of the same substance?","Why is it that when you're driving and looking for an address, you turn down the volume on the radio?","If you have your finger touching the rearview mirror that says - \"objects in mirror are closer than they appear\", how can that be possible?"]
+@questions_oe += ["Why is it so hard to remember how to spell MNEMONIC?","If someone invented instant water, what would they mix it with?","Why is it called a TV \"set\" when you only get one?","Why does your nose run and your feet smell?","Why does an alarm clock \"go off\" when it begins ringing?","If pro is the opposite of con, is progress the opposite of congress?","Why does \"cleave\" mean both split apart and stick together?"]
+used = []
+turns = (0..179).to_a.shuffle
 user_idx = 1
-@questions.each do |question|
-  temp = JSON.parse(question)
-  poll = Poll.create!(text:temp['question'], user_id: user_idx, chart: [1,2,3,4].sample, format: 1)
-  temp['answers'].each do |answer|
-    next if answer.length == 0
-    responders = []
-    answer = Answer.create!(poll_id: poll.id, text: answer)
-    (1..60).to_a.sample.times do |idx|
-      uid = (1..20).to_a.sample
-      if uid != user_idx && !responders.include?(uid)
-        Response.create!(respondent_id: uid, answer_id: answer.id)
-        responders << uid
+turns.each do |turn|
+  if turn > 70
+    num = turn - 68
+    if used.include?(num)
+      next
+    else
+      used << num
+    end
+    temp = JSON.parse(@questions[num])
+    question = temp['question']
+    answers = temp['answers']
+    poll = Poll.create!(text: question, user_id: user_idx, chart: [1,2,3,4].sample, format: 1)
+    answers.each do |answer|
+      if answer.length > 0
+        new_answer = Answer.create!(poll_id: poll.id, text: answer)
+        (6..16).to_a.sample.times do
+          uid = (1..20).to_a.sample
+          Response.create!(respondent_id: uid, answer_id: new_answer.id)
+        end
       end
+    end
+  else
+    num = turn
+    if used.include?(num)
+      next
+    else
+      used << num
+    end
+    question = @questions_oe[num]
+    poll = Poll.create!(text: question, user_id: user_idx, chart: 0, format: 2)
+    answer = Answer.create!(poll_id: poll.id)
+    (40..60).to_a.sample.times do |idx|
+      text = [Faker::Team.creature, Faker::Commerce.product_name, Faker::Commerce.color, Faker::Commerce.department(5), Faker::Address.city_prefix, Faker::Address.street_name, Faker::Address.city, Faker::Address.city_suffix, Faker::Team.creature].shuffle.join(" ")
+      uid = (1..20).to_a.sample
+      Response.create!(respondent_id: uid, answer_id: answer.id, text: text)
     end
   end
   user_idx += 1

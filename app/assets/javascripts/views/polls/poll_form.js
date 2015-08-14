@@ -49,6 +49,9 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 		var formData = this.pollFormData;
 		var $notice = this.$(".notice");
 		var $answers = $('.answer-item');
+		if (this.pollFormData.poll.format === "2") {
+			this.pollFormData.poll.chart = 0;
+		}
 		$notice.removeClass("notice-flash");
 		$notice.html("");
 		if ($answers.length < 2 && this.pollFormData.poll.format === "1") {

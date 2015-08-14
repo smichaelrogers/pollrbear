@@ -15,9 +15,8 @@
 #
 
 class User < ActiveRecord::Base
-  validates :email, :session_token, presence: true
+  validates :session_token, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
-  validates :email, uniqueness: true
 
   has_many :submitted_responses,
     class_name: "Response",
@@ -31,6 +30,7 @@ class User < ActiveRecord::Base
   attr_reader :password
   after_initialize :ensure_session_token
   before_validation :ensure_session_token
+  after_initialize :ensure_email
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
     end
 
     user
+  end
+
+  def ensure_email
+    self.email ||= "      "
   end
 
   def password=(password)

@@ -1,13 +1,14 @@
 module Api
   class PollsController < ApiController
     def index
-      @polls = Poll.order(created_at: :desc).page(params[:page]).per(8)
+      @polls = Poll.order(created_at: :desc).page(params[:page]).per(10)
       @result = []
       @polls.each do |poll|
         pollData = {}
         pollData[:response_count] = 0
         pollData[:answers] = []
         pollData[:format] = poll.format
+        pollData[:chart] = poll.chart
         pollData[:text] = poll.text
         pollData[:responses] = []
         pollData[:created_at] = poll.created_at.strftime("Posted %b %d, %Y at %l:%M %p by")
