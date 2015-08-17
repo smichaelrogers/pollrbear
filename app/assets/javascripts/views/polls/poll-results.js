@@ -1,55 +1,9 @@
 PollrBear.Views.PollResults = Backbone.CompositeView.extend({
 	template: JST['polls/results'],
-	className: "multiple-choice-results",
-	initialize: function () {
+	initialize: function (options) {
 		this.listenTo(this.collection, 'sync', this.delegateChartRendering);
-		this.colors = [
-      "rgba(42, 183, 201, 0.7)",
-      "rgba(254,215,101, 0.7)",
-      "rgba(254,74,73, 0.7)",
-			"rgba(6, 214, 160, 0.7)",
-			"rgba(194, 100, 209, 0.7)",
-      "rgba(0, 141, 213, 0.7)",
-      "rgba(255, 189, 0, 0.7)",
-      "rgba(255, 116, 158, 0.7)",
-      "rgba(0,225,255, 0.7)"
-    ];
-		this.highlights = [
-			"rgba(42, 183, 201, 1.0)",
-      "rgba(254,215,101, 1.0)",
-      "rgba(254,74,73, 1.0)",
-			"rgba(6, 214, 160, 1.0)",
-			"rgba(194, 100, 209, 1.0)",
-      "rgba(0, 141, 213, 1.0)",
-      "rgba(255, 189, 0, 1.0)",
-      "rgba(255, 116, 158, 1.0)",
-      "rgba(0,225,255, 1.0)"
-    ];
-		this.tints = [
-			"rgba(71, 206, 223, 1)",
-      "rgba(251, 222, 137, 1)",
-      "rgba(247, 108, 108, 1)",
-			"rgba(60, 236, 190, 1)",
-			"rgba(214, 143, 226, 1)",
-      "rgba(55, 173, 233, 1)",
-      "rgba(245, 204, 87, 1)",
-      "rgba(250, 145, 177, 1)",
-      "rgba(95, 229, 247, 1)"
-    ];
-		this.shades = [
-			"rgba(32, 154, 170, 1)",
-			"rgba(223, 187, 80, 1)",
-			"rgba(215, 64, 64, 1)",
-			"rgba(6, 184, 137, 1)",
-			"rgba(159, 79, 172, 1)",
-			"rgba(5, 114, 170, 1)",
-			"rgba(214, 161, 9, 1)",
-			"rgba(219, 83, 124, 1)",
-			"rgba(4, 186, 210, 1)"
-		];
-		this.labels = ["A", "B", "C", "D", "E", "F", "G", "H"];
-		this.userResponse;
-		this.majorityResponse;
+		this.userVote = options.userVote;
+		this.numVotes = [];
 	},
 
 	render: function () {
@@ -57,10 +11,13 @@ PollrBear.Views.PollResults = Backbone.CompositeView.extend({
 			poll: this.model,
 			answers: this.collection,
 			percentages: this.percentages(),
-			labels: this.labels,
-			colors: this.highlights,
-			total: this.totalVotes()
+			labels: PollrBear.labels,
+			colors: PollrBear.highlights,
+			total: this.totalVotes(),
+			user_vote: this.userVote,
+			num_votes: this.numVotes
 		});
+		$(".notice").remove();
 		this.$el.html(content);
 		this.delegateChartRendering();
 		return this;
@@ -72,23 +29,24 @@ PollrBear.Views.PollResults = Backbone.CompositeView.extend({
 		return Math.floor(numResp / this.totalVotes());
 	},
 
-	mostChosen: function () {
-
-	},
-
 	percentages: function () {
 		var data = [];
+		var nV = [];
 		var len = this.totalVotes();
-		if(len > 3) {
-			var num;
+		var numResponses = 0;
+		var majorityResponses = [];
+		if (len > 3) {
 			this.collection.forEach(function (answer) {
 				if (answer.attributes.responses) {
-					num = (answer.attributes.responses.length / len) * 100
+					var n = answer.attributes.responses.length;
+					nV.push(n);
+					num = (answer.attributes.responses.length / len) * 100;
 					data.push(Math.round(num) + "");
 				}
 			});
+			this.numVotes = nV;
+			return data;
 		}
-		return data;
 	},
 
 	totalVotes: function () {
@@ -129,9 +87,9 @@ PollrBear.Views.PollResults = Backbone.CompositeView.extend({
 		this.collection.forEach(function (answer) {
 			answerData = {};
 			answerData['value'] = answer.attributes.responses.length;
-			answerData['color'] = this.colors[i];
-			answerData['highlight'] = this.highlights[i];
-			answerData['label'] = this.labels[i];
+			answerData['color'] = PollrBear.colors[i];
+			answerData['highlight'] = PollrBear.highlights[i];
+			answerData['label'] = PollrBear.labels[i];
 			pieChartData.push(answerData);
 			i++;
 		}.bind(this));
@@ -145,12 +103,12 @@ PollrBear.Views.PollResults = Backbone.CompositeView.extend({
 			chartData.push(answer.attributes.responses.length);
 		});
 		var barChartData = {
-			labels: this.labels.slice(0, this.collection.length),
+			labels: PollrBear.labels.slice(0, this.collection.length),
 			datasets: [{
-				fillColor: this.colors[0],
-				strokeColor: this.highlights[0],
-				highlightFill: this.highlights[0],
-				highlightStroke: this.shades[0],
+				fillColor: PollrBear.colors[0],
+				strokeColor: PollrBear.highlights[0],
+				highlightFill: PollrBear.highlights[0],
+				highlightStroke: PollrBear.shades[0],
 				data: chartData
       }]
 		}
@@ -167,9 +125,9 @@ PollrBear.Views.PollResults = Backbone.CompositeView.extend({
 		this.collection.forEach(function (answer) {
 			answerData = {};
 			answerData['value'] = answer.attributes.responses.length;
-			answerData['color'] = this.colors[i];
-			answerData['highlight'] = this.highlights[i];
-			answerData['label'] = this.labels[i];
+			answerData['color'] = PollrBear.colors[i];
+			answerData['highlight'] = PollrBear.highlights[i];
+			answerData['label'] = PollrBear.labels[i];
 			chartData.push(answerData);
 			i++;
 		}.bind(this));
@@ -183,7 +141,7 @@ PollrBear.Views.PollResults = Backbone.CompositeView.extend({
 			chartData.push(answer.attributes.responses.length);
 		});
 		var lineChartData = {
-			labels: this.labels.slice(0, this.collection.length),
+			labels: PollrBear.labels.slice(0, this.collection.length),
 			datasets: [{
 				fillColor: "rgba(42, 183, 201, 0.3)",
 				strokeColor: "rgba(42, 183, 201, 1.0)",

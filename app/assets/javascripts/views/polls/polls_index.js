@@ -10,20 +10,14 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
 	},
 
 	initialize: function () {
+		this.fetchPage(1);
 		this.chartIcons = ["", "fa-pie-chart", "fa-bar-chart", "fa-line-chart", "fa-area-chart"];
-		this.listenTo(this.collection, 'sync add destroy', this.render);
-		this.collection.fetch({
-			remove: true,
-			data: {
-				page: 1
-			}
-		});
+		this.listenTo(this.collection, 'sync destroy', this.render);
 	},
 
 
 	render: function () {
 		var currentPage = this.collection.page;
-		console.log("rendering collection page" + currentPage);
 		var content = this.template({
 			currentPage: currentPage,
 			totalPages: this.collection.total_pages,
@@ -65,8 +59,6 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
 		var poll = this.collection.get(pollId);
 		poll.destroy();
 	},
-
-
 
 	populatePollData: function () {
 		var formatStr;
@@ -112,34 +104,49 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
 			if (p.format === 2) {
 				chartStr = "<span class=\"chart-icon chart-cloud\"><i class=\"fa fa-cloud\"></i></span>";
 			}
-
-			formatStr += chartStr;
-
+			formatStr = chartStr + formatStr;
 			$("div.poll-text[data-poll-id=\"" + p.id + "\"]").html(textStr);
 			$("div.poll-votes[data-poll-id=\"" + p.id + "\"]").html(p.response_count + "");
-			$("div.poll-info[data-poll-id=\"" + p.id + "\"]").html("<div class=\"poll-format\">" + formatStr + " </div><div class=\"poll-created\">" + p.created_at + " by " + p.user + "</div>");
+			$("div.poll-info[data-poll-id=\"" + p.id + "\"]").html("<div class=\"poll-format\">" + formatStr + " </div><div class=\"poll-created\"><span class=\"poll-freq\"><i class=\"fa fa-caret-up\"></i>&nbsp;" + p.frequency + "</span>" + p.created_at + " by " + p.user + "</div>");
 		});
 	},
+
 	fetchPage: function (pageNum) {
+		var that = this;
+		this.renderLoader($("#poll-index"));
 		this.collection.fetch({
 			remove: true,
 			data: {
 				page: pageNum * 1
 			}
+		}, {
+			success: function() {
+				that.$(".loader").remove();
+			},
+			error: function() {
+				that.$(".loader").remove();
+			}
 		});
 	},
 
 	selectPage: function (event) {
+		event.preventDefault();
 		var pageNum = $(event.currentTarget).attr("data-page-id");
 		this.fetchPage(pageNum);
 	},
 
 
 	nextPage: function (event) {
-		this.fetchPage((this.collection.page + 1));
+		event.preventDefault();
+		if(!$(event.currentTarget).hasClass("page-nav-disabled")) {
+			this.fetchPage((this.collection.page + 1));
+		}
 	},
 
 	prevPage: function (event) {
-		this.fetchPage((this.collection.page - 1));
+		event.preventDefault();
+		if(!$(event.currentTarget).hasClass("page-nav-disabled")) {
+			this.fetchPage((this.collection.page - 1));
+		}
 	}
 });

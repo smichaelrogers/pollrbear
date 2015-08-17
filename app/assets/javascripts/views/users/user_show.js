@@ -4,10 +4,13 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
 	events: {
 		"click .sign-out-link": "signOut",
 		"click .select-trending-poll": "showTrendingPoll",
-		'click .reload-main': 'showUserPolls'
+		'click .reload-main': 'reloadMain',
+		'click .dismiss': 'dismissNotice'
 	},
+
 	initialize: function (options) {
 		this.users = options.users;
+		this.listenTo(this.collection, 'change', this.trends);
 		this.listenTo(this.model, 'sync', this.render);
 		this.indexView;
 	},
@@ -33,6 +36,11 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
 		});
 	},
 
+	reloadMain: function(event) {
+		event.preventDefault();
+		this.showUserPolls();
+	},
+
 	showUserPolls: function () {
 		this.indexView = new PollrBear.Views.PollsIndex({
 			collection: this.collection,
@@ -54,17 +62,20 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
 	trends: function () {
 		var userId = this.model.id;
 		var s;
+		var that = this;
+		this.renderLoader($("#trending"));
 		$.ajax({
 			url: "/api/polls/trending/" + userId,
 			dataType: 'json',
 			type: "GET",
 			success: function (trending) {
         $("#trending-polls").html("");
-				trending.polls.forEach(function (poll) {
+				trending.forEach(function (poll) {
 					s = "";
-					s += "<a class=\"select-trending-poll\" href=\"#\" data-trend-id=\"" + poll.poll.id + "\"><span class=\"tleft\">" +  poll.responses.length + "</span><span class=\"tright\">" + poll.poll.text + "</span></a>";
+					s += "<a class=\"select-trending-poll\" href=\"#\" data-trend-id=\"" + poll[0] + "\"><span class=\"tleft\"><span class=\"trend-num-responses\">" +  poll[1].responses + "</span><span class=\"trend-resp-per-day\"><i class=\"fa fa-caret-up\"></i> " + Math.round(poll[1].frequency) + "</span><span class=\"trend-poll-type\" style=\"color:" + PollrBear.chartColors[poll[1].chart] + ";\"><i class=\"fa " + PollrBear.chartIcons[poll[1].chart] + "\"></i></span></span><span class=\"tright\">" + poll[1].text + "</span></a>";
 					$("#trending-polls").append(s);
 				});
+				that.$(".loader").remove();
 			}
 		});
 	},
@@ -79,5 +90,10 @@ PollrBear.Views.UserShow = Backbone.CompositeView.extend({
 			parentView: this.indexView
 		});
 		this._swapMainView(view);
+	},
+
+	dismissNotice: function(event) {
+		event.preventDefault();
+		$(".notice").remove();
 	}
 });

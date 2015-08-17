@@ -5,7 +5,8 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 	events: {
 		'click .btn-answer-select': 'selectAnswer',
 		'click .go-back': 'goBack',
-		'click #submit-word-cloud': 'submitWordCloud'
+		'click #submit-word-cloud': 'submitWordCloud',
+		'click .dismiss': 'dismissNotice'
 	},
 	initialize: function () {
 		this.listenTo(this.collection, 'add', this.render);
@@ -16,7 +17,8 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 		var content = this.template({
 			poll: this.model,
 			answers: this.collection,
-			labels: this.labels
+			labels: PollrBear.labels,
+			colors: PollrBear.highlights
 		});
 		this.$el.html(content);
 		return this;
@@ -32,50 +34,63 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 
 	submitWordCloud: function (event) {
 		event.preventDefault();
-		var poll = this.model;
-		var userId = PollrBear.currentUser.id;
-		var answer = poll.answers().at(0);
-		var responses = answer.responses();
-		var responseText = $(".word-cloud-text").text();
-		responses.create({
-			respondent_id: userId,
-			answer_id: answer.id,
-			text: responseText
-		});
-		$("#answers").remove();
-		$(".allow-realign").removeClass("overlay-collapsed");
-		window.setTimeout(function () {
-			$(".allow-realign").addClass("overlay-collapsed");
+		var that = this;
+		var text = $("#word-cloud-text").val();
+		var answer = this.model.answers().at(0);
+		if (text.length > 0) {
+			this.renderLoader($("#poll-wrap"));
+			answer.responses().create({
+				respondent_id: PollrBear.currentUser.id,
+				answer_id: answer.id,
+				text: $("#word-cloud-text").val()
+			}, {
+				success: function() {
+					that.$(".loader").remove();
+				},
+				error: function() {
+					that.$(".loader").remove();
+				}
+			});
+			$(".notice").remove();
+			$("#answers").remove();
 			$("#results").removeClass("form-collapsed");
 			var view = new PollrBear.Views.PollCloud({
-				model: poll,
+				model: this.model,
 				answer: answer,
-				collection: responses
+				collection: answer.responses()
 			});
-			$("#poll-results-cloud").html(view.render().$el);
-		}, 800);
+			$("#results-oe").html(view.render().$el);
+		} else {
+			this.renderNoticeBefore($("#word-cloud-text"), "Not quite a response, try again");
+		}
 	},
 
 	selectAnswer: function (event) {
 		event.preventDefault();
-		var poll = this.model;
-		var userId = PollrBear.currentUser.id;
+		var that = this;
 		var answerId = $(event.currentTarget).attr("data-answer-id");
 		var answer = this.collection.getOrFetch(answerId);
+		this.renderLoader($("#poll-wrap"));
 		answer.responses().create({
-			respondent_id: userId,
+			respondent_id: PollrBear.currentUser.id,
 			answer_id: answerId
+		}, {
+			success: function() {
+				that.$(".loader").remove();
+			}
 		});
 		$("#answers").remove();
-		$(".allow-realign").removeClass("overlay-collapsed");
-		window.setTimeout(function () {
-			$(".allow-realign").addClass("overlay-collapsed");
-			$("#results").removeClass("form-collapsed");
-			var view = new PollrBear.Views.PollResults({
-				model: poll,
-				collection: poll.answers()
-			});
-			$("#poll-results").html(view.render().$el);
-		}, 800);
+		$("#results").removeClass("form-collapsed");
+		var view = new PollrBear.Views.PollResults({
+			model: this.model,
+			collection: this.model.answers(),
+			userVote: answer
+		});
+		$("#results-mc").html(view.render().$el);
+	},
+
+	dismissNotice: function(event) {
+		event.preventDefault();
+		$(".notice").remove();
 	}
 });

@@ -1,74 +1,70 @@
 <div class="row">
-    <div class="col-xs-6">
-        <button type="button" class="btn btn-std go-back">
-            Back to list</button>
+    <div class="col-xs-3">
+        <button type="button" class="btn btn-std go-back">Back to list</button>
     </div>
-    <div class="col-xs-6 poll-show-heading-wrap">
-        <div class="poll-show-heading">
-            <% if(poll.attributes.format === 1) { %>
-                <span class="poll-show-heading-text">Multiple Choice</span>
-                <span class="chart-icon"></span>
-                <% } else { %>
-                    <span class="poll-show-heading-text">Open Ended</span>
-                    <span class="cloud-icon"></span>
-                    <% }; %>
+    <div class="col-xs-9 answer-poll-heading">
+      <% var c = poll.attributes.chart; %>
+      <% if(c === 0) {  %>
+        <span class="chart-lg chart-cloud"><i class="fa fa-cloud fa-lg"></i></span>
+      <% } else if(c === 1) { %>
+        <span class="chart-lg chart-pie"><i class="fa fa-pie-chart fa-lg"></i></span>
+      <% } else if(c === 2) { %>
+        <span class="chart-lg chart-bar"><i class="fa fa-bar-chart fa-lg"></i></span>
+      <% } else if(c === 3) { %>
+        <span class="chart-lg chart-line"><i class="fa fa-line-chart fa-lg"></i></span>
+      <% } else { %>
+        <span class="chart-lg chart-area"><i class="fa fa-pie-chart fa-lg"></i></span>
+      <% } %>
+      <% if(poll.attributes.format === 1) { %>
+        <span class="answer-poll-heading-text">Multiple Choice</span>
+      <% } else { %>
+        <span class="answer-poll-heading-text">Open Ended</span>
+      <% }; %>
+    </div>
+</div>
+<div class="row">
+  <div class="col-xs-12" id="poll-wrap">
+    <div class="row">
+      <div class="col-xs-12" id="poll-heading">
+        <h3><%= poll.escape('text') %></h3>
+      </div>
+    </div>
+    <div class="row" id="answers">
+      <% if(poll.attributes.format === 1) { %>
+        <div class="col-xs-12" id="answer-mc">
+        <% var i = 0; answers.forEach(function(answer) { %>
+          <button style="border: 2px solid <%= colors[i] %>" type="button" class="btn btn-std btn-answer-select" data-answer-id="<%= answer.id %>">
+            <span style="color: <%= colors[i] %>" class="answer-label"><%= labels[i] %>:</span>
+            <span class="answer-text"><%= answer.escape('text') %></span>
+          </button>
+        <% i++; }); %>
         </div>
+        <% } else { %>
+          <div class="col-xs-12" id="answer-oe">
+              <h3 class="heading"></h3>
+            <form>
+              <textarea rows="4" id="word-cloud-text" class="form-class form-control" name="response[text]" placeholder="Make some words"></textarea>
+              <button type="button" class="btn btn-uniq" id="submit-word-cloud">Submit</button>
+            </form>
+          </div>
+        <% }; %>
     </div>
-</div>
-
-<div class="allow-realign overlay-collapsed">
-    <h2><i class="fa fa-spinner fa-pulse"></i> Hang on...</h2>
-</div>
-<div id="answers" class="row">
-    <div class="col-xs-12 answer-wrap">
-        <h3 class="answer-wrap-title">
-            <%= poll.escape('text') %>
-        </h3>
-
-        <% if(poll.attributes.format === 1) { %>
-            <% var i = 0; %>
-                <% answers.forEach(function(answer) { %>
-                    <button type="button" class="btn btn-std btn-answer-select" data-answer-id="<%= answer.id %>">
-                        <span class="answer-label">
-                            <%= labels[i] %>:</span>
-                        <span class="answer-text">
-                            <%= answer.escape('text') %>
-                        </span>
-                        <% i++; %>
-                    </button>
-                    <% }); %>
-                        <% } else { %>
-                            <form id="word-cloud">
-                                <h3 class="heading"></h3>
-                                <textarea rows="5" class="word-cloud-text form-class form-control" name="response[text]" placeholder="Make some words"></textarea>
-                                <button type="button" class="btn btn-uniq" id="submit-word-cloud">Submit</button>
-                            </form>
-
-                            <% }; %>
-    </div>
-</div>
-<div id="results" class="row form-collapsed">
-    <div class="col-xs-12 answer-wrap">
-        <h3 class="answer-wrap-title">
-            <%= poll.escape('text') %>
-        </h3>
-        <% if(poll.attributes.format === 1) { %>
-            <div class="row">
-                <div id="poll-results" class="col-xs-12 col-md-12 col-lg-5">
-                </div>
-                <div class="col-xs-12 col-md-12 col-lg-7">
-                    <div id="canvas-wrap">
-                        <div id="canvas-holder">
-                            <canvas height="360" width="360" id="chart"></canvas>
-                        </div>
-                    </div>
+    <div class="row form-collapsed" id="results">
+      <% if(poll.attributes.format === 1) { %>
+        <div class="col-xs-12 col-lg-6" id="results-mc">
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-6">
+            <div id="canvas-wrap">
+                <div id="canvas-holder">
+                    <canvas height="300" width="300" id="chart"></canvas>
                 </div>
             </div>
-            <% } else { %>
-                <div class="row">
-                    <div id="poll-results-cloud" class="col-xs-12">
-                    </div>
-                </div>
-                <% }; %>
+        </div>
+      <% } else { %>
+        <div class="col-xs-12" id="results-oe">
+
+        </div>
+      <% }; %>
+      </div>
     </div>
-</div>
+  </div>

@@ -3,6 +3,7 @@ module Api
     def index
       @polls = Poll.order(created_at: :desc).page(params[:page]).per(10)
       @result = []
+      now = Time.now.to_f
       @polls.each do |poll|
         pollData = {}
         pollData[:response_count] = 0
@@ -16,13 +17,10 @@ module Api
         pollData[:user] = "#{poll.user.first_name} #{poll.user.last_name}"
         pollData[:email] = poll.user.email
         pollData[:user_id] = poll.user.id
-        poll.answers.each do |answer|
-          pollData[:answers] << answer
-          answer.responses.each do |response|
-            pollData[:responses] << response
-            pollData[:response_count] += 1
-          end
-        end
+        pollData[:answers] = poll.answers
+        pollData[:responses] = poll.responses
+        pollData[:response_count] = poll.responses.length
+        pollData[:frequency] = poll.responses.select{|response| now - response.created_at.to_f < 86400.0}.length
         @result << pollData
       end
       render :json => {
@@ -35,23 +33,19 @@ module Api
 
     def trending
       @polls = Poll.trending
-      @data = {}
-      @data[:polls] = []
-      5.times do |idx|
-        poll_data = {}
-        poll_data[:poll] = @polls[idx]
-        poll_data[:answers] = []
-        poll_data[:responses] = []
-        @polls[idx].answers.each do |answer|
-          poll_data[:answers] << answer
-          answer.responses.each do |response|
-            poll_data[:responses] << response
-          end
-        end
-        @data[:polls] << poll_data
+      @result = []
+      @frequency = {}
+      now = Time.now.to_f
+      @polls.each do |poll|
+        recent = poll.responses.select{|response| now - response.created_at.to_f < 86400.0}
+        @frequency[poll.id] = {}
+        @frequency[poll.id]['frequency'] = recent.length.to_f
+        @frequency[poll.id]['text'] = poll.text
+        @frequency[poll.id]['chart'] = poll.chart
+        @frequency[poll.id]['responses'] = poll.responses.length
       end
-
-      render json: @data
+      @result = @frequency.sort_by{|k,v| -v['frequency']}.first(5)
+      render json: @result
     end
 
     def word_cloud

@@ -1,15 +1,30 @@
-<% var i = 0; %>
-<% if (total > 0) { %>
-    <% answers.forEach(function(answer) { %>
-        <span class="answer-result-heading">
-            <strong style="color: <%= colors[i] %>">
-                <%= percentages[i] %>%</strong> of people selected answer:</span>
-        <span class="answer-result-text">
-            <strong style="color: <%= colors[i] %>">
-                <%= labels[i] %>:</strong>
-            <%= answer.attributes.text %></span>
-        <% i++; %>
-            <% }); %>
-<% } else { %>
-  <h3 class="page-title" style="margin-bottom: 100px;">Not enough votes</h3>
-<% }; %>
+<% var i = 0; if (total > 0) { %>
+  <div class="sub-heading-wrap">
+    <h4><em>Results to poll #<%= poll.id %></em></h4>
+  </div>
+  <% answers.forEach(function(answer) { %>
+  <div class="answer-vote-wrap">
+    <div class="vote-label">
+      <strong style="color: <%= colors[i] %>"><%= labels[i] %></strong>
+    </div>
+    <div class="vote-content">
+      <div class="vote-content-top">
+        <span>"</span><%=answer.attributes.text%><span>"</span>
+      </div>
+      <div class="vote-content-bottom">
+        <strong style="color: <%= colors[i] %>"><%= percentages[i] %>%</strong>
+        <span>(<%= num_votes[i] %>/<%= total %>)</span>
+        <% if(answer.id === user_vote.id) { %>
+          <small><em>(Your choice)</em></small>
+        <% }; %>
+      </div>
+    </div>
+  </div>
+    <%  i++; %>
+  <% }); %>
+  <% } else { %>
+    <div class="sub-heading-wrap">
+      <h3><em>Not enough votes</em></h3>
+    </div>
+  <% }; %>
+</div>

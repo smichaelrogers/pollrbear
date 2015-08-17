@@ -11,13 +11,13 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 		'click .btn-format': 'selectFormat',
 		'click .btn-chart': 'selectChart',
 		'click .visit-created-poll': 'visitCreatedPoll',
-		'click .notice-dismiss': 'noticeDismiss'
+		'click .dismiss': 'dismissNotice'
 	},
 
 	initialize: function (options) {
 		this.pollFormData;
-		this.$notice = this.$(".notice");
 		this.parentView = options.parentView;
+		this.answersAdded = [];
 	},
 
 	render: function () {
@@ -28,37 +28,34 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 
 	submitPollForm: function (event) {
 		event.preventDefault();
+		this.dismissNotice(event);
 		if ($("#poll-text").val().length > 1) {
 			this.pollFormData = $("#poll-form").serializeJSON();
-			$(".notice").removeClass("notice-flash");
 			$("#poll-form").addClass("form-collapsed");
 			if (this.pollFormData.poll.format === "2") {
 				$("#open-ended-form").removeClass("form-collapsed");
 			} else {
 				$("#multiple-choice-form").removeClass("form-collapsed");
 			}
-			this.$(".notice").removeClass("notice-flash").html("");
-			$("#new-poll-title").text(this.pollFormData.poll.text);
+			$(".new-poll-preview-question").html(this.pollFormData.poll.text);
 		} else {
-			this.$(".notice").addClass("notice-flash").html("<span class=\"notice-text\">Please enter a valid question</span> <a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
+			this.renderNoticeBefore($("#poll-text"), "Not much of a question...");
 		}
 	},
 
 	submitCreatePoll: function (event) {
 		event.preventDefault();
+		this.dismissNotice(event);
+		var that = this;
 		var formData = this.pollFormData;
-		var $notice = this.$(".notice");
 		var $answers = $('.answer-item');
-		if (this.pollFormData.poll.format === "2") {
-			this.pollFormData.poll.chart = 0;
-		}
-		$notice.removeClass("notice-flash");
-		$notice.html("");
 		if ($answers.length < 2 && this.pollFormData.poll.format === "1") {
-			this.$(".notice").addClass("notice-flash").html("<span class=\"notice-text\">It's called <strong>multiple</strong> choice,</span> please provide at least two answers<a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
+			this.renderNoticeBefore($("#answer-text"), "<strong>Multiple</strong> choices please");
 		} else {
+			this.renderLoader(this.$el);
 			this.collection.create(formData, {
 				success: function (poll) {
+					that.$(".loader").remove();
 					if (formData.poll.format === "1") {
 						$answers.each(function (index) {
 							poll.answers().create({
@@ -76,28 +73,21 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 					$('.answer-item').html("");
 					$("#multiple-choice-form").addClass("form-collapsed");
 					$("#open-ended-form").addClass("form-collapsed");
-					$notice.addClass("notice-flash").html("<span class=\"notice-text\"><strong>Success</strong><br><a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">Your poll has been created</a></span><a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
+					that.renderNoticeBefore($("#poll-text"), "<strong>Success</strong><br><a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">See your poll</a>");
 				}
 			});
 		}
 	},
 
-	noticeDismiss: function (event) {
-		event.preventDefault();
-		$(".notice").removeClass("notice-flash").html("");
-	},
-
 	visitCreatedPoll: function (event) {
 		event.preventDefault();
-		var pollId = $(event.currentTarget).attr("data-poll-id");
-		var poll = this.collection.getOrFetch(pollId);
-		var answers = poll.answers();
+		this.dismissNotice(event);
+		var poll = this.collection.getOrFetch($(event.currentTarget).attr("data-poll-id"));
 		var view = new PollrBear.Views.PollShow({
 			model: poll,
-			collection: answers,
+			collection: poll.answers(),
 			parentView: this.parentView
 		});
-		this.$(".notice").removeClass("notice-flash").html("");
 		this._swapMainView(view);
 	},
 
@@ -105,10 +95,10 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 		event.preventDefault();
 		if ($(event.currentTarget).attr("data-format") === "2") {
 			$(".btn-chart").addClass("invisible");
-			$("#poll-text").attr("placeholder", "Write a prompt (word cloud)");
+			$("#poll-text").attr("placeholder", "Word Cloud - Write a prompt");
 		} else {
 			$(".btn-chart").removeClass("invisible");
-			$("#poll-text").attr("placeholder", "Ask a question (multiple choice)");
+			$("#poll-text").attr("placeholder", "Multiple Choice - Write a question");
 		}
 		$(".btn-format").removeClass("btn-selected").addClass("btn-default");
 		var format = ($(event.currentTarget).attr("data-format") * 1);
@@ -125,7 +115,6 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 	},
 
 	delegateKeystroke: function (event) {
-
 		if (event.keyCode === 13) {
 			event.preventDefault();
 			if (event.currentTarget.id === "poll-text") {
@@ -138,19 +127,35 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 
 	addAnswer: function (event) {
 		event.preventDefault();
+		this.dismissNotice(event);
+		var answerStr = "";
 		var answer = this.$('#answer-text').val();
 		if (answer.length > 0) {
 			this.$('#answer-text').val('');
-			this.$('.answer-select').append("<div class=\"answer-item-wrap\"><div class=\"answer-item\" data-content=\"" + answer + "\"><a href=\"#\" class=\"remove-answer\"><i class=\"fa fa-times fa-lg\"></i></a><span class=\"answer-input-text\">" + answer + "</span></div></div>");
+			answerStr = "<div class=\"answer-item-wrap\"><div class=\"answer-item\" data-content=\"" + answer + "\"><span class=\"answer-input-text\">" + answer + "</span></div><a href=\"#\" class=\"remove-answer\"><i class=\"fa fa-times\"></i></a></div>";
+			this.$('.answer-select').append(answerStr);
+			this.addLabels();
 		} else {
-			this.$(".notice").addClass("notice-flash").html("<span class=\"notice-text\">Please enter a valid answer</span><a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
+			this.renderNoticeBefore($("#answer-text"), "Maybe a bit longer")
 		}
+	},
+
+	addLabels: function() {
+		$(".answer-item-label").remove();
+		var $targets = $(".answer-item-wrap");
+		$targets.each(function(index) {
+			$(this).prepend("<div class=\"answer-item-label\" style=\"color: " + PollrBear.highlights[index] + "\">" + PollrBear.labels[index] + ": </div>");
+		});
 	},
 
 	removeAnswer: function (event) {
 		event.preventDefault();
-		$(event.currentTarget).parent().parent().remove();
-		$(event.currentTarget).parent().remove();
+		$(event.target).parent().parent().remove();
+		this.addLabels();
+	},
 
+	dismissNotice: function(event) {
+		event.preventDefault();
+		$(".notice").remove();
 	}
 });

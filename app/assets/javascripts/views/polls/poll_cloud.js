@@ -23,16 +23,16 @@ PollrBear.Views.PollCloud = Backbone.CompositeView.extend({
 		});
 		this.$el.html(content);
 		this.generateWordCloud();
-
 		return this;
 	},
 
 	generateWordCloud: function () {
+		var that = this;
 		var pollId = this.model.id;
 		var answerId = this.answer.id;
 		var s;
 		var userId = PollrBear.currentUser.id;
-		var r1, r2, r3;
+		this.renderLoader(this.$el);
 		$.ajax({
 			url: "/api/polls/cloud/" + pollId,
 			data: {
@@ -43,25 +43,19 @@ PollrBear.Views.PollCloud = Backbone.CompositeView.extend({
 			dataType: 'json',
 			type: "GET",
 			success: function (wordData) {
-				if(wordData.length < 3) {
+				if (wordData.length < 3) {
 					return;
 				}
-				$("#cloud").html("");
-				var htmlStr;
-				var numWords;
-				var words;
-				var str;
-				var val;
-				var dir;
+				$("#cloud-container").html("");
+				var htmlStr, numWords, words, str, val, dir, words;
 				var idx = 1;
-				var size = 48;
 				var cloudData = [];
 				var most = wordData[0][1];
 				if (wordData.length > 100) {
-					var words = wordData.slice(0, 100);
+					words = wordData.slice(0, 100);
 					numWords = 100;
 				} else {
-					var words = wordData;
+					words = wordData;
 					numWords = words.length;
 				}
 				words.forEach(function (word) {
@@ -73,22 +67,23 @@ PollrBear.Views.PollCloud = Backbone.CompositeView.extend({
 					} else {
 						dir = "cloud-right";
 					}
-					var n = Math.floor(4 + (Math.pow(val / most, 1.7) * 120)) + "";
-					styleStr = "margin-top: -" + Math.floor(n*.5) + "px; z-index: " + val + ";";
+					var n = Math.floor(8 + (Math.pow(val / most, 2) * 100)) + "";
+					styleStr = "margin-top: -" + (n * 0.7) + "px; z-index: " + val + ";";
 					htmlStr += "<span class=\" cloud cloud-" + Math.floor(idx / numWords * 16.0 + 1.0) + " " + dir + "\" style=\"font-size:" + n + "px;" + styleStr + "\">" + str + "</span>";
 					cloudData.push(htmlStr);
 					idx++;
 				});
-				for(var i = cloudData.length - 1; i > 0; i = i - 2) {
+				for (var i = cloudData.length - 1; i > 0; i = i - 2) {
 					$("#cloud-container").append(cloudData[i]);
 				}
 				var n = 1;
-				if(cloudData.length % 2 === 0) {
+				if (cloudData.length % 2 === 0) {
 					n = 0;
 				}
-				for(var i = n; i < cloudData.length - 1; i+= 2) {
+				for (var i = n; i < cloudData.length - 1; i += 2) {
 					$("#cloud-container").append(cloudData[i]);
 				}
+				that.$(".loader").remove();
 			}
 		});
 	}

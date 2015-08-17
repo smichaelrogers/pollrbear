@@ -1,45 +1,43 @@
-PollrBear.Views.SignIn = Backbone.View.extend({
+PollrBear.Views.SignIn = Backbone.CompositeView.extend({
 
 	initialize: function (options) {
 		this.user = new PollrBear.users.model();
 		this.callback = options.callback;
 		this.listenTo(PollrBear.currentUser, "signIn", this.signInCallback);
 	},
-	//<a href="/auth/twitter" class="btn btn-std" id="twitter-login"><i class="fa fa-twitter fa-fw"></i>Login with Twitter</a>
 
 	events: {
 		"click #standard-login": "standardLogin",
 		"click #guest-login": "guestLogin",
 		"click #twitter-login": "twitterLogin",
-		"click #register-login": "registerLogin",
-		'click .notice-dismiss': 'noticeDismiss'
+		"click #register-login": "registerLogin"
 	},
 
 	template: JST['shared/sign_in'],
 
 	render: function () {
 		this.$el.html(this.template());
-
 		return this;
 	},
 
 	standardLogin: function (event) {
 		event.preventDefault();
-		var $notice = this.$(".notice-login");
+		$(".notice").remove();
 		var $form = $(".login-form");
 		var formData = $form.serializeJSON().user;
-
+		var that = this;
 		PollrBear.currentUser.signIn({
 			email: formData.email,
 			password: formData.password,
 			error: function () {
-				$notice.addClass("notice-flash").html("<span class=\"notice-text\">Please enter a valid username and/or password</span> <a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
+				that.renderNotice($form, "Invalid username and/or password")
 			}
 		});
 	},
 
 	guestLogin: function (event) {
 		event.preventDefault();
+		$(".notice").remove();
 		PollrBear.currentUser.signIn({
 			email: "guest@guest.com",
 			password: "asdfasdf",
@@ -58,10 +56,10 @@ PollrBear.Views.SignIn = Backbone.View.extend({
 
 	registerLogin: function (event) {
 		event.preventDefault();
+		$(".notice").remove();
 		var $form = $(".signup-form");
 		var that = this;
 		var userData = $form.serializeJSON().user;
-		var $notice = this.$(".register-notice");
 		this.user.set(userData);
 		this.user.save({}, {
 			success: function () {
@@ -72,13 +70,8 @@ PollrBear.Views.SignIn = Backbone.View.extend({
 				});
 			},
 			error: function (data) {
-				$notice.addClass("notice-flash").html("<span class=\"notice-text\">Something went wrong...</span> <a href=\"#\" class=\"notice-dismiss\"><i class=\"fa fa-lg fa-times\"></i></a>");
+				that.renderNotice($form, "Invalid username and/or password")
 			}
 		});
-	},
-	noticeDismiss: function (event) {
-		event.preventDefault();
-		$(".notice").removeClass("notice-flash").html("");
 	}
-
 });
