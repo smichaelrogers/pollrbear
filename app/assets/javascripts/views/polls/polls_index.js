@@ -113,7 +113,7 @@ PollrBear.Views.PollsIndex = Backbone.CompositeView.extend({
 
 	fetchPage: function (pageNum) {
 		var that = this;
-		this.renderLoader($(".poll-index-wrap-group"));
+		this.renderLoader($(".poll-index-wrap"));
 		this.collection.fetch({
 			remove: true,
 			data: {
