@@ -11,7 +11,6 @@ PollrBear.Views.PollShow = Backbone.CompositeView.extend({
 	initialize: function () {
 		this.listenTo(this.collection, 'add', this.render);
 		this.listenTo(this.model, 'sync', this.render);
-		this.labels = ["A", "B", "C", "D", "E", "F", "G", "H"];
 	},
 	render: function () {
 		var content = this.template({

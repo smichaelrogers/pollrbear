@@ -7,8 +7,12 @@ $font-body: "Helvetica Neue", "Proxima Nova", "Lato", "Open Sans", "Roboto", "He
 $blue: #2ab7ca;
 $yellow: rgb(254, 215, 101);
 $red: rgb(254, 74, 73);
+$green: rgba(6, 214, 160, 1.0);
 $lightest-grey: rgb(241, 241, 241);
 $yellow-alt: #f6ba0b;
+$yellow2: rgba(255, 189, 0, 1.0);
+$purple: rgba(194, 100, 209, 1.0);
+$full-blue: rgba(0, 141, 213, 1.0);
 $almost-white: rgb(249, 249, 249);
 $almost-black: rgb(30,30,30);
 $lighter-grey: rgb(215, 215, 215);
@@ -19,6 +23,8 @@ $dark-grey: rgb(107, 107, 107);
 $base-grey: rgb(77, 77, 77);
 $bgcolor: rgb(250, 250, 250);
 $white: rgb(255,255,255);
+$pink: rgba(255, 116, 158, 1.0);
+$light-blue: rgba(0,225,255, 1.0);
 $black: rgb(0,0,0);
 $base: rgb(40,40,40);
 $base-radius: 6px;
@@ -62,8 +68,8 @@ h3,
 h4,
 h5,
 h6 {
-    color      : $grey;
-    font-weight: 400;
+    color      : darken($lightest-grey, 20%);
+    font-weight: 700;
 }
 input.form-class,
 textarea.form-class {
@@ -76,11 +82,16 @@ textarea.form-class {
     background   : transparent;
     border-radius: $base-radius;
     &:focus {
-        background: rgba(246, 246, 246, 0.5);
-        border    : 2px solid $yellow;
+        background: rgba(200,200,200,0.1);
+        border    : 2px solid darken($lightest-grey, 15%);
     }
     &:hover {
-        background: rgba(246, 246, 246, 0.5);
+        background: rgba(200,200,200,0.3);
+        border    : 2px solid darken($lightest-grey, 10%);
+        &:focus {
+            background: rgba(200,200,200,0.15);
+            border    : 2px solid darken($lightest-grey, 15%);
+        }
     }
 }
 label {
@@ -101,11 +112,11 @@ label {
    ========================================================================== */
 button.btn,
 a.btn {
-    transition   : border-color color background 0.15s linear;
-    padding      : 8px 16px;
-    background   : transparent;
-    margin-bottom: 12px;
-    border-radius: $base-radius;
+    transition    : border-color color background 0.2s linear;
+    padding       : 8px 16px;
+    background    : transparent;
+    margin-bottom : 12px;
+    border-radius : $base-radius;
     &:focus {
         outline: none;
     }
@@ -115,20 +126,23 @@ a.btn {
         border: 2px solid $lighter-grey;
         color : $base;
         &:hover {
-            border: 2px solid lighten($yellow, 10%);
-            color : $dark-grey;
+            background: rgba(200,200,200,0.2);
+            border    : 2px solid lighten($yellow, 10%);
+            color     : $dark-grey;
         }
     }
     &-uniq,
     &-uniq:focus,
     &-uniq:active {
-        border    : 2px solid lighten($blue, 10%);
-        color     : $base;
-        background: transparent;
+        font-weight: bold;
+        padding    : 8px 20px;
+        border     : 2px solid darken($lightest-grey, 15%);
+        color      : $white;
+        background : darken($lightest-grey, 15%);
         &:hover {
-            border    : 2px solid $blue;
-            background: transparent;
-            color     : $dark-grey;
+            border    : 2px solid darken($lightest-grey, 20%);
+            background: darken($lightest-grey, 20%);
+            color     : $white;
         }
     }
     &-selector,
@@ -137,19 +151,21 @@ a.btn {
         line-height: 24px;
         margin     : 0;
         color      : $grey;
-        border     : 2px solid $lighter-grey;
+        border     : 2px solid darken($lightest-grey, 5%);
         &:hover {
-            border: 2px solid $light-grey;
+            border    : 2px solid darken($lightest-grey, 10%);
+            background: darken($lightest-grey, 5%);
         }
     }
     &-selected,
     &-selected:active,
     &-selected:focus {
         line-height: 24px;
-        border     : 2px solid $yellow;
+        background : darken($lightest-grey, 5%);
+        border     : 2px solid darken($lightest-grey, 10%);
         color      : $dark-grey;
         &:hover {
-            border: 2px solid $yellow-alt;
+            border: 2px solid darken($lightest-grey, 10%);
             color : darken($dark-grey, 10%);
         }
     }
@@ -176,7 +192,7 @@ a.btn {
     line-height : 24px;
     margin-left : 6px;
     margin-right: 12px;
-    color       : $mid-grey;
+    color       : $white;
 }
 
 /* ==========================================================================
@@ -206,17 +222,17 @@ a.btn {
     display: block;
     &-text {
         display: block;
-        padding: 8px;
     }
     &-flash {
-        background   : $lightest-grey;
+        background   : darken($lightest-grey,5%);
+        border       : 2px solid darken($lightest-grey, 10%);
         position     : relative;
         text-align   : center;
-        margin-bottom: 12px;
+        margin-bottom: 6px;
         display      : block;
         min-height   : 50px;
         border-radius: $base-radius;
-        padding      : 8px 24px 8px 8px;
+        padding      : 8px 24px 4px 8px;
     }
 }
 .dismiss {
@@ -225,8 +241,8 @@ a.btn {
     width   : 16px;
     height  : 16px;
     position: absolute;
-    top     : 10px;
-    right   : 20px;
+    top     : 4px;
+    right   : 6px;
     i {
         &:before {
             color     : $mid-grey;
@@ -235,16 +251,6 @@ a.btn {
         &:hover:before {
             color: $dark-grey;
         }
-    }
-}
-.image-wrap {
-    text-align: center;
-    display   : block;
-    max-width : 300px;
-    img {
-        width  : 100%;
-        height : auto;
-        display: block;
     }
 }
 .chart {
@@ -264,89 +270,87 @@ a.btn {
         color: rgba(194, 100, 209, 1.0);
     }
 }
-
+.visit-created-poll {
+    margin-top: 6px;
+}
 /* ==========================================================================
    Unique
    ========================================================================== */
 #left-side {
-    padding: 0 0 36px 0;
+    padding: 0 0 36px;
     border : none;
 }
 #right-side {
-    padding: 0 0px;
-}
-@media (min-width:768px) {
-
-}
-@media (min-width:992px) {
-    #left-side {
-        border-right: 2px solid $lightest-grey;
-        padding     : 24px;
-    }
-    #right-side {
-        padding: 0 24px;
-    }
-}
-@media (min-width:1200px) {
-
+    padding   : 24px 0;
+    background: $lightest-grey;
+    border-bottom-right-radius: $base-radius-xl;
+    border-bottom-left-radius: $base-radius-xl;
 }
 #user-info {
-    span,
-    small {
-        text-align: right;
-    }
+    min-height : 70px;
+    padding-top: 16px;
+    color      : $lightest-grey;
+    background : $green;
     span {
-        display: block;
-        color  : $mid-grey;
+        display   : block;
+        font-weight: bold;
+        text-align: right;
+        font-size : 14px;
     }
     small {
-        display  : block;
-        font-size: 12px;
-        color    : $grey;
+        display   : block;
+        text-align: right;
+        font-size : 11px;
     }
-    button.btn-std.sign-out-link {
-        font-size: 12px;
-        color    : $grey;
-        padding  : 6px 10px;
-        display  : block;
+    button.btn.sign-out-link {
+        transition: background-color 0.25s ease;
+        padding   : 8px 12px;
+        background: $lightest-grey;
+        border    : 2px solid $lightest-grey;
+        color     : $green;
+        font-size : 12px;
         &:hover {
-            color: $mid-grey;
+            background: $green;
+            border    : 2px solid $white;
+            color     : $white;
         }
     }
 }
 #wrapper {
-    box-shadow                : -3px 3px 16px 4px rgba(0,0,0,0.25);
+    box-shadow                : -1px 1px 1px 2px rgba(0,0,0,0.1);
     display                   : block;
-    padding-bottom            : 48px;
-    border-bottom-right-radius: 12px;
-    border-bottom-left-radius : 12px;
-    margin-bottom             : 24px;
+    overflow                  : hidden;
     background                : $white;
     #poll-index {
+
+    }
+    #inner-wrapper {
 
     }
 }
 #footer {
     height : 100%;
-    padding: 50px;
+    padding: 50px 0;
+    background: $white;
     span {
         font-size  : 14px;
         text-shadow: 2px 2px 2px rgba(0,0,0,0.1);
-        color      : $mid-grey;
+        color      : $light-grey;
     }
 }
 .nav-logo-wrap {
-    padding: 48px 12px 24px;
-    float  : left;
+    margin-top: -50px;
+    padding   : 0 0 24px 8%;
+    float     : left;
     .nav-logo-img {
         display: block;
-        height : 130px;
+        height : 140px;
         width  : auto;
     }
 }
 .loader {
     position  : absolute;
-    transition: 1s ease all;
+    transition: 0.3s ease all;
     width     : 100%;
     height    : 100%;
     top       : 0;
@@ -366,40 +370,45 @@ a.btn {
    New Poll Form
    ========================================================================== */
 #poll-form-wrap {
+    height : 100%;
+    padding: 0 12px 36px;
+    #poll-form-title {
+        padding: 6px 24px 0 12px;
+    }
     .poll-form-heading {
         display      : block;
         margin-bottom: 6px;
         .preview-label {
             display       : block;
-            line-height   : 12px;
+            line-height   : 14px;
             font-size     : 10px;
-            color         : $light-grey;
+            color         : $grey;
             letter-spacing: 1px;
         }
         .new-poll-preview {
             display      : block;
             width        : 100%;
             float        : left;
-            border       : 2px solid $lightest-grey;
+            border       : 2px solid darken($lightest-grey, 10%);
             border-radius: $base-radius;
             &-question {
-                font-size : 22px;
+                font-size : 20px;
                 text-align: center;
                 display   : block;
                 width     : 100%;
                 float     : left;
-                padding   : 12px;
+                padding   : 4px;
             }
             .answer-select {
                 float  : left;
                 width  : 100%;
                 display: block;
                 .answer-item-wrap {
+                    padding   : 4px 8px;
                     display   : block;
                     float     : left;
-                    padding   : 12px 6px;
                     width     : 100%;
-                    border-top: 2px solid $lightest-grey;
+                    border-top: 2px solid darken($lightest-grey, 5%);
                     .answer-item-label {
                         display    : block;
                         position   : relative;
@@ -408,6 +417,9 @@ a.btn {
                         float      : left;
                         text-align : center;
                         font-size  : 14px;
+                    }
+                    .answer-input-text {
+
                     }
                     .answer-item {
                         font-size: 14px;
@@ -447,9 +459,13 @@ a.btn {
    Trending Index List
    ========================================================================== */
 #trending {
+    display      : block;
+    float        : left;
+    width        : 100%;
     min-height   : 240px;
-    margin-bottom: 36px;
+    margin-bottom: 24px;
     h3 {
+        padding      : 6px 24px 0;
         margin-bottom: 6px;
         small {
             font-size     : 10px;
@@ -460,16 +476,16 @@ a.btn {
     #trending-polls {
         display      : block;
         float        : left;
-        border-bottom: 1px solid $lightest-grey;
+        border-bottom: 1px solid darken($lightest-grey, 5%);
         a {
-            border-top: 1px solid $lightest-grey;
+            border-top: 1px solid darken($lightest-grey, 5%);
             float     : left;
-            padding   : 2px 5px;
+            padding   : 2px 12px;
             display   : block;
             width     : 100%;
             background: transparent;
             &:hover {
-                background: $lightest-grey;
+                background: darken($lightest-grey, 5%);
             }
             span.tleft {
                 float  : left;
@@ -625,13 +641,12 @@ a.btn {
     display      : block;
     position     : relative;
     border-radius: $base-radius-lg;
-    padding      : 30px;
     min-height   : 300px;
+    padding      : 4px 48px 32px;
     .answer-poll-heading {
         display       : inline-block;
-        text-align    : center;
         vertical-align: baseline;
-        padding       : 8px 6px;
+        padding       : 2px 6px;
         .chart-lg,
         &-text {
             vertical-align: middle;
@@ -648,7 +663,7 @@ a.btn {
         }
     }
     #poll-wrap {
-        padding      : 6px 24px 36px;
+        position     : relative;
         border-radius: $base-radius-lg;
         border       : 2px solid $lightest-grey;
         #poll-heading {
@@ -660,7 +675,7 @@ a.btn {
         #answers {
             text-align: center;
             #answer-mc {
-                padding: 0 10%;
+                padding: 12px 16%;
                 .btn-answer-select {
                     border       : 2px solid $lightest-grey;
                     border-radius: $base-radius-lg;
@@ -668,16 +683,16 @@ a.btn {
                     margin-bottom: 12px;
                     width        : 100%;
                     word-wrap    : break-word;
-                    box-shadow   : 2px 2px 1px 1px rgba(100,100,100,0.1);
+                    box-shadow   : 0 4px 0 0 rgba(100,100,100,0.3);
                     &:hover {
-                        background: $lightest-grey;
+                        background: lighten($lightest-grey, 4%);
                     }
                     .answer-text {
-                        font-size: 18px;
+                        font-size: 16px;
                         display  : block;
                         height   : 100%;
                         width    : 90%;
-                        padding  : 8px 24px;
+                        padding  : 4px 8px;
                         float    : left;
                     }
                     .answer-label {
@@ -685,8 +700,8 @@ a.btn {
                         color      : $grey;
                         text-align : center;
                         display    : block;
-                        padding    : 8px;
-                        font-size  : 20px;
+                        padding    : 4px;
+                        font-size  : 18px;
                         width      : 10%;
                         height     : 100%;
                         float      : left;
@@ -770,8 +785,7 @@ a.btn {
         }
     }
     .sub-heading-wrap {
-        display   : block;
-        text-align: center;
+        display: block;
         h2,
         h3,
         h4,
@@ -786,12 +800,14 @@ a.btn {
   Pagination
    ========================================================================== */
 .page-nav-wrap {
-    padding: 3px 5px;
+    display: block;
+    width  : 100%;
+    padding: 0 24px 12px 8%;
     &-top {
-        display: block;
+
     }
     &-bottom {
-        display: block;
+
     }
 }
 .page-nav {
@@ -804,12 +820,18 @@ a.btn {
         height        : 24px;
         font-weight   : bold;
         color         : $light-grey;
+        &:hover {
+            color: darken($light-grey, 10%);
+        }
     }
     .page-nav-active {
         color: $blue;
     }
     .page-nav-disabled {
         color : $lightest-grey;
+        &:hover {
+            color: $lightest-grey !important;
+        }
         cursor: default !important;
     }
 }
@@ -893,10 +915,123 @@ a.btn {
 /* ==========================================================================
    Landing
    ========================================================================== */
-#signup,
 #splash {
-    padding: 32px 20%;
+    padding: 32px 20% 20% 20%;
 }
-#splash {
-    border-bottom: 1px solid $lighter-grey;
+#signup {
+  padding: 50px 20% 20% 20%;
+  background: $blue;
+}
+#login-header {
+  position: relative;
+
+}
+.login-header {
+  button, a {
+    color: $green !important;
+    background: $white;
+    border: 2px solid $white !important;
+    &:hover {
+      color: $white !important;
+      background: transparent;
+    }
+  }
+  button {
+    position: absolute;
+    bottom: 6px;
+    right: 140px;
+  }
+  a {
+    position: absolute;
+    bottom: 6px;
+    right: 20px;
+  }
+}
+#signup, #login-header {
+    button, a.btn {
+        color : $lightest-grey;
+        border: 2px solid $lightest-grey;
+    }
+    h3 {
+        color: $white;
+    }
+    input.form-class,
+    textarea.form-class {
+        margin-bottom: 12px;
+        transition   : 0.15s ease all;
+        padding      : 8px;
+        display      : block;
+        color: $white;
+        box-shadow   : none !important;
+        border       : 2px solid $lightest-grey;
+        background   : transparent;
+        border-radius: $base-radius;
+        &::-moz-placeholder {
+            color  : $lighter-grey;
+            opacity: 1;
+        }
+        &:-ms-input-placeholder {
+            color: $lighter-grey;
+        }
+        &::-webkit-input-placeholder {
+            color: $lighter-grey;
+        }
+        &:focus {
+            background: rgba(200,200,200,0.1);
+            border    : 2px solid $white;
+        }
+        &:hover {
+            background: rgba(200,200,200,0.2);
+            border    : 2px solid $white;
+            &:focus {
+                background: rgba(200,200,200,0.1);
+                border    : 2px solid $white;
+            }
+        }
+    }
+    label {
+        display       : block;
+        width         : 100px;
+        float         : right;
+        margin-top    : -6px;
+        margin-bottom : 0;
+        padding-bottom: 0;
+        color         : $lightest-grey;
+        letter-spacing: 1px;
+        font-size     : 12px;
+        text-align    : center;
+        text-transform: lowercase;
+    }
+}
+.button-wrap {
+  text-align: right;
+  display: block;
+  padding: 3px 0;
+
+}
+.divider-wrap {
+  display: block;
+  width: 100%;
+  margin: 4px 0 6px 0;
+  height: 1px;
+  background: $lightest-grey;
+  content: "";
+}
+.image-wrap {
+    padding   : 0;
+    margin    : -110px 0 0;
+    text-align: center;
+    display   : block;
+    max-width : 360px;
+    img {
+        padding: 0;
+        margin : 0;
+        width  : 100%;
+        height : auto;
+        display: block;
+    }
+}
+.login-header {
+    height: 200px;
+    background: $green;
 }

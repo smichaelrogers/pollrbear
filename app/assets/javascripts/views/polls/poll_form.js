@@ -53,6 +53,9 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 			this.renderNoticeBefore($("#answer-text"), "<strong>Multiple</strong> choices please");
 		} else {
 			this.renderLoader(this.$el);
+			if(formData.format === "2") {
+				formData.poll.chart = "0";
+			}
 			this.collection.create(formData, {
 				success: function (poll) {
 					that.$(".loader").remove();
@@ -73,7 +76,7 @@ PollrBear.Views.PollForm = Backbone.CompositeView.extend({
 					$('.answer-item').html("");
 					$("#multiple-choice-form").addClass("form-collapsed");
 					$("#open-ended-form").addClass("form-collapsed");
-					that.renderNoticeBefore($("#poll-text"), "<strong>Success</strong><br><a href=\"#\" class=\"visit-created-poll\" data-poll-id=\"" + poll.id + "\">See your poll</a>");
+					that.renderNoticeBefore($("#poll-text"), "Your poll has been created<br><button type=\"button\" class=\"btn btn-uniq visit-created-poll\" data-poll-id=\"" + poll.id + "\">Preview</button>");
 				}
 			});
 		}

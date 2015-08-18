@@ -33,7 +33,7 @@
       <% if(poll.attributes.format === 1) { %>
         <div class="col-xs-12" id="answer-mc">
         <% var i = 0; answers.forEach(function(answer) { %>
-          <button style="border: 2px solid <%= colors[i] %>" type="button" class="btn btn-std btn-answer-select" data-answer-id="<%= answer.id %>">
+          <button style="border-color: " + "<%= colors[i] %>" type="button" class="btn btn-std btn-answer-select" data-answer-id="<%= answer.id %>">
             <span style="color: <%= colors[i] %>" class="answer-label"><%= labels[i] %>:</span>
             <span class="answer-text"><%= answer.escape('text') %></span>
           </button>
