@@ -10,6 +10,5 @@ Rails.application.routes.draw do
   root to: 'pages#root'
   get '/api/polls/cloud/:id', to: 'api/polls#word_cloud'
   get '/api/polls/trending/:id', to: 'api/polls#trending'
-  get '/api/responses/sms/:id', to: 'api/responses#sms'
   get '/auth/:provider/callback', to: 'api/sessions#omniauth'
 end

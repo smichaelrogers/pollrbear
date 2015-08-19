@@ -1229,7 +1229,7 @@ turns.each do |turn|
     answers.each do |answer|
       if answer.length > 0
         new_answer = Answer.create!(poll_id: poll.id, text: answer)
-        (6..16).to_a.sample.times do
+        (1..32).to_a.sample.times do
           uid = (1..20).to_a.sample
           Response.create!(respondent_id: uid, answer_id: new_answer.id)
         end
@@ -1245,7 +1245,7 @@ turns.each do |turn|
     question = @questions_oe[num]
     poll = Poll.create!(text: question, user_id: user_idx, chart: 0, format: 2)
     answer = Answer.create!(poll_id: poll.id)
-    (40..60).to_a.sample.times do |idx|
+    (4..100).to_a.sample.times do |idx|
       text = [Faker::Team.creature, Faker::Commerce.product_name, Faker::Commerce.color, Faker::Commerce.department(5), Faker::Address.city_prefix, Faker::Address.street_name, Faker::Address.city, Faker::Address.city_suffix, Faker::Team.creature].shuffle.join(" ")
       uid = (1..20).to_a.sample
       Response.create!(respondent_id: uid, answer_id: answer.id, text: text)
