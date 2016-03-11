@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-gem 'twilio-ruby'
+ruby '2.3.0'
+
 gem 'backbone-on-rails'
 gem 'rails', '4.2.1'
 gem 'pg'
@@ -16,9 +17,7 @@ gem 'kaminari'
 gem 'figaro'
 gem 'omniauth-twitter'
 gem 'faker'
-group :doc do
-  gem 'sdoc', require: false
-end
+
 group :development do
   gem 'annotate'
   gem 'better_errors'

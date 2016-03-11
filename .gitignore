@@ -11,6 +11,10 @@
 /log/*
 !/log/.keep
 /tmp
-
+/test
+*/.DS_Store
+/Gemfile.lock
+/.git/*
+/erd.pdf
 # Ignore application configuration
 /config/application.yml
