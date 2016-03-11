@@ -12,10 +12,9 @@
 !/log/.keep
 /tmp
 /test
-/.DS_Store
-*/.DS_Store
-/Gemfile.lock
+*.DS_Store
+Gemfile.lock
 /.git/*
-/erd.pdf
+erd.pdf
 # Ignore application configuration
 /config/application.yml
