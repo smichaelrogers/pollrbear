@@ -4,17 +4,29 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+*.rbc
+capybara-*.html
+.rspec
+
+
+/public/system
+/coverage/
+/spec/tmp
+**.orig
 # Ignore bundler config.
 /.bundle
+/vendor/bundle
 
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
 /tmp
 /test
-*.DS_Store
-Gemfile.lock
-/.git/*
+.DS_Store
+
 erd.pdf
+
 # Ignore application configuration
 /config/application.yml
+
+.byebug_history
