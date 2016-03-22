@@ -15,6 +15,9 @@ Seed for all of the random polls
 
 Run a server
 
+![pollrbear screenshot](https://raw.githubusercontent.com/smichaelrogers/pollrbear/master/screen.png)
+
+
 ## API
 
 Looks something like this
